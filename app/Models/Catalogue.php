@@ -22,13 +22,10 @@ class Catalogue extends Model
 
     public function getCatalogues() {
         $catalogues = Catalogue::where('art_items.active', 1)
-                    ->join('artists', 'art_items.artist_id' , '=', 'artists.id')
-                    ->select('art_items.*', 'artists.uname')
+                    ->join('users', 'art_items.artist_id' , '=', 'users.id')
+                    ->select('art_items.*', 'users.uname')
                     ->orderBy('id', 'desc')
-                    //->take(10)
                     ->paginate(10);
-// echo '<pre>';
-// print_r($catalogues);exit;
 
         if (!empty($catalogues)) {
             return $catalogues;
@@ -58,13 +55,12 @@ class Catalogue extends Model
     // get art details
     public function getArtDetails($artist_id, $art_id) {
         $catArts = DB::table('art_items')
-            ->join('artists', 'art_items.artist_id', '=', 'artists.id')
+            ->join('users', 'art_items.artist_id', '=', 'users.id')
             ->where('art_items.id', $art_id)
-            ->where('artists.id', '=', $artist_id)
-            ->select('art_items.*', 'artists.uname')
+            ->where('users.id', '=', $artist_id)
+            ->select('art_items.*', 'users.uname')
             ->get();
-// echo '<pre>';
-// print_r($catArts);exit;
+
         if (!empty($catArts)) {
             return $catArts;
         }
@@ -78,7 +74,7 @@ class Catalogue extends Model
                     'art_items.active'    => 1
                 ];
         $catalogues = Catalogue::where($where)
-                    ->join('artists', 'art_items.artist_id', '=', 'artists.id')
+                    ->join('users', 'art_items.artist_id', '=', 'users.id')
                     ->where('art_items.id', '<>', $art_id)
                     ->orderBy('art_items.id', 'desc')
                     ->take(4)

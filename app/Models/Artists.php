@@ -17,7 +17,7 @@ class Artists extends Model
      *
      * @var string
      */
-    protected $table = 'artists';
+    protected $table = 'users';
 
     public function getAllArtists() {
         $artists = Artists::where('shide', 1)

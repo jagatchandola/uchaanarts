@@ -1,6 +1,6 @@
 <?php
 /**
- * @File Api.php
+ * @File Category.php
  * @Project Uchaanarts
  * @Author: Jagat Prakash
  * @Date: 15/07/18
@@ -36,11 +36,10 @@ class Category extends Model
     public function getCategoryArts($cat_name) {
         $catArts = DB::table('category')
             ->join('art_items', 'category.id', '=', 'art_items.cat')
-            ->join('artists', 'art_items.artist_id', '=', 'artists.id')
+            ->join('users', 'art_items.artist_id', '=', 'users.id')
             ->where('category.cat_url', '=', $cat_name)
             ->where('art_items.active', 1)
-            //->join('orders', 'users.id', '=', 'orders.user_id')
-            ->select('art_items.*', 'artists.uname')
+            ->select('art_items.*', 'users.uname')
             ->paginate(10);
 
         if (!empty($catArts)) {
@@ -53,13 +52,13 @@ class Category extends Model
 
     public function getArtistCategoryArts($cat_id, $art_id) {
         $catArts = DB::table('art_items')
-            ->join('artists', 'art_items.artist_id', '=', 'artists.id')
+            ->join('users', 'art_items.artist_id', '=', 'users.id')
             ->where('art_items.cat', '=', $cat_id)
             ->where('art_items.id', '<>', $art_id)
             ->where('art_items.active', 1)
             ->orderBy('art_items.id', 'desc')
             ->take(10)
-            ->select('art_items.*', 'artists.uname')
+            ->select('art_items.*', 'users.uname')
             ->get()
             ->toArray();
 

@@ -47,7 +47,7 @@
     
         <a href="{{ route('register') }}">Register</a> 
       @else
-        <span>Welcome Deepak</span> 
+        <span>Welcome {{Auth::user()->uname}}</span> 
         <a href="{{ route('logout-custom') }}"
            onclick="event.preventDefault();
                          document.getElementById('logout-form').submit();">
