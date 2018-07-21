@@ -70,13 +70,13 @@ class HomeController extends Controller
      */
     public function artistdetails(Request $request, $id)
     {
-        $artists = $this->artists->getArtistDetails($id);
-        if (!empty($artists)) {
+        $artist = $this->artists->getArtistDetails($id);
+        if (!empty($artist)) {
             $catalogues = $this->catalogue->getArtistWork($id);
         }
 
         return view('artistdetails')->with([
-                                            'artists' => array_shift($artists),
+                                            'artists' => array_shift($artist),
                                             'catalogues' => $catalogues
                                         ]);
     }
@@ -132,9 +132,6 @@ class HomeController extends Controller
     public function catGallery($cat_name) {
         $arts = $this->category->getCategoryArts($cat_name);
 
-//                echo '<pre>';
-//        print_r($arts);exit;
-        
         if (!empty($arts) && count($arts)) {
             foreach ($arts as $art) {
                 $calculateData = [
@@ -158,14 +155,11 @@ class HomeController extends Controller
 
     public function artistArtDetails($artist_id, $art_id) {
         $arts = $this->catalogue->getArtDetails($artist_id, $art_id);
-//        echo '<pre>';
-// print_r($arts);exit;
+
         $artistOtherArts = $categoryArts = [];
         if (!empty($arts)) {
             $artistOtherArts = $this->catalogue->getOtherArts($artist_id, $arts[0]->id);
             $categoryArts = $this->category->getArtistCategoryArts($arts[0]->cat, $arts[0]->id);
-//             echo '<pre>';
-// print_r($categoryArts);exit;
         }
         
         return view('artdetails')->with([

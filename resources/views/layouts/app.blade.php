@@ -113,9 +113,9 @@
             <div class="footerLink">
               <h4>For Buyers</h4>
               <ul>
-                <li><a href="/art-gallery.html">Product</a></li>
-                <li><a href="/events.html">Events</a></li>
-                <li><a href="/artist.html">Artists</a></li>
+                <li><a href="{{ route('art-gallery') }}">Product</a></li>
+                <li><a href="{{ route('events') }}">Events</a></li>
+                <li><a href="{{ route('artists') }}">Artists</a></li>
               </ul>
             </div>
           </div>
@@ -124,7 +124,7 @@
               <h4>For Artist</h4>
               <ul>
                 <li><a href="#">Why Sell</a></li>
-                <li><a href="/events.html">Events</a></li>
+                <li><a href="{{ route('events') }}">Events</a></li>
               </ul>
             </div>
           </div>
@@ -136,8 +136,8 @@
             <div class="footerLink">
               <h4>About Us</h4>
               <ul>
-                <li><a href="/testimonials.html">Testimonials</a></li>
-                <li><a href="/media.html">Media Coverage</a></li>
+                <li><a href="{{ route('testimonials') }}">Testimonials</a></li>
+                <li><a href="{{ route('media') }}">Media Coverage</a></li>
               </ul>
             </div>
           </div>

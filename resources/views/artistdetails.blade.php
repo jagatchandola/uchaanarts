@@ -9,8 +9,8 @@
                 <div class="card-body">
                     
                     <?php   
-                    // echo '<pre>';
-                    // print_r($catalogues);exit;                      
+//                     echo '<pre>';
+//                     print_r($artists);exit;                      
                         if (empty($artists)) {
 
                             echo 'No record(s) found';
@@ -18,7 +18,7 @@
                     ?>
                         <div class="card-body">
                                 <img src="images/{{ $artists['profimg'] }}" alt="" width="200" height="200" />
-                                <p>{{$artists['about']}}</p>
+                                <p>{{$artists['uname']}}</p>
                         </div>
                         
                     <?php } ?>
