@@ -3,93 +3,203 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Uchaan Arts - A Group of Contemporary Artists') }}</title>
+    <title>{{ config('app.name') }}</title>
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+	<link rel="icon" href="favicon.ico">
+
+	<!-- Bootstrap core CSS -->
+	<link href="{{ asset('/css/bootstrap.min.css') }}" rel="stylesheet">
+	<link href="{{ asset('/css/fontawesome.css') }}" rel="stylesheet">
+	<link href="{{ asset('/css/owl.carousel.min.css') }}" rel="stylesheet">
+	<link href="{{ asset('/css/owl.theme.default.css') }}" rel="stylesheet">
+	<!-- Custom styles for this template -->
+	<link href="{{ asset('/css/style.css') }}" rel="stylesheet">
+
+	<link href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,400i,700,700i" rel="stylesheet">
+	
+  @yield('style')
+
+	<!-- Scripts -->
     <script src="{{ asset('js/jquery-1.11.2.min.js') }}" defer></script>
 
-    <!-- Fonts -->
-    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600" rel="stylesheet" type="text/css">
-
-    <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
-    <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
-            <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Uchaan Arts - A Group of Contemporary Artists') }}
-                </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+<!--Header start Here-->
+<header>
+  <div class="col-md-6 col-12 col-sm-12 col-lg-3 d-none d-md-block d-lg-block">
+    <div class="logoRight"><a href="/"><img src="{{ asset('img/uchaan-logo.jpg')}}" class="img-fluid"></a></div>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3 col-12 col-sm-12 col-lg-4 offset-lg-3 offset-md-0 offset-sm-0">
+        <div class="logo d-md-none d-lg-none d-col-block d-sm-block"><a href="/"><img src="{{ asset('img/logo-mobile.png')}}" class="img-fluid"></a></div>
+      </div>
+      <div class="col-md-6 col-12 col-sm-12 col-lg-5">
+        <nav class="topMenu float-lg-right float-sm-none float-col-none float-md-right">
+      @guest  
+		
+        <a href="{{ route('login') }}">Login</a>
+    
+        <a href="{{ route('register') }}">Register</a> 
+      @else
+        <span>Welcome Deepak</span> 
+        <a href="{{ route('logout-custom') }}"
+           onclick="event.preventDefault();
+                         document.getElementById('logout-form').submit();">
+            {{ __('Logout') }}
+        </a>
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav mr-auto">
-
-                    </ul>
-
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ml-auto">
-			<li class="nav-item">
-                	        <a class="nav-link" href="{{ route('home') }}">{{ __('Home') }}</a>
-                    	</li>
-			<li class="nav-item">
-                	        <a class="nav-link" href="{{ route('aboutus') }}">{{ __('About') }}</a>
-                    	</li>
-			<li class="nav-item">
-                	        <a class="nav-link" href="{{ route('art-gallery') }}">{{ __('Art Gallery') }}</a>
-                    	</li>
-			<li class="nav-item">
-                	        <a class="nav-link" href="{{ route('artists') }}">{{ __('Artists') }}</a>
-                    	</li>
-			<li class="nav-item">
-                	        <a class="nav-link" href="{{ route('events') }}">{{ __('Events') }}</a>
-                    	</li>
-                        <!-- Authentication Links -->
-                        @guest
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                            </li>
-                        @else
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }} <span class="caret"></span>
-                                </a>
-
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout-custom') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
-
-                                    <form id="logout-form" action="{{ route('logout-custom') }}" method="POST" style="display: none;">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>
-                        @endguest
-                    </ul>
-                </div>
-            </div>
-        </nav>
-
-        <main class="py-4">
-            @yield('content')
-        </main>
+        <form id="logout-form" action="{{ route('logout-custom') }}" method="POST" style="display: none;">
+            @csrf
+        </form>
+      @endguest
+		<a href="/" title="Add to Cart"><i class="fas fa-cart-arrow-down"></i></a></nav>
+		<div class="clearfix"></div>
+        <form class="searchBox float-lg-right float-sm-none float-col-none float-md-right">
+          <input type="text" placeholder="Search">
+          <button type="button"><i class="fa fa-search"></i></button>
+        </form>
+      </div>
     </div>
+    <nav class="navbar navbar-expand-lg navbar-light myNav">
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarsExample09" aria-controls="navbarsExample09" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button>
+      <div class="collapse navbar-collapse" id="navbarsExample09">
+        <ul class="navbar-nav ml-auto ">
+          <li class="nav-item active">
+                          <a class="nav-link" href="{{ route('home') }}">{{ __('Home') }}</a>
+          </li>
+      <li class="nav-item">
+                          <a class="nav-link" href="{{ route('aboutus') }}">{{ __('About') }}</a>
+                      </li>
+      <li class="nav-item">
+                          <a class="nav-link" href="{{ route('events') }}">{{ __('Events') }}</a>
+                      </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="{{ route('art-gallery') }}">{{ __('Art Gallery') }}</a>
+                      </li>
+      <li class="nav-item">
+                          <a class="nav-link" href="{{ route('artists') }}">{{ __('Artists') }}</a>
+                      </li>
+      <li class="nav-item">
+                          <a class="nav-link" href="{{ route('testimonials') }}">{{ __('Testimonials') }}</a>
+                      </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="{{ route('media') }}">{{ __('Media Coverage') }}</a>
+                      </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="{{ route('contactus') }}">{{ __('Contact Us') }}</a>
+                      </li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+</header>
+<!--Header Ends Here-->
+
+@yield('content')
+
+<!--footer 2 Start Here-->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-5 col-lg-5 col-12 col-sm-12">
+        <div class="row">
+          <div class="col-md-6 col-lg-6 col-12 col-sm-6">
+            <div class="footerLink">
+              <h4>For Buyers</h4>
+              <ul>
+                <li><a href="/art-gallery.html">Product</a></li>
+                <li><a href="/events.html">Events</a></li>
+                <li><a href="/artist.html">Artists</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-6 col-12 col-sm-6">
+            <div class="footerLink">
+              <h4>For Artist</h4>
+              <ul>
+                <li><a href="#">Why Sell</a></li>
+                <li><a href="/events.html">Events</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-7 col-lg-7 col-12 col-sm-12">
+        <div class="row">
+          <div class="col-md-4 col-lg-4 col-12 col-sm-4">
+            <div class="footerLink">
+              <h4>About Us</h4>
+              <ul>
+                <li><a href="/testimonials.html">Testimonials</a></li>
+                <li><a href="/media.html">Media Coverage</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-md-4 col-lg-4 col-12 col-sm-4">
+            <div class="footerLink">
+              <h4> Uchaan Art</h4>
+              <ul>
+                <li><a href="#">Rangmahal Art Classes</a></li>
+                <li><a href="#">Privacy Policy</a></li>
+                <li><a href="#">Copyright Policy</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-md-4 col-lg-4 col-12 col-sm-4">
+            <div class="footerLink">
+              <h4>Top Categories</h4>
+              <ul>
+                <li><a href="#">Paintings</a></li>
+                <li><a href="#">Photography</a></li>
+                <li><a href="#">Nature</a></li>
+                <li><a href="#">Spritual</a></li>
+                <li><a href="#">Portrait</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="clearfix"></div>
+      <div class="col-md-6 col-lg-6 col-12 col-sm-12">
+        <div class="socialMedia">
+          <ul>
+            <li><a href="" class="iconShape"><i class="fab fa-facebook-f"></i></a></li>
+            <li><a href="" class="iconShape"><i class="fab fa-twitter"></i></a></li>
+            <li><a href="" class="iconShape"><i class="fab fa-pinterest-p"></i></a></li>
+            <li><a href="" class="iconShape"><i class="fab fa-tumblr"></i></a></li>
+            <li><a href="" class="iconShape"><i class="fab fa-instagram"></i></a></li>
+            <li><a href="" class="iconShape"><i class="fab fa-youtube"></i></a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-6 col-12 col-sm-12">
+        <div class="newLetter">
+          <h5>Signup for our Newslatter</h5>
+          <h6>Discover new art and collections added weekly</h6>
+          <form class="newsBox">
+            <input type="text" placeholder="Enter Email ID">
+            <button type="button"><i class="fas fa-sign-in-alt"></i></button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+<!--footer 2 Ends Here-->
+
+<script src="{{ asset('js/jquery-3.3.1.slim.min.js')}}" ></script>
+<script src="{{ asset('js/popper.min.js')}}"></script>
+<script src="{{ asset('js/bootstrap.min.js')}}"></script>
+<script src="{{ asset('js/owl.carousel.min.js')}}"></script>
+<script src="{{ asset('js/custom.js')}}"></script>
+
+@yield('script')
+
 </body>
 </html>

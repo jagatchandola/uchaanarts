@@ -33,9 +33,24 @@
                         <h3>Other works by Artist</h3>
                     </div>
                     @foreach($artistOtherArts as $otherArt)
+<!--                        <img src="/images/{{$otherArt['fname']}}" alt="" width="150" height="150" />-->
                         <img src="/images/dummy.jpg" alt="" width="150" height="150" />
                         <span>{{ $otherArt['title'] }}</span><br>
                         <span>By {{$otherArt['uname']}}</span>
+                    @endforeach
+                @endif
+                
+                
+                
+                @if (!empty($categoryArts))
+                    <br/><br/><br/>
+                    <div class="card-header">
+                        <h3>Related Products</h3>
+                    </div>
+                    @foreach($categoryArts as $art)
+                        <img src="/images/dummy.jpg" alt="" width="150" height="150" />
+                        <span>{{ $art->title }}</span><br>
+                        <span>By {{$art->uname}}</span>
                     @endforeach
                 @endif
     </div>

@@ -21,10 +21,12 @@ class Catalogue extends Model
     protected $table = 'art_items';
 
     public function getCatalogues() {
-        $catalogues = Catalogue::where('active', 1)
+        $catalogues = Catalogue::where('art_items.active', 1)
+                    ->join('artists', 'art_items.artist_id' , '=', 'artists.id')
+                    ->select('art_items.*', 'artists.uname')
                     ->orderBy('id', 'desc')
-                    ->take(10)
-                    ->get();
+                    //->take(10)
+                    ->paginate(10);
 // echo '<pre>';
 // print_r($flights);exit;
 
@@ -72,13 +74,13 @@ class Catalogue extends Model
 
     public function getOtherArts($artist_id, $art_id) {
         $where = [
-                    'artist_id' => $artist_id,
-                    'active'    => 1
+                    'art_items.artist_id' => $artist_id,
+                    'art_items.active'    => 1
                 ];
         $catalogues = Catalogue::where($where)
                     ->join('artists', 'art_items.artist_id', '=', 'artists.id')
                     ->where('art_items.id', '<>', $art_id)
-                    ->orderBy('id', 'desc')
+                    ->orderBy('art_items.id', 'desc')
                     ->take(4)
                     ->get()
                     ->toArray();

@@ -6,7 +6,10 @@ use App\Models\Catalogue;
 use App\Models\Category;
 use App\Models\Artists;
 use App\Models\Events;
+use App\Models\Testimonials;
+use App\Models\Contactus;
 use Illuminate\Http\Request;
+use App\Helpers\Helper;
 
 class HomeController extends Controller
 {
@@ -22,6 +25,8 @@ class HomeController extends Controller
         $this->category = new Category();
         $this->artists = new Artists();
         $this->events = new Events();
+        $this->testimonials = new Testimonials();
+        $this->contactus = new Contactus();
     }
 
     /**
@@ -54,7 +59,7 @@ class HomeController extends Controller
      */
     public function artists()
     {
-        $artists = $this->artists->getAllArtists();
+        $artists = $this->artists->getAllArtists();        
         return view('artists')->with(['artists' => $artists]);
     }
 
@@ -100,6 +105,25 @@ class HomeController extends Controller
 
     public function gallery() {
         $arts = $this->catalogue->getCatalogues();
+        $artDetails = [];
+        
+        if (!empty($arts)) {
+            foreach ($arts as $art) {
+                $calculateData = [
+                                    'price' => $art['price'],
+                                    'gst' => $art['gst'],
+                                    'discountType' => $art['discount'],
+                                    'discountValue' => $art['discount_value']
+                                ];
+                
+                $art['totalPrice'] = Helper::calculatePrice($calculateData);
+                
+                $artDetails[] = $art;
+            }
+        }
+//        echo '<pre>';
+//        print_r($artDetails);exit;
+        
         $categories = $this->category->getCategories();
 
         return view('gallery')->with([
@@ -120,11 +144,14 @@ class HomeController extends Controller
 
     public function artistArtDetails($artist_id, $art_id) {
         $arts = $this->catalogue->getArtDetails($artist_id, $art_id);
-
+//        echo '<pre>';
+// print_r($arts);exit;
         $artistOtherArts = $categoryArts = [];
         if (!empty($arts)) {
             $artistOtherArts = $this->catalogue->getOtherArts($artist_id, $arts[0]->id);
             $categoryArts = $this->category->getArtistCategoryArts($arts[0]->cat, $arts[0]->id);
+//             echo '<pre>';
+// print_r($categoryArts);exit;
         }
         
         return view('artdetails')->with([
@@ -132,5 +159,25 @@ class HomeController extends Controller
                                     'artistOtherArts' => $artistOtherArts,
                                     'categoryArts' => $categoryArts
                                 ]);
+    }
+    
+    public function testimonials() {
+        $testimonails = $this->testimonials->getTestimonials();
+        return view('testimonials')->with([
+                                    'testimonails' => $testimonails
+                                ]);
+    }
+    
+    public function media() {
+        return view('media');
+    }
+    
+    public function contactus(Request $request) {
+        if($request->post()) {
+            //print_r($request->all());exit;
+            $this->contactus->insert($request);
+        }
+        
+        return view('contactus');
     }
 }

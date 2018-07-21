@@ -59,9 +59,9 @@ class Category extends Model
             ->where('art_items.active', 1)
             ->orderBy('art_items.id', 'desc')
             ->take(10)
-            //->join('orders', 'users.id', '=', 'orders.user_id')
             ->select('art_items.*', 'artists.uname')
-            ->get();
+            ->get()
+            ->toArray();
 
         if (!empty($catArts)) {
             return $catArts;

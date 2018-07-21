@@ -28,3 +28,8 @@ Route::get('/events/{id}', 'HomeController@eventdetails')->name('eventdetails');
 Route::get('/art-gallery', 'HomeController@gallery')->name('art-gallery');
 Route::get('/art-gallery/{cat_name}', 'HomeController@catGallery')->name('cat-art-gallery');
 Route::get('/artists/{id}/{art_id}', 'HomeController@artistArtDetails')->name('artist-art');
+
+Route::get('/testimonials', 'HomeController@testimonials')->name('testimonials');
+Route::get('/media', 'HomeController@media')->name('media');
+Route::get('/contactus', 'HomeController@contactus')->name('contactus');
+Route::post('/contactus', 'HomeController@contactus')->name('contactus');

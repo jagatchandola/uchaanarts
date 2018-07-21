@@ -34,12 +34,13 @@
                             <a href="/artists/{{ $art->artist_id}}/{{ $art->id}}">
                                 <img src="/images/dummy.jpg" alt="" width="150" height="150" />
                                 <span>{{ $art->title }}</span><br>
+                                <span>rs. {{ $art->totalPrice }}</span><br>
                                 <span>By {{$art->uname}}</span>
                             </a>
                     </div>
                     <?php } } ?>
                 </div>
-
+                {{$arts->links()}}
             </div>
         </div>
     </div>

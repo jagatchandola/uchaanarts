@@ -1,23 +1,153 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">Dashboard</div>
 
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
-                    You are logged in!
-                </div>
-            </div>
+<!--Carousel Start Here-->
+<div id="myCarousel" class="carousel slide" data-ride="carousel">
+  <ol class="carousel-indicators">
+    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+    <li data-target="#myCarousel" data-slide-to="1"></li>
+    <li data-target="#myCarousel" data-slide-to="2"></li>
+  </ol>
+  <div class="carousel-inner">
+    <div class="carousel-item active"> <img src="{{ asset('img/carousel/c-1.jpg')}}" alt="First slide" class="img-fluid first-slide">
+      <div class="container d-none d-md-block d-lg-block ">
+        <div class="carousel-caption">
+          <h1>News This Week</h1>
+          <p>New Original Work Selected by Our Chief Curator</p>
+          <p><a class="btn btn-lg btn-primary themeBtn" href="#" role="button">See More</a></p>
         </div>
+      </div>
     </div>
-</div>
+    <div class="carousel-item"> <img src="{{ asset('img/carousel/c-2.jpg')}}" alt="Second slide" class="img-fluid second-slide">
+      <div class="container d-none d-md-block d-lg-block">
+        <div class="carousel-caption">
+          <h1>News This Week</h1>
+          <p>New Original Work Selected by Our Chief Curator</p>
+          <p><a class="btn btn-lg btn-primary themeBtn" href="#" role="button">See More</a></p>
+        </div>
+      </div>
+    </div>
+    <div class="carousel-item"> <img src="{{ asset('img/carousel/c-3.jpg')}}" alt="Third slide" class="img-fluid third-slide">
+      <div class="container d-none d-md-block d-lg-block">
+        <div class="carousel-caption">
+          <h1>News This Week</h1>
+          <p>New Original Work Selected by Our Chief Curator</p>
+          <p><a class="btn btn-lg btn-primary themeBtn" href="#" role="button">See More</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev"> <span class="carousel-control-prev-icon" aria-hidden="true"></span> <span class="sr-only">Previous</span> </a> <a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next"> <span class="carousel-control-next-icon" aria-hidden="true"></span> <span class="sr-only">Next</span> </a> </div>
+<!--Carousel Ends Here-->
+<!--Section 1 Start Here-->
+<section class="themeSec1">
+  <h1>Browse by category</h1>
+  <div class="container">
+    <div class="owl-carousel owl-theme first-owl-carousel">
+      <div class="item"><img src="{{ asset('img/slider/1.jpg')}}"><a href="#" class="caption">Portrait</a></div>
+      <div class="item"><img src="{{ asset('img/slider/2.jpg')}}"><a href="#" class="caption">Nature</a></div>
+      <div class="item"><img src="{{ asset('img/slider/3.jpg')}}"><a href="#" class="caption">Art</a></div>
+      <div class="item"><img src="{{ asset('img/slider/4.jpg')}}"><a href="#" class="caption">Spirituals</a></div>
+      <div class="item"><img src="{{ asset('img/slider/3.jpg')}}"><a href="#" class="caption">Art</a></div>
+    </div>
+  </div>
+</section>
+<!--Section 1 Ends Here-->
+<!--Section 2 Start Here-->
+<section class="themeSec2">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-6 col-md-6 col-12 col-sm-12">
+        <article class="themeSubs1">
+          <h2>Artist of the week</h2>
+          <div class="row">
+            <div class="col-lg-5 col-md-5 col-12 col-sm-12">
+              <img class="card-img-top" src="{{ asset('img/swagatika.jpg')}}" alt="Card image cap">
+                
+                  <p class="card-text">Swagatika Mohanty</p>
+               
+            </div>
+            <div class="col-lg-7 col-md-7 col-12 col-sm-12">
+              <blockquote class="blockquote aboutBio">
+               <h3>Artist Bio</h3>
+                <p class="mb-0 text-center font-italic">"The artist biography. It sounds so simple right ? who is more equipped to write about your life and work than you ? Well, sometimes it can be the hardest thing to write your own biography because you are too personally involved or are conscious about sounding too boastful. How do  you decide which life events are important ? Which are'nt? Organizing your own artistic journey into a succinct story can be a big challenge."</p>
+              </blockquote>
+              <a href="#" class="btn btn-primary themeBtn">View Artwork</a>
+            </div>
+          </div>
+        </article>
+      </div>
+      <div class="col-lg-6 col-md-6 col-12 col-sm-12">
+      <article class="themeSubs1">
+       <h2>Upcoming Events</h2>
+       <div class="owl-carousel owl-theme second-owl-carousel">
+      <div class="item"><img src="{{ asset('img/slider/1.jpg')}}"><div class="captionBtm">22-07-2018<br>Uchaan Events<br>Noida, India</div></div>
+      <div class="item"><img src="{{ asset('img/slider/2.jpg')}}"><div class="captionBtm">22-07-2018<br>Uchaan Events<br>Noida, India</div></div>
+      <div class="item"><img src="{{ asset('img/slider/3.jpg')}}"><div class="captionBtm">22-07-2018<br>Uchaan Events<br>Noida, India</div></div>
+      <div class="item"><img src="{{ asset('img/slider/4.jpg')}}"><div class="captionBtm">22-07-2018<br>Uchaan Events<br>Noida, India</div></div>
+      <div class="item"><img src="{{ asset('img/slider/3.jpg')}}"><div class="captionBtm">22-07-2018<br>Uchaan Events<br>Noida, India</div></div>
+    </div>
+      </article>
+       </div>
+    </div>
+  </div>
+</section>
+<!--Section 2 Ends Here-->
+
+<!--Section 1 Start Here-->
+<section class="themeSec1">
+ <h2>Creative Art</h2>
+ <div class="container">
+ <div class="row">
+  <div class="col-md-4 col-lg-4 col-12 col-sm-12">
+   <div class="artBox">
+    <a href="/"><img src="{{ asset('img/slider/1.jpg')}}" class="img-fluid"></a>
+    <h3>TITLE</h3>
+    <h2>15,000</h2>
+    <span>Abhishek Sharma</span>
+   </div>
+  </div>
+  <div class="col-md-4 col-lg-4 col-12 col-sm-12">
+   <div class="artBox">
+    <a href="/"><img src="{{ asset('img/slider/2.jpg')}}" class="img-fluid"></a>
+    <h3>TITLE</h3>
+    <h2>15,000</h2>
+    <span>Abhishek Sharma</span>
+   </div>
+  </div>
+  <div class="col-md-4 col-lg-4 col-12 col-sm-12">
+   <div class="artBox">
+    <a href="/"><img src="{{ asset('img/slider/3.jpg')}}" class="img-fluid"></a>
+    <h3>TITLE</h3>
+    <h2>15,000</h2>
+    <span>Abhishek Sharma</span>
+   </div>
+  </div>
+  <div class="col-lg-12 text-center">
+   <a class="btn btn-primary themeBtn mt-5" href="#">View Artwork</a>
+  </div>
+ </div>
+ </div>
+</section>
+<!--Section 1 Ends Here-->
+
+<!--Section 2 Start Here-->
+<section class="themeSec2">
+<div class="container">
+<div class="col-lg-12 col-md-12 col-12 col-sm-12">
+      <article class="themeSubs1">
+       <h2>Creative Modern Artist</h2>
+       <div class="owl-carousel owl-theme third-owl-carousel">
+      <div class="item"><img src="{{ asset('img/slider/1.jpg')}}"><a href="#" class="captionBtn1">View Artwork</a><div class="captionBtm">Abhishek Sharma</div></div>
+      <div class="item"><img src="{{ asset('img/slider/2.jpg')}}"><a href="#" class="captionBtn1">View Artwork</a><div class="captionBtm">Amit Srivastava</div></div>
+      <div class="item"><img src="{{ asset('img/slider/3.jpg')}}"><a href="#" class="captionBtn1">View Artwork</a><div class="captionBtm">Anil Kaira</div></div>
+      <div class="item"><img src="{{ asset('img/slider/4.jpg')}}"><a href="#" class="captionBtn1">View Artwork</a><div class="captionBtm">Abhishek Sharma</div></div>
+      <div class="item"><img src="{{ asset('img/slider/3.jpg')}}"><a href="#" class="captionBtn1">View Artwork</a><div class="captionBtm">Amit Srivastava</div></div>
+    </div>
+      </article>
+       </div>
+</div>     
+</section>
+<!--Section 2 Ends Here-->
 @endsection
