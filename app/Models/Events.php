@@ -31,4 +31,14 @@ class Events extends Model
         return [];
     }
     
+    public function getEventDetails($event_id) {
+        $events = Events::where('id', $event_id)
+                    ->get();
+
+        if (!empty($events)) {
+            return $events[0];
+        }
+
+        return [];
+    }
 }

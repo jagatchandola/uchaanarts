@@ -1,9 +1,15 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use App\User;
+use App\Models\Artists;
+use Illuminate\Http\Request;
+use App\Http\Requests;
+use Session;
+use Auth;
 
 class LoginController extends Controller
 {
@@ -35,6 +41,30 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+        $this->user = new User();
+        $this->artists = new Artists();
     }
 
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function index(Request $request)
+    {
+        if (Auth::attempt(['email' => $request['email'], 'password' => $request['password']])) {
+            return redirect()->route('home');
+        } else {
+            Session::flash('error-msg', "Invalid email/password");
+            return redirect('login');
+        }
+        
+    }
+
+    public function logout(Request $request)
+    {
+        Session::flush();
+        Auth::logout();
+        return redirect('login');
+    }
 }

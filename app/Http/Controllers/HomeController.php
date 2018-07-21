@@ -32,7 +32,7 @@ class HomeController extends Controller
     public function index()
     {
         $result = $this->catalogue->getCatalogues();
-        $category = $this->category->getCatalogues();
+        $category = $this->category->getCategories();
 
         return view('home')->with(['catalogues' => $result, 'categories' => $category]);
     }
@@ -59,6 +59,24 @@ class HomeController extends Controller
     }
 
     /**
+     * Show the artist details.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function artistdetails(Request $request, $id)
+    {
+        $artists = $this->artists->getArtistDetails($id);
+        if (!empty($artists)) {
+            $catalogues = $this->catalogue->getArtistWork($id);
+        }
+
+        return view('artistdetails')->with([
+                                            'artists' => array_shift($artists),
+                                            'catalogues' => $catalogues
+                                        ]);
+    }
+
+    /**
      * Show the application events.
      *
      * @return \Illuminate\Http\Response
@@ -67,5 +85,52 @@ class HomeController extends Controller
     {
         $events = $this->events->getAllEvents();
         return view('events')->with(['events' => $events]);
+    }
+
+    /**
+     * Show the application event details.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function eventdetails(Request $request, $id)
+    {
+        $eventDetails = $this->events->getEventDetails($id);
+        return view('eventdetails')->with(['eventDetails' => $eventDetails]);
+    }
+
+    public function gallery() {
+        $arts = $this->catalogue->getCatalogues();
+        $categories = $this->category->getCategories();
+
+        return view('gallery')->with([
+                                    'arts' => $arts,
+                                    'categories' => $categories
+                                ]);
+    }
+
+    public function catGallery($cat_name) {
+        $arts = $this->category->getCategoryArts($cat_name);
+        $categories = $this->category->getCategories();
+
+        return view('gallery')->with([
+                                    'arts' => $arts,
+                                    'categories' => $categories
+                                ]);
+    }
+
+    public function artistArtDetails($artist_id, $art_id) {
+        $arts = $this->catalogue->getArtDetails($artist_id, $art_id);
+
+        $artistOtherArts = $categoryArts = [];
+        if (!empty($arts)) {
+            $artistOtherArts = $this->catalogue->getOtherArts($artist_id, $arts[0]->id);
+            $categoryArts = $this->category->getArtistCategoryArts($arts[0]->cat, $arts[0]->id);
+        }
+        
+        return view('artdetails')->with([
+                                    'arts' => $arts,
+                                    'artistOtherArts' => $artistOtherArts,
+                                    'categoryArts' => $categoryArts
+                                ]);
     }
 }

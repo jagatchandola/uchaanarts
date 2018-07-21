@@ -21,12 +21,19 @@
                     ?>
                     <div class="card-body">
                         <a href="#">
-                            <img src="{{ $artist->profing }}" alt="" width="150" height="150" />
-                            <span>{{ $artist->uname }}</span>
+                            <!-- <img src="images/{{ $artist->profing }}" alt="" width="150" height="150" /> -->
+                            <a href="artists/{{ $artist->id}}">
+                                <img src="images/dummy.jpg" alt="" width="150" height="150" />
+                                <span>{{ $artist->uname }}</span>
+                            </a>
                         </a>
                     </div>
                     <?php } } ?>
                 </div>
+                @if ($artists->lastPage() > 1)
+                    <div>{{$artists->lastPage()}}</div>
+                @endif
+                {{$artists->links()}}
             </div>
         </div>
     </div>

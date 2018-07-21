@@ -6,10 +6,25 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">{{ __('Login') }}</div>
-
+                @if (Session::has('error-msg'))
+                    <div style="color:red; text-align: center;">{{ Session::get('error-msg') }}</div>
+                @endif
                 <div class="card-body">
                     <form method="POST" action="{{ route('login') }}" aria-label="{{ __('Login') }}">
                         @csrf
+
+                        <div class="form-group row">
+                            <label for="email" class="col-sm-4 col-form-label text-md-right">{{ __('Login Type') }}</label>
+
+                            <div class="col-md-6">
+                                <select id="user_type" name="user_type" class="form-control" required autofocus>
+                                    <option value="">Select</option>
+                                    <option value="1">Normal User</option>
+                                    <option value="2">Artist</option>
+                                </select>
+                                
+                            </div>
+                        </div>
 
                         <div class="form-group row">
                             <label for="email" class="col-sm-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
@@ -69,3 +84,7 @@
     </div>
 </div>
 @endsection
+
+<script type="text/javascript">
+    
+</script>

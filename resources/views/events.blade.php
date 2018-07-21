@@ -20,7 +20,7 @@
                                 if (strtotime($event->start_date) > strtotime($currentDate)) {
                                     if ($upcomingEvents === false) {
                                         echo '<div class="card-header">
-                                                <h3>Upcoming Events</h3>
+                                                <h3><b>Upcoming Events</b></h3>
                                             </div>';
                                         $upcomingEvents = true;
                                     }
@@ -28,22 +28,24 @@
                              
                     ?>
                             <div class="card-body">
-                                <a href="#">
+                                <a href="events/{{$event->id}}">
                                     <img src="images/{{ $event->banner }}" alt="" width="200" height="200" />
-                                    <span>{{ $event->etitle }}</span>
+                                    <span>{{ $event->etitle }}<br/>
+                                        {{date('d-F-Y', strtotime($event->start_date))}}
+                                    </span>
                                 </a>
                             </div>
                         <?php 
                             } else {
                                 if ($pastEvents === false) {
                                         echo '<div class="card-header">
-                                                <h3>Past Events</h3>
+                                                <h3><b>Past Events</b></h3>
                                             </div>';
                                         $pastEvents = true;
                                     }
                         ?>
                             <div class="card-body">
-                                <a href="#">
+                                <a href="events/{{$event->id}}">
                                     <img src="images/{{ $event->banner }}" alt="" width="200" height="200" />
                                     <span>{{ $event->etitle }} <br/>
                                         {{date('d-F-Y', strtotime($event->start_date))}}

@@ -22,7 +22,8 @@ class Artists extends Model
     public function getAllArtists() {
         $artists = Artists::where('shide', 1)
                     ->orderBy('uname', 'asc')
-                    ->get();
+                    //->get()
+                    ->paginate(5);
 
         if (!empty($artists)) {
             return $artists;
@@ -31,4 +32,33 @@ class Artists extends Model
         return [];
     }
     
+    public function authenticate($input) {
+        $matchThese = [
+                        'email' => $input['email'], 
+                        'password' => md5($input['password'])
+                    ];
+
+        $artist = Artists::where($matchThese)
+                    ->get()
+                    ->toArray();
+
+        if (!empty($artist)) {
+            return $artist;
+        }
+
+        return [];
+    }
+
+    public function getArtistDetails($artist_id) {
+        $artist = Artists::where('id', $artist_id)
+                    //->orderBy('uname', 'asc')
+                    ->get()
+                    ->toArray();
+
+        if (!empty($artist)) {
+            return $artist;
+        }
+
+        return [];
+    }
 }

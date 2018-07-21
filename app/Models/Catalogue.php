@@ -9,6 +9,7 @@
 
 namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
+use DB;
 
 class Catalogue extends Model
 {
@@ -34,4 +35,60 @@ class Catalogue extends Model
         return [];
     }
     
+    public function getArtistWork($artist_id) {
+        $where = [
+                    'artist_id' => $artist_id,
+                    'active'    => 1
+                ];
+        $catalogues = Catalogue::where($where)
+                    ->orderBy('id', 'desc')
+                    ->take(4)
+                    ->get()
+                    ->toArray();
+
+        if (!empty($catalogues)) {
+            return $catalogues;
+        }
+
+        return [];
+    }
+
+    // get art details
+    public function getArtDetails($artist_id, $art_id) {
+        $catArts = DB::table('art_items')
+            ->join('artists', 'art_items.artist_id', '=', 'artists.id')
+            ->where('art_items.id', $art_id)
+            ->where('artists.id', '=', $artist_id)
+            ->select('art_items.*', 'artists.uname')
+            ->get();
+// echo '<pre>';
+// print_r($catArts);exit;
+        if (!empty($catArts)) {
+            return $catArts;
+        }
+
+        return [];
+    }
+
+    public function getOtherArts($artist_id, $art_id) {
+        $where = [
+                    'artist_id' => $artist_id,
+                    'active'    => 1
+                ];
+        $catalogues = Catalogue::where($where)
+                    ->join('artists', 'art_items.artist_id', '=', 'artists.id')
+                    ->where('art_items.id', '<>', $art_id)
+                    ->orderBy('id', 'desc')
+                    ->take(4)
+                    ->get()
+                    ->toArray();
+// echo '<pre>';
+// print_r($catalogues);exit;
+
+        if (!empty($catalogues)) {
+            return $catalogues;
+        }
+
+        return [];
+    }
 }
