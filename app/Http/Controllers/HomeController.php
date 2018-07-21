@@ -105,8 +105,9 @@ class HomeController extends Controller
 
     public function gallery() {
         $arts = $this->catalogue->getCatalogues();
-        $artDetails = [];
         
+//        echo '<pre>';
+//        print_r($arts);exit;
         if (!empty($arts)) {
             foreach ($arts as $art) {
                 $calculateData = [
@@ -117,13 +118,9 @@ class HomeController extends Controller
                                 ];
                 
                 $art['totalPrice'] = Helper::calculatePrice($calculateData);
-                
-                $artDetails[] = $art;
             }
         }
-//        echo '<pre>';
-//        print_r($artDetails);exit;
-        
+
         $categories = $this->category->getCategories();
 
         return view('gallery')->with([
@@ -134,6 +131,23 @@ class HomeController extends Controller
 
     public function catGallery($cat_name) {
         $arts = $this->category->getCategoryArts($cat_name);
+
+//                echo '<pre>';
+//        print_r($arts);exit;
+        
+        if (!empty($arts) && count($arts)) {
+            foreach ($arts as $art) {
+                $calculateData = [
+                                    'price' => $art->price,
+                                    'gst' => $art->gst,
+                                    'discountType' => $art->discount,
+                                    'discountValue' => $art->discount_value
+                                ];
+                
+                $art->totalPrice = Helper::calculatePrice($calculateData);
+            }
+        }
+        
         $categories = $this->category->getCategories();
 
         return view('gallery')->with([

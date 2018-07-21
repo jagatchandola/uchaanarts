@@ -1,23 +1,90 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">
-                    <h3>UCHAAN - A Group of Contemporary Artists</h3>
-                </div>
-
-                <div class="card-body">
-                    
-                    Founder & Director at UCHAAN
-
-                    Jyoti herself is a trained artist, having gained her expertise under the tutelage of eminent art thespians. Since 2013 she has curated launched over 50 art exhibitions, amalgamating contemporary art, paintings, sculptures and photographs. Jyoti has been persistent in experimenting with her showcase by making it a fusion of various creative expressions, live music and painting or live music and sculpture coupled with mimicry as an art form.
-                    Her dedication to the upliftment of arts and artists has made UCHAAN a space for all art lovers and connoisseurs a destination, for art appreciation as well as for enriching their art collection. 
-                </div>
+<!--Section 1 Stat Here-->
+<section class="themeSec1 bgWhite">
+  <h1>UCHAAN - A Group of Contemporary Artist </h1>
+  <div class="container">
+   <div class="aboutUsbx">
+     <div class="row">
+            <div class="col-lg-3 col-md-3 col-12 col-sm-12">
+              <img class="card-img-top img-fluid" src="{{ asset('img/a-1.jpg')}}" alt="Card image cap">
+                <p class="card-text">Jyoti Kalra</p>
             </div>
-        </div>
-    </div>
+            <div class="col-lg-9 col-md-9 col-12 col-sm-12">
+              <blockquote class="blockquote aboutBio text-left">
+               <h3>Foundation & Director of UCHAAN</h3>
+                <p class="mb-0 "><strong>Jyoti Kalra</strong> is a founder of Uchaan arts, a podium that benifits upcoming artists and provides excellent platform for established artist to get worldwide exposure. <br>
+Over the years Uchaan has acquired and developed an exotic art collection from artists of varied genre. She has been displaying works of folk artists  to  encourage and promote our traditional art form. This inspires, informs and educates the masses and helps our culture reach a certain height. Over the years Uchaan art has earned its repute of being a serious art promoter.<br>
+Besides working with art and artists, she has tremendous administrative skills for organising exhibitions and art events. She keeps up with latest art trends and keeps on researching about artists and their work. She is an adept multitasker who is also good at public relations and marketing artefacts. She has excellent communication skills and using them she has successfully mediated between artists, buyers and the art connoisseurs with great success rates.<br>
+<strong>UCHAAN Foundation</strong>, is incorporated as a not-for-profit comapny with a main objective that has established itself as nurtuing ground for a variety of art and varied artists.
+Uchaan has a repertoire of not just the masters of art but also an impeccable a range of contemporary artists from all parts of the country, whose works are showcased on a regular basis. Uchaan has been doing shows in all forms of visual arts in its own distinguish way within the gallery as well as hastaken art outside the confines to off site locations. Uchaan has taken the art to masses so as to maximise the reach and lure are enthusiasts far and wide
+</p>
+              </blockquote>
+            </div>
+          </div>
+   </div>         
+  </div>
+</section>
+<!--Section 1 Ends Here-->
+
+<!--sectionAddcart Start here-->
+<div class="sectionAddcart">
+ <div class="container">
+   <div class="aboutUsbx themeSubs1 ">
+    <h2>Uchaan Memorable Moments </h2>
+     <div class="row">
+       <div class="col-lg-3 col-md-3 col-12 col-sm-6">
+         <div class="artBox"> <a href="/"><img src="/assets/img/a-2.jpg" class="img-fluid"></a>
+            <h3>TITLE</h3>
+           
+         </div>
+       </div>
+       <div class="col-lg-3 col-md-3 col-12 col-sm-6">
+         <div class="artBox"> <a href="/"><img src="/assets/img/a-3.jpg" class="img-fluid"></a>
+            <h3>TITLE</h3>
+          
+         </div>
+       </div>
+       <div class="col-lg-3 col-md-3 col-12 col-sm-6">
+         <div class="artBox"> <a href="/"><img src="/assets/img/a-4.jpg" class="img-fluid"></a>
+            <h3>TITLE</h3>
+           
+         </div>
+       </div>
+       <div class="col-lg-3 col-md-3 col-12 col-sm-6">
+         <div class="artBox"> <a href="/"><img src="/assets/img/a-5.jpg" class="img-fluid"></a>
+            <h3>TITLE</h3>
+            
+       </div>
+     </div>
+       <div class="col-lg-3 col-md-3 col-12 col-sm-6">
+         <div class="artBox"> <a href="/"><img src="/assets/img/a-5.jpg" class="img-fluid"></a>
+            <h3>TITLE</h3>
+           
+         </div>
+       </div>
+       <div class="col-lg-3 col-md-3 col-12 col-sm-6">
+         <div class="artBox"> <a href="/"><img src="/assets/img/a-6.jpg" class="img-fluid"></a>
+            <h3>TITLE</h3>
+          
+         </div>
+       </div>
+       <div class="col-lg-3 col-md-3 col-12 col-sm-6">
+         <div class="artBox"> <a href="/"><img src="/assets/img/a-2.jpg" class="img-fluid"></a>
+            <h3>TITLE</h3>
+           
+         </div>
+       </div>
+       <div class="col-lg-3 col-md-3 col-12 col-sm-6">
+         <div class="artBox"> <a href="/"><img src="/assets/img/a-3.jpg" class="img-fluid"></a>
+            <h3>TITLE</h3>
+            
+       </div>
+     </div>
+   </div>         
+  </div>
 </div>
+</div>
+<!--sectionAddcart Ends here-->
 @endsection

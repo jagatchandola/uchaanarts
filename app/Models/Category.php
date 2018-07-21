@@ -41,7 +41,7 @@ class Category extends Model
             ->where('art_items.active', 1)
             //->join('orders', 'users.id', '=', 'orders.user_id')
             ->select('art_items.*', 'artists.uname')
-            ->get();
+            ->paginate(10);
 
         if (!empty($catArts)) {
             return $catArts;

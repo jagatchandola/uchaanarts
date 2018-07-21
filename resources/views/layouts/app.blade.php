@@ -70,29 +70,29 @@
       <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarsExample09" aria-controls="navbarsExample09" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button>
       <div class="collapse navbar-collapse" id="navbarsExample09">
         <ul class="navbar-nav ml-auto ">
-          <li class="nav-item active">
-                          <a class="nav-link" href="{{ route('home') }}">{{ __('Home') }}</a>
+          <li class="nav-item  {{ request()->is('home') ? 'active' : '' }}">
+            <a class="nav-link" href="{{ route('home') }}">{{ __('Home') }}</a>
           </li>
-      <li class="nav-item">
-                          <a class="nav-link" href="{{ route('aboutus') }}">{{ __('About') }}</a>
+      <li class="nav-item {{ request()->is('aboutus') ? 'active' : '' }}">
+            <a class="nav-link" href="{{ route('aboutus') }}">{{ __('About') }}</a>
                       </li>
-      <li class="nav-item">
-                          <a class="nav-link" href="{{ route('events') }}">{{ __('Events') }}</a>
+      <li class="nav-item {{ request()->is('events*') ? 'active' : '' }}">
+            <a class="nav-link" href="{{ route('events') }}">{{ __('Events') }}</a>
                       </li>
-                        <li class="nav-item">
-                          <a class="nav-link" href="{{ route('art-gallery') }}">{{ __('Art Gallery') }}</a>
+                        <li class="nav-item {{ request()->is('art-gallery*') ? 'active' : '' }}">
+            <a class="nav-link" href="{{ route('art-gallery') }}">{{ __('Art Gallery') }}</a>
                       </li>
-      <li class="nav-item">
-                          <a class="nav-link" href="{{ route('artists') }}">{{ __('Artists') }}</a>
+      <li class="nav-item {{ request()->is('artists*') ? 'active' : '' }}">
+            <a class="nav-link" href="{{ route('artists') }}">{{ __('Artists') }}</a>
                       </li>
-      <li class="nav-item">
-                          <a class="nav-link" href="{{ route('testimonials') }}">{{ __('Testimonials') }}</a>
+      <li class="nav-item {{ request()->is('testimonials*') ? 'active' : '' }}">
+            <a class="nav-link" href="{{ route('testimonials') }}">{{ __('Testimonials') }}</a>
                       </li>
-                        <li class="nav-item">
-                          <a class="nav-link" href="{{ route('media') }}">{{ __('Media Coverage') }}</a>
+                        <li class="nav-item {{ request()->is('media*') ? 'active' : '' }}">
+            <a class="nav-link" href="{{ route('media') }}">{{ __('Media Coverage') }}</a>
                       </li>
-                        <li class="nav-item">
-                          <a class="nav-link" href="{{ route('contactus') }}">{{ __('Contact Us') }}</a>
+                        <li class="nav-item {{ request()->is('contactus*') ? 'active' : '' }}">
+            <a class="nav-link" href="{{ route('contactus') }}">{{ __('Contact Us') }}</a>
                       </li>
         </ul>
       </div>

@@ -11,7 +11,7 @@
 
                 <div>
                     @if(!empty($categories))
-                        <a href="gallery">All</a>
+                        <a href="/art-gallery">All</a>
                         @foreach($categories as $category)
                             <p>
                                 <a href="/art-gallery/{{$category->cat_url}}">{{$category->cat_name}}</a>
@@ -22,11 +22,12 @@
                 <div class="card-body">
                     
                     <?php 
-                        if (empty($arts)) {
+                        if (empty($arts) || !count($arts)) {
                             echo 'No record(s) found';
                         } else {
+                            //echo '<pre>';print_r($arts);exit;
                             foreach ($arts as $art) {
-                                //echo '<pre>';print_r($art);exit;
+                                
                              
                     ?>
                     <div class="card-body">
@@ -34,7 +35,7 @@
                             <a href="/artists/{{ $art->artist_id}}/{{ $art->id}}">
                                 <img src="/images/dummy.jpg" alt="" width="150" height="150" />
                                 <span>{{ $art->title }}</span><br>
-                                <span>rs. {{ $art->totalPrice }}</span><br>
+                                <span>Rs. {{ $art->totalPrice }}</span><br>
                                 <span>By {{$art->uname}}</span>
                             </a>
                     </div>

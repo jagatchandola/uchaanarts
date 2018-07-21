@@ -28,7 +28,7 @@ class Catalogue extends Model
                     //->take(10)
                     ->paginate(10);
 // echo '<pre>';
-// print_r($flights);exit;
+// print_r($catalogues);exit;
 
         if (!empty($catalogues)) {
             return $catalogues;

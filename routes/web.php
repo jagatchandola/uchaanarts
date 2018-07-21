@@ -33,3 +33,13 @@ Route::get('/testimonials', 'HomeController@testimonials')->name('testimonials')
 Route::get('/media', 'HomeController@media')->name('media');
 Route::get('/contactus', 'HomeController@contactus')->name('contactus');
 Route::post('/contactus', 'HomeController@contactus')->name('contactus');
+
+
+
+// Backend routes
+
+Route::namespace('Backend')->prefix('backend')->group(function () {
+	Route::get('/login', 'LoginController@index')->name('login');
+    
+});
+
