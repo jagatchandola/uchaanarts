@@ -14,19 +14,6 @@
                         @csrf
 
                         <div class="form-group row">
-                            <label for="email" class="col-sm-4 col-form-label text-md-right">{{ __('Login Type') }}</label>
-
-                            <div class="col-md-6">
-                                <select id="user_type" name="user_type" class="form-control" required autofocus>
-                                    <option value="">Select</option>
-                                    <option value="1">Normal User</option>
-                                    <option value="2">Artist</option>
-                                </select>
-                                
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
                             <label for="email" class="col-sm-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
 
                             <div class="col-md-6">

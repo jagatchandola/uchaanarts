@@ -40,6 +40,6 @@ Route::post('/contactus', 'HomeController@contactus')->name('contactus');
 // Backend routes
 
 Route::namespace('Backend')->prefix('backend')->group(function () {
-	Route::get('/login', 'LoginController@index')->name('login');
+	Route::get('/login', 'LoginController@index')->name('backend-login');
 });
 
