@@ -8,6 +8,7 @@ use App\Models\Artists;
 use App\Models\Events;
 use App\Models\Testimonials;
 use App\Models\Contactus;
+use App\Models\Moments;
 use Illuminate\Http\Request;
 use App\Helpers\Helper;
 
@@ -27,6 +28,7 @@ class HomeController extends Controller
         $this->events = new Events();
         $this->testimonials = new Testimonials();
         $this->contactus = new Contactus();
+        $this->moments = new Moments();
     }
 
     /**
@@ -49,7 +51,10 @@ class HomeController extends Controller
      */
     public function aboutus()
     {
-        return view('aboutus');
+        $moments = $this->moments->getAllMoments();
+        return view('aboutus')->with([
+                                    'moments' => $moments
+                                ]);
     }
 
     /**

@@ -1,5 +1,13 @@
 @extends('layouts.app')
 
+@section('style')
+<link rel="stylesheet" type="text/css" href="{{ asset('/css/ekko-lightbox.css') }}">
+@endsection
+@section('script')
+<!--<script type="text/javascript" src="{{ asset('/js/ekko-lightbox.js')}}"></script>-->
+<script type="text/javascript" src="{{ asset('/js/ekko-lightbox.min.js')}}"></script>
+@endsection
+
 @section('content')
 <!--Section 1 Stat Here-->
 <section class="themeSec1 bgWhite">
@@ -32,59 +40,32 @@ Uchaan has a repertoire of not just the masters of art but also an impeccable a 
 <div class="sectionAddcart">
  <div class="container">
    <div class="aboutUsbx themeSubs1 ">
+       
+    @if (!empty($moments))
     <h2>Uchaan Memorable Moments </h2>
-     <div class="row">
-       <div class="col-lg-3 col-md-3 col-12 col-sm-6">
-         <div class="artBox"> <a href="/"><img src="/assets/img/a-2.jpg" class="img-fluid"></a>
-            <h3>TITLE</h3>
-           
-         </div>
-       </div>
-       <div class="col-lg-3 col-md-3 col-12 col-sm-6">
-         <div class="artBox"> <a href="/"><img src="/assets/img/a-3.jpg" class="img-fluid"></a>
-            <h3>TITLE</h3>
-          
-         </div>
-       </div>
-       <div class="col-lg-3 col-md-3 col-12 col-sm-6">
-         <div class="artBox"> <a href="/"><img src="/assets/img/a-4.jpg" class="img-fluid"></a>
-            <h3>TITLE</h3>
-           
-         </div>
-       </div>
-       <div class="col-lg-3 col-md-3 col-12 col-sm-6">
-         <div class="artBox"> <a href="/"><img src="/assets/img/a-5.jpg" class="img-fluid"></a>
-            <h3>TITLE</h3>
-            
-       </div>
-     </div>
-       <div class="col-lg-3 col-md-3 col-12 col-sm-6">
-         <div class="artBox"> <a href="/"><img src="/assets/img/a-5.jpg" class="img-fluid"></a>
-            <h3>TITLE</h3>
-           
-         </div>
-       </div>
-       <div class="col-lg-3 col-md-3 col-12 col-sm-6">
-         <div class="artBox"> <a href="/"><img src="/assets/img/a-6.jpg" class="img-fluid"></a>
-            <h3>TITLE</h3>
-          
-         </div>
-       </div>
-       <div class="col-lg-3 col-md-3 col-12 col-sm-6">
-         <div class="artBox"> <a href="/"><img src="/assets/img/a-2.jpg" class="img-fluid"></a>
-            <h3>TITLE</h3>
-           
-         </div>
-       </div>
-       <div class="col-lg-3 col-md-3 col-12 col-sm-6">
-         <div class="artBox"> <a href="/"><img src="/assets/img/a-3.jpg" class="img-fluid"></a>
-            <h3>TITLE</h3>
-            
-       </div>
-     </div>
-   </div>         
+        
+    @foreach ($moments as $moment)
+        <div class="row">
+            <div class="col-lg-3 col-md-3 col-12 col-sm-6">
+                <div class="artBox"> 
+                    <a href="uploads/memorable_moments/{{$moment->image}}" data-toggle="lightbox" data-title="{{$moment->title}}">
+                        <img src="uploads/memorable_moments/{{$moment->image}}" class="img-fluid">
+                    </a>
+                    <h3>{{$moment->title}}</h3>
+                </div>
+            </div>
+        </div> 
+    @endforeach
+    @endif
   </div>
 </div>
 </div>
 <!--sectionAddcart Ends here-->
+
+<script type="text/javascript">
+    $(document).on('click', '[data-toggle="lightbox"]', function(event) {
+        event.preventDefault();
+        $(this).ekkoLightbox();
+    });
+</script>
 @endsection
