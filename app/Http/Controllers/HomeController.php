@@ -89,7 +89,21 @@ class HomeController extends Controller
     public function events()
     {
         $events = $this->events->getAllEvents();
-        return view('events')->with(['events' => $events]);
+        $upcomingEvents = $pastEvents = [];
+
+        if (empty($events)) {
+           ?> <div>Sorry no arts avialabe right now</div> <?php
+        } else {
+            foreach ($events as $event) {
+                //echo '<pre>';print_r($events->eurl);exit;
+                if (strtotime($event->start_date) > strtotime(date('Y-m-d'))) {
+                    $upcomingEvents[] = $event;
+                } else {
+                    $pastEvents[] = $event;
+                }
+            }
+        }
+        return view('events')->with(['upcomingEvents' => $upcomingEvents, 'pastEvents' => $pastEvents]);
     }
 
     /**

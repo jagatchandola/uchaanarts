@@ -47,7 +47,7 @@
     
         <a href="{{ route('register') }}">Register</a> 
       @else
-        <span>Welcome {{Auth::user()->uname}}</span> 
+      <span style="color: white;">Welcome {{Auth::user()->uname}}</span> 
         <a href="{{ route('logout-custom') }}"
            onclick="event.preventDefault();
                          document.getElementById('logout-form').submit();">
@@ -83,7 +83,7 @@
             <a class="nav-link" href="{{ route('art-gallery') }}">{{ __('Art Gallery') }}</a>
                       </li>
       <li class="nav-item {{ request()->is('artists*') ? 'active' : '' }}">
-            <a class="nav-link" href="{{ route('artists') }}">{{ __('Artists') }}</a>
+            <a class="nav-link" href="{{ route('artists') }}">{{ __('Artist') }}</a>
                       </li>
       <li class="nav-item {{ request()->is('testimonials*') ? 'active' : '' }}">
             <a class="nav-link" href="{{ route('testimonials') }}">{{ __('Testimonials') }}</a>

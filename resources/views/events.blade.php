@@ -1,62 +1,56 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
+
+<!--Section 1 Stat Here-->
+<section class="themeSec1 bgWhite">
+  <h1>Upcoming Events</h1>
+  <div class="container">
+   <div class="eventsBox">
+  <div class="row">
+        @if(empty($upcomingEvents))
+            <div> There are no upcomming events exists.</div>
+        @else
+        @foreach($upcomingEvents as $event)
+           <div class="col-lg-4 col-md-4 col-12 col-sm-6">
+             <div class="artBox"> <a href="/events/{{$event->id}}"><img src="{{ \App\Helpers\Helper::getImage($event->banner, 2) }}" class="img-fluid"></a>
+                <h3>{{ $event->etitle }}</h3>
+                <span>{{ $event->venue }}</span>
+                <span>{{date('d/F/Y', strtotime($event->start_date))}}</span>
+            
+             </div>
+           </div>
+       @endforeach
+       @endif
+  
+  </div>
+  </div>
+   </div>
+</section>
+<!--Section 1 Ends Here-->
+<!--Section 1 Stat Here-->
+<section class="themeSec1">
+  <h2>PAST EVENTS</h2>
+  <div class="container">
+   <div class="eventsBox">
+  <div class="row">
+
+    @if(!empty($pastEvents))
+        @foreach($pastEvents as $event)
+            <div class="col-lg-3 col-md-3 col-12 col-sm-6">
+                <div class="artBox"> <a href="/events/{{$event->id}}"><img src="{{ \App\Helpers\Helper::getImage($event->banner, 2) }}" class="img-fluid"></a>
+                    <h3>{{ $event->etitle }}</h3>
+                    <span>{{ $event->venue }}</span>
+                    <span>{{date('d/F/Y', strtotime($event->start_date))}}</span>
                 
-                <div class="card-body">
-                    
-                    <?php 
-                        $upcomingEvents = $pastEvents = false;
-                        $currentDate = date('Y-m-d');
-
-                        if (empty($events)) {
-                            echo 'No record(s) found';
-                        } else {
-                            foreach ($events as $event) {
-                                //echo '<pre>';print_r($events->eurl);exit;
-                                if (strtotime($event->start_date) > strtotime($currentDate)) {
-                                    if ($upcomingEvents === false) {
-                                        echo '<div class="card-header">
-                                                <h3><b>Upcoming Events</b></h3>
-                                            </div>';
-                                        $upcomingEvents = true;
-                                    }
-                                
-                             
-                    ?>
-                            <div class="card-body">
-                                <a href="events/{{$event->id}}">
-                                    <img src="images/{{ $event->banner }}" alt="" width="200" height="200" />
-                                    <span>{{ $event->etitle }}<br/>
-                                        {{date('d-F-Y', strtotime($event->start_date))}}
-                                    </span>
-                                </a>
-                            </div>
-                        <?php 
-                            } else {
-                                if ($pastEvents === false) {
-                                        echo '<div class="card-header">
-                                                <h3><b>Past Events</b></h3>
-                                            </div>';
-                                        $pastEvents = true;
-                                    }
-                        ?>
-                            <div class="card-body">
-                                <a href="events/{{$event->id}}">
-                                    <img src="images/{{ $event->banner }}" alt="" width="200" height="200" />
-                                    <span>{{ $event->etitle }} <br/>
-                                        {{date('d-F-Y', strtotime($event->start_date))}}
-                                    </span>
-                                </a>
-                            </div>
-
-                    <?php } } }?>
-                </div>
+                 </div>
             </div>
-        </div>
-    </div>
-</div>
+        @endforeach
+    @endif
+  </div>
+  </div>
+   </div>
+</section>
+<!--Section 1 Ends Here-->
+
 @endsection

@@ -1,49 +1,64 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">
-                    <h3>Creative Art Work</h3>
-                </div>
-
-                <div>
-                    @if(!empty($categories))
-                        <a href="/art-gallery">All</a>
-                        @foreach($categories as $category)
-                            <p>
-                                <a href="/art-gallery/{{$category->cat_url}}">{{$category->cat_name}}</a>
-                            </p>
-                        @endforeach
-                    @endif
-                </div>
-                <div class="card-body">
-                    
-                    <?php 
-                        if (empty($arts) || !count($arts)) {
-                            echo 'No record(s) found';
-                        } else {
-                            //echo '<pre>';print_r($arts);exit;
-                            foreach ($arts as $art) {
-                                
-                             
-                    ?>
-                    <div class="card-body">
-                            <!-- <img src="images/{{ $art->fname }}" alt="" width="150" height="150" /> -->
-                            <a href="/artists/{{ $art->artist_id}}/{{ $art->id}}">
-                                <img src="/images/dummy.jpg" alt="" width="150" height="150" />
-                                <span>{{ $art->title }}</span><br>
-                                <span>Rs. {{ $art->totalPrice }}</span><br>
-                                <span>By {{$art->uname}}</span>
-                            </a>
-                    </div>
-                    <?php } } ?>
-                </div>
-                {{$arts->links()}}
-            </div>
+<!--Section 1 Stat Here-->
+<section class="themeSec1 bgWhite">
+  <h1>Creative Art Work</h1>
+  <div class="container">
+    <div class="productPbox">
+      <div class="row">
+        <div class="col-md-3 col-lg-2 col-12 col-sm-12">
+             @if(!empty($categories))
+            <ul class="itemList d-none d-md-block d-lg-block">
+                <li class="active list" id="all"><a href="/art-gallery">All</a></li>
+                @foreach($categories as $category)
+                <li class="list" id="{{$category->cat_url}}"><a href="/art-gallery/{{$category->cat_url}}">{{$category->cat_name}}</a></li>
+                @endforeach
+                <li>Browse by category</li>
+            </ul>
+            @endif
+          
+          <div class="mobileFilter d-md-none d-lg-none">
+            <h2>Select a Category</h2>
+          <select class=" form-control">
+            <option value="all">All</option>
+            <option value="a">Abstract</option>
+            
+          </select>
+          </div>
         </div>
+        <div class="col-md-9 col-lg-10 col-12 col-sm-12" >
+          <div class="row" id="parent">
+
+            @if(!empty($arts))
+                @foreach($arts as $art)
+                <div class="col-lg-3 col-md-4 col-12 col-sm-6 a b box all">
+                  <div class="artBox"> <a href="/product-details.html"><img src="{{ \App\Helpers\Helper::getImage($art->fname.'.'.$art->ext, 0) }}" class="img-fluid"></a>
+                    <h3>{{ $art->title }}</h3>
+                    <h2><i class="fas fa-rupee-sign"></i> {{ $art->totalPrice }}</h2>
+                    <span>{{$art->uname}}</span> <a href="/product-details.html" class="btn btn-primary themebBtn">ADD TO CART</a> </div>
+                </div>
+                @endforeach
+            @else
+            <div>Sorry no arts avialabe right now</div>
+            @endif
+            
+            <div class="clearfix"></div>
+          </div>
+        </div>
+      </div>
+      <!--Pagination-->
+      <div class="row">
+        <div class="col-md-6 col-lg-6 col-sm-12 col-12 offset-md-3 offset-lg-3">
+          <nav aria-label="Page navigation example">
+            {{$arts->links()}}
+          </nav>
+        </div>
+      </div>
+      <!--Pagination Ends here-->
     </div>
-</div>
+  </div>
+</section>
+<!--Section 1 Ends Here-->
+
 @endsection

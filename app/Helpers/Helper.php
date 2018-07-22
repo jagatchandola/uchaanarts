@@ -21,5 +21,28 @@ class Helper
 
         return ceil($amount);
     }
+
+    public static function getImage($image, $type='0'){
+
+        $img = '/img/swagatika.jpg';
+        switch ($type) {
+            case 0:
+                $img = '/img/swagatika.jpg';
+                if(is_file('/uploads/arts/'.$image)) {
+                    $img = '/uploads/arts/'.$image;
+                }
+                break;
+
+            case 1:
+                $img = '/img/swagatika.jpg';
+                if(is_file('/uploads/artists/'.$image)) {
+                    $img = '/uploads/artists/'.$image;
+                }
+                break;
+        }
+
+        return $img;
+
+    }
     
 }//END CLASS
