@@ -10,7 +10,7 @@
         <div class="col-md-3 col-lg-2 col-12 col-sm-12">
              @if(!empty($categories))
             <ul class="itemList d-none d-md-block d-lg-block">
-                <li class="active list" id="all"><a href="/art-gallery">All</a></li>
+                <li class="list" id="all"><a href="/art-gallery">All</a></li>
                 @foreach($categories as $category)
                 <li class="list" id="{{$category->cat_url}}"><a href="/art-gallery/{{$category->cat_url}}">{{$category->cat_name}}</a></li>
                 @endforeach
