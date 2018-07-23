@@ -52,26 +52,21 @@ class LoginController extends Controller
      */
     public function index(Request $request)
     {
-        if($request->isMethod('post')){
-            //$data = $request->input();
+        if($request->isMethod('post')) {
             if (Auth::attempt(['email' => $request['email'], 'password' => $request['password']])) {
                 return redirect('/admin/dashboard');
-            }else{
-                //echo "failed"; die;
+            } else {
                 return redirect('/backend/login')->with('flash_message_error','Invalid Username or Password');
             }
         }
-        //return view('admin.admin_login');
+        
         return view('backend.login');
-        
-//        if (Auth::attempt(['email' => $request['email'], 'password' => $request['password']])) {
-//            return redirect()->route('backend-dashboard');
-//        }
-//        
-//        //Session::flash('error-msg', "Invalid email/password");
-//        return view('backend/login');
-        //return view('backend/login');
-        
+    }
+    
+    public function logout(){
+        Session::flush();
+        Auth::logout();
+        return redirect('/backend/login')->with('flash_message_success','Logged out Successfully'); 
     }
 }
 

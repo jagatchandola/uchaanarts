@@ -39,7 +39,10 @@
     </head>
     <body>
       <div id="wrapper">
-            @include('backend.layouts.sidebar')  
+            @auth
+                @include('backend.layouts.sidebar')  
+            @endauth
+            
             @yield('content')
         </div>
         <!-- /#page-wrapper -->
