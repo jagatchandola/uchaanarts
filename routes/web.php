@@ -38,8 +38,12 @@ Route::post('/contactus', 'HomeController@contactus')->name('contactus');
 
 
 // Backend routes
+Route::match(['get', 'post'], '/backend/login','Backend\LoginController@index')->name('backend-login');
+Route::get('/admin/dashboard','Backend\DashboardController@index')->name('backend-dashboard');	
 
-Route::namespace('Backend')->prefix('backend')->group(function () {
-	Route::get('/login', 'LoginController@index')->name('backend-login');
-});
+//Route::namespace('Backend')->prefix('backend')->group(function () {
+//	Route::get('/login', 'LoginController@index')->name('backend-login');
+//        Route::post('/login', 'LoginController@index')->name('backend-post-login');
+//	Route::get('/', 'DashboardController@index')->name('backend-dashboard');
+//});
 

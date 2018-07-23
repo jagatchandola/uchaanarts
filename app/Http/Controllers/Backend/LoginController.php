@@ -31,7 +31,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/';
 
     /**
      * Create a new controller instance.
@@ -52,8 +52,25 @@ class LoginController extends Controller
      */
     public function index(Request $request)
     {
+        if($request->isMethod('post')){
+            //$data = $request->input();
+            if (Auth::attempt(['email' => $request['email'], 'password' => $request['password']])) {
+                return redirect('/admin/dashboard');
+            }else{
+                //echo "failed"; die;
+                return redirect('/backend/login')->with('flash_message_error','Invalid Username or Password');
+            }
+        }
+        //return view('admin.admin_login');
+        return view('backend.login');
         
-        return view('backend/login');
+//        if (Auth::attempt(['email' => $request['email'], 'password' => $request['password']])) {
+//            return redirect()->route('backend-dashboard');
+//        }
+//        
+//        //Session::flash('error-msg', "Invalid email/password");
+//        return view('backend/login');
+        //return view('backend/login');
         
     }
 }

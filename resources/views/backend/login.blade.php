@@ -10,7 +10,7 @@
                     <div style="color:red; text-align: center;">{{ Session::get('error-msg') }}</div>
                 @endif
                 <div class="card-body">
-                    <form method="POST" action="{{ route('login') }}" aria-label="{{ __('Login') }}">
+                    <form method="POST" action="{{ route('backend-login') }}" aria-label="{{ __('Login') }}">
                         @csrf
 
                         <div class="form-group row">
