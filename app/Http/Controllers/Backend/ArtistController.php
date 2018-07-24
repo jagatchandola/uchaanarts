@@ -73,4 +73,13 @@ class ArtistController extends Controller
                                         ]);
     }
 
+    public function updateStatus(Request $request, $artist_id) {
+        $artist = $this->artists->updateArtistStatus($artist_id, $request['status']);
+
+        if ($artist == true) {
+            echo 1;
+        } else {
+            echo 0;
+        }
+    }
 }

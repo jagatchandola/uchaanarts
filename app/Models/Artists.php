@@ -93,4 +93,15 @@ class Artists extends Model
 
         return [];
     }
+    
+    public function updateArtistStatus($artist_id, $status) {
+        $updateStatus = DB::table('users')
+            ->where('id', $artist_id)
+            ->update(['shide' => $status]);
+        
+        if ($updateStatus >= 1) {
+            return true;
+        }
+        return false;
+    }
 }

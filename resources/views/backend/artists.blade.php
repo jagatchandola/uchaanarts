@@ -21,6 +21,8 @@
                                                 <th>Name</th>
                                                 <th>Email</th>
                                                 <th>Status</th>
+                                                <th></th>
+                                                <th></th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -32,6 +34,14 @@
                                                 <td>{{ $artist->uname }}</td>
                                                 <td>{{ $artist->user_email }}</td>
                                                 <td class="center">{{ $artist->status == 1 ? 'Active' : 'Inactive' }}</td>
+                                                <td class="center"><a href="javascript;" target="_blank"><button type="button" class="btn btn-primary">Edit</button></a></td>
+                                                <td class="center">
+                                                    @if( $artist->status == 1)
+                                                    <button type="button" class="btn btn-danger" onclick="changeStatus({{ $artist->id }}, 0)">Inactive</button>
+                                                    @else
+                                                        <button type="button" class="btn btn-success" onclick="changeStatus({{ $artist->id }}, 1)">Active</button>
+                                                    @endif
+                                                </td>
                                             </tr>
                                             @php $i++ @endphp
                                             @endforeach
@@ -57,8 +67,39 @@
     <script type="text/javascript">
         $(document).ready(function() {
             $('#dataTables').DataTable({
-                responsive: true
+                responsive: true,
+                //iDisplayLength: 20
             });
         });
+        
+        function changeStatus(id, status) {
+            var updateStatus = status == 1 ? 'Active' : 'Inactive';
+            var r = confirm("Are you sure, you want to change status to " + updateStatus + "?");
+            if (r == true) {
+                $.ajax({
+                    method: "PUT",
+                    url: "/admin/artists/changeStatus/"+id,
+                    data: {
+                            status:status
+                         },
+                    dataType: "json",
+                    success: function(response) {
+                        if (response == 1) {
+                            alert('Status updated successfully!');
+                            setTimeout(function() {
+                                location.reload(true);    
+                            }, 500);
+                        } else {
+                            alert('Something went wrong. Please try again!');
+                            return false;
+                        }
+                        
+                    },
+                    error: function(request,status,errorThrown) {
+                       alert('request :'+request,'status : '+status,'errorThrown : '+errorThrown); 
+                    }
+                });
+            }
+        }
     </script>
 @endsection

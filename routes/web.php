@@ -44,14 +44,21 @@ Route::match(['get', 'post'], '/backend/login','Backend\LoginController@index')-
 Route::group(['middleware' => ['auth']],function(){
 	Route::get('/admin/dashboard','Backend\DashboardController@index')->name('backend-dashboard');
 	//Route::get('/admin/settings','AdminController@settings');
-	Route::get('/admin/artists','Backend\ArtistController@index')->name('artists-list');
         
+        // Artists Routes (Admin)
+	Route::get('/admin/artists','Backend\ArtistController@index')->name('artists-list');
+	Route::put('/admin/artists/changeStatus/{id}','Backend\ArtistController@updateStatus');
+        
+        // gallery Routes (Admin)
 	Route::get('/admin/gallery','Backend\CatalogueController@index')->name('gallery-list');
         
+        // Customers Routes (Admin)
         Route::get('/admin/customers','Backend\ArtistController@getCustomers')->name('customers-list');
         
+        // Category Routes (Admin)
         Route::get('/admin/category','Backend\CategoryController@index')->name('category-list');
         
+        // Event Routes (Admin)
         Route::get('/admin/events','Backend\EventController@index')->name('events-list');
 //	Route::match(['get','post'],'/admin/update-pwd','AdminController@updatePassword');
 
