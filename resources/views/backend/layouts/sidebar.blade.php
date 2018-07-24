@@ -73,7 +73,7 @@
                     <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i>Category<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li>
-                            <a href="flot.html">All Category</a>
+                            <a href="{{ route('category-list') }}">All Categories</a>
                         </li>
                         <li>
                             <a href="{{ route('category-list') }}">Add Category</a>
@@ -95,7 +95,7 @@
                     <a href="#"><i class="fa fa-wrench fa-fw"></i>Customers<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li>
-                            <a href="{{ route('customers-list') }}">All Customers') }}</a>
+                            <a href="{{ route('customers-list') }}">{{ ('All Customers') }}</a>
                         </li>
                     </ul>
                     <!-- /.nav-second-level -->

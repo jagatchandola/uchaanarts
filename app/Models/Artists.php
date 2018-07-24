@@ -80,4 +80,17 @@ class Artists extends Model
 
         return [];
     }
+    
+    public function getCustomers() {
+        $customers = DB::table('users')
+                            ->where('user_role', '=', 'user')
+                            ->select('id', 'uname', 'email as user_email', 'phone','shide as status')
+                            ->get();
+        
+        if (!empty($customers)) {
+            return $customers;
+        }
+
+        return [];
+    }
 }

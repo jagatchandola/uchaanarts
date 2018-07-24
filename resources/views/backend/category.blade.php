@@ -18,10 +18,9 @@
                                         <thead>
                                             <tr>
                                                 <th>#</th>
-                                                <th>Artist</th>
-                                                <th>Title</th>
-                                                <th>About</th>
-                                                <th>Price</th>
+                                                <th>Category Name</th>
+                                                <th>Category Url</th>
+                                                <th>GST</th>
                                                 <th>Status</th>
                                                 <th>View</th>
                                                 <th>Edit</th>
@@ -30,14 +29,13 @@
                                         <tbody>
 <!--                                            {{-- */$i=0;/* --}}-->
                                             @php $i=1 @endphp
-                                            @foreach($arts as $art)
+                                            @foreach($categories as $category)
                                             <tr class="odd gradeX">
                                                 <td>{{$i}}</td>
-                                                <td>{{ $art->user_name }}</td>
-                                                <td>{{ $art->title }}</td>
-                                                <td>{{ $art->about }}</td>
-                                                <td>{{ $art->price }}</td>
-                                                <td class="center">{{ $art->status == 1 ? 'Active' : 'Inactive' }}</td>
+                                                <td>{{ $category->cat_name }}</td>
+                                                <td>{{ $category->cat_url }}</td>
+                                                <td>{{ $category->gst }}</td>
+                                                <td class="center">{{ $category->status == 1 ? 'Active' : 'Inactive' }}</td>
                                                 <td class="center">View</td>
                                                 <td class="center">Edit</td>
                                             </tr>

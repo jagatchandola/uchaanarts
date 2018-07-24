@@ -20,11 +20,18 @@ class Category extends Model
      */
     protected $table = 'category';
 
-    public function getCategories() {
-        $categories = Category::where('shide', 1)
-                    ->orderBy('cat_name', 'asc')
-                    ->get();
-
+    public function getCategories($records = '') {
+        if ($records == 'all') {
+            $categories = DB::table('category')
+                        ->orderBy('cat_name', 'asc')
+                        ->select('id', 'cat_url', 'cat_name', 'gst', 'shide as status')
+                        ->get();
+        } else {
+            $categories = Category::where('shide', 1)
+                        ->orderBy('cat_name', 'asc')
+                        ->get();
+        }
+        
         if (!empty($categories)) {
             return $categories;
         }

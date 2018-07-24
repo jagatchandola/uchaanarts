@@ -7,10 +7,13 @@ use App\Models\Catalogue;
 use App\Models\Category;
 use App\Models\Artists;
 use App\Models\Events;
+use App\Models\Testimonials;
+use App\Models\Contactus;
+use App\Models\Moments;
 use Illuminate\Http\Request;
 use App\Helpers\Helper;
 
-class ArtistController extends Controller
+class CategoryController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -33,9 +36,9 @@ class ArtistController extends Controller
      */
     public function index()
     {
-        $artists = $this->artists->getAllArtists('all');
-        return view('backend.artists')->with([
-                                            'artists' => $artists
+        $categories = $this->category->getCategories('all');
+        return view('backend.category')->with([
+                                            'categories' => $categories
                                         ]);
     }
 
@@ -44,12 +47,10 @@ class ArtistController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function getCustomers()
+    public function getArtists()
     {
-        $customers = $this->artists->getCustomers();
-        return view('backend.customers')->with([
-                                            'customers' => $customers
-                                        ]);
+        $artists = $this->artists->getAllArtists('all');
+        return view('backend.artists')->with(['artists' => $artists]);
     }
 
     /**
