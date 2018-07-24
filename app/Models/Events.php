@@ -19,11 +19,17 @@ class Events extends Model
      */
     protected $table = 'events';
 
-    public function getAllEvents() {
-        $events = Events::where('shide', 1)
-                    ->orderBy('start_date', 'desc')
-                    ->get();
-
+    public function getAllEvents($records = '') {
+        if ($records == 'all') {
+            $artists = DB::table('events')
+                                ->select('id', 'title', 'start_date','end_date', 'shide as status')
+                                ->orderBy('id', 'desc')
+                                ->get();
+        } else {
+            $events = Events::where('shide', 1)
+                        ->orderBy('start_date', 'desc')
+                        ->get();
+        }
         if (!empty($events)) {
             return $events;
         }

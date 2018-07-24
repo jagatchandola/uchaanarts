@@ -20,13 +20,21 @@ class Catalogue extends Model
      */
     protected $table = 'art_items';
 
-    public function getCatalogues() {
-        $catalogues = Catalogue::where('art_items.active', 1)
-                    ->join('users', 'art_items.artist_id' , '=', 'users.id')
-                    ->select('art_items.*', 'users.uname')
-                    ->orderBy('id', 'desc')
-                    ->paginate(10);
-
+    public function getCatalogues($records = '') {
+        if ($records == 'all') {
+            $catalogues = DB::table('art_items')
+                        ->join('users', 'art_items.artist_id' , '=', 'users.id')
+                        ->select('art_items.id', 'title', 'art_items.about', 'price', 'users.uname as user_name', 'art_items.active as status')
+                        ->orderBy('id', 'desc')
+                        ->get();
+        } else {
+            $catalogues = Catalogue::where('art_items.active', 1)
+                        ->join('users', 'art_items.artist_id' , '=', 'users.id')
+                        ->select('art_items.*', 'users.uname')
+                        ->orderBy('id', 'desc')
+                        ->paginate(10);
+        }
+        
         if (!empty($catalogues)) {
             return $catalogues;
         }

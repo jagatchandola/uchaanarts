@@ -18,20 +18,26 @@
                                         <thead>
                                             <tr>
                                                 <th>#</th>
-                                                <th>Name</th>
-                                                <th>Email</th>
+                                                <th>Title</th>
+                                                <th>Start Date</th>
+                                                <th>End Date</th>
                                                 <th>Status</th>
+                                                <th>View</th>
+                                                <th>Edit</th>
                                             </tr>
                                         </thead>
                                         <tbody>
 <!--                                            {{-- */$i=0;/* --}}-->
                                             @php $i=1 @endphp
-                                            @foreach($artists as $artist)
+                                            @foreach($events as $event)
                                             <tr class="odd gradeX">
                                                 <td>{{$i}}</td>
-                                                <td>{{ $artist->uname }}</td>
-                                                <td>{{ $artist->user_email }}</td>
-                                                <td class="center">{{ $artist->status == 1 ? 'Active' : 'Inactive' }}</td>
+                                                <td>{{ $event->title }}</td>
+                                                <td>{{ $event->start_date }}</td>
+                                                <td>{{ $event->end_date }}</td>
+                                                <td class="center">{{ $event->status == 1 ? 'Active' : 'Inactive' }}</td>
+                                                <td class="center">View</td>
+                                                <td class="center">Edit</td>
                                             </tr>
                                             @php $i++ @endphp
                                             @endforeach

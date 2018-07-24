@@ -65,7 +65,7 @@
                     <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i>Gallery<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li>
-                            <a href="flot.html">All Photo</a>
+                            <a href="{{ route('gallery-list') }}">All Photo</a>
                         </li>
                     </ul>
                 </li>
@@ -76,7 +76,7 @@
                             <a href="flot.html">All Category</a>
                         </li>
                         <li>
-                            <a href="morris.html">Add Category</a>
+                            <a href="{{ route('category-list') }}">Add Category</a>
                         </li>
                     </ul>
                 </li>
@@ -84,10 +84,10 @@
                     <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i>Event<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li>
-                            <a href="flot.html">All Events</a>
+                            <a href="{{ route('events-list') }}">All Events</a>
                         </li>
                         <li>
-                            <a href="morris.html">Add Event</a>
+                            <a href="{{ route('events-list') }}">Add Event</a>
                         </li>
                     </ul>
                 </li>
@@ -95,10 +95,7 @@
                     <a href="#"><i class="fa fa-wrench fa-fw"></i>Customers<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li>
-                            <a href="panels-wells.html">All Customers') }}</a>
-                        </li>
-                        <li>
-                            <a href="buttons.html">{{ ('Edit Customers') }}</a>
+                            <a href="{{ route('customers-list') }}">All Customers') }}</a>
                         </li>
                     </ul>
                     <!-- /.nav-second-level -->
