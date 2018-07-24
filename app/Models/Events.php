@@ -41,4 +41,15 @@ class Events extends Model
 
         return [];
     }
+    
+    public function getTotalEventsCount() {
+        $totalEvents = Events::where('shide', 1)
+                    ->count('id');
+
+        if (!empty($totalEvents)) {
+            return $totalEvents;
+        }
+
+        return [];
+    }
 }

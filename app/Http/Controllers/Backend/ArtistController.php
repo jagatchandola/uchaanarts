@@ -13,7 +13,7 @@ use App\Models\Moments;
 use Illuminate\Http\Request;
 use App\Helpers\Helper;
 
-class DashboardController extends Controller
+class ArtistController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -49,27 +49,14 @@ class DashboardController extends Controller
     }
 
     /**
-     * Show the application aboutus.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function aboutus()
-    {
-        $moments = $this->moments->getAllMoments();
-        return view('aboutus')->with([
-                                    'moments' => $moments
-                                ]);
-    }
-
-    /**
      * Show the application artists.
      *
      * @return \Illuminate\Http\Response
      */
-    public function artists()
+    public function getArtists()
     {
-        $artists = $this->artists->getAllArtists();        
-        return view('artists')->with(['artists' => $artists]);
+        $artists = $this->artists->getAllArtists('all');
+        return view('backend.artists')->with(['artists' => $artists]);
     }
 
     /**

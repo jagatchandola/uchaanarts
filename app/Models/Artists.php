@@ -9,6 +9,7 @@
 
 namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
+use DB;
 
 class Artists extends Model
 {
@@ -19,12 +20,18 @@ class Artists extends Model
      */
     protected $table = 'users';
 
-    public function getAllArtists() {
-        $artists = Artists::where('shide', 1)
-                    ->orderBy('uname', 'asc')
-                    //->get()
-                    ->paginate(5);
-
+    public function getAllArtists($records = '') {
+        if ($records == 'all') {
+            $artists = DB::table('users')
+                                ->where('user_role', '=', 'artist')
+                                ->select('id', 'uname', 'email as user_email','shide as status')
+                                ->get();
+        } else {
+            $artists = Artists::where('shide', 1)
+                        ->orderBy('uname', 'asc')
+                        ->paginate(5);
+        }
+        
         if (!empty($artists)) {
             return $artists;
         }
@@ -57,6 +64,18 @@ class Artists extends Model
 
         if (!empty($artist)) {
             return $artist;
+        }
+
+        return [];
+    }
+    
+    public function getTotalArtistsCount() {
+        $catalogues = Artists::where('shide', 1)
+                    ->where('user_role', '=', 'artist')
+                    ->count('id');
+
+        if (!empty($catalogues)) {
+            return $catalogues;
         }
 
         return [];

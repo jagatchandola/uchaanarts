@@ -80,8 +80,17 @@ class Catalogue extends Model
                     ->take(4)
                     ->get()
                     ->toArray();
-// echo '<pre>';
-// print_r($catalogues);exit;
+
+        if (!empty($catalogues)) {
+            return $catalogues;
+        }
+
+        return [];
+    }
+    
+    public function getTotalArtsCount() {
+        $catalogues = Catalogue::where('active', 1)
+                    ->count('id');
 
         if (!empty($catalogues)) {
             return $catalogues;
