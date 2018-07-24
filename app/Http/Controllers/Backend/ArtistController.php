@@ -9,6 +9,7 @@ use App\Models\Artists;
 use App\Models\Events;
 use Illuminate\Http\Request;
 use App\Helpers\Helper;
+use Gate;
 
 class ArtistController extends Controller
 {
@@ -46,6 +47,10 @@ class ArtistController extends Controller
      */
     public function getCustomers()
     {
+        if (!Gate::allows('isAdmin')) {
+            return 'You are not authorized!';
+        }
+        
         $customers = $this->artists->getCustomers();
         return view('backend.customers')->with([
                                             'customers' => $customers
