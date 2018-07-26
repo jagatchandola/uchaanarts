@@ -34,7 +34,7 @@
                                                 <td>{{ $artist->uname }}</td>
                                                 <td>{{ $artist->user_email }}</td>
                                                 <td class="center">{{ $artist->status == 1 ? 'Active' : 'Inactive' }}</td>
-                                                <td class="center"><a href="javascript;" target="_blank"><button type="button" class="btn btn-primary">Edit</button></a></td>
+                                                <td class="center"><a href="" target="_blank"><button type="button" class="btn btn-primary">Edit</button></a></td>
                                                 <td class="center">
                                                     @if( $artist->status == 1)
                                                     <button type="button" class="btn btn-danger" onclick="changeStatus({{ $artist->id }}, 0)">Inactive</button>
@@ -69,6 +69,7 @@
             $('#dataTables').DataTable({
                 responsive: true,
                 //iDisplayLength: 20
+                "lengthMenu": [20,30,40,50]
             });
         });
         
