@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Catalogue;
 use App\Models\Category;
 use App\Models\Artists;
+use App\Models\Banner;
 use App\Models\Events;
 use App\Models\Testimonials;
 use App\Models\Contactus;
@@ -39,9 +40,19 @@ class HomeController extends Controller
     public function index()
     {
         $result = $this->catalogue->getCatalogues();
-        $category = $this->category->getCategories();
+        $category = $this->category->getCategories('all');
+        $artists = $this->artists->getArtistDetails('','1');
 
-        return view('home')->with(['catalogues' => $result, 'categories' => $category]);
+        $banner = new Banner();
+
+        $banners = $banner->getBanners();
+
+        return view('home')->with([
+                            'catalogues' => $result, 
+                            'categories' => $category,
+                            'banners'    => $banners,
+                            'artists'    => $artists
+                            ]);
     }
 
     /**

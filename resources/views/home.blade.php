@@ -3,56 +3,48 @@
 @section('content')
 
 <!--Carousel Start Here-->
+@if(!empty($banners))
 <div id="myCarousel" class="carousel slide" data-ride="carousel">
   <ol class="carousel-indicators">
-    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-    <li data-target="#myCarousel" data-slide-to="1"></li>
-    <li data-target="#myCarousel" data-slide-to="2"></li>
+    @php $i=0; @endphp
+    @foreach($banners as $banner)
+    <li data-target="#myCarousel" data-slide-to="{{$i}}" @if($i ==0) class="active" @endif></li>
+    @php $i++; @endphp
+    @endforeach
   </ol>
   <div class="carousel-inner">
-    <div class="carousel-item active"> <img src="{{ asset('img/carousel/c-1.jpg')}}" alt="First slide" class="img-fluid first-slide">
+  @php $i=0; @endphp
+  @foreach($banners as $banner)
+    <div class="carousel-item @if($i == 0)active @endif"> <img src="{{ \App\Helpers\Helper::getImage($banner->image, 6) }}" alt="First slide" class="img-fluid first-slide">
       <div class="container d-none d-md-block d-lg-block ">
         <div class="carousel-caption">
-          <h1>News This Week</h1>
-          <p>New Original Work Selected by Our Chief Curator</p>
+          <h1>{{$banner->title}}</h1>
+          <p>{{$banner->description}}</p>
           <p><a class="btn btn-lg btn-primary themeBtn" href="#" role="button">See More</a></p>
         </div>
       </div>
     </div>
-    <div class="carousel-item"> <img src="{{ asset('img/carousel/c-2.jpg')}}" alt="Second slide" class="img-fluid second-slide">
-      <div class="container d-none d-md-block d-lg-block">
-        <div class="carousel-caption">
-          <h1>News This Week</h1>
-          <p>New Original Work Selected by Our Chief Curator</p>
-          <p><a class="btn btn-lg btn-primary themeBtn" href="#" role="button">See More</a></p>
-        </div>
-      </div>
-    </div>
-    <div class="carousel-item"> <img src="{{ asset('img/carousel/c-3.jpg')}}" alt="Third slide" class="img-fluid third-slide">
-      <div class="container d-none d-md-block d-lg-block">
-        <div class="carousel-caption">
-          <h1>News This Week</h1>
-          <p>New Original Work Selected by Our Chief Curator</p>
-          <p><a class="btn btn-lg btn-primary themeBtn" href="#" role="button">See More</a></p>
-        </div>
-      </div>
-    </div>
+    @php $i++; @endphp
+    @endforeach
+    
   </div>
-  <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev"> <span class="carousel-control-prev-icon" aria-hidden="true"></span> <span class="sr-only">Previous</span> </a> <a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next"> <span class="carousel-control-next-icon" aria-hidden="true"></span> <span class="sr-only">Next</span> </a> </div>
+  <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev"> <span class="carousel-control-prev-icon" aria-hidden="true"></span> <span class="sr-only">Previous</span> </a> <a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next"> <span class="carousel-control-next-icon" aria-hidden="true"></span> <span class="sr-only">Next</span> </a> 
+</div>
+@endif
 <!--Carousel Ends Here-->
 <!--Section 1 Start Here-->
+@if(!empty($categories))
 <section class="themeSec1">
   <h1>Browse by category</h1>
   <div class="container">
     <div class="owl-carousel owl-theme first-owl-carousel">
-      <div class="item"><img src="{{ asset('img/slider/1.jpg')}}"><a href="#" class="caption">Portrait</a></div>
-      <div class="item"><img src="{{ asset('img/slider/2.jpg')}}"><a href="#" class="caption">Nature</a></div>
-      <div class="item"><img src="{{ asset('img/slider/3.jpg')}}"><a href="#" class="caption">Art</a></div>
-      <div class="item"><img src="{{ asset('img/slider/4.jpg')}}"><a href="#" class="caption">Spirituals</a></div>
-      <div class="item"><img src="{{ asset('img/slider/3.jpg')}}"><a href="#" class="caption">Art</a></div>
+      @foreach($categories as $category)
+      <div class="item"><img src="{{ \App\Helpers\Helper::getImage($category->image, 5) }}"><a href="/art-gallery/{{$category->cat_url}}" class="caption">{{$category->cat_name}}</a></div>
+      @endforeach
     </div>
   </div>
 </section>
+@endif
 <!--Section 1 Ends Here-->
 <!--Section 2 Start Here-->
 <section class="themeSec2">
@@ -133,21 +125,26 @@
 <!--Section 1 Ends Here-->
 
 <!--Section 2 Start Here-->
+@if(!empty($artists))
 <section class="themeSec2">
 <div class="container">
 <div class="col-lg-12 col-md-12 col-12 col-sm-12">
       <article class="themeSubs1">
        <h2>Creative Modern Artist</h2>
        <div class="owl-carousel owl-theme third-owl-carousel">
-      <div class="item"><img src="{{ asset('img/slider/1.jpg')}}"><a href="#" class="captionBtn1">View Artwork</a><div class="captionBtm">Abhishek Sharma</div></div>
-      <div class="item"><img src="{{ asset('img/slider/2.jpg')}}"><a href="#" class="captionBtn1">View Artwork</a><div class="captionBtm">Amit Srivastava</div></div>
+       @foreach($artists as $artist)
+       
+      <div class="item"><img src="{{ \App\Helpers\Helper::getImage($artist['profimg'], 1) }}"><a href="/artists/{{$artist['id']}}" class="captionBtn1">View Artwork</a><div class="captionBtm">{{$artist['uname']}}</div></div>
+      @endforeach
+      <!-- <div class="item"><img src="{{ asset('img/slider/2.jpg')}}"><a href="#" class="captionBtn1">View Artwork</a><div class="captionBtm">Amit Srivastava</div></div>
       <div class="item"><img src="{{ asset('img/slider/3.jpg')}}"><a href="#" class="captionBtn1">View Artwork</a><div class="captionBtm">Anil Kaira</div></div>
       <div class="item"><img src="{{ asset('img/slider/4.jpg')}}"><a href="#" class="captionBtn1">View Artwork</a><div class="captionBtm">Abhishek Sharma</div></div>
-      <div class="item"><img src="{{ asset('img/slider/3.jpg')}}"><a href="#" class="captionBtn1">View Artwork</a><div class="captionBtm">Amit Srivastava</div></div>
+      <div class="item"><img src="{{ asset('img/slider/3.jpg')}}"><a href="#" class="captionBtn1">View Artwork</a><div class="captionBtm">Amit Srivastava</div></div> -->
     </div>
       </article>
        </div>
 </div>     
 </section>
+@endif
 <!--Section 2 Ends Here-->
 @endsection

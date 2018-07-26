@@ -56,11 +56,18 @@ class Artists extends Model
         return [];
     }
 
-    public function getArtistDetails($artist_id) {
-        $artist = Artists::where('id', $artist_id)
-                    //->orderBy('uname', 'asc')
-                    ->get()
-                    ->toArray();
+    public function getArtistDetails($artist_id = '', $is_creative = 0) {
+        $artist = Artists::where('shide', 1);
+                
+        if($artist_id != '')
+            $artist->where('id', $artist_id);
+
+        if($is_creative == 1)
+            $artist->where('is_creative_artists', 1);
+
+            //->orderBy('uname', 'asc')
+        $artist = $artist->get()
+                         ->toArray();
 
         if (!empty($artist)) {
             return $artist;

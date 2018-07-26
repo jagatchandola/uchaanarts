@@ -24,7 +24,7 @@ class Category extends Model
         if ($records == 'all') {
             $categories = DB::table('category')
                         ->orderBy('cat_name', 'asc')
-                        ->select('id', 'cat_url', 'cat_name', 'gst', 'shide as status')
+                        ->select('id', 'cat_url', 'cat_name', 'gst', 'shide as status', 'image')
                         ->get();
         } else {
             $categories = Category::where('shide', 1)
