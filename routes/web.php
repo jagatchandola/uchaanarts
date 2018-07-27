@@ -48,9 +48,13 @@ Route::group(['middleware' => ['auth']],function(){
         // Artists Routes (Admin)
 	Route::get('/admin/artists','Backend\ArtistController@index')->name('artists-list');
 	Route::put('/admin/artists/changeStatus/{id}','Backend\ArtistController@updateStatus');
+        Route::get('/admin/artists/{id}','Backend\ArtistController@edit')->name('edit-artist');
+        Route::post('/admin/artist','Backend\ArtistController@edit')->name('edit-artist-post');;
         
         // gallery Routes (Admin)
 	Route::get('/admin/gallery','Backend\CatalogueController@index')->name('gallery-list');
+        Route::get('/admin/gallery/{artistId}/{artId}','Backend\CatalogueController@edit')->name('edit-gallery');
+        Route::post('/admin/gallery','Backend\CatalogueController@edit')->name('edit-gallery-post');
         
         // Customers Routes (Admin)
         Route::get('/admin/customers','Backend\ArtistController@getCustomers')->name('customers-list');

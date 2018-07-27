@@ -22,7 +22,7 @@
                                                 <th>Email</th>
                                                 <th>Status</th>
                                                 <th></th>
-                                                <th></th>
+                                                <!--<th></th>-->
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -33,15 +33,16 @@
                                                 <td>{{$i}}</td>
                                                 <td>{{ $artist->uname }}</td>
                                                 <td>{{ $artist->user_email }}</td>
-                                                <td class="center">{{ $artist->status == 1 ? 'Active' : 'Inactive' }}</td>
-                                                <td class="center"><a href="" target="_blank"><button type="button" class="btn btn-primary">Edit</button></a></td>
+                                                <!--<td class="center">{{ $artist->status == 1 ? 'Active' : 'Inactive' }}</td>-->
                                                 <td class="center">
-                                                    @if( $artist->status == 1)
-                                                    <button type="button" class="btn btn-danger" onclick="changeStatus({{ $artist->id }}, 0)">Inactive</button>
+                                                    @if( $artist->status == 0)
+                                                    <button type="button" class="btn btn-danger" onclick="changeStatus({{ $artist->id }}, 1)">Inactive</button>
                                                     @else
-                                                        <button type="button" class="btn btn-success" onclick="changeStatus({{ $artist->id }}, 1)">Active</button>
+                                                        <button type="button" class="btn btn-success" onclick="changeStatus({{ $artist->id }}, 0)">Active</button>
                                                     @endif
                                                 </td>
+                                                <td class="center"><a href="{{ route('edit-artist', $artist->id) }}" target="_blank"><button type="button" class="btn btn-primary">Edit</button></a></td>
+                                                
                                             </tr>
                                             @php $i++ @endphp
                                             @endforeach
@@ -86,7 +87,7 @@
                     dataType: "json",
                     success: function(response) {
                         if (response == 1) {
-                            alert('Status updated successfully!');
+//                            alert('Status updated successfully!');
                             setTimeout(function() {
                                 location.reload(true);    
                             }, 500);

@@ -125,8 +125,6 @@ class HomeController extends Controller
     public function gallery() {
         $arts = $this->catalogue->getCatalogues();
         
-//        echo '<pre>';
-//        print_r($arts);exit;
         if (!empty($arts)) {
             foreach ($arts as $art) {
                 $calculateData = [

@@ -66,7 +66,7 @@ class Catalogue extends Model
             ->join('users', 'art_items.artist_id', '=', 'users.id')
             ->where('art_items.id', $art_id)
             ->where('users.id', '=', $artist_id)
-            ->select('art_items.*', 'users.uname')
+            ->select('art_items.*', 'users.uname', 'users.id as artist_id')
             ->get();
 
         if (!empty($catArts)) {

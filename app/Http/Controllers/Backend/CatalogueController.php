@@ -31,8 +31,9 @@ class CatalogueController extends Controller
      */
     public function index()
     {
-        $arts = $this->catalogue->getCatalogues('all');
-        return view('backend.gallery')->with([
+        //$arts = $this->catalogue->getCatalogues('all');
+        $arts = $this->catalogue->getCatalogues();
+        return view('backend.gallery.index')->with([
                                     'arts' => $arts
                                 ]);
     }
@@ -42,10 +43,26 @@ class CatalogueController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function getArtistDetails(Request $request, $id)
+    public function edit(Request $request, $artist_id = '', $art_id = '')
     {
-        $artists = $this->artists->getAllArtists('all');
-        return view('backend.artists')->with(['artists' => $artists]);
+        if ($request->isMethod('POST')) {
+            
+        } else {
+            $art = $this->catalogue->getArtDetails($artist_id, $art_id);
+
+            $calculateData = [
+                                        'price' => $art[0]->price,
+                                        'gst' => $art[0]->gst,
+                                        'discountType' => $art[0]->discount,
+                                        'discountValue' => $art[0]->discount_value
+                                    ];
+
+            $totalPrice = Helper::calculatePrice($calculateData);
+            return view('backend.gallery.edit-gallery')->with([
+                                                    'art' => $art[0],
+                                                    'totalPrice' => $totalPrice
+                                                ]);
+        }
     }
 
 }
