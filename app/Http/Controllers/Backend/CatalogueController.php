@@ -31,7 +31,7 @@ class CatalogueController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {die('4234====');
+    {
         //$arts = $this->catalogue->getCatalogues('all');
         $arts = $this->catalogue->getCatalogues();
         return view('backend.gallery.index')->with([

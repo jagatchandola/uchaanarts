@@ -87,7 +87,7 @@ class ArtistController extends Controller
     public function edit(Request $request, $artist_id = '') {
         if ($request->isMethod('POST')) {
             $inputData = $request->all();
-            //dd($inputData);
+
             $result = $this->artists->updateArtist($inputData);
             if ($result == true) {
                 Session::flash('success_message', 'Artist updated successfully');
