@@ -51,15 +51,15 @@
                                             </div>
                                             <div class="form-group">
                                                 <label>Discount</label>
-                                                <select class="form-control" name="user-role">
+                                                <select class="form-control" name="discount">
                                                     <option>Select Discount</option>
-                                                    <option value="artist" @if($art->discount == 'fixed') selected="selected" @endif>Fixed</option>
-                                                    <option value="user" @if($art->discount == 'percentage') selected="selected" @endif>Percentage</option>
+                                                    <option value="fixed" @if($art->discount == 'fixed') selected="selected" @endif>Fixed</option>
+                                                    <option value="percentage" @if($art->discount == 'percentage') selected="selected" @endif>Percentage</option>
                                                 </select>
                                             </div>
                                             <div class="form-group">
                                                 <label>Discount Value</label>
-                                                <input class="form-control" type="text" name="discount" value="{{ $art->discount_value }}">
+                                                <input class="form-control" type="text" name="discount_value" value="{{ $art->discount_value }}">
                                             </div>
                                             
                                             <div class="form-group">

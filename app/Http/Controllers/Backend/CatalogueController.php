@@ -8,6 +8,7 @@ use App\Models\Category;
 use App\Models\Artists;
 use Illuminate\Http\Request;
 use App\Helpers\Helper;
+use Session;
 
 class CatalogueController extends Controller
 {
@@ -30,7 +31,7 @@ class CatalogueController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
+    {die('4234====');
         //$arts = $this->catalogue->getCatalogues('all');
         $arts = $this->catalogue->getCatalogues();
         return view('backend.gallery.index')->with([
@@ -46,7 +47,17 @@ class CatalogueController extends Controller
     public function edit(Request $request, $artist_id = '', $art_id = '')
     {
         if ($request->isMethod('POST')) {
+            $inputData = $request->all();
             
+            $result = $this->catalogue->updateArt($inputData);
+
+            if ($result == true) {
+                Session::flash('success_message', 'Art updated successfully');
+                return redirect('/admin/gallery/' . $inputData['artist-id'] . '/' . $inputData['art-id']);
+            } else {
+                Session::flash('success_message', 'Something went wrong. Please try again');
+                return redirect('/admin/gallery/' . $artist_id . '/' . $art_id);
+            }
         } else {
             $art = $this->catalogue->getArtDetails($artist_id, $art_id);
 

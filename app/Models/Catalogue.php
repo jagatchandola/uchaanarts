@@ -106,4 +106,24 @@ class Catalogue extends Model
 
         return [];
     }
+    
+    public function updateArt($data) {
+        $updateStatus = DB::table('art_items')
+            ->where('id', $data['art-id'])
+            ->update([
+                        'title' => $data['title'], 
+                        'about' => $data['about'], 
+                        'price' => $data['price'], 
+                        'gst' => $data['gst'], 
+                        'discount' => $data['discount'], 
+                        'discount_value' => $data['discount_value'], 
+                        'active' => $data['status']
+                    ]);
+
+        if ($updateStatus >= 1) {
+            return true;
+        }
+        
+        return false;
+    }
 }
