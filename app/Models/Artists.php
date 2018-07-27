@@ -111,4 +111,15 @@ class Artists extends Model
         }
         return false;
     }
+    
+    public function updateArtist($data) {
+        $updateStatus = DB::table('users')
+            ->where('id', $data['artist-id'])
+            ->update(['uname' => $data['artist-name'], 'email' => $data['email'], 'user_role' => $data['user-role'], 'shide' => $data['status']]);
+        
+        if ($updateStatus >= 1) {
+            return true;
+        }
+        return false;
+    }
 }

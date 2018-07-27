@@ -33,7 +33,7 @@ class EventController extends Controller
     public function index()
     {
         $events = $this->events->getAllEvents();
-        return view('backend.events')->with([
+        return view('backend.events.index')->with([
                                     'events' => $events
                                 ]);
     }

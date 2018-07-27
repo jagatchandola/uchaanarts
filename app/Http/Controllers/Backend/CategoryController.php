@@ -27,7 +27,7 @@ class CategoryController extends Controller
     public function index()
     {
         $categories = $this->category->getCategories('all');
-        return view('backend.category')->with([
+        return view('backend.category.index')->with([
                                             'categories' => $categories
                                         ]);
     }

@@ -9,6 +9,7 @@ use App\Models\Artists;
 use Illuminate\Http\Request;
 use App\Helpers\Helper;
 use Gate;
+use Session;
 
 class ArtistController extends Controller
 {
@@ -33,7 +34,7 @@ class ArtistController extends Controller
     public function index()
     {
         $artists = $this->artists->getAllArtists('all');
-        return view('backend.artists')->with([
+        return view('backend.artist.index')->with([
                                             'artists' => $artists
                                         ]);
     }
@@ -50,7 +51,7 @@ class ArtistController extends Controller
         }
         
         $customers = $this->artists->getCustomers();
-        return view('backend.customers')->with([
+        return view('backend.customers.index')->with([
                                             'customers' => $customers
                                         ]);
     }
@@ -80,6 +81,27 @@ class ArtistController extends Controller
             echo 1;
         } else {
             echo 0;
+        }
+    }
+    
+    public function edit(Request $request, $artist_id = '') {
+        if ($request->isMethod('POST')) {
+            $inputData = $request->all();
+            //dd($inputData);
+            $result = $this->artists->updateArtist($inputData);
+            if ($result == true) {
+                Session::flash('success_message', 'Artist updated successfully');
+                return redirect('/admin/artists/'.$inputData['artist-id']);
+            } else {
+                Session::flash('success_message', 'Something went wrong. Please try again');
+                return redirect('/admin/artists/'.$inputData['artist-id']);
+            }
+        } else {
+            $artist = $this->artists->getArtistDetails($artist_id);
+    //dd($artist);
+            return view('backend.artist.edit-artist')->with([
+                                                'artist' => array_shift($artist)
+                                            ]);
         }
     }
 }

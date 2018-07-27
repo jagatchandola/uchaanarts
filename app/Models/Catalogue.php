@@ -66,7 +66,7 @@ class Catalogue extends Model
             ->join('users', 'art_items.artist_id', '=', 'users.id')
             ->where('art_items.id', $art_id)
             ->where('users.id', '=', $artist_id)
-            ->select('art_items.*', 'users.uname')
+            ->select('art_items.*', 'users.uname', 'users.id as artist_id')
             ->get();
 
         if (!empty($catArts)) {
@@ -105,5 +105,25 @@ class Catalogue extends Model
         }
 
         return [];
+    }
+    
+    public function updateArt($data) {
+        $updateStatus = DB::table('art_items')
+            ->where('id', $data['art-id'])
+            ->update([
+                        'title' => $data['title'], 
+                        'about' => $data['about'], 
+                        'price' => $data['price'], 
+                        'gst' => $data['gst'], 
+                        'discount' => $data['discount'], 
+                        'discount_value' => $data['discount_value'], 
+                        'active' => $data['status']
+                    ]);
+
+        if ($updateStatus >= 1) {
+            return true;
+        }
+        
+        return false;
     }
 }
