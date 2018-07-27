@@ -88,18 +88,18 @@
 <!--Section 2 Ends Here-->
 
 <!--Section 1 Start Here-->
-@if(!empty($arts))
+@if(!empty($catalogues))
 <section class="themeSec1">
  <h2>Creative Art</h2>
  <div class="container">
  <div class="row">
- @foreach($arts as $art)
+ @foreach($catalogues as $catalogue)
   <div class="col-md-4 col-lg-4 col-12 col-sm-12">
    <div class="artBox">
-    <a href="/"><img src="{{ \App\Helpers\Helper::getImage($art->fname.'.'.$art->ext, 0) }}"><a href="/item/{{$art->id}}" class="img-fluid"></a>
-    <h3>{{$art->title}}</h3>
-    <h2>{{$art->price}}</h2>
-    <span>{{$art->fname}}</span>
+    <a href="/"><img src="{{ \App\Helpers\Helper::getImage($catalogue->fname.'.'.$catalogue->ext, 0) }}"><a href="/item/{{$catalogue->id}}" class="img-fluid"></a>
+    <h3>{{$catalogue->title}}</h3>
+    <h2>{{money_format($catalogue->totalPrice)}}</h2>
+    <span>{{$catalogue->user_name}}</span>
    </div>
   </div>
   @endforeach
