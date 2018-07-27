@@ -51,7 +51,8 @@ class HomeController extends Controller
                             'catalogues' => $result, 
                             'categories' => $category,
                             'banners'    => $banners,
-                            'artists'    => $artists
+                            'artists'    => $artists,
+                            'arts'    => $artists
                             ]);
     }
 
