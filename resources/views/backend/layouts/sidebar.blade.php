@@ -76,7 +76,7 @@
                             <a href="{{ route('category-list') }}">All Categories</a>
                         </li>
                         <li>
-                            <a href="{{ route('category-list') }}">Add Category</a>
+                            <a href="{{ route('add-category') }}">Add Category</a>
                         </li>
                     </ul>
                 </li>

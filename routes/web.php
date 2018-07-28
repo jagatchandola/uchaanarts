@@ -63,7 +63,8 @@ Route::group(['middleware' => ['auth']],function(){
         Route::get('/admin/category', 'Backend\CategoryController@index')->name('category-list');
         Route::put('/admin/category/changeStatus/{id}', 'Backend\CategoryController@updateStatus');
         Route::get('/admin/category/{id}', 'Backend\CategoryController@edit')->name('edit-category');
-        Route::post('/admin/category', 'Backend\CategoryController@edit')->name('edit-category-post');
+        Route::post('/admin/category', 'Backend\CategoryController@editPost')->name('edit-category-post');
+        Route::match(['get', 'post'], '/admin/category/add', 'Backend\CategoryController@addCategory')->name('add-category');
         
         // Event Routes (Admin)
         Route::get('/admin/events','Backend\EventController@index')->name('events-list');

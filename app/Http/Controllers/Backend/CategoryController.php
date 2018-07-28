@@ -52,7 +52,7 @@ class CategoryController extends Controller
                 Session::flash('success_message', 'Category updated successfully');
                 return redirect('/admin/category/'.$inputData['cat-id']);
             } else {
-                Session::flash('success_message', 'Something went wrong. Please try again');
+                Session::flash('error_message', 'Something went wrong. Please try again');
                 return redirect('/admin/category/'.$inputData['cat-id']);
             }
         } else {
@@ -61,6 +61,28 @@ class CategoryController extends Controller
             return view('backend.category.edit-category')->with([
                                                 'category' => array_shift($cat)
                                             ]);
+        }
+    }
+
+    public function addCategory(Request $request) {
+        if ($request->isMethod('POST')) {
+            $inputData = $request->all();
+
+            $valid = $request->validate([
+                'cat-name' => 'required|regex:/(^([a-zA-Z\s]+)(\d+)?$)/u|max:50',
+                'gst' => 'required',
+            ]);
+
+            $result = $this->category->addCategory($inputData);
+            if ($result == true) {
+                Session::flash('success_message', 'Category added successfully');
+                return redirect('/admin/category');
+            } else {
+                Session::flash('error_message', 'Something went wrong. Please try again');
+                return redirect('/admin/category/add');
+            }
+        } else {
+            return view('backend.category.add-category');
         }
     }
 }

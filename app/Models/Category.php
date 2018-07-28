@@ -116,4 +116,19 @@ class Category extends Model
         }
         return false;
     }
+    
+    public function addCategory($data) {
+        $insert = DB::table('category')->insert([
+                                            'cat_name' => $data['cat-name'], 
+                                            'cat_url' => str_replace(' ', '-', strtolower($data['cat-name'])),
+                                            'cat_desc' => $data['description'],
+                                            'gst' => $data['gst'],
+                                            'shide' => $data['status']
+                                        ]);
+
+        if ($insert === true) {
+            return true;
+        }
+        return false;
+    }
 }
