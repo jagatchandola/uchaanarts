@@ -68,7 +68,7 @@ class Helper
                     $img = config('constants.uploads.banner').$image;
                 }
                 break;
-            case 6:
+            case 7:
                 $img = '/img/swagatika.jpg';
                 if(is_file(public_path(config('constants.uploads.media').$image))) {
                     $img = config('constants.uploads.media').$image;
