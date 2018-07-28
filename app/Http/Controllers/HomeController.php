@@ -62,11 +62,11 @@ class HomeController extends Controller
         }
 
         return view('home')->with([
-                            'catalogues' => $arts, 
-                            'categories' => $category,
-                            'banners'    => $banners,
-                            'artists'    => $artists,
-                            'arts'    => $artists
+                                'catalogues' => $arts, 
+                                'categories' => $category,
+                                'banners'    => $banners,
+                                'artists'    => $artists,
+                                'arts'    => $artists
                             ]);
     }
 

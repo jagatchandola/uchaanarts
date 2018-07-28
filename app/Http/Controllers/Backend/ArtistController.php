@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Catalogue;
-use App\Models\Category;
 use App\Models\Artists;
 use Illuminate\Http\Request;
 use App\Helpers\Helper;
@@ -20,9 +19,7 @@ class ArtistController extends Controller
      */
     public function __construct()
     {
-//        $this->middleware('auth');
         $this->catalogue = new Catalogue();
-        $this->category = new Category();
         $this->artists = new Artists();
     }
 
@@ -103,5 +100,26 @@ class ArtistController extends Controller
                                                 'artist' => array_shift($artist)
                                             ]);
         }
+    }
+    
+    public function viewArts($artist_id) {
+        $arts = $this->catalogue->getArtistArts($artist_id);
+
+        if (!empty($arts) && count($arts)) {
+            foreach ($arts as $art) {
+                $calculateData = [
+                                    'price' => $art->price,
+                                    'gst' => $art->gst,
+                                    'discountType' => $art->discount,
+                                    'discountValue' => $art->discount_value
+                                ];
+                
+                $art->totalPrice = Helper::calculatePrice($calculateData);
+            }
+        }
+        
+        return view('backend.artist.view-arts')->with([
+                                            'arts' => $arts
+                                        ]);
     }
 }

@@ -22,7 +22,7 @@
                                                 <th>Email</th>
                                                 <th>Status</th>
                                                 <th></th>
-                                                <!--<th></th>-->
+                                                <th></th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -42,6 +42,7 @@
                                                     @endif
                                                 </td>
                                                 <td class="center"><a href="{{ route('edit-artist', $artist->id) }}" target="_blank"><button type="button" class="btn btn-primary">Edit</button></a></td>
+                                                <td class="center"><a href="{{ route('view-artist-arts', $artist->id) }}" target="_blank"><button type="button" class="btn btn-primary">View Arts</button></a></td>
                                                 
                                             </tr>
                                             @php $i++ @endphp
@@ -69,7 +70,6 @@
         $(document).ready(function() {
             $('#dataTables').DataTable({
                 responsive: true,
-                //iDisplayLength: 20
                 "lengthMenu": [20,30,40,50]
             });
         });
