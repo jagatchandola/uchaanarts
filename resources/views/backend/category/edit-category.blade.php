@@ -20,7 +20,7 @@
                             <div class="panel-body">
                                 <div class="row">
                                     <div class="col-lg-6">
-                                        <form role="form" name="edit-category-form" action="{{ route('edit-category-post') }}" method="post">
+                                        <form role="form" name="edit-category-form" action="{{ route('edit-category-post') }}" method="post" enctype="multipart/form-data">
                                             <input type="hidden" name="cat-id" value="{{ $category['id'] }}" />
                                             <div class="form-group">
                                                 <label>Category Name</label>
@@ -30,7 +30,7 @@
                                                 <label>Category Image</label>
                                                 <!--<img src="{{ asset('image/'.$category['image']) }}" />-->
                                                 <img src="{{ \App\Helpers\Helper::getImage($category['image'], 5) }}" width="100" height="100" />
-                                                <input class="form-control" type="file" name="cat-image" value="{{ $category['cat_name'] }}">
+                                                <input class="form-control" type="file" name="image" value="">
                                             </div>
                                             <div class="form-group">
                                                 <label>GST</label>

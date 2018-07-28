@@ -27,7 +27,7 @@
                                                 <label>Artist Name: <strong>{{ $art->uname }}</strong></label>
                                             </div>
                                             <div class="form-group">
-                                                <label>Image: <img src="{{ asset('image/'.$art->fname.$art->ext) }}"></label>
+                                                <label>Image: <img src="{{ \App\Helpers\Helper::getImage($art->fname . $art->ext, 0) }}"></label>
                                             </div>
                                             <div class="form-group">
                                                 <label>Title</label>

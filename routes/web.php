@@ -63,13 +63,15 @@ Route::group(['middleware' => ['auth']],function(){
         Route::get('/admin/category', 'Backend\CategoryController@index')->name('category-list');
         Route::put('/admin/category/changeStatus/{id}', 'Backend\CategoryController@updateStatus');
         Route::get('/admin/category/{id}', 'Backend\CategoryController@edit')->name('edit-category');
-        Route::post('/admin/category', 'Backend\CategoryController@editPost')->name('edit-category-post');
+        Route::post('/admin/category', 'Backend\CategoryController@edit')->name('edit-category-post');
         Route::match(['get', 'post'], '/admin/category/add', 'Backend\CategoryController@addCategory')->name('add-category');
         
         // Event Routes (Admin)
         Route::get('/admin/events','Backend\EventController@index')->name('events-list');
-//	Route::match(['get','post'],'/admin/update-pwd','AdminController@updatePassword');
-
+        Route::put('/admin/events/changeStatus/{id}', 'Backend\EventController@updateStatus');
+        Route::get('/admin/events/{id}', 'Backend\EventController@edit')->name('edit-event');
+        Route::post('/admin/events', 'Backend\EventController@edit')->name('edit-event-post');
+        
 	// Categories Routes (Admin)
 //	Route::match(['get','post'],'/admin/add-category','CategoryController@addCategory');
 //	Route::match(['get','post'],'/admin/edit-category/{id}','CategoryController@editCategory');

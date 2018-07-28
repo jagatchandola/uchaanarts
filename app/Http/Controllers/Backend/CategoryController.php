@@ -47,6 +47,19 @@ class CategoryController extends Controller
         if ($request->isMethod('POST')) {
             $inputData = $request->all();
 
+            if ($request->hasFile('image')) {
+                
+                $image = $request->file('image');
+                $title = str_replace(' ', '-', strtolower($request['cat-name']));
+                $name = str_slug($title).'.'.$image->getClientOriginalExtension();
+                //$destinationPath = public_path('/uploads/category');
+                $destinationPath = public_path(config('constants.uploads.category'));
+                $imagePath = $destinationPath. "/".  $name;
+                $image->move($destinationPath, $name);
+                
+                $inputData['image'] = $name;
+            }
+            
             $result = $this->category->updateCategory($inputData);
             if ($result == true) {
                 Session::flash('success_message', 'Category updated successfully');

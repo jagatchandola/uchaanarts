@@ -22,7 +22,6 @@
                                                 <th>Start Date</th>
                                                 <th>End Date</th>
                                                 <th>Status</th>
-                                                <th>View</th>
                                                 <th>Edit</th>
                                             </tr>
                                         </thead>
@@ -32,12 +31,17 @@
                                             @foreach($events as $event)
                                             <tr class="odd gradeX">
                                                 <td>{{$i}}</td>
-                                                <td>{{ $event->title }}</td>
+                                                <td>{{ $event->etitle }}</td>
                                                 <td>{{ $event->start_date }}</td>
                                                 <td>{{ $event->end_date }}</td>
-                                                <td class="center">{{ $event->status == 1 ? 'Active' : 'Inactive' }}</td>
-                                                <td class="center">View</td>
-                                                <td class="center">Edit</td>
+                                                <td class="center">
+                                                    @if( $event->shide == 0)
+                                                    <button type="button" class="btn btn-danger" onclick="changeStatus({{ $event->id }}, 1)">Inactive</button>
+                                                    @else
+                                                        <button type="button" class="btn btn-success" onclick="changeStatus({{ $event->id }}, 0)">Active</button>
+                                                    @endif
+                                                </td>
+                                                <td class="center"><a href="{{ route('edit-event', $event->id) }}" target="_blank"><button type="button" class="btn btn-primary">Edit</button></a></td>
                                             </tr>
                                             @php $i++ @endphp
                                             @endforeach
@@ -66,5 +70,34 @@
                 responsive: true
             });
         });
+        
+        function changeStatus(id, status) {
+            var updateStatus = status == 1 ? 'Active' : 'Inactive';
+            var r = confirm("Are you sure, you want to change status to " + updateStatus + "?");
+            if (r == true) {
+                $.ajax({
+                    method: "PUT",
+                    url: "/admin/events/changeStatus/"+id,
+                    data: {
+                            status:status
+                         },
+                    dataType: "json",
+                    success: function(response) {
+                        if (response == 1) {
+                            setTimeout(function() {
+                                location.reload(true);    
+                            }, 500);
+                        } else {
+                            alert('Something went wrong. Please try again!');
+                            return false;
+                        }
+                        
+                    },
+                    error: function(request,status,errorThrown) {
+                       alert('request :'+request,'status : '+status,'errorThrown : '+errorThrown); 
+                    }
+                });
+            }
+        }
     </script>
 @endsection

@@ -18,7 +18,7 @@
                                     
                                     <!--<img src="images/{{ $art->fname.'.'.$art->ext }}" />-->
                                     <a href="{{ route('edit-gallery', [$art->artist_id, $art->id]) }}" target="_blank">
-                                        <img src="{{ asset('image/dummy.jpg') }}" width="100" height="100" /><br/>
+                                        <img src="{{ \App\Helpers\Helper::getImage($art->fname . $art->ext, 0) }}" width="100" height="100" /><br/>
                                     </a>
                                     <span>{{ $art->title }}</span><br/>
                                     <span>By {{ $art->uname }}</span>

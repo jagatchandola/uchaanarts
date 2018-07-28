@@ -107,7 +107,8 @@ class Category extends Model
             ->update([
                         'cat_name' => $data['cat-name'], 
                         'cat_url' => str_replace(' ', '-', strtolower($data['cat-name'])),
-                        'gst' => $data['gst'], 
+                        'gst' => $data['gst'],
+                        'image' => $data['image'],
                         'shide' => $data['status']
                     ]);
         
@@ -116,7 +117,7 @@ class Category extends Model
         }
         return false;
     }
-    
+
     public function addCategory($data) {
         $insert = DB::table('category')->insert([
                                             'cat_name' => $data['cat-name'], 
