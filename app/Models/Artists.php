@@ -122,4 +122,18 @@ class Artists extends Model
         }
         return false;
     }
+
+    public function getArtistOfWeek() {
+        $artist = Artists::where('shide', 1)
+                ->where('is_weekly_artist', 1)
+                ->where('user_role', 'artist')
+                ->select('id', 'username', 'uname', 'email', 'about', 'profimg');
+        $artist = $artist->first();
+
+        if (!empty($artist)) {
+            return $artist;
+        }
+
+        return [];
+    }
 }

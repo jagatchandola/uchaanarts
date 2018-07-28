@@ -43,6 +43,22 @@ class HomeController extends Controller
         // print_r($result);die;
         $category = $this->category->getCategories('all');
         $artists = $this->artists->getArtistDetails('','1');
+        $weeklyStatus= $this->artists->getArtistOfWeek();
+
+        $events = $this->events->getAllEvents();
+        $upcomingEvents = [];
+
+        if (!empty($events)) {
+           
+            foreach ($events as $event) {
+                // echo '<pre>';print_r($event->start_date);
+                if (strtotime($event->start_date) > strtotime(date('Y-m-d'))) {
+                    $upcomingEvents[] = $event;
+                }
+            }
+        }
+        
+        // echo '<pre>';print_r($upcomingEvents);exit;
 
         $banner = new Banner();
 
@@ -66,7 +82,9 @@ class HomeController extends Controller
                             'categories' => $category,
                             'banners'    => $banners,
                             'artists'    => $artists,
-                            'arts'    => $artists
+                            'arts'    => $artists,
+                            'weeklyStatus' => $weeklyStatus,
+                            'upcomingEvents' => $upcomingEvents
                             ]);
     }
 
@@ -122,9 +140,8 @@ class HomeController extends Controller
         $events = $this->events->getAllEvents();
         $upcomingEvents = $pastEvents = [];
 
-        if (empty($events)) {
-           ?> <div>Sorry no arts avialabe right now</div> <?php
-        } else {
+        if (!empty($events)) {
+           
             foreach ($events as $event) {
                 //echo '<pre>';print_r($events->eurl);exit;
                 if (strtotime($event->start_date) > strtotime(date('Y-m-d'))) {

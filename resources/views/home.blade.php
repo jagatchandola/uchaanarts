@@ -53,33 +53,35 @@
       <div class="col-lg-6 col-md-6 col-12 col-sm-12">
         <article class="themeSubs1">
           <h2>Artist of the week</h2>
+          @if(!empty($weeklyStatus))
           <div class="row">
             <div class="col-lg-5 col-md-5 col-12 col-sm-12">
-              <img class="card-img-top" src="{{ asset('img/swagatika.jpg')}}" alt="Card image cap">
+              <img class="card-img-top" src="{{ \App\Helpers\Helper::getImage($weeklyStatus->profimg, 1) }}" alt="Card image cap">
                 
-                  <p class="card-text">Swagatika Mohanty</p>
+                  <p class="card-text">{{$weeklyStatus->uname}}</p>
                
             </div>
             <div class="col-lg-7 col-md-7 col-12 col-sm-12">
               <blockquote class="blockquote aboutBio">
                <h3>Artist Bio</h3>
-                <p class="mb-0 text-center font-italic">"The artist biography. It sounds so simple right ? who is more equipped to write about your life and work than you ? Well, sometimes it can be the hardest thing to write your own biography because you are too personally involved or are conscious about sounding too boastful. How do  you decide which life events are important ? Which are'nt? Organizing your own artistic journey into a succinct story can be a big challenge."</p>
+                <p class="mb-0 text-center font-italic">"{{$weeklyStatus->about}}"</p>
               </blockquote>
-              <a href="#" class="btn btn-primary themeBtn">View Artwork</a>
+              <a href="/artists/{{$weeklyStatus->id}}" class="btn btn-primary themeBtn">View Artwork</a>
             </div>
           </div>
+          @endif
         </article>
       </div>
       <div class="col-lg-6 col-md-6 col-12 col-sm-12">
       <article class="themeSubs1">
        <h2>Upcoming Events</h2>
+       @if(!empty($upcomingEvents))
        <div class="owl-carousel owl-theme second-owl-carousel">
-      <div class="item"><img src="{{ asset('img/slider/1.jpg')}}"><div class="captionBtm">22-07-2018<br>Uchaan Events<br>Noida, India</div></div>
-      <div class="item"><img src="{{ asset('img/slider/2.jpg')}}"><div class="captionBtm">22-07-2018<br>Uchaan Events<br>Noida, India</div></div>
-      <div class="item"><img src="{{ asset('img/slider/3.jpg')}}"><div class="captionBtm">22-07-2018<br>Uchaan Events<br>Noida, India</div></div>
-      <div class="item"><img src="{{ asset('img/slider/4.jpg')}}"><div class="captionBtm">22-07-2018<br>Uchaan Events<br>Noida, India</div></div>
-      <div class="item"><img src="{{ asset('img/slider/3.jpg')}}"><div class="captionBtm">22-07-2018<br>Uchaan Events<br>Noida, India</div></div>
+        @foreach($upcomingEvents as $event)
+          <div class="item"><img src="{{ \App\Helpers\Helper::getImage($event->banner, 3) }}"><div class="captionBtm">{{date("d-m-Y", strtotime($event->start_date))}}<br>Uchaan Events<br>{{$event->venue}}</div></div>
+        @endforeach
     </div>
+    @endif
       </article>
        </div>
     </div>
@@ -98,28 +100,11 @@
    <div class="artBox">
     <a href="/"><img src="{{ \App\Helpers\Helper::getImage($catalogue->fname.'.'.$catalogue->ext, 0) }}"><a href="/item/{{$catalogue->id}}" class="img-fluid"></a>
     <h3>{{$catalogue->title}}</h3>
-    <h2>{{money_format($catalogue->totalPrice)}}</h2>
+    <h2>{{$catalogue->totalPrice??number_format($catalogue->totalPrice)}}</h2>
     <span>{{$catalogue->user_name}}</span>
    </div>
   </div>
   @endforeach
-
-  <!-- <div class="col-md-4 col-lg-4 col-12 col-sm-12">
-   <div class="artBox">
-    <a href="/"><img src="{{ asset('img/slider/2.jpg')}}" class="img-fluid"></a>
-    <h3>TITLE</h3>
-    <h2>15,000</h2>
-    <span>Abhishek Sharma</span>
-   </div>
-  </div>
-  <div class="col-md-4 col-lg-4 col-12 col-sm-12">
-   <div class="artBox">
-    <a href="/"><img src="{{ asset('img/slider/3.jpg')}}" class="img-fluid"></a>
-    <h3>TITLE</h3>
-    <h2>15,000</h2>
-    <span>Abhishek Sharma</span>
-   </div>
-  </div> -->
 
   <div class="col-lg-12 text-center">
    <a class="btn btn-primary themeBtn mt-5" href="#">View Artwork</a>
