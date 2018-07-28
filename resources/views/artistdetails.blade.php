@@ -8,9 +8,7 @@
                 
                 <div class="card-body">
                     
-                    <?php   
-//                     echo '<pre>';
-//                     print_r($artists);exit;                      
+                    <?php                    
                         if (empty($artists)) {
 
                             echo 'No record(s) found';

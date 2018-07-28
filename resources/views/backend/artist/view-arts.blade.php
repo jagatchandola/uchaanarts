@@ -9,18 +9,21 @@
                             <div class="panel-heading"></div>
                             <!-- /.panel-heading -->
                             <div class="panel-body">
-                                @foreach($arts as $art)
-                                <div class="dataTable_wrapper">
-                                    
-                                    <!--<img src="images/{{ $art->fname.'.'.$art->ext }}" />-->
-                                    <a href="{{ route('edit-gallery', [$art->artist_id, $art->id]) }}" target="_blank">
-                                        <img src="{{ \App\Helpers\Helper::getImage($art->fname . $art->ext, 0) }}" width="100" height="100" /><br/>
-                                    </a>
-                                    <span>{{ $art->title }}</span><br/>
-                                    <span>By {{ $art->uname }}</span>
-                                    
-                                </div>
-                                @endforeach
+                                @if(count($arts) == 0)
+                                    <div class="dataTable_wrapper">
+                                        No record(s) found
+                                    </div>
+                                @else
+                                    @foreach($arts as $art)
+                                    <div class="dataTable_wrapper">
+
+                                        <img src="{{ \App\Helpers\Helper::getImage($art['fname'] . $art['ext'], 0) }}" width="100" height="100" /><br/>
+                                        <span>{{ $art['title'] }}</span><br/>
+                                        <span>Rs. {{ $art['totalPrice'] }}</span>
+
+                                    </div>
+                                    @endforeach
+                                @endif
                             </div>
                             <!-- /.panel-body -->
                         </div>

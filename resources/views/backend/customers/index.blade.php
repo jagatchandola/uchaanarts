@@ -33,7 +33,13 @@
                                                 <td>{{ $customer->uname }}</td>
                                                 <td>{{ $customer->user_email }}</td>
                                                 <td>{{ $customer->phone }}</td>
-                                                <td class="center">{{ $customer->status == 1 ? 'Active' : 'Inactive' }}</td>
+                                                <td class="center">
+                                                    @if( $customer->status == 0)
+                                                    <button type="button" class="btn btn-danger" onclick="changeStatus({{ $customer->id }}, 1)">Inactive</button>
+                                                    @else
+                                                        <button type="button" class="btn btn-success" onclick="changeStatus({{ $customer->id }}, 0)">Active</button>
+                                                    @endif
+                                                </td>
                                             </tr>
                                             @php $i++ @endphp
                                             @endforeach
@@ -62,5 +68,34 @@
                 responsive: true
             });
         });
+        
+        function changeStatus(id, status) {
+            var updateStatus = status == 1 ? 'Active' : 'Inactive';
+            var r = confirm("Are you sure, you want to change status to " + updateStatus + "?");
+            if (r == true) {
+                $.ajax({
+                    method: "PUT",
+                    url: "/admin/customers/changeStatus/"+id,
+                    data: {
+                            status:status
+                         },
+                    dataType: "json",
+                    success: function(response) {
+                        if (response == 1) {
+                            setTimeout(function() {
+                                location.reload(true);    
+                            }, 500);
+                        } else {
+                            alert('Something went wrong. Please try again!');
+                            return false;
+                        }
+                        
+                    },
+                    error: function(request,status,errorThrown) {
+                       alert('request :'+request,'status : '+status,'errorThrown : '+errorThrown); 
+                    }
+                });
+            }
+        }
     </script>
 @endsection

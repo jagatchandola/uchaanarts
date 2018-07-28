@@ -47,12 +47,25 @@ class CategoryController extends Controller
         if ($request->isMethod('POST')) {
             $inputData = $request->all();
 
+            if ($request->hasFile('image')) {
+                
+                $image = $request->file('image');
+                $title = str_replace(' ', '-', strtolower($request['cat-name']));
+                $name = str_slug($title).'.'.$image->getClientOriginalExtension();
+                //$destinationPath = public_path('/uploads/category');
+                $destinationPath = public_path(config('constants.uploads.category'));
+                $imagePath = $destinationPath. "/".  $name;
+                $image->move($destinationPath, $name);
+                
+                $inputData['image'] = $name;
+            }
+            
             $result = $this->category->updateCategory($inputData);
             if ($result == true) {
                 Session::flash('success_message', 'Category updated successfully');
                 return redirect('/admin/category/'.$inputData['cat-id']);
             } else {
-                Session::flash('success_message', 'Something went wrong. Please try again');
+                Session::flash('error_message', 'Something went wrong. Please try again');
                 return redirect('/admin/category/'.$inputData['cat-id']);
             }
         } else {
@@ -61,6 +74,42 @@ class CategoryController extends Controller
             return view('backend.category.edit-category')->with([
                                                 'category' => array_shift($cat)
                                             ]);
+        }
+    }
+
+    public function addCategory(Request $request) {
+        if ($request->isMethod('POST')) {
+            $inputData = $request->all();
+
+            $valid = $request->validate([
+                'cat-name' => 'required|regex:/(^([a-zA-Z\s]+)(\d+)?$)/u|max:50',
+                'gst' => 'required',
+                'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            ]);
+
+            if ($request->hasFile('image')) {
+                
+                $image = $request->file('image');
+                $title = str_replace(' ', '-', strtolower($request['cat-name']));
+                $name = str_slug($title).'.'.$image->getClientOriginalExtension();
+                //$destinationPath = public_path('/uploads/category');
+                $destinationPath = public_path(config('constants.uploads.category'));
+                $imagePath = $destinationPath. "/".  $name;
+                $image->move($destinationPath, $name);
+            }
+
+            $inputData['image'] = $name;
+            
+            $result = $this->category->addCategory($inputData);
+            if ($result == true) {
+                Session::flash('success_message', 'Category added successfully');
+                return redirect('/admin/category');
+            } else {
+                Session::flash('error_message', 'Something went wrong. Please try again');
+                return redirect('/admin/category/add');
+            }
+        } else {
+            return view('backend.category.add-category');
         }
     }
 }

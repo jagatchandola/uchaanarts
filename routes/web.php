@@ -50,6 +50,7 @@ Route::group(['middleware' => ['auth']],function(){
 	Route::put('/admin/artists/changeStatus/{id}','Backend\ArtistController@updateStatus');
         Route::get('/admin/artists/{id}','Backend\ArtistController@edit')->name('edit-artist');
         Route::post('/admin/artist','Backend\ArtistController@edit')->name('edit-artist-post');
+        Route::get('/admin/artist/view/{id}','Backend\ArtistController@viewArts')->name('view-artist-arts');
         
         // gallery Routes (Admin)
 	Route::get('/admin/gallery','Backend\CatalogueController@index')->name('gallery-list');
@@ -58,17 +59,22 @@ Route::group(['middleware' => ['auth']],function(){
         
         // Customers Routes (Admin)
         Route::get('/admin/customers','Backend\ArtistController@getCustomers')->name('customers-list');
+        Route::put('/admin/customers/changeStatus/{id}', 'Backend\ArtistController@updateStatus');
         
         // Category Routes (Admin)
         Route::get('/admin/category', 'Backend\CategoryController@index')->name('category-list');
         Route::put('/admin/category/changeStatus/{id}', 'Backend\CategoryController@updateStatus');
         Route::get('/admin/category/{id}', 'Backend\CategoryController@edit')->name('edit-category');
         Route::post('/admin/category', 'Backend\CategoryController@edit')->name('edit-category-post');
+        Route::match(['get', 'post'], '/admin/category/add', 'Backend\CategoryController@addCategory')->name('add-category');
         
         // Event Routes (Admin)
         Route::get('/admin/events','Backend\EventController@index')->name('events-list');
-//	Route::match(['get','post'],'/admin/update-pwd','AdminController@updatePassword');
-
+        Route::put('/admin/events/changeStatus/{id}', 'Backend\EventController@updateStatus');
+        Route::get('/admin/events/{id}', 'Backend\EventController@edit')->name('edit-event');
+        Route::post('/admin/events', 'Backend\EventController@edit')->name('edit-event-post');
+        Route::match(['get', 'post'], '/admin/event/add', 'Backend\EventController@addEvent')->name('add-event');
+        
 	// Categories Routes (Admin)
 //	Route::match(['get','post'],'/admin/add-category','CategoryController@addCategory');
 //	Route::match(['get','post'],'/admin/edit-category/{id}','CategoryController@editCategory');

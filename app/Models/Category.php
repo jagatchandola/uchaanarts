@@ -89,10 +89,9 @@ class Category extends Model
     }
     
     public function getCategoryDetails($cat_id) {
-        $cat = Category::where('id', $cat_id);
-
-        $cat = $cat->get()
-                         ->toArray();
+        $cat = Category::where('id', $cat_id)
+                                ->get()
+                                ->toArray();
 
         if (!empty($cat)) {
             return $cat;
@@ -102,16 +101,39 @@ class Category extends Model
     }
     
     public function updateCategory($data) {
-        $updateStatus = DB::table('category')
-            ->where('id', $data['cat-id'])
-            ->update([
+        
+        $updateData = [
                         'cat_name' => $data['cat-name'], 
                         'cat_url' => str_replace(' ', '-', strtolower($data['cat-name'])),
-                        'gst' => $data['gst'], 
+                        'gst' => $data['gst'],
                         'shide' => $data['status']
-                    ]);
+                    ];
+        
+        if (isset($data['image']) && !empty($data['image'])) {
+            $updateData['image'] = $data['image'];
+        }
+        
+        $updateStatus = DB::table('category')
+            ->where('id', $data['cat-id'])
+            ->update($updateData);
         
         if ($updateStatus >= 1) {
+            return true;
+        }
+        return false;
+    }
+
+    public function addCategory($data) {
+        $insert = DB::table('category')->insert([
+                                            'cat_name' => $data['cat-name'], 
+                                            'cat_url' => str_replace(' ', '-', strtolower($data['cat-name'])),
+                                            'cat_desc' => $data['description'],
+                                            'gst' => $data['gst'],
+                                            'image' => $data['image'],
+                                            'shide' => $data['status']
+                                        ]);
+
+        if ($insert === true) {
             return true;
         }
         return false;

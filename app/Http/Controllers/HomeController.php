@@ -78,6 +78,7 @@ class HomeController extends Controller
         }
 
         return view('home')->with([
+
                             'catalogues' => $arts, 
                             'categories' => $category,
                             'banners'    => $banners,
@@ -85,6 +86,7 @@ class HomeController extends Controller
                             'arts'    => $artists,
                             'weeklyStatus' => $weeklyStatus,
                             'upcomingEvents' => $upcomingEvents
+
                             ]);
     }
 
