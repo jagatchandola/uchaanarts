@@ -124,11 +124,27 @@ class HomeController extends Controller
         $artist = $this->artists->getArtistDetails($id);
         if (!empty($artist)) {
             $catalogues = $this->catalogue->getArtistWork($id);
+            $items = [];
+            if (!empty($catalogues) && count($catalogues)) {
+                foreach ($catalogues as $art) {
+                    $calculateData = [
+                                        'price' => $art['price'],
+                                        'gst' => $art['gst'],
+                                        'discountType' => $art['discount'],
+                                        'discountValue' => $art['discount_value']
+                                    ];
+                    
+                    $art['totalPrice'] = Helper::calculatePrice($calculateData);
+
+                    $items[] = $art;
+                }
+            }
+
         }
 
         return view('artistdetails')->with([
                                             'artists' => array_shift($artist),
-                                            'catalogues' => $catalogues
+                                            'catalogues' => $items
                                         ]);
     }
 
@@ -243,11 +259,14 @@ class HomeController extends Controller
     }
     
     public function contactus(Request $request) {
+        $msg = '';
         if($request->post()) {
             //print_r($request->all());exit;
-            $this->contactus->insert($request);
+            if($this->contactus->insert($request)) {
+                $msg = 'Thank you for contacting us. We will get back to you soon!';
+            }
         }
         
-        return view('contactus');
+        return view('contactus')->with([ 'message' => $msg]);
     }
 }
