@@ -119,12 +119,23 @@ class Catalogue extends Model
         return 0;
     }
     
-    public function updateArt($data) {
+    public function updateArt($data, $id = '') {
         
-        dd(Auth::user());
-        $updateStatus = DB::table('art_items')
-            ->where('id', $data['art-id'])
-            ->update([
+        if (!empty($id)) {
+            $where = [
+                        'title' => $data['title'],
+                        'about' => $data['about'],
+                        'price' => $data['price'],
+                        'active' => 2
+                    ];
+            
+            if (!empty($data['image'])) {
+                list($name, $extension) = explode('.', $data['image']);
+                $where['fname'] = $name;
+                $where['ext'] = $extension;
+            }
+        } else {
+            $where = [
                         'title' => $data['title'], 
                         'about' => $data['about'], 
                         'price' => $data['price'], 
@@ -132,7 +143,12 @@ class Catalogue extends Model
                         'discount' => $data['discount'], 
                         'discount_value' => $data['discount_value'], 
                         'active' => $data['status']
-                    ]);
+                    ];
+        }
+        
+        $updateStatus = DB::table('art_items')
+            ->where('id', $data['art-id'])
+            ->update($where);
 
         if ($updateStatus >= 1) {
             return true;

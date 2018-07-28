@@ -38,9 +38,18 @@ class CatalogueController extends Controller
             $id = Auth::user()->id;
         }
         
+        $message = '';
+        
+        if (Session::has('success_message')) {
+            $message = Session::get('success_message');
+        } elseif (Session::has('error_message')) {
+            $message = Session::get('error_message');
+        }
+        
         $arts = $this->catalogue->getCatalogues('', $id);
         return view('backend.gallery.index')->with([
-                                    'arts' => $arts
+                                    'arts' => $arts,
+                                    'message' => $message
                                 ]);
     }
 
@@ -53,14 +62,34 @@ class CatalogueController extends Controller
     {
         if ($request->isMethod('POST')) {
             $inputData = $request->all();
-            
-            $result = $this->catalogue->updateArt($inputData);
+            $id = '';
+
+            if (Auth::user()->user_role == 'artist') {
+                $id = Auth::user()->id;
+                
+                if ($request->hasFile('image')) {
+                    $image = $request->file('image');
+                    $title = str_replace(' ', '-', strtolower($request['title']));
+                    $name = str_slug($title).'.'.$image->getClientOriginalExtension();
+                    $destinationPath = public_path(config('constants.uploads.arts'));
+                    $image->move($destinationPath, $name);
+                    
+                    $inputData['image'] = $name;
+                }
+            }
+
+            $result = $this->catalogue->updateArt($inputData, $id);
 
             if ($result == true) {
                 Session::flash('success_message', 'Art updated successfully');
+                
+                if (!empty($id)) {
+                    return redirect('/admin/gallery');
+                }
+                
                 return redirect('/admin/gallery/' . $inputData['artist-id'] . '/' . $inputData['art-id']);
             } else {
-                Session::flash('success_message', 'Something went wrong. Please try again');
+                Session::flash('error_message', 'Something went wrong. Please try again');
                 return redirect('/admin/gallery/' . $artist_id . '/' . $art_id);
             }
         } else {
@@ -78,6 +107,7 @@ class CatalogueController extends Controller
                                     ];
 
             $totalPrice = Helper::calculatePrice($calculateData);
+            
             return view('backend.gallery.edit-gallery')->with([
                                                     'art' => $art[0],
                                                     'totalPrice' => $totalPrice

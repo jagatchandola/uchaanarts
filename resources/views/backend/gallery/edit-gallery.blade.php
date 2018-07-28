@@ -20,23 +20,24 @@
                             <div class="panel-body">
                                 <div class="row">
                                     <div class="col-lg-6">
-                                        <form role="form" name="edit-gallery-form" action="{{ route('edit-gallery-post') }}" method="post">
+                                        <form role="form" name="edit-gallery-form" action="{{ route('edit-gallery-post') }}" method="post" enctype="multipart/form-data">
                                             <input type="hidden" name="artist-id" value="{{ $art->artist_id }}" />
                                             <input type="hidden" name="art-id" value="{{ $art->id }}" />
                                             <div class="form-group">
                                                 <label>Artist Name: <strong>{{ $art->uname }}</strong></label>
                                             </div>
                                             
-                                            @can('isArtist')
                                             <div class="form-group">
-                                                <label>Image: <img src="{{ \App\Helpers\Helper::getImage($art->fname . $art->ext, 0) }}"></label>
+                                                <label>Image: <img src="{{ \App\Helpers\Helper::getImage($art->fname .'.'. $art->ext, 0) }}" width="100" height="100"></label>
                                             </div>
-                                            @endcan
                                             
+                                            @can('isArtist')
                                             <div class="form-group">
                                                 <label>Image</label>
                                                 <input class="form-control" type="file" name="image" value="">
                                             </div>
+                                            @endcan
+                                            
                                             <div class="form-group">
                                                 <label>Title</label>
                                                 <input class="form-control" type="text" name="title" value="{{ $art->title }}">

@@ -3,6 +3,12 @@
 @section('content')
 
             <div id="page-wrapper">
+                @if(!empty($message))
+                    <div class="alert alert-success fade in" id="success-div">
+                        <a href="#" class="close">&times;</a>
+                        <span>{{ $message }}</span>
+                    </div>
+                @endif
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="panel panel-default">
