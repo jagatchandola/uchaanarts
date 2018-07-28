@@ -23,8 +23,10 @@ class Events extends Model
 
     public function getAllEvents($records = '') {
         if ($records == 'all') {
+
             $events = DB::table('events')
-                                ->select('id', 'etitle', 'start_date','end_date', 'fees', 'shide as status')
+                                ->select('id', 'etitle', 'start_date','end_date','venue', 'fees', 'shide as status')
+
                                 ->orderBy('id', 'desc')
                                 ->get();
         } else {
