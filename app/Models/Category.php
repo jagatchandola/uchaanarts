@@ -123,6 +123,7 @@ class Category extends Model
                                             'cat_url' => str_replace(' ', '-', strtolower($data['cat-name'])),
                                             'cat_desc' => $data['description'],
                                             'gst' => $data['gst'],
+                                            'image' => $data['image'],
                                             'shide' => $data['status']
                                         ]);
 

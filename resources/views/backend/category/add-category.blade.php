@@ -29,14 +29,15 @@
                             <div class="panel-body">
                                 <div class="row">
                                     <div class="col-lg-6">
-                                        <form role="form" name="add-category-form" action="{{ route('add-category') }}" method="post">
+                                        <form role="form" name="add-category-form" action="{{ route('add-category') }}" method="post" enctype="multipart/form-data">
+                                            @csrf
                                             <div class="form-group">
                                                 <label>Category Name</label>
                                                 <input class="form-control" name="cat-name" value="">
                                             </div>
                                             <div class="form-group">
                                                 <label>Category Image</label>
-                                                <input class="form-control" type="file" name="cat-image" value="">
+                                                <input class="form-control" type="file" name="image" value="">
                                             </div>
                                             <div class="form-group">
                                                 <label>Description</label>

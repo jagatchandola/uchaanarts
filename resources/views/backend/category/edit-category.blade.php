@@ -28,7 +28,8 @@
                                             </div>
                                             <div class="form-group">
                                                 <label>Category Image</label>
-                                                <img src="{{ asset('image/'.$category['image']) }}" />
+                                                <!--<img src="{{ asset('image/'.$category['image']) }}" />-->
+                                                <img src="{{ \App\Helpers\Helper::getImage($category['image'], 5) }}" width="100" height="100" />
                                                 <input class="form-control" type="file" name="cat-image" value="{{ $category['cat_name'] }}">
                                             </div>
                                             <div class="form-group">

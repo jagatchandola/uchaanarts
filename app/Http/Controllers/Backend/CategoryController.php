@@ -71,8 +71,22 @@ class CategoryController extends Controller
             $valid = $request->validate([
                 'cat-name' => 'required|regex:/(^([a-zA-Z\s]+)(\d+)?$)/u|max:50',
                 'gst' => 'required',
+                'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             ]);
 
+            if ($request->hasFile('image')) {
+                
+                $image = $request->file('image');
+                $title = str_replace(' ', '-', strtolower($request['cat-name']));
+                $name = str_slug($title).'.'.$image->getClientOriginalExtension();
+                //$destinationPath = public_path('/uploads/category');
+                $destinationPath = public_path(config('constants.uploads.category'));
+                $imagePath = $destinationPath. "/".  $name;
+                $image->move($destinationPath, $name);
+            }
+
+            $inputData['image'] = $name;
+            
             $result = $this->category->addCategory($inputData);
             if ($result == true) {
                 Session::flash('success_message', 'Category added successfully');
