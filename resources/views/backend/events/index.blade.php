@@ -21,6 +21,7 @@
                                                 <th>Title</th>
                                                 <th>Start Date</th>
                                                 <th>End Date</th>
+                                                <th>Entry Fees</th>
                                                 <th>Status</th>
                                                 <th>Edit</th>
                                             </tr>
@@ -34,6 +35,7 @@
                                                 <td>{{ $event->etitle }}</td>
                                                 <td>{{ $event->start_date }}</td>
                                                 <td>{{ $event->end_date }}</td>
+                                                <td>{{ number_format($event->fees) }}</td>
                                                 <td class="center">
                                                     @if( $event->status == 0)
                                                     <button type="button" class="btn btn-danger" onclick="changeStatus({{ $event->id }}, 1)">Inactive</button>
