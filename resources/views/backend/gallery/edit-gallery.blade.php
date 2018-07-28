@@ -52,7 +52,7 @@
                                             <div class="form-group">
                                                 <label>Discount</label>
                                                 <select class="form-control" name="discount">
-                                                    <option>Select Discount</option>
+                                                    <option value="">Select Discount</option>
                                                     <option value="fixed" @if($art->discount == 'fixed') selected="selected" @endif>Fixed</option>
                                                     <option value="percentage" @if($art->discount == 'percentage') selected="selected" @endif>Percentage</option>
                                                 </select>
