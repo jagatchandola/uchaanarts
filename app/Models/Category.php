@@ -75,4 +75,45 @@ class Category extends Model
 
         return [];
     }
+    
+    public function updateArtistStatus($cat_id, $status) {
+        $updateStatus = DB::table('category')
+            ->where('id', $cat_id)
+            ->update(['shide' => $status]);
+        
+        if ($updateStatus >= 1) {
+            return true;
+        }
+        
+        return false;
+    }
+    
+    public function getCategoryDetails($cat_id) {
+        $cat = Category::where('id', $cat_id);
+
+        $cat = $cat->get()
+                         ->toArray();
+
+        if (!empty($cat)) {
+            return $cat;
+        }
+
+        return [];
+    }
+    
+    public function updateCategory($data) {
+        $updateStatus = DB::table('category')
+            ->where('id', $data['cat-id'])
+            ->update([
+                        'cat_name' => $data['cat-name'], 
+                        'cat_url' => str_replace(' ', '-', strtolower($data['cat-name'])),
+                        'gst' => $data['gst'], 
+                        'shide' => $data['status']
+                    ]);
+        
+        if ($updateStatus >= 1) {
+            return true;
+        }
+        return false;
+    }
 }

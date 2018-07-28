@@ -98,7 +98,7 @@ class ArtistController extends Controller
             }
         } else {
             $artist = $this->artists->getArtistDetails($artist_id);
-    //dd($artist);
+
             return view('backend.artist.edit-artist')->with([
                                                 'artist' => array_shift($artist)
                                             ]);

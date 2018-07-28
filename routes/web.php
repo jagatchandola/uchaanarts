@@ -49,7 +49,7 @@ Route::group(['middleware' => ['auth']],function(){
 	Route::get('/admin/artists','Backend\ArtistController@index')->name('artists-list');
 	Route::put('/admin/artists/changeStatus/{id}','Backend\ArtistController@updateStatus');
         Route::get('/admin/artists/{id}','Backend\ArtistController@edit')->name('edit-artist');
-        Route::post('/admin/artist','Backend\ArtistController@edit')->name('edit-artist-post');;
+        Route::post('/admin/artist','Backend\ArtistController@edit')->name('edit-artist-post');
         
         // gallery Routes (Admin)
 	Route::get('/admin/gallery','Backend\CatalogueController@index')->name('gallery-list');
@@ -60,7 +60,10 @@ Route::group(['middleware' => ['auth']],function(){
         Route::get('/admin/customers','Backend\ArtistController@getCustomers')->name('customers-list');
         
         // Category Routes (Admin)
-        Route::get('/admin/category','Backend\CategoryController@index')->name('category-list');
+        Route::get('/admin/category', 'Backend\CategoryController@index')->name('category-list');
+        Route::put('/admin/category/changeStatus/{id}', 'Backend\CategoryController@updateStatus');
+        Route::get('/admin/category/{id}', 'Backend\CategoryController@edit')->name('edit-category');
+        Route::post('/admin/category', 'Backend\CategoryController@edit')->name('edit-category-post');
         
         // Event Routes (Admin)
         Route::get('/admin/events','Backend\EventController@index')->name('events-list');

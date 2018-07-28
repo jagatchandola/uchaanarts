@@ -19,10 +19,8 @@
                                             <tr>
                                                 <th>#</th>
                                                 <th>Category Name</th>
-                                                <th>Category Url</th>
                                                 <th>GST</th>
                                                 <th>Status</th>
-                                                <th>View</th>
                                                 <th>Edit</th>
                                             </tr>
                                         </thead>
@@ -33,11 +31,15 @@
                                             <tr class="odd gradeX">
                                                 <td>{{$i}}</td>
                                                 <td>{{ $category->cat_name }}</td>
-                                                <td>{{ $category->cat_url }}</td>
                                                 <td>{{ $category->gst }}</td>
-                                                <td class="center">{{ $category->status == 1 ? 'Active' : 'Inactive' }}</td>
-                                                <td class="center">View</td>
-                                                <td class="center">Edit</td>
+                                                <td class="center">
+                                                    @if( $category->status == 0)
+                                                    <button type="button" class="btn btn-danger" onclick="changeStatus({{ $category->id }}, 1)">Inactive</button>
+                                                    @else
+                                                        <button type="button" class="btn btn-success" onclick="changeStatus({{ $category->id }}, 0)">Active</button>
+                                                    @endif
+                                                </td>
+                                                <td class="center"><a href="{{ route('edit-category', $category->id) }}" target="_blank"><button type="button" class="btn btn-primary">Edit</button></a></td>
                                             </tr>
                                             @php $i++ @endphp
                                             @endforeach
@@ -66,5 +68,35 @@
                 responsive: true
             });
         });
+        
+        function changeStatus(id, status) {
+            var updateStatus = status == 1 ? 'Active' : 'Inactive';
+            var r = confirm("Are you sure, you want to change status to " + updateStatus + "?");
+            if (r == true) {
+                $.ajax({
+                    method: "PUT",
+                    url: "/admin/category/changeStatus/"+id,
+                    data: {
+                            status:status
+                         },
+                    dataType: "json",
+                    success: function(response) {
+                        if (response == 1) {
+//                            alert('Status updated successfully!');
+                            setTimeout(function() {
+                                location.reload(true);    
+                            }, 500);
+                        } else {
+                            alert('Something went wrong. Please try again!');
+                            return false;
+                        }
+                        
+                    },
+                    error: function(request,status,errorThrown) {
+                       alert('request :'+request,'status : '+status,'errorThrown : '+errorThrown); 
+                    }
+                });
+            }
+        }
     </script>
 @endsection

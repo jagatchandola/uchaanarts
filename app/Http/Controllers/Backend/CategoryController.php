@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Helpers\Helper;
+use Session;
 
 class CategoryController extends Controller
 {
@@ -32,4 +33,34 @@ class CategoryController extends Controller
                                         ]);
     }
 
+    public function updateStatus(Request $request, $cat_id) {
+        $artist = $this->category->updateArtistStatus($cat_id, $request['status']);
+
+        if ($artist == true) {
+            echo 1;
+        } else {
+            echo 0;
+        }
+    }
+    
+    public function edit(Request $request, $cat_id = '') {
+        if ($request->isMethod('POST')) {
+            $inputData = $request->all();
+
+            $result = $this->category->updateCategory($inputData);
+            if ($result == true) {
+                Session::flash('success_message', 'Category updated successfully');
+                return redirect('/admin/category/'.$inputData['cat-id']);
+            } else {
+                Session::flash('success_message', 'Something went wrong. Please try again');
+                return redirect('/admin/category/'.$inputData['cat-id']);
+            }
+        } else {
+            $cat = $this->category->getCategoryDetails($cat_id);
+
+            return view('backend.category.edit-category')->with([
+                                                'category' => array_shift($cat)
+                                            ]);
+        }
+    }
 }
