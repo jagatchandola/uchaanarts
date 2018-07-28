@@ -126,4 +126,19 @@ class Catalogue extends Model
         
         return false;
     }
+
+    public function getCreativeArts(){
+
+        $catalogues = DB::table('art_items')->where('art_items.is_creative_art', 1)
+                    ->join('users', 'art_items.artist_id' , '=', 'users.id')
+                    ->select('art_items.id', 'title', 'price', 'gst', 'discount', 'discount_value', 'users.uname as user_name', 'art_items.fname', 'art_items.ext')
+                    ->orderBy('id', 'desc')
+                    ->get();
+
+        if (!empty($catalogues)) {
+            return $catalogues;
+        }
+
+        return [];            
+    }
 }

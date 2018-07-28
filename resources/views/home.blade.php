@@ -88,19 +88,23 @@
 <!--Section 2 Ends Here-->
 
 <!--Section 1 Start Here-->
+@if(!empty($catalogues))
 <section class="themeSec1">
  <h2>Creative Art</h2>
  <div class="container">
  <div class="row">
+ @foreach($catalogues as $catalogue)
   <div class="col-md-4 col-lg-4 col-12 col-sm-12">
    <div class="artBox">
-    <a href="/"><img src="{{ asset('img/slider/1.jpg')}}" class="img-fluid"></a>
-    <h3>TITLE</h3>
-    <h2>15,000</h2>
-    <span>Abhishek Sharma</span>
+    <a href="/"><img src="{{ \App\Helpers\Helper::getImage($catalogue->fname.'.'.$catalogue->ext, 0) }}"><a href="/item/{{$catalogue->id}}" class="img-fluid"></a>
+    <h3>{{$catalogue->title}}</h3>
+    <h2>{{money_format($catalogue->totalPrice)}}</h2>
+    <span>{{$catalogue->user_name}}</span>
    </div>
   </div>
-  <div class="col-md-4 col-lg-4 col-12 col-sm-12">
+  @endforeach
+
+  <!-- <div class="col-md-4 col-lg-4 col-12 col-sm-12">
    <div class="artBox">
     <a href="/"><img src="{{ asset('img/slider/2.jpg')}}" class="img-fluid"></a>
     <h3>TITLE</h3>
@@ -115,13 +119,15 @@
     <h2>15,000</h2>
     <span>Abhishek Sharma</span>
    </div>
-  </div>
+  </div> -->
+
   <div class="col-lg-12 text-center">
    <a class="btn btn-primary themeBtn mt-5" href="#">View Artwork</a>
   </div>
  </div>
  </div>
 </section>
+@endif
 <!--Section 1 Ends Here-->
 
 <!--Section 2 Start Here-->

@@ -39,7 +39,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $result = $this->catalogue->getCatalogues();
+        $arts = $this->catalogue->getCreativeArts();
+        // print_r($result);die;
         $category = $this->category->getCategories('all');
         $artists = $this->artists->getArtistDetails('','1');
 
@@ -47,11 +48,25 @@ class HomeController extends Controller
 
         $banners = $banner->getBanners();
 
+        if (!empty($arts) && count($arts)) {
+            foreach ($arts as $art) {
+                $calculateData = [
+                                    'price' => $art->price,
+                                    'gst' => $art->gst,
+                                    'discountType' => $art->discount,
+                                    'discountValue' => $art->discount_value
+                                ];
+                
+                $art->totalPrice = Helper::calculatePrice($calculateData);
+            }
+        }
+
         return view('home')->with([
-                            'catalogues' => $result, 
+                            'catalogues' => $arts, 
                             'categories' => $category,
                             'banners'    => $banners,
-                            'artists'    => $artists
+                            'artists'    => $artists,
+                            'arts'    => $artists
                             ]);
     }
 
