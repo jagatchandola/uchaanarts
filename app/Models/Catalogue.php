@@ -10,6 +10,7 @@
 namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use DB;
+use Illuminate\Support\Facades\Auth;
 
 class Catalogue extends Model
 {
@@ -20,7 +21,7 @@ class Catalogue extends Model
      */
     protected $table = 'art_items';
 
-    public function getCatalogues($records = '') {
+    public function getCatalogues($records = '', $artist_id = '') {
         if ($records == 'all') {
             $catalogues = DB::table('art_items')
                         ->join('users', 'art_items.artist_id' , '=', 'users.id')
@@ -29,8 +30,14 @@ class Catalogue extends Model
                         ->get();
         } else {
             $catalogues = Catalogue::where('art_items.active', 1)
-                        ->join('users', 'art_items.artist_id' , '=', 'users.id')
-                        ->select('art_items.*', 'users.uname')
+                        ->join('users', 'art_items.artist_id' , '=', 'users.id');
+            
+            if (!empty($artist_id)) {
+                $catalogues = $catalogues->where('art_items.artist_id', '=', $artist_id);
+            }
+            
+            
+            $catalogues = $catalogues->select('art_items.*', 'users.uname')
                         ->orderBy('id', 'desc')
                         ->paginate(10);
         }
@@ -96,18 +103,25 @@ class Catalogue extends Model
         return [];
     }
     
-    public function getTotalArtsCount() {
-        $catalogues = Catalogue::where('active', 1)
-                    ->count('id');
+    public function getTotalArtsCount($id = '') {
+        $catalogues = Catalogue::where('active', 1);
+        
+        if (!empty($id)) {
+            $catalogues->where('artist_id', $id);
+        }
+        
+        $catalogues = $catalogues->count('id');
 
         if (!empty($catalogues)) {
             return $catalogues;
         }
 
-        return [];
+        return 0;
     }
     
     public function updateArt($data) {
+        
+        dd(Auth::user());
         $updateStatus = DB::table('art_items')
             ->where('id', $data['art-id'])
             ->update([

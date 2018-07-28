@@ -154,19 +154,16 @@
                         <!-- /input-group -->
                     </li>
                     <li>
-                        <a href="index.html" class="active"><i class="fa fa-dashboard fa-fw"></i>Dashboard</a>
+                        <a href="#" class="active"><i class="fa fa-dashboard fa-fw"></i>Dashboard</a>
                     </li>
                     <li>
                         <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i>Gallery<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="flot.html">All Photo</a>
+                                <a href="{{ route('gallery-list') }}">All Photo</a>
                             </li>
                             <li>
-                                <a href="morris.html">Add Image</a>
-                            </li>
-                            <li>
-                                <a href="morris.html">Edit Image</a>
+                                <a href="">Add Image</a>
                             </li>
                         </ul>
                     </li>

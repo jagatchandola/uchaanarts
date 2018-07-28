@@ -9,6 +9,7 @@ use App\Models\Artists;
 use Illuminate\Http\Request;
 use App\Helpers\Helper;
 use Session;
+use Illuminate\Support\Facades\Auth;
 
 class CatalogueController extends Controller
 {
@@ -32,8 +33,12 @@ class CatalogueController extends Controller
      */
     public function index()
     {
-        //$arts = $this->catalogue->getCatalogues('all');
-        $arts = $this->catalogue->getCatalogues();
+        $id = '';
+        if (Auth::user()->user_role == 'artist') {
+            $id = Auth::user()->id;
+        }
+        
+        $arts = $this->catalogue->getCatalogues('', $id);
         return view('backend.gallery.index')->with([
                                     'arts' => $arts
                                 ]);
@@ -59,6 +64,10 @@ class CatalogueController extends Controller
                 return redirect('/admin/gallery/' . $artist_id . '/' . $art_id);
             }
         } else {
+            if(!isset($_SERVER['HTTP_REFERER'])) {
+                abort(401);
+            }
+            
             $art = $this->catalogue->getArtDetails($artist_id, $art_id);
 
             $calculateData = [

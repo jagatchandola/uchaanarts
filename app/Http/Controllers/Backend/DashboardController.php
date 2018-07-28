@@ -9,6 +9,7 @@ use App\Models\Artists;
 use App\Models\Events;
 use Illuminate\Http\Request;
 use App\Helpers\Helper;
+use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
@@ -32,12 +33,20 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        $totalArts = $this->catalogue->getTotalArtsCount();        
-        $totalArtists = $this->artists->getTotalArtistsCount();
+        $id = '';
+        $totalArtists = 0;
+        
+        if (Auth::user()->user_role == 'artist') {
+            $id = Auth::user()->id;
+        } else {
+            $totalArtists = $this->artists->getTotalArtistsCount();
+        }
+        
+        $totalArts = $this->catalogue->getTotalArtsCount($id);
         $totalEvents = $this->events->getTotalEventsCount();
         
         return view('backend.index')->with([
-                                        'totalArts' => $totalArts,
+                                        'totalArts' => $totalArts ?? 0,
                                         'totalArtists' => $totalArtists,
                                         'totalEvents' => $totalEvents
                                     ]);
