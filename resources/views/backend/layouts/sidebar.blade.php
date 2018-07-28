@@ -87,7 +87,7 @@
                             <a href="{{ route('events-list') }}">All Events</a>
                         </li>
                         <li>
-                            <a href="{{ route('events-list') }}">Add Event</a>
+                            <a href="{{ route('add-event') }}">Add Event</a>
                         </li>
                     </ul>
                 </li>

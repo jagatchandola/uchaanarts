@@ -71,6 +71,7 @@ Route::group(['middleware' => ['auth']],function(){
         Route::put('/admin/events/changeStatus/{id}', 'Backend\EventController@updateStatus');
         Route::get('/admin/events/{id}', 'Backend\EventController@edit')->name('edit-event');
         Route::post('/admin/events', 'Backend\EventController@edit')->name('edit-event-post');
+        Route::match(['get', 'post'], '/admin/event/add', 'Backend\EventController@addEvent')->name('add-event');
         
 	// Categories Routes (Admin)
 //	Route::match(['get','post'],'/admin/add-category','CategoryController@addCategory');

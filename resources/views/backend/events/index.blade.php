@@ -35,7 +35,7 @@
                                                 <td>{{ $event->start_date }}</td>
                                                 <td>{{ $event->end_date }}</td>
                                                 <td class="center">
-                                                    @if( $event->shide == 0)
+                                                    @if( $event->status == 0)
                                                     <button type="button" class="btn btn-danger" onclick="changeStatus({{ $event->id }}, 1)">Inactive</button>
                                                     @else
                                                         <button type="button" class="btn btn-success" onclick="changeStatus({{ $event->id }}, 0)">Active</button>

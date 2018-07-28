@@ -8,7 +8,9 @@
  */
 
 namespace App\Models;
+
 use Illuminate\Database\Eloquent\Model;
+use DB;
 
 class Events extends Model
 {
@@ -21,8 +23,8 @@ class Events extends Model
 
     public function getAllEvents($records = '') {
         if ($records == 'all') {
-            $artists = DB::table('events')
-                                ->select('id', 'title', 'start_date','end_date', 'shide as status')
+            $events = DB::table('events')
+                                ->select('id', 'etitle', 'start_date','end_date', 'shide as status')
                                 ->orderBy('id', 'desc')
                                 ->get();
         } else {
@@ -57,5 +59,62 @@ class Events extends Model
         }
 
         return [];
+    }
+    
+    public function updateEventStatus($event_id, $status) {
+        $updateStatus = DB::table('events')
+            ->where('id', $event_id)
+            ->update(['shide' => $status]);
+
+        if ($updateStatus >= 1) {
+            return true;
+        }
+        
+        return false;
+    }
+    
+    public function updateEvent($data) {
+        
+        $updateData = [
+                        'etitle' => $data['event-name'],
+                        'venue' => $data['venue'],
+                        'about' => $data['about'],
+                        'start_date' => $data['start_date'],
+                        'end_date' => $data['end_date'],
+                        'fees' => $data['event_fees'],
+                        'shide' => $data['status']
+                    ];
+        
+        if (isset($data['image']) && !empty($data['image'])) {
+            $updateData['banner'] = $data['image'];
+        }
+
+        $updateStatus = DB::table('events')
+            ->where('id', $data['event-id'])
+            ->update($updateData);
+
+        if ($updateStatus >= 1) {
+            return true;
+        }
+        return false;
+    }
+
+    public function addEvent($data) {
+        $insert = DB::table('events')->insert([
+                                            'etitle' => $data['event_name'],
+                                            'eurl' => str_replace(' ', '-', strtolower($data['event_name'])),
+                                            'venue' => $data['venue'],
+                                            'about' => $data['about'],
+                                            'start_date' => $data['start_date'],
+                                            'end_date' => $data['end_date'],
+                                            'fees' => $data['event_fees'],
+                                            'banner' => $data['image'],
+                                            'shide' => $data['status']
+                                        ]);
+
+        if ($insert === true) {
+            return true;
+        }
+        return false;
     }
 }
