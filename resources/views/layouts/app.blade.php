@@ -200,11 +200,6 @@
 <script src="{{ asset('js/custom.js')}}"></script>
 
 @yield('script')
-<script type="text/javascript">
-//    $(document).ready(function() {
-//        $('#dob').datepicker();
-//    });
-</script>
 
 </body>
 </html>

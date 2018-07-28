@@ -19,6 +19,10 @@ class ArtistController extends Controller
      */
     public function __construct()
     {
+        if (!Gate::allows('isAdmin')) {
+            abort(401);
+        }
+        
         $this->catalogue = new Catalogue();
         $this->artists = new Artists();
     }
@@ -43,10 +47,6 @@ class ArtistController extends Controller
      */
     public function getCustomers()
     {
-        if (!Gate::allows('isAdmin')) {
-            return 'You are not authorized!';
-        }
-        
         $customers = $this->artists->getCustomers();
         return view('backend.customers.index')->with([
                                             'customers' => $customers

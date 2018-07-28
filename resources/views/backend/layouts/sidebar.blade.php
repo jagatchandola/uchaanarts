@@ -166,7 +166,7 @@
                                 <a href="morris.html">Add Image</a>
                             </li>
                             <li>
-                                <a href="morris.html">Edit Edit</a>
+                                <a href="morris.html">Edit Image</a>
                             </li>
                         </ul>
                     </li>

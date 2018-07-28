@@ -7,6 +7,7 @@ use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Helpers\Helper;
 use Session;
+use Gate;
 
 class CategoryController extends Controller
 {
@@ -17,6 +18,10 @@ class CategoryController extends Controller
      */
     public function __construct()
     {
+        if (!Gate::allows('isAdmin')) {
+            abort(401);
+        }
+        
         $this->category = new Category();
     }
 
@@ -52,9 +57,7 @@ class CategoryController extends Controller
                 $image = $request->file('image');
                 $title = str_replace(' ', '-', strtolower($request['cat-name']));
                 $name = str_slug($title).'.'.$image->getClientOriginalExtension();
-                //$destinationPath = public_path('/uploads/category');
                 $destinationPath = public_path(config('constants.uploads.category'));
-                $imagePath = $destinationPath. "/".  $name;
                 $image->move($destinationPath, $name);
                 
                 $inputData['image'] = $name;
