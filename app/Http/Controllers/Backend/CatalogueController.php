@@ -115,4 +115,49 @@ class CatalogueController extends Controller
         }
     }
 
+    public function getPendingPhotos() {
+        if (!Gate::allows('isAdmin')) {
+            abort(401);
+        }
+        
+        $message = '';
+        
+        if (Session::has('success_message')) {
+            $message = Session::get('success_message');
+        } elseif (Session::has('error_message')) {
+            $message = Session::get('error_message');
+        }
+        
+        $arts = $this->catalogue->getCatalogues('', $id);
+        return view('backend.gallery.index')->with([
+                                    'arts' => $arts,
+                                    'message' => $message
+                                ]);
+    }
+
+    public function updatePendingPhotos(Request $request, $id = null) {
+        if ($request->isMethod('post')) {
+            
+        }
+        
+        if(!isset($_SERVER['HTTP_REFERER'])) {
+            abort(401);
+        }
+
+        $art = $this->catalogue->getArtDetails($artist_id, $art_id);
+
+        $calculateData = [
+                                    'price' => $art[0]->price,
+                                    'gst' => $art[0]->gst,
+                                    'discountType' => $art[0]->discount,
+                                    'discountValue' => $art[0]->discount_value
+                                ];
+
+        $totalPrice = Helper::calculatePrice($calculateData);
+
+        return view('backend.gallery.pending-gallery')->with([
+                                                'art' => $art[0],
+                                                'totalPrice' => $totalPrice
+                                            ]);
+    }
 }

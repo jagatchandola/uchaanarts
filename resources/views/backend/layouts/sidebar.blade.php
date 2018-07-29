@@ -67,6 +67,9 @@
                         <li>
                             <a href="{{ route('gallery-list') }}">All Photo</a>
                         </li>
+                        <li>
+                            <a href="{{ route('pending-gallery') }}">Pending Photo</a>
+                        </li>
                     </ul>
                 </li>
                 <li>
