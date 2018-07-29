@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use App\Helpers\Helper;
 use Session;
 use Illuminate\Support\Facades\Auth;
+use Gate;
 
 class CatalogueController extends Controller
 {
@@ -128,23 +129,37 @@ class CatalogueController extends Controller
             $message = Session::get('error_message');
         }
         
-        $arts = $this->catalogue->getCatalogues('', $id);
-        return view('backend.gallery.index')->with([
+        $arts = $this->catalogue->getPendingPhotos();
+        return view('backend.gallery.pending-gallery')->with([
                                     'arts' => $arts,
                                     'message' => $message
                                 ]);
     }
 
-    public function updatePendingPhotos(Request $request, $id = null) {
+    public function updatePendingPhotos(Request $request, $art_id = null) {
+        if (!Gate::allows('isAdmin')) {
+            abort(401);
+        }
+        
         if ($request->isMethod('post')) {
-            
+            $inputData = $request->all();
+
+            $result = $this->catalogue->updateArt($inputData);
+
+            if ($result == true) {
+                Session::flash('success_message', 'Art updated successfully');               
+                return redirect('/admin/gallery/pending');                
+            } else {
+                Session::flash('error_message', 'Something went wrong. Please try again');
+                return redirect('/admin/gallery/pending/' . $art_id);
+            }
         }
         
         if(!isset($_SERVER['HTTP_REFERER'])) {
             abort(401);
         }
 
-        $art = $this->catalogue->getArtDetails($artist_id, $art_id);
+        $art = $this->catalogue->getArtById($art_id);
 
         $calculateData = [
                                     'price' => $art[0]->price,
@@ -155,7 +170,7 @@ class CatalogueController extends Controller
 
         $totalPrice = Helper::calculatePrice($calculateData);
 
-        return view('backend.gallery.pending-gallery')->with([
+        return view('backend.gallery.update-gallery')->with([
                                                 'art' => $art[0],
                                                 'totalPrice' => $totalPrice
                                             ]);

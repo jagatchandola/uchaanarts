@@ -188,4 +188,34 @@ class Catalogue extends Model
 
         return [];
     }
+    
+    public function getPendingPhotos() {
+        
+        $catalogue = Catalogue::where('art_items.active', 2)
+                    ->join('users', 'art_items.artist_id' , '=', 'users.id')
+                    ->select('art_items.id', 'title', 'price', 'gst', 'discount', 'discount_value', 'users.uname as user_name', 'art_items.fname', 'art_items.ext', 'users.uname')
+                    ->orderBy('art_items.updated_at', 'desc')
+                    ->get();
+
+        if (!empty($catalogue)) {
+            return $catalogue;
+        }
+
+        return [];
+    }
+    
+    public function getArtById($art_id) {
+        
+        $catalogue = Catalogue::where('art_items.id', $art_id)
+                    ->join('users', 'art_items.artist_id' , '=', 'users.id')
+                    ->select('art_items.id', 'title', 'art_items.about', 'price', 'gst', 'discount', 'discount_value', 'users.uname as user_name', 'art_items.fname', 'art_items.ext', 'users.uname')
+                    ->orderBy('art_items.updated_at', 'desc')
+                    ->get();
+
+        if (!empty($catalogue)) {
+            return $catalogue;
+        }
+
+        return [];
+    }
 }
