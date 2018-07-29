@@ -121,4 +121,39 @@ class EventController extends Controller
             return view('backend.events.add-event');
         }
     }
+
+    public function participateEvent(Request $request, $id){
+
+        if ($request->isMethod('POST')) {
+            $inputData = $request->all();
+
+            $valid = $request->validate([
+                'event_name' => 'required|regex:/(^([a-zA-Z\s]+)(\d+)?$)/u|max:50',
+                'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            ]);
+
+            if ($request->hasFile('image')) {
+                
+                $image = $request->file('image');
+                $title = str_replace(' ', '-', strtolower($request['event_name']));
+                $name = str_slug($title).'.'.$image->getClientOriginalExtension();
+                $destinationPath = public_path(config('constants.uploads.events'));
+                $image->move($destinationPath, $name);
+            }
+
+            $inputData['image'] = $name;
+            
+            $result = $this->events->addEvent($inputData);
+            if ($result == true) {
+                Session::flash('success_message', 'Event added successfully');
+                return redirect('/admin/events');
+            } else {
+                Session::flash('error_message', 'Something went wrong. Please try again');
+                return redirect('/admin/events/add');
+            }
+        } else {
+            
+            return view('backend.events.participate-event');
+        }
+    }
 }

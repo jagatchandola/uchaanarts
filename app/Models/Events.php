@@ -27,6 +27,7 @@ class Events extends Model
             $events = DB::table('events')
                                 ->select('id', 'etitle', 'start_date','end_date','venue', 'fees', 'shide as status')
 
+                                ->orderBy('start_date', 'desc')
                                 ->orderBy('id', 'desc')
                                 ->get();
         } else {

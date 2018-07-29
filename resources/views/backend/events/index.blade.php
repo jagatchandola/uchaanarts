@@ -19,11 +19,17 @@
                                             <tr>
                                                 <th>#</th>
                                                 <th>Title</th>
+                                                <th>venue</th>
                                                 <th>Start Date</th>
                                                 <th>End Date</th>
                                                 <th>Entry Fees</th>
                                                 <th>Status</th>
+                                                @can('isAdmin')
                                                 <th>Edit</th>
+                                                @endcan
+                                                @can('isArtist')
+                                                <th>Participate</th>
+                                                @endcan
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -33,17 +39,37 @@
                                             <tr class="odd gradeX">
                                                 <td>{{$i}}</td>
                                                 <td>{{ $event->etitle }}</td>
-                                                <td>{{ $event->start_date }}</td>
-                                                <td>{{ $event->end_date }}</td>
-                                                <td>{{ number_format($event->fees) }}</td>
-                                                <td class="center">
+                                                <td>{{ $event->venue }}</td>
+                                                <td class="text-center">{{ $event->start_date }}</td>
+                                                <td class="text-center">{{ $event->end_date }}</td>
+                                                <td class="text-right">{{ number_format($event->fees) }}</td>
+                                                <td class="text-center">
+                                                @can('isAdmin')
+                                               
+                                                
                                                     @if( $event->status == 0)
                                                     <button type="button" class="btn btn-danger" onclick="changeStatus({{ $event->id }}, 1)">Inactive</button>
                                                     @else
                                                         <button type="button" class="btn btn-success" onclick="changeStatus({{ $event->id }}, 0)">Active</button>
                                                     @endif
+                                                    @endcan
+                                                @can('isArtist')
+                                                @if( $event->status == 0)
+                                                    <button type="button" class="btn btn-danger">Inactive</button>
+                                                    @else
+                                                        <button type="button" class="btn btn-success">Active</button>
+                                                    @endif
+                                                @endcan
                                                 </td>
-                                                <td class="center"><a href="{{ route('edit-event', $event->id) }}" target="_blank"><button type="button" class="btn btn-primary">Edit</button></a></td>
+                                                <td class="text-center">
+                                                @can('isAdmin')
+                                                    <a href="{{ route('edit-event', $event->id) }}" target="_blank"><button type="button" class="btn btn-primary">Edit</button></a>
+                                                @endcan
+
+                                                @can('isArtist')
+                                                    <a href="{{ route('participate-event', $event->id) }}" target="_blank"><button type="button" class="btn btn-primary">Participate</button></a>
+                                                @endcan
+                                                </td>
                                             </tr>
                                             @php $i++ @endphp
                                             @endforeach
