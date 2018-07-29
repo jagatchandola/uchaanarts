@@ -35,7 +35,7 @@ Route::get('/media', 'HomeController@media')->name('media');
 Route::get('/contactus', 'HomeController@contactus')->name('contactus');
 Route::post('/contactus', 'HomeController@contactus')->name('contactus');
 
-
+Route::post('/news-letter', 'HomeController@newsLetter')->name('news-letter');
 
 // Backend routes
 Route::match(['get', 'post'], '/backend/login','Backend\LoginController@index')->name('backend-login');

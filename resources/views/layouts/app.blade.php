@@ -183,8 +183,9 @@
           <h5>Signup for our Newslatter</h5>
           <h6>Discover new art and collections added weekly</h6>
           <form class="newsBox">
-            <input type="text" placeholder="Enter Email ID">
-            <button type="button"><i class="fas fa-sign-in-alt"></i></button>
+            <div id="news-letter-msg-box"></div>
+            <input type="text" id="news-letter-email" placeholder="Enter Email ID">
+            <button type="button" id="news-letter"><i class="fas fa-sign-in-alt"></i></button>
           </form>
         </div>
       </div>
