@@ -40,34 +40,37 @@
                                                 <td>{{$i}}</td>
                                                 <td>{{ $event->etitle }}</td>
                                                 <td>{{ $event->venue }}</td>
-                                                <td class="text-center">{{ $event->start_date }}</td>
-                                                <td class="text-center">{{ $event->end_date }}</td>
+                                                <td class="text-center">{{ \App\Helpers\Helper::getFormattedDate($event->start_date) }}</td>
+                                                <td class="text-center">{{ \App\Helpers\Helper::getFormattedDate($event->end_date) }}</td>
                                                 <td class="text-right">{{ number_format($event->fees) }}</td>
                                                 <td class="text-center">
-                                                @can('isAdmin')
-                                               
-                                                
+                                                    @can('isAdmin')
+
                                                     @if( $event->status == 0)
-                                                    <button type="button" class="btn btn-danger" onclick="changeStatus({{ $event->id }}, 1)">Inactive</button>
+                                                        <button type="button" class="btn btn-danger" onclick="changeStatus({{ $event->id }}, 1)">Inactive</button>
                                                     @else
                                                         <button type="button" class="btn btn-success" onclick="changeStatus({{ $event->id }}, 0)">Active</button>
-                                                    @endif
+                                                    @endif                                                
                                                     @endcan
-                                                @can('isArtist')
-                                                @if( $event->status == 0)
-                                                    <button type="button" class="btn btn-danger">Inactive</button>
-                                                    @else
-                                                        <button type="button" class="btn btn-success">Active</button>
-                                                    @endif
-                                                @endcan
+
+                                                    @can('isArtist')
+                                                        @if( $event->status == 0)
+                                                            <button type="button" class="btn btn-danger">Inactive</button>
+                                                        @else
+                                                            <button type="button" class="btn btn-success">Active</button>
+                                                        @endif
+                                                    @endcan
                                                 </td>
+                                                
                                                 <td class="text-center">
                                                 @can('isAdmin')
                                                     <a href="{{ route('edit-event', $event->id) }}" target="_blank"><button type="button" class="btn btn-primary">Edit</button></a>
                                                 @endcan
 
                                                 @can('isArtist')
-                                                    <a href="{{ route('participate-event', $event->id) }}" target="_blank"><button type="button" class="btn btn-primary">Participate</button></a>
+                                                    @if($event->end_date > date('Y-m-d'))
+                                                        <a href="{{ route('participate-event', $event->id) }}" target="_blank"><button type="button" class="btn btn-primary">Participate</button></a>
+                                                    @endif
                                                 @endcan
                                                 </td>
                                             </tr>
@@ -99,33 +102,34 @@
             });
         });
         
-        function changeStatus(id, status) {
-            var updateStatus = status == 1 ? 'Active' : 'Inactive';
-            var r = confirm("Are you sure, you want to change status to " + updateStatus + "?");
-            if (r == true) {
-                $.ajax({
-                    method: "PUT",
-                    url: "/admin/events/changeStatus/"+id,
-                    data: {
-                            status:status
-                         },
-                    dataType: "json",
-                    success: function(response) {
-                        if (response == 1) {
-                            setTimeout(function() {
-                                location.reload(true);    
-                            }, 500);
-                        } else {
-                            alert('Something went wrong. Please try again!');
-                            return false;
+        @can('isAdmin')
+            function changeStatus(id, status) {
+                var updateStatus = status == 1 ? 'Active' : 'Inactive';
+                var r = confirm("Are you sure, you want to change status to " + updateStatus + "?");
+                if (r == true) {
+                    $.ajax({
+                        method: "PUT",
+                        url: "/admin/events/changeStatus/"+id,
+                        data: {
+                                status:status
+                             },
+                        dataType: "json",
+                        success: function(response) {
+                            if (response == 1) {
+                                setTimeout(function() {
+                                    location.reload(true);    
+                                }, 500);
+                            } else {
+                                alert('Something went wrong. Please try again!');
+                                return false;
+                            }                        
+                        },
+                        error: function(request,status,errorThrown) {
+                           alert('request :'+request,'status : '+status,'errorThrown : '+errorThrown); 
                         }
-                        
-                    },
-                    error: function(request,status,errorThrown) {
-                       alert('request :'+request,'status : '+status,'errorThrown : '+errorThrown); 
-                    }
-                });
+                    });
+                }
             }
-        }
+        @endcan
     </script>
 @endsection

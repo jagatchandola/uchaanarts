@@ -172,16 +172,23 @@ class Catalogue extends Model
         return [];            
     }
     
-    public function getArtistArts($artist_id) {
+    public function getArtistArts($artist_id, $all = false) {
         $where = [
                     'artist_id' => $artist_id,
                     'active'    => 1
                 ];
         
-        $catalogues = Catalogue::where($where)
+        if ($all === true) {
+            $catalogues = Catalogue::where($where)
+                    ->select('id', 'title', 'fname', 'ext')
+                    ->orderBy('id', 'desc')
+                    ->get();
+        } else {
+            $catalogues = Catalogue::where($where)
                     ->orderBy('id', 'desc')
                     ->paginate(2);
-
+        }
+        
         if (!empty($catalogues)) {
             return $catalogues;
         }

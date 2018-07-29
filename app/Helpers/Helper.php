@@ -90,4 +90,8 @@ class Helper
                 break;
         }
     }
+    
+    public static function getFormattedDate($date) {
+        return date('jS M Y', strtotime($date));
+    } 
 }//END CLASS

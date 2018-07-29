@@ -4,9 +4,12 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Events;
+use App\Models\Catalogue;
 use Illuminate\Http\Request;
 use App\Helpers\Helper;
 use Session;
+use Auth;
+use Gate;
 
 class EventController extends Controller
 {
@@ -18,6 +21,7 @@ class EventController extends Controller
     public function __construct()
     {
         $this->events = new Events();
+        $this->catalogue = new Catalogue();
     }
 
     /**
@@ -47,6 +51,10 @@ class EventController extends Controller
     }
 
     public function updateStatus(Request $request, $event_id) {
+        if (!Gate::allows('isAdmin')) {
+            abort(401);
+        }
+        
         $event = $this->events->updateEventStatus($event_id, $request['status']);
 
         if ($event == true) {
@@ -57,6 +65,10 @@ class EventController extends Controller
     }
     
     public function edit(Request $request, $event_id = '') {
+        if (!Gate::allows('isAdmin')) {
+            abort(401);
+        }
+        
         if ($request->isMethod('POST')) {
             $inputData = $request->all();
 
@@ -66,7 +78,6 @@ class EventController extends Controller
                 $title = str_replace(' ', '-', strtolower($request['event-name']));
                 $name = str_slug($title).'.'.$image->getClientOriginalExtension();
                 $destinationPath = public_path(config('constants.uploads.events'));
-                //$imagePath = $destinationPath. "/".  $name;
                 $image->move($destinationPath, $name);
                 
                 $inputData['image'] = $name;
@@ -90,9 +101,13 @@ class EventController extends Controller
     }
 
     public function addEvent(Request $request) {
+        if (!Gate::allows('isAdmin')) {
+            abort(401);
+        }
+        
         if ($request->isMethod('POST')) {
             $inputData = $request->all();
-//dd($inputData);
+
             $valid = $request->validate([
                 'event_name' => 'required|regex:/(^([a-zA-Z\s]+)(\d+)?$)/u|max:50',
                 'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
@@ -122,8 +137,12 @@ class EventController extends Controller
         }
     }
 
-    public function participateEvent(Request $request, $id){
+    public function participateEvent(Request $request, $event_id){
 
+        if (!Gate::allows('isArtist')) {
+            abort(401);
+        }
+        
         if ($request->isMethod('POST')) {
             $inputData = $request->all();
 
@@ -152,8 +171,14 @@ class EventController extends Controller
                 return redirect('/admin/events/add');
             }
         } else {
+            $artist_id = Auth::user()->id;
+            $arts = $this->catalogue->getArtistArts($artist_id, true);
+            $eventArts = $this->events->getArtistEventArts($artist_id, $event_id);
             
-            return view('backend.events.participate-event');
+            return view('backend.events.participate-event')->with([
+                                            'arts'          => $arts,
+                                            'eventArts'    => $eventArts
+                                        ]);
         }
     }
 }

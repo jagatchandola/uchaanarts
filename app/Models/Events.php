@@ -120,4 +120,23 @@ class Events extends Model
         }
         return false;
     }
+    
+    public function getArtistEventArts($artist_id, $event_id) {
+        $where = [
+                    'evtid'     => $event_id,
+                    'artist_id' => $artist_id
+                ];
+        
+        $events = DB::table('evt_artists')
+                    ->where($where)
+                    ->select('artist_item_id')
+                    ->get()
+                    ->toArray();
+
+        if (!empty($events)) {
+            return array_column($events, 'artist_item_id');
+        }
+
+        return [];
+    }
 }
