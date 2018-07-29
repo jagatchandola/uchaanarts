@@ -175,4 +175,38 @@ class CatalogueController extends Controller
                                                 'totalPrice' => $totalPrice
                                             ]);
     }
+    
+    public function addGallery(Request $request)
+    {
+        if ($request->isMethod('POST')) {
+            $inputData = $request->all();
+
+            $id = Auth::user()->id;
+
+            if ($request->hasFile('image')) {
+                $image = $request->file('image');
+                $title = str_replace(' ', '-', strtolower($request['title']));
+                $name = str_slug($title).'.'.$image->getClientOriginalExtension();
+                $destinationPath = public_path(config('constants.uploads.arts'));
+                $image->move($destinationPath, $name);
+
+                $inputData['image'] = $name;
+            }
+
+            $result = $this->catalogue->addArt($inputData, $id);
+
+            if ($result == true) {
+                Session::flash('success_message', 'Art added successfully');
+                return redirect('/admin/gallery/add');
+            } else {
+                Session::flash('error_message', 'Something went wrong. Please try again');
+                return redirect('/admin/gallery/add');
+            }
+        } else {
+            $categories = $this->category->getCategories();
+            return view('backend.gallery.add-gallery')->with([
+                                                            'categories' => $categories
+                                                        ]);
+        }
+    }
 }

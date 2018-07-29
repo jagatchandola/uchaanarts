@@ -58,7 +58,7 @@ Route::group(['middleware' => ['auth']],function(){
         Route::post('/admin/gallery','Backend\CatalogueController@edit')->name('edit-gallery-post');
         Route::get('/admin/gallery/pending','Backend\CatalogueController@getPendingPhotos')->name('pending-gallery');
         Route::match(['get', 'post'], '/admin/gallery/pending/{artId}','Backend\CatalogueController@updatePendingPhotos')->name('update-pending-gallery');
-        
+        Route::match(['get', 'post'], '/admin/gallery/add','Backend\CatalogueController@addGallery')->name('add-gallery');
         
         
         

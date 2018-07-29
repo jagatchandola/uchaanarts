@@ -225,4 +225,27 @@ class Catalogue extends Model
 
         return [];
     }
+    
+    public function addArt($data, $artist_id) {
+        $where = [
+                    'title' => $data['title'],
+                    'artist_id' => $artist_id,
+                    'about' => $data['about'],
+                    'price' => $data['price'],
+                    'active' => 2,
+                    'cat' => $data['category']
+                ];
+        
+        list($name, $extension) = explode('.', $data['image']);
+        $where['fname'] = $name;
+        $where['ext'] = $extension;
+        
+        $lastInsertId = DB::table('art_items')->insertGetId($where);
+
+        if ($lastInsertId > 0) {
+            return true;
+        }
+        
+        return false;
+    }
 }

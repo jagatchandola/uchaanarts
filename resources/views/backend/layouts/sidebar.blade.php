@@ -185,7 +185,7 @@
                                 <a href="{{ route('gallery-list') }}">All Photo</a>
                             </li>
                             <li>
-                                <a href="">Add Image</a>
+                                <a href="{{ route('add-gallery') }}">Add Image</a>
                             </li>
                         </ul>
                     </li>
