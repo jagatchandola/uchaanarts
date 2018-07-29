@@ -3,9 +3,9 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-8 col-md-offset-2">
             <div class="card">
-                <div class="card-header" style="text-align: center;">{{ __('Admin Login') }}</div>
+                <div class="card-header" style="text-align: center;">{{ __('Login') }}</div>
                 @if (Session::has('error-msg'))
                     <div style="color:red; text-align: center;">{{ Session::get('error-msg') }}</div>
                 @endif
@@ -56,6 +56,3 @@
 </div>
 @endsection
 
-<script type="text/javascript">
-    
-</script>

@@ -80,6 +80,9 @@ Route::group(['middleware' => ['auth']],function(){
         Route::post('/admin/events', 'Backend\EventController@edit')->name('edit-event-post');
         Route::match(['get', 'post'], '/admin/event/add', 'Backend\EventController@addEvent')->name('add-event');
         
+        // Event Route 
+        Route::match(['get', 'post'], '/admin/event/participateEvent/{id}', 'Backend\EventController@participateEvent')->name('participate-event');
+        
 	// Categories Routes (Admin)
 //	Route::match(['get','post'],'/admin/add-category','CategoryController@addCategory');
 //	Route::match(['get','post'],'/admin/edit-category/{id}','CategoryController@editCategory');
