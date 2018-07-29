@@ -92,6 +92,9 @@
                         <li>
                             <a href="{{ route('add-event') }}">Add Event</a>
                         </li>
+                        <li>
+                            <a href="{{ route('event-participants') }}">Event Participants</a>
+                        </li>
                     </ul>
                 </li>
                 <li>

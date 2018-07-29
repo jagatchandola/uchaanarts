@@ -112,7 +112,6 @@
         $(document).ready(function() {
             $('#dataTables').DataTable({
                 responsive: true,
-                //iDisplayLength: 20
                 "lengthMenu": [20,30,40,50]
             });
         });

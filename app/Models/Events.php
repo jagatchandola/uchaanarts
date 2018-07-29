@@ -140,11 +140,77 @@ class Events extends Model
         return [];
     }
     
-    public function addEventArtists($eventArtistsArts, $event_art_id) {
+    public function participateEventArts($eventArtistsArts, $event_art_id) {
         DB::table('evt_artists')->whereIn('id', explode(',', $event_art_id))->delete();
         
         return DB::table('evt_artists')->insert(
             $eventArtistsArts
         );        
     }
+    
+    public function getEventParticipants() {
+        
+        $catalogue = Events::where('events.shide', 1)
+                    ->join('evt_artists', 'events.id' , '=', 'evt_artists.evtid')
+                    ->join('users', 'evt_artists.artist_id' , '=', 'users.id')
+                    //->join('art_items', 'evt_artists.artist_item_id' , '=', 'art_items.id')
+                    ->select('events.etitle', 'events.id as event_id', 'users.id as artist_id', 'uname')
+                    ->orderBy('events.id', 'desc')
+                    ->groupBy('evt_artists.evtid', 'evt_artists.artist_id')
+                    ->get();
+
+        if (!empty($catalogue)) {
+            return $catalogue;
+        }
+
+        return [];
+    }
+    
+    public function getParticipantDetails($event_id, $artist_id) {
+        return DB::table('evt_artists')
+                ->join('art_items', 'evt_artists.artist_item_id' , '=', 'art_items.id')
+                ->where('evt_artists.evtid', '=', $event_id)
+                ->where('evt_artists.artist_id', '=', $artist_id)
+                ->select('evt_artists.id', 'title', 'fname', 'ext', 'price', 'gst', 'discount', 'discount_value')
+                ->get();
+    }
+    
+    public function approveEventArt($data) {
+        
+        DB::transaction(function ($data) {
+            print_r($data);exit;
+            $approveStatus = DB::table('evt_artists')
+                            ->whereIn('id', $data['event_art_ids'])
+                            ->update(['admin_approved' => 1]);
+            
+            $featuredStatus = DB::table('evt_artists')
+                                ->where('id', $data['featured_image'])
+                                ->update(['is_featured' => 1]);
+            
+            $eventDetails = $this->getEventDetails($data['event_id']);
+            
+            $lastInsertId = DB::table('event_payment')->insertGetId([
+                                            'event_id' => $data['event_id'],
+                                            'artist_id' => $data['artist_id'],
+                                            'payment_amount' => $eventDetails['fees'],
+                                            'link'  => hash('sha256', $data['event_id'].$data['artist_id'])
+                                        ]);
+            
+            if ($lastInsertId > 0) {
+                return DB::table('event_payment')
+                        ->where($lastInsertId)
+                        ->get();
+            }
+        }, 5);
+        
+        
+        
+
+        if ($updateStatus >= 1) {
+            $this->setFeaturedImage($featured_id);
+        }
+        
+        return false;
+    }
+    
 }

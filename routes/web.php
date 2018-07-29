@@ -86,6 +86,8 @@ Route::group(['middleware' => ['auth']],function(){
         
         // Event Route 
         Route::match(['get', 'post'], '/admin/event/participateEvent/{id}', 'Backend\EventController@participateEvent')->name('participate-event');
+        Route::get('/admin/event/participants', 'Backend\EventController@participants')->name('event-participants');
+        Route::match(['get', 'post'], '/admin/event/participants/{event_id}/{artist_id}', 'Backend\EventController@participantDetails')->name('participant');
         
 	// Categories Routes (Admin)
 //	Route::match(['get','post'],'/admin/add-category','CategoryController@addCategory');
