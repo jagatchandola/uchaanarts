@@ -215,20 +215,29 @@ class EventController extends Controller
         if ($request->isMethod('post')) {
             $inputData = $request->all();
             
-//            echo '<pre>';
-//            print_r($inputData);exit;
-            
             $data = [
                 'event_art_ids'     => $inputData['event_id'], 
                 'featured_image'    => $inputData['featured_image'],
                 'event_id'          => $event_id,
                 'artist_id'         => $artist_id
             ];
+
             $response = $this->events->approveEventArt($data);
-            echo '<pre>';
-            print_r($response);exit;
-            if ($response === true) {
-                
+
+            if (!empty($response) && count($response)) {
+                $html = 'Cleck on the ';
+                $status = Mail::send([], [], function($message) use ($data, $sender_details, $Env) {
+                    $message->from(env('MAIL_USERNAME'), 'Jagat Prakash');
+                    $message->to('kandari.singh87@gmail.com');
+                    $message->subject($Env.'- '.$data['subject']);
+                    $message->setBody($data['body'], 'text/html');
+                }); 
+
+                Session::flash('success_message', 'Participant approved successfully');
+                return redirect('/admin/event/participants');
+            } else {
+                Session::flash('error_message', 'Something went wrong. Please try again');
+                return redirect('/admin/event/participants/' . $event_id . ''. $artist_id);
             }
         }
         

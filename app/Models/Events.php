@@ -20,7 +20,8 @@ class Events extends Model
      * @var string
      */
     protected $table = 'events';
-
+    private $data;
+    
     public function getAllEvents($records = '') {
         if ($records == 'all') {
 
@@ -176,40 +177,38 @@ class Events extends Model
     }
     
     public function approveEventArt($data) {
-        
-        DB::transaction(function ($data) {
-            print_r($data);exit;
+        $this->data = $data;
+        //dd($this->data);
+        $result = DB::transaction(function () {
+
             $approveStatus = DB::table('evt_artists')
-                            ->whereIn('id', $data['event_art_ids'])
+                            ->whereIn('id', $this->data['event_art_ids'])
                             ->update(['admin_approved' => 1]);
             
             $featuredStatus = DB::table('evt_artists')
-                                ->where('id', $data['featured_image'])
+                                ->where('id', $this->data['featured_image'])
                                 ->update(['is_featured' => 1]);
             
-            $eventDetails = $this->getEventDetails($data['event_id']);
+            $eventDetails = $this->getEventDetails($this->data['event_id']);
             
             $lastInsertId = DB::table('event_payment')->insertGetId([
-                                            'event_id' => $data['event_id'],
-                                            'artist_id' => $data['artist_id'],
+                                            'event_id' => $this->data['event_id'],
+                                            'artist_id' => $this->data['artist_id'],
                                             'payment_amount' => $eventDetails['fees'],
-                                            'link'  => hash('sha256', $data['event_id'].$data['artist_id'])
+                                            'payment_link'  => hash('sha256', $this->data['event_id'].$this->data['artist_id'])
                                         ]);
             
             if ($lastInsertId > 0) {
                 return DB::table('event_payment')
-                        ->where($lastInsertId)
-                        ->get();
-            }
+                        ->where('id', $lastInsertId)
+                        ->get();                
+            }            
         }, 5);
         
-        
-        
-
-        if ($updateStatus >= 1) {
-            $this->setFeaturedImage($featured_id);
+        if ($result != null) {
+            return $result;
         }
-        
+
         return false;
     }
     
