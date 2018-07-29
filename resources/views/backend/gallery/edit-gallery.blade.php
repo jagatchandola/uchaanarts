@@ -20,15 +20,24 @@
                             <div class="panel-body">
                                 <div class="row">
                                     <div class="col-lg-6">
-                                        <form role="form" name="edit-gallery-form" action="{{ route('edit-gallery-post') }}" method="post">
+                                        <form role="form" name="edit-gallery-form" action="{{ route('edit-gallery-post') }}" method="post" enctype="multipart/form-data">
                                             <input type="hidden" name="artist-id" value="{{ $art->artist_id }}" />
                                             <input type="hidden" name="art-id" value="{{ $art->id }}" />
                                             <div class="form-group">
                                                 <label>Artist Name: <strong>{{ $art->uname }}</strong></label>
                                             </div>
+                                            
                                             <div class="form-group">
-                                                <label>Image: <img src="{{ \App\Helpers\Helper::getImage($art->fname . $art->ext, 0) }}"></label>
+                                                <label>Image: <img src="{{ \App\Helpers\Helper::getImage($art->fname .'.'. $art->ext, 0) }}" width="100" height="100"></label>
                                             </div>
+                                            
+                                            @can('isArtist')
+                                            <div class="form-group">
+                                                <label>Image</label>
+                                                <input class="form-control" type="file" name="image" value="">
+                                            </div>
+                                            @endcan
+                                            
                                             <div class="form-group">
                                                 <label>Title</label>
                                                 <input class="form-control" type="text" name="title" value="{{ $art->title }}">
@@ -45,32 +54,34 @@
                                                 <label>Commission(%)</label>
                                                 <input class="form-control" type="text" name="commission" value="30" readonly="readonly">
                                             </div>
-                                            <div class="form-group">
-                                                <label>GST(%)</label>
-                                                <input class="form-control" type="text" name="gst" value="{{ $art->gst }}">
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Discount</label>
-                                                <select class="form-control" name="discount">
-                                                    <option value="">Select Discount</option>
-                                                    <option value="fixed" @if($art->discount == 'fixed') selected="selected" @endif>Fixed</option>
-                                                    <option value="percentage" @if($art->discount == 'percentage') selected="selected" @endif>Percentage</option>
-                                                </select>
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Discount Value</label>
-                                                <input class="form-control" type="text" name="discount_value" value="{{ $art->discount_value }}">
-                                            </div>
                                             
-                                            <div class="form-group">
-                                                <label>Status</label>
-                                                <label class="radio-inline">
-                                                    <input type="radio" name="status" id="active" value="1" @if($art->active == 1) checked @endif>Active
-                                                </label>
-                                                <label class="radio-inline">
-                                                    <input type="radio" name="status" id="inactive" value="0" @if($art->active == 0) checked @endif>Inactive
-                                                </label>                                                
-                                            </div>
+                                            @can('isAdmin')
+                                                <div class="form-group">
+                                                    <label>GST(%)</label>
+                                                    <input class="form-control" type="text" name="gst" value="{{ $art->gst }}">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Discount</label>
+                                                    <select class="form-control" name="discount">
+                                                        <option value="">Select Discount</option>
+                                                        <option value="fixed" @if($art->discount == 'fixed') selected="selected" @endif>Fixed</option>
+                                                        <option value="percentage" @if($art->discount == 'percentage') selected="selected" @endif>Percentage</option>
+                                                    </select>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Discount Value</label>
+                                                    <input class="form-control" type="text" name="discount_value" value="{{ $art->discount_value }}">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Status</label>
+                                                    <label class="radio-inline">
+                                                        <input type="radio" name="status" id="active" value="1" @if($art->active == 1) checked @endif>Active
+                                                    </label>
+                                                    <label class="radio-inline">
+                                                        <input type="radio" name="status" id="inactive" value="0" @if($art->active == 0) checked @endif>Inactive
+                                                    </label>                                                
+                                                </div>
+                                            @endcan
                                             
                                             <div class="form-group">
                                                 <label>Total Price: {{ $totalPrice }}</label>

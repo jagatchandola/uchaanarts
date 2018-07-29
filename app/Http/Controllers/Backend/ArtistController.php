@@ -19,10 +19,6 @@ class ArtistController extends Controller
      */
     public function __construct()
     {
-        if (!Gate::allows('isAdmin')) {
-            abort(401);
-        }
-        
         $this->catalogue = new Catalogue();
         $this->artists = new Artists();
     }
@@ -34,6 +30,10 @@ class ArtistController extends Controller
      */
     public function index()
     {
+        if (!Gate::allows('isAdmin')) {
+            abort(401);
+        }
+        
         $artists = $this->artists->getAllArtists('all');
         return view('backend.artist.index')->with([
                                             'artists' => $artists
@@ -47,6 +47,10 @@ class ArtistController extends Controller
      */
     public function getCustomers()
     {
+        if (!Gate::allows('isAdmin')) {
+            abort(401);
+        }
+        
         $customers = $this->artists->getCustomers();
         return view('backend.customers.index')->with([
                                             'customers' => $customers
@@ -72,6 +76,10 @@ class ArtistController extends Controller
     }
 
     public function updateStatus(Request $request, $artist_id) {
+        if (!Gate::allows('isAdmin')) {
+            abort(401);
+        }
+        
         $artist = $this->artists->updateArtistStatus($artist_id, $request['status']);
 
         if ($artist == true) {
@@ -82,6 +90,10 @@ class ArtistController extends Controller
     }
     
     public function edit(Request $request, $artist_id = '') {
+        if (!Gate::allows('isAdmin')) {
+            abort(401);
+        }
+        
         if ($request->isMethod('POST')) {
             $inputData = $request->all();
 
@@ -103,6 +115,10 @@ class ArtistController extends Controller
     }
     
     public function viewArts($artist_id) {
+        if (!Gate::allows('isAdmin')) {
+            abort(401);
+        }
+        
         $arts = $this->catalogue->getArtistArts($artist_id);
 
         if (!empty($arts) && count($arts)) {

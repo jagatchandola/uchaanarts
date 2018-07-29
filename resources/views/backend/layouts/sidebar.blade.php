@@ -132,6 +132,22 @@
             <a class="navbar-brand" href="{{ route('backend-dashboard') }}">{{ ('Uchaan Arts') }}</a>
         </div>
 
+        <ul class="nav navbar-right navbar-top-links">        
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    <i class="fa fa-user fa-fw"></i>{{Auth::user()->uname}} <b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu dropdown-user">
+                    <li>
+                        <a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                        <a href="{{ route('backend-logout') }}"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
             <span class="sr-only">Toggle navigation</span>
             <span class="icon-bar"></span>
@@ -154,19 +170,16 @@
                         <!-- /input-group -->
                     </li>
                     <li>
-                        <a href="index.html" class="active"><i class="fa fa-dashboard fa-fw"></i>Dashboard</a>
+                        <a href="#" class="active"><i class="fa fa-dashboard fa-fw"></i>Dashboard</a>
                     </li>
                     <li>
                         <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i>Gallery<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="flot.html">All Photo</a>
+                                <a href="{{ route('gallery-list') }}">All Photo</a>
                             </li>
                             <li>
-                                <a href="morris.html">Add Image</a>
-                            </li>
-                            <li>
-                                <a href="morris.html">Edit Image</a>
+                                <a href="">Add Image</a>
                             </li>
                         </ul>
                     </li>
@@ -174,7 +187,7 @@
                         <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i>Event<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="flot.html">All Events</a>
+                                <a href="{{ route('events-list') }}">All Events</a>
                             </li>
                             </li>
                         </ul>

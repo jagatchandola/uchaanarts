@@ -19,14 +19,14 @@ class Helper
         return ceil($amount);
     }
 
-    public static function getImage($image, $type='0'){
+    public static function getImage($image, $type = 0){
 
         $img = '/img/swagatika.jpg';
         switch ($type) {
             case 0:
                 $img = '/img/swagatika.jpg';
-                if(is_file(public_path(config('constants.uploads.art').$image))) {
-                    $img = config('constants.uploads.art').$image;
+                if(is_file(public_path(config('constants.uploads.arts').$image))) {
+                    $img = config('constants.uploads.arts').$image;
                 }
                 break;
 

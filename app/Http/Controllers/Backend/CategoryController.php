@@ -18,10 +18,6 @@ class CategoryController extends Controller
      */
     public function __construct()
     {
-        if (!Gate::allows('isAdmin')) {
-            abort(401);
-        }
-        
         $this->category = new Category();
     }
 
@@ -32,6 +28,10 @@ class CategoryController extends Controller
      */
     public function index()
     {
+        if (!Gate::allows('isAdmin')) {
+            abort(401);
+        }
+        
         $categories = $this->category->getCategories('all');
         return view('backend.category.index')->with([
                                             'categories' => $categories
@@ -39,6 +39,10 @@ class CategoryController extends Controller
     }
 
     public function updateStatus(Request $request, $cat_id) {
+        if (!Gate::allows('isAdmin')) {
+            abort(401);
+        }
+        
         $artist = $this->category->updateArtistStatus($cat_id, $request['status']);
 
         if ($artist == true) {
@@ -49,6 +53,10 @@ class CategoryController extends Controller
     }
     
     public function edit(Request $request, $cat_id = '') {
+        if (!Gate::allows('isAdmin')) {
+            abort(401);
+        }
+        
         if ($request->isMethod('POST')) {
             $inputData = $request->all();
 
@@ -81,6 +89,10 @@ class CategoryController extends Controller
     }
 
     public function addCategory(Request $request) {
+        if (!Gate::allows('isAdmin')) {
+            abort(401);
+        }
+        
         if ($request->isMethod('POST')) {
             $inputData = $request->all();
 

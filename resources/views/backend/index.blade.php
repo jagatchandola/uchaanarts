@@ -10,6 +10,7 @@
                 </div>
                 <!-- /.row -->
                 <div class="row">
+                    @can('isAdmin')
                     <div class="col-lg-3 col-md-6">
                         <div class="panel panel-primary">
                             <div class="panel-heading">
@@ -25,6 +26,7 @@
                             </div>
                         </div>
                     </div>
+                    @endcan
                     <div class="col-lg-3 col-md-6">
                         <div class="panel panel-green">
                             <div class="panel-heading">
