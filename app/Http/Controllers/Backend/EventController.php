@@ -143,41 +143,56 @@ class EventController extends Controller
             abort(401);
         }
         
+        $artist_id = Auth::user()->id;
+        
         if ($request->isMethod('POST')) {
             $inputData = $request->all();
 
-            $valid = $request->validate([
-                'event_name' => 'required|regex:/(^([a-zA-Z\s]+)(\d+)?$)/u|max:50',
-                'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            $request->validate([
+                'art_id' => 'required'
             ]);
 
-            if ($request->hasFile('image')) {
-                
-                $image = $request->file('image');
-                $title = str_replace(' ', '-', strtolower($request['event_name']));
-                $name = str_slug($title).'.'.$image->getClientOriginalExtension();
-                $destinationPath = public_path(config('constants.uploads.events'));
-                $image->move($destinationPath, $name);
-            }
-
-            $inputData['image'] = $name;
+            $eventArtistsArray = [];
+            //print_r($inputData);exit;
             
-            $result = $this->events->addEvent($inputData);
+            foreach($inputData['art_id'] as $id) {
+                $eventArtistsArray[] = [
+                                'evtid'             => $event_id,
+                                'artist_id'         => $artist_id,
+                                'artist_item_id'    => $id,
+                                'shide'             => 0
+                            ];
+            }
+            
+            $result = $this->events->addEventArtists($eventArtistsArray, $inputData['event_art_id']);
             if ($result == true) {
-                Session::flash('success_message', 'Event added successfully');
+                Session::flash('success_message', 'Particiapted successfully');
                 return redirect('/admin/events');
             } else {
                 Session::flash('error_message', 'Something went wrong. Please try again');
-                return redirect('/admin/events/add');
+                return redirect('/admin/participateEvent/'.$event_id);
             }
         } else {
-            $artist_id = Auth::user()->id;
-            $arts = $this->catalogue->getArtistArts($artist_id, true);
+            if(!isset($_SERVER['HTTP_REFERER'])) {
+                abort(401);
+            }
+            
+            $arts = $this->catalogue->getArtistArts($artist_id, true);            
             $eventArts = $this->events->getArtistEventArts($artist_id, $event_id);
             
+            $eventArtItemIds = [];
+            $eventArtIds = '';
+            
+            if (!empty($eventArts)) {
+                $eventArtItemIds = array_column($eventArts, 'artist_item_id');
+                $eventArtIds = implode(',', array_column($eventArts, 'id'));
+            }
+
             return view('backend.events.participate-event')->with([
                                             'arts'          => $arts,
-                                            'eventArts'    => $eventArts
+                                            'eventArts'     => $eventArtItemIds,
+                                            'event_id'      => $event_id,
+                                            'event_artist_id' => $eventArtIds
                                         ]);
         }
     }

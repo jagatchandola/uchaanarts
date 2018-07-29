@@ -129,14 +129,22 @@ class Events extends Model
         
         $events = DB::table('evt_artists')
                     ->where($where)
-                    ->select('artist_item_id')
+                    ->select('id', 'artist_item_id')
                     ->get()
                     ->toArray();
 
         if (!empty($events)) {
-            return array_column($events, 'artist_item_id');
+            return $events;
         }
 
         return [];
+    }
+    
+    public function addEventArtists($eventArtistsArts, $event_art_id) {
+        DB::table('evt_artists')->whereIn('id', explode(',', $event_art_id))->delete();
+        
+        return DB::table('evt_artists')->insert(
+            $eventArtistsArts
+        );        
     }
 }

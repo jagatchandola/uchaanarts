@@ -18,13 +18,11 @@
                     @if (empty($arts))
                         <div class="dataTable_wrapper">No record(s) found</div>
                     @else
-                        <form role="form" name="edit-gallery-form" action="{{ route('edit-gallery-post') }}" method="post" enctype="multipart/form-data">
+                        <form role="form" name="particiapte-event-form" action="{{ route('participate-event', [$event_id]) }}" method="post">
+                            <input type="hidden" name="event_art_id" value="{{ $event_artist_id }}"
                             @foreach($arts as $art)
                             <div class="dataTable_wrapper">
-
-                                <a href="{{ route('edit-gallery', [$art->artist_id, $art->id]) }}" target="_blank">
-                                    <img src="{{ \App\Helpers\Helper::getImage($art->fname . $art->ext, 0) }}" width="100" height="100" /><br/>
-                                </a>
+                               <img src="{{ \App\Helpers\Helper::getImage($art->fname . $art->ext, 0) }}" width="100" height="100" /><br/>
                                 <span>{{ $art->title }}</span><br/>
                                 <input type="checkbox" name="art_id[]" value="{{ $art->id }}" @if(in_array($art->id, $eventArts)) checked="checked" @endif />
                             </div>
@@ -42,4 +40,22 @@
     </div>
 </div>
 <!-- /#wrapper -->
+
+<script type="text/javascript">
+$(document).ready(function(){
+    $("form").submit(function() {
+        if($('input[type=checkbox]:checked').length == 0)
+        {
+            alert ( "ERROR! Please select at least one art" );
+            return false;
+        }
+        
+        var r = confirm("Are you sure you want to submit?");
+        if (r == true) {
+            return true;
+        }
+        return false;
+    });
+});
+</script>
 @endsection
