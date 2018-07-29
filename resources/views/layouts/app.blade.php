@@ -54,6 +54,13 @@
             {{ __('Logout') }}
         </a>
 
+        @can('isAdmin')
+            <a href="{{ route('backend-dashboard') }}" target="_blank">{{ ('Admin') }}</a>
+        @endcan
+        
+        @can('isArtist')
+            <a href="{{ route('backend-dashboard') }}" target="_blank">{{ ('Artist') }}</a>
+        @endcan
         <form id="logout-form" action="{{ route('logout-custom') }}" method="POST" style="display: none;">
             @csrf
         </form>

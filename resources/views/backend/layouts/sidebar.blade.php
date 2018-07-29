@@ -16,9 +16,6 @@
                 <li>
                     <a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
                 </li>
-                <li>
-                    <a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
-                </li>
                 <li class="divider"></li>
                 <li>
                     <a href="{{ route('backend-logout') }}"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
@@ -28,27 +25,10 @@
     </ul>
     <!-- /.navbar-top-links -->
     
-    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-    </button>
-
     <div class="navbar-default sidebar" role="navigation">
         <div class="sidebar-nav navbar-collapse">
             <ul class="nav" id="side-menu">
-                <li class="sidebar-search">
-                    <div class="input-group custom-search-form">
-                        <input type="text" class="form-control" placeholder="Search...">
-                        <span class="input-group-btn">
-                            <button class="btn btn-primary" type="button">
-                                <i class="fa fa-search"></i>
-                            </button>
-                    </span>
-                    </div>
-                    <!-- /input-group -->
-                </li>
+                
                 <li>
                     <a href="{{ route('backend-dashboard') }}" class="active"><i class="fa fa-dashboard fa-fw"></i>Dashboard</a>
                 </li>
@@ -154,27 +134,10 @@
                 </ul>
             </li>
         </ul>
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-        </button>
 
         <div class="navbar-default sidebar" role="navigation">
             <div class="sidebar-nav navbar-collapse">
                 <ul class="nav" id="side-menu">
-                    <li class="sidebar-search">
-                        <div class="input-group custom-search-form">
-                            <input type="text" class="form-control" placeholder="Search...">
-                            <span class="input-group-btn">
-                                <button class="btn btn-primary" type="button">
-                                    <i class="fa fa-search"></i>
-                                </button>
-                        </span>
-                        </div>
-                        <!-- /input-group -->
-                    </li>
                     <li>
                         <a href="#" class="active"><i class="fa fa-dashboard fa-fw"></i>Dashboard</a>
                     </li>
