@@ -137,6 +137,33 @@ $(document).ready(function(){
             }
         });
     }).change();
+
+    $('#news-letter').on('click', function(){
+        $('#news-letter-msg-box').html('');
+        var email = $('#news-letter-email').val().trim();
+        if(email != ''){
+
+                $.ajax({
+                    type: "POST",
+                    url: '/news-letter',
+                    data: {email: email, '_token': $('meta[name=csrf-token]').attr('content')},
+                    success: function( response ) {
+                        var _html = '';
+                        if(response == 1){
+                            _html = '<div class="alert-success" style="font-size:12px;"><strong>Success!</strong> Thanks for subscription.</div>'
+                        }else if(response == 0){
+                            _html = '<div class="alert-danger" style="font-size:12px;"><strong>Danger!</strong> Something went wrong.</div>';
+                        } else{
+                            _html = '<div class="alert-danger" style="font-size:12px;"><strong>Danger!</strong> Email is Required.</div>';
+                        }
+                        $('#news-letter-msg-box').html(_html);
+                    }
+                });
+            
+        } else {
+            $('#news-letter-msg-box').html('<div class="alert-danger" style="font-size:12px;"><strong>Danger!</strong> Email id is Required.</div>');
+        }
+    });
 });
 
 	

@@ -9,6 +9,7 @@ use App\Models\Banner;
 use App\Models\Events;
 use App\Models\Testimonials;
 use App\Models\Contactus;
+use App\Models\NewsLetter;
 use App\Models\Moments;
 use Illuminate\Http\Request;
 use App\Helpers\Helper;
@@ -268,5 +269,22 @@ class HomeController extends Controller
         }
         
         return view('contactus')->with([ 'message' => $msg]);
+    }
+
+    public function newsLetter(Request $request){
+
+        $input  = $request->all();
+        if(!empty($input['email'])){
+            $news = new NewsLetter();
+            $result = $news->add($input);
+            if(!empty($result)){
+                echo 1;
+            } else {
+                echo 0;
+            }
+        } else {
+            echo -1;
+        }
+
     }
 }
