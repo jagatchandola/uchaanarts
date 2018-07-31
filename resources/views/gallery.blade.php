@@ -33,10 +33,10 @@
             @if(!empty($arts))
                 @foreach($arts as $art)
                 <div class="col-lg-3 col-md-4 col-12 col-sm-6 a b box all">
-                  <div class="artBox"> <a href="/product-details.html"><img src="{{ \App\Helpers\Helper::getImage($art->fname.'.'.$art->ext, 0) }}" class="img-fluid"></a>
+                  <div class="artBox"> <a href="{{ route('artist-art', [$art->artist_id, $art->id]) }}"><img src="{{ \App\Helpers\Helper::getImage($art->fname.'.'.$art->ext, 0) }}" class="img-fluid"></a>
                     <h3>{{ $art->title }}</h3>
                     <h2><i class="fas fa-rupee-sign"></i> {{ $art->totalPrice }}</h2>
-                    <span>{{$art->uname}}</span> <a href="/product-details.html" class="btn btn-primary themebBtn">ADD TO CART</a> </div>
+                    <span>{{$art->uname}}</span> <a href="#" class="btn btn-primary themebBtn">ADD TO CART</a> </div>
                 </div>
                 @endforeach
             @else

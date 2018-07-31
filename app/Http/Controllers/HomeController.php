@@ -233,18 +233,56 @@ class HomeController extends Controller
     }
 
     public function artistArtDetails($artist_id, $art_id) {
-        $arts = $this->catalogue->getArtDetails($artist_id, $art_id);
+        $art = $this->catalogue->getArtDetails($artist_id, $art_id);
 
         $artistOtherArts = $categoryArts = [];
-        if (!empty($arts)) {
-            $artistOtherArts = $this->catalogue->getOtherArts($artist_id, $arts[0]->id);
-            $categoryArts = $this->category->getArtistCategoryArts($arts[0]->cat, $arts[0]->id);
-        }
         
+        if (!empty($art)) {
+            $art = $art[0];
+            $calculateData = [
+                                'price' => $art->price,
+                                'gst' => $art->gst,
+                                'discountType' => $art->discount,
+                                'discountValue' => $art->discount_value
+                            ];
+
+            $art->totalPrice = Helper::calculatePrice($calculateData);
+
+            // artist other arts
+            $artistOtherArts = $this->catalogue->getOtherArts($artist_id, $art->id);
+            if (!empty($artistOtherArts)) {
+                foreach ($artistOtherArts as $artistOtherArt) {
+                    $calculateData = [
+                                    'price' => $artistOtherArt->price,
+                                    'gst' => $artistOtherArt->gst,
+                                    'discountType' => $artistOtherArt->discount,
+                                    'discountValue' => $artistOtherArt->discount_value
+                                ];
+
+                    $artistOtherArt->totalPrice = Helper::calculatePrice($calculateData);
+                }                
+            }
+            
+            // artist category related arts
+            $categoryArts = $this->category->getArtistCategoryArts($art->cat, $art->id);
+            if (!empty($categoryArts)) {
+                foreach ($categoryArts as $categoryArt) {
+                    $calculateData = [
+                                    'price' => $categoryArt->price,
+                                    'gst' => $categoryArt->gst,
+                                    'discountType' => $categoryArt->discount,
+                                    'discountValue' => $categoryArt->discount_value
+                                ];
+
+                    $categoryArt->totalPrice = Helper::calculatePrice($calculateData);
+                }                
+            }
+        }
+
         return view('artdetails')->with([
-                                    'arts' => $arts,
-                                    'artistOtherArts' => $artistOtherArts,
-                                    'categoryArts' => $categoryArts
+                                    'art' => $art,
+                                    'artistOtherArts' => (!empty($artistOtherArts) && count($artistOtherArts)) ? $artistOtherArts : '',
+                                    'categoryArts' => (!empty($categoryArts) && count($categoryArts)) ? $categoryArts : ''
                                 ]);
     }
     

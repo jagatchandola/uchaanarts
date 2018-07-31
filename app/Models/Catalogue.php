@@ -71,9 +71,10 @@ class Catalogue extends Model
     public function getArtDetails($artist_id, $art_id) {
         $catArts = DB::table('art_items')
             ->join('users', 'art_items.artist_id', '=', 'users.id')
+            ->join('category', 'art_items.cat', '=', 'category.id')
             ->where('art_items.id', $art_id)
             ->where('users.id', '=', $artist_id)
-            ->select('art_items.*', 'users.uname', 'users.id as artist_id')
+            ->select('art_items.*', 'users.uname', 'users.id as artist_id', 'category.cat_name')
             ->get();
 
         if (!empty($catArts)) {
@@ -88,13 +89,16 @@ class Catalogue extends Model
                     'art_items.artist_id' => $artist_id,
                     'art_items.active'    => 1
                 ];
-        $catalogues = Catalogue::where($where)
+        
+        $catalogues = DB::table('art_items')
                     ->join('users', 'art_items.artist_id', '=', 'users.id')
+                    ->where('art_items.artist_id', '=', $artist_id)
+                    ->where('art_items.active', '=', 1)
                     ->where('art_items.id', '<>', $art_id)
                     ->orderBy('art_items.id', 'desc')
-                    ->take(4)
-                    ->get()
-                    ->toArray();
+                    ->select('art_items.id', 'title', 'art_items.about', 'art_items.price', 'users.uname as user_name', 'users.id as artist_id', 'art_items.fname', 'art_items.ext', 'art_items.price', 'art_items.gst', 'art_items.discount', 'art_items.discount_value')
+                    ->take(20)
+                    ->get();
 
         if (!empty($catalogues)) {
             return $catalogues;

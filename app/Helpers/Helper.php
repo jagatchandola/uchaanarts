@@ -93,5 +93,9 @@ class Helper
     
     public static function getFormattedDate($date) {
         return date('jS M Y', strtotime($date));
-    } 
+    }
+    
+    public static function getFormattedPrice($price) {
+        return number_format($price);
+    }
 }//END CLASS
