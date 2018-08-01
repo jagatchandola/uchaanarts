@@ -41,10 +41,6 @@
                                                 <label>Price</label>
                                                 <input class="form-control" type="number" name="price" value="">
                                             </div>
-                                            <div class="form-group">
-                                                <label>Commission(%)</label>
-                                                <input class="form-control" type="text" name="commission" value="{{ config('app.commission') }}" readonly="readonly">
-                                            </div>
                                             
                                             <button type="submit" class="btn btn-default">Submit</button>
                                         </form>

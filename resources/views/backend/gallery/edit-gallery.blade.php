@@ -50,10 +50,6 @@
                                                 <label>Price</label>
                                                 <input class="form-control" type="textarea" name="price" value="{{ $art->price }}">
                                             </div>
-                                            <div class="form-group">
-                                                <label>Commission(%)</label>
-                                                <input class="form-control" type="text" name="commission" value="30" readonly="readonly">
-                                            </div>
                                             
                                             @can('isAdmin')
                                                 <div class="form-group">

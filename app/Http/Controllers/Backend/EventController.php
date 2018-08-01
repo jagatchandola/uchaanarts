@@ -44,7 +44,7 @@ class EventController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function eventDetails(Request $request, $id)
-    {
+    {die('asd===');
         $eventDetails = $this->events->getEventDetails($id);
         return view('eventdetails')->with([
                                             'eventDetails' => $eventDetails

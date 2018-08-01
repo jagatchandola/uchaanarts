@@ -178,10 +178,15 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function eventdetails(Request $request, $id)
+    public function eventdetails(Request $request, $event_id)
     {
-        $eventDetails = $this->events->getEventDetails($id);
-        return view('eventdetails')->with(['eventDetails' => $eventDetails]);
+        $eventDetails = $this->events->getEventDetails($event_id);
+        $eventArts = $this->events->getEventFeaturedArts($event_id);
+//        dd($eventArts);
+        return view('eventdetails')->with([
+                                            'eventDetails' => $eventDetails,
+                                            'eventArts'    => $eventArts
+                                        ]);
     }
 
     public function gallery() {

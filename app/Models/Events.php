@@ -211,5 +211,22 @@ class Events extends Model
 
         return false;
     }
-    
+ 
+    public function getEventFeaturedArts($event_id) {
+        $result = DB::table('events as e')
+                ->join('evt_artists as es', 'e.id', '=', 'es.evtid')
+                ->join('art_items as ai', 'es.artist_item_id', '=', 'ai.id')
+                ->join('users as u', 'es.artist_id', '=', 'u.id')
+                ->where('e.id', '=', $event_id)
+                ->where('es.shide', '=', 1)
+                ->where('es.is_featured', '=', 1)
+                ->select('ai.fname', 'ai.ext', 'u.profimg', 'u.uname')
+                ->get();
+        
+        if (!empty($result)) {
+            return $result;
+        }
+        
+        return [];
+    }
 }
