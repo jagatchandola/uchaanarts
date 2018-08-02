@@ -41,7 +41,7 @@ class HomeController extends Controller
     public function index()
     {
         $arts = $this->catalogue->getCreativeArts();
-        // print_r($result);die;
+
         $category = $this->category->getCategories('all');
         $artists = $this->artists->getArtistDetails('','1');
         $weeklyStatus = $this->artists->getArtistOfWeek();
@@ -52,7 +52,7 @@ class HomeController extends Controller
         if (!empty($events)) {
            
             foreach ($events as $event) {
-                if (strtotime($event->start_date) > strtotime(date('Y-m-d'))) {
+                if (strtotime($event->start_date) >= strtotime(date('Y-m-d'))) {
                     $upcomingEvents[] = $event;
                 }
             }
@@ -161,14 +161,16 @@ class HomeController extends Controller
         if (!empty($events)) {
            
             foreach ($events as $event) {
-                //echo '<pre>';print_r($events->eurl);exit;
-                if (strtotime($event->start_date) > strtotime(date('Y-m-d'))) {
+//                echo $event->start_date;exit;
+//                echo '<pre>';print_r($event);exit;
+                if (strtotime($event->start_date) >= strtotime(date('Y-m-d'))) {
                     $upcomingEvents[] = $event;
                 } else {
                     $pastEvents[] = $event;
                 }
             }
         }
+//        echo '<pre>';print_r($upcomingEvents);exit;
         return view('events')->with(['upcomingEvents' => $upcomingEvents, 'pastEvents' => $pastEvents]);
     }
 
