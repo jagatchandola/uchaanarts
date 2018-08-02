@@ -2,7 +2,7 @@
 return [
 	'uploads' => [
 		'arts' 			=> '/uploads/arts/',
-		'artists' 		=> '/uploads/profile/',
+		'artists' 		=> '/uploads/artists/',
 		'testimonials'          => '/uploads/testimonials/',
 		'events' 		=> '/uploads/events/',
 		'memorable'             => '/uploads/memorable_moments/',

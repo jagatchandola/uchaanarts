@@ -44,7 +44,7 @@ class HomeController extends Controller
         // print_r($result);die;
         $category = $this->category->getCategories('all');
         $artists = $this->artists->getArtistDetails('','1');
-        $weeklyStatus= $this->artists->getArtistOfWeek();
+        $weeklyStatus = $this->artists->getArtistOfWeek();
 
         $events = $this->events->getAllEvents();
         $upcomingEvents = [];
@@ -52,7 +52,6 @@ class HomeController extends Controller
         if (!empty($events)) {
            
             foreach ($events as $event) {
-                // echo '<pre>';print_r($event->start_date);
                 if (strtotime($event->start_date) > strtotime(date('Y-m-d'))) {
                     $upcomingEvents[] = $event;
                 }

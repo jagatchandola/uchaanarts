@@ -127,7 +127,9 @@ class Artists extends Model
         $artist = Artists::where('shide', 1)
                 ->where('is_weekly_artist', 1)
                 ->where('user_role', 'artist')
-                ->select('id', 'username', 'uname', 'email', 'about', 'profimg');
+                ->select('id', 'username', 'uname', 'email', 'about', 'profimg')
+                ->orderBy('id', 'desc')
+                ->take(1);
         $artist = $artist->first();
 
         if (!empty($artist)) {

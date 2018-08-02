@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Http\Request;
 
 class RegisterController extends Controller
 {
@@ -28,7 +29,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/';
 
     /**
      * Create a new controller instance.
@@ -63,11 +64,22 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        if (isset($data['artist_image'])) {
+            $image = $data['artist_image'];
+            $title = str_replace(' ', '-', strtolower($data['name']));
+            $name = str_slug($title) . '.' . $image->getClientOriginalExtension();
+            $destinationPath = public_path(config('constants.uploads.artists'));
+            $image->move($destinationPath, $name);
+
+            $data['image'] = $name;
+        }
+
         return User::create([
             'uname' => $data['name'],
             'username' => $data['email'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'user_role' => $data['user_role'],
             'phone' => $data['mobile'],
             'gender' => $data['gender'],
             'dob' => $data['dob'],
@@ -75,7 +87,7 @@ class RegisterController extends Controller
             'city' => $data['city'],
             'pcode' => $data['pincode'],
             'about' => $data['about'],
-            'profimg' => $data['artist_image'],
+            'profimg' => $data['image'],
             'education' => $data['qualification']
         ]);
     }
