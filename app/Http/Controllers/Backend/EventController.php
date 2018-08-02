@@ -44,7 +44,7 @@ class EventController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function eventDetails(Request $request, $id)
-    {die('asd===');
+    {
         $eventDetails = $this->events->getEventDetails($id);
         return view('eventdetails')->with([
                                             'eventDetails' => $eventDetails
@@ -74,11 +74,11 @@ class EventController extends Controller
             $inputData = $request->all();
 
             if ($request->hasFile('image')) {
-                
+
                 $image = $request->file('image');
                 $title = str_replace(' ', '-', strtolower($request['event-name']));
                 $name = str_slug($title).'.'.$image->getClientOriginalExtension();
-                $destinationPath = public_path(config('constants.uploads.events'));
+                $destinationPath = public_path(config('constants.uploads.events')) . $inputData['path'];
                 $image->move($destinationPath, $name);
                 
                 $inputData['image'] = $name;
@@ -119,7 +119,8 @@ class EventController extends Controller
                 $image = $request->file('image');
                 $title = str_replace(' ', '-', strtolower($request['event_name']));
                 $name = str_slug($title).'.'.$image->getClientOriginalExtension();
-                $destinationPath = public_path(config('constants.uploads.events'));
+
+                $destinationPath = public_path(config('constants.uploads.events')) . $title .'-'. date('d-M-Y', strtotime($inputData['start_date']));
                 $image->move($destinationPath, $name);
             }
 

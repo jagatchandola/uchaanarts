@@ -56,6 +56,8 @@
                                                     <input type="radio" name="status" id="inactive" value="0" @if($event['shide'] == 0) checked @endif>Inactive
                                                 </label>                                                
                                             </div>
+
+                                            <input type="hidden" name="path" value="{{ $event['eurl'] }}" required>
                                             
                                             <button type="submit" class="btn btn-default">Submit Button</button>
                                         </form>

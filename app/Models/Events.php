@@ -106,7 +106,7 @@ class Events extends Model
     public function addEvent($data) {
         $insert = DB::table('events')->insert([
                                             'etitle' => $data['event_name'],
-                                            'eurl' => str_replace(' ', '-', strtolower($data['event_name'])),
+                                            'eurl' => str_replace(' ', '-', strtolower($data['event_name'])).'-'.date('d-M-Y', strtotime($data['start_date'])),
                                             'venue' => $data['venue'],
                                             'about' => $data['about'],
                                             'start_date' => $data['start_date'],
