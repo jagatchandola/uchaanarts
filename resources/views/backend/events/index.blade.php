@@ -54,11 +54,14 @@
                                                     @endcan
 
                                                     @can('isArtist')
-                                                        @if( $event->status == 0)
+                                                        @if(strtotime($event->start_date) <= strtotime(date('Y-m-d')))
+                                                            <button type="button" class="btn btn-danger">Inactive</button>
+                                                        @elseif( $event->status == 0)
                                                             <button type="button" class="btn btn-danger">Inactive</button>
                                                         @else
                                                             <button type="button" class="btn btn-success">Active</button>
                                                         @endif
+                                                        
                                                     @endcan
                                                 </td>
                                                 
@@ -68,7 +71,7 @@
                                                 @endcan
 
                                                 @can('isArtist')
-                                                    @if($event->end_date > date('Y-m-d'))
+                                                    @if($event->start_date > date('Y-m-d'))
                                                         <a href="{{ route('participate-event', $event->id) }}" target="_blank"><button type="button" class="btn btn-primary">Participate</button></a>
                                                     @endif
                                                 @endcan

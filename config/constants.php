@@ -3,9 +3,9 @@ return [
 	'uploads' => [
 		'arts' 			=> '/uploads/arts/',
 		'artists' 		=> '/uploads/artists/',
-		'testimonials'  => '/uploads/testimonials/',
+		'testimonials'          => '/uploads/testimonials/',
 		'events' 		=> '/uploads/events/',
-		'memorable'     => '/uploads/memorable_moments/',
+		'memorable'             => '/uploads/memorable_moments/',
 		'category' 		=> '/uploads/category/',
 		'banner' 		=> '/uploads/banners/',
 		'media' 		=> '/uploads/media/'
