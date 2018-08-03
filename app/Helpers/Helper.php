@@ -98,4 +98,8 @@ class Helper
     public static function getFormattedPrice($price) {
         return number_format($price);
     }
+
+    public static function nameFormat($name){
+        return preg_replace('/\s+/','-',strtolower($name));
+    }
 }//END CLASS

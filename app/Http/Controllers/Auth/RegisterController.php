@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
+use App\Helpers\Helper;
 
 class RegisterController extends Controller
 {
@@ -68,15 +69,15 @@ class RegisterController extends Controller
             $image = $data['artist_image'];
             $title = str_replace(' ', '-', strtolower($data['name']));
             $name = str_slug($title) . '.' . $image->getClientOriginalExtension();
-            $destinationPath = public_path(config('constants.uploads.artists'));
-            $image->move($destinationPath, $name);
+            // $destinationPath = public_path(config('constants.uploads.artists'));
+            // $image->move($destinationPath, $name);
 
             $data['image'] = $name;
         }
 
-        return User::create([
+        $user = User::create([
             'uname' => $data['name'],
-            'username' => $data['email'],
+            // 'username' => Helper::nameFormat($data['name']).'-','LAST_INSERT_ID()',
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'user_role' => $data['user_role'],
@@ -90,5 +91,19 @@ class RegisterController extends Controller
             'profimg' => $data['image'],
             'education' => $data['qualification']
         ]);
+
+        $user->username = Helper::nameFormat($data['name']).'-'.$user->id;
+        // print_r($user);die;
+        if (isset($data['artist_image'])) {
+            // $image = $data['artist_image'];
+            // $title = str_replace(' ', '-', strtolower($data['name']));
+            // $name = str_slug($title) . '.' . $image->getClientOriginalExtension();
+            $destinationPath = public_path(config('constants.uploads.artists')) . $user->username . '/';
+            $image->move($destinationPath, $name);
+
+        }
+        $user->save();
+
+        return $user;
     }
 }
