@@ -47,7 +47,12 @@
     <div class="container">
         <div class="owl-carousel owl-theme first-owl-carousel">
             @foreach($categories as $category)
-            <div class="item"><img src="{{ \App\Helpers\Helper::getImage($category->image, 5) }}"><a href="/art-gallery/{{$category->cat_url}}" class="caption">{{$category->cat_name}}</a></div>
+            <div class="item">
+                <a href="{{ \App\Helpers\Helper::getImage($category->image, 5)}}" data-lightbox="{{$category->cat_name.rand()}}" data-title="{{$category->cat_name}}">
+                    <img src="{{ \App\Helpers\Helper::getImage($category->image, 5) }}">
+                </a>
+                <a href="/art-gallery/{{$category->cat_url}}" class="caption">{{$category->cat_name}}</a>
+            </div>
             @endforeach
         </div>
     </div>
@@ -128,13 +133,13 @@
 <section class="themeSec2">
     <div class="container">
         <div class="col-lg-12 col-md-12 col-12 col-sm-12">
-            <!--<article class="themeSubs1">-->
+            <article class="themeSubs1">
                 <h2>Creative Modern Artist</h2>
                 <div class="owl-carousel owl-theme third-owl-carousel">
                     @foreach($artists as $artist)
 
                     <div class="item">
-                        <a href="{{ \App\Helpers\Helper::getImage($artist['username'].'/'.$artist['profimg'], 1) }}" data-lightbox="{{$artist['uname']}}" data-title="{{$artist['uname']}}">
+                        <a href="{{ \App\Helpers\Helper::getImage($artist['username'].'/'.$artist['profimg'], 1) }}" data-lightbox="creatice-artists" data-title="{{$artist['uname']}}">
                             <img class="img-fluid" src="{{ \App\Helpers\Helper::getImage($artist['username'].'/'.$artist['profimg'], 1) }}">
                         </a>
                         <a href="{{ route('artistdetails', $artist['id']) }}" class="captionBtn1">View Artwork</a>
@@ -143,7 +148,7 @@
                     @endforeach
                     
                 </div>
-            <!--</article>-->
+            </article>
         </div>
     </div>     
 </section>
