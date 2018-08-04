@@ -95,7 +95,7 @@
         
         function changeStatus(id, status, type) {
             var updateStatus = status == 1 ? 'Active' : 'Inactive';
-            var r = confirm("Are you sure, you want to change status to " + updateStatus + "?");
+            var r = confirm("Are you sure, you want to change status?");
             if (r == true) {
                 $.ajax({
                     method: "PUT",

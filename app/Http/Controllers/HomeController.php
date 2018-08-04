@@ -232,7 +232,8 @@ class HomeController extends Controller
 
         return view('gallery')->with([
                                     'arts' => $arts,
-                                    'categories' => $categories
+                                    'categories' => $categories,
+                                    'cat_name' => $cat_name
                                 ]);
     }
 

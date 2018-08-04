@@ -30,7 +30,8 @@ class Catalogue extends Model
                         ->get();
         } else {
             $catalogues = Catalogue::where('art_items.active', 1)
-                        ->join('users', 'art_items.artist_id' , '=', 'users.id');
+                        ->join('users', 'art_items.artist_id' , '=', 'users.id')
+                        ->where('art_items.isSold' , '=', 0);
             
             if (!empty($artist_id)) {
                 $catalogues = $catalogues->where('art_items.artist_id', '=', $artist_id);

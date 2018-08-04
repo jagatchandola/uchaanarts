@@ -48,7 +48,7 @@
                                                 </label>                                                
                                             </div>
                                             
-                                            <button type="submit" class="btn btn-default">Submit Button</button>
+                                            <button type="submit" class="btn btn-primary">Submit</button>
                                         </form>
                                     </div>                                    
                                     <!-- /.col-lg-6 (nested) -->

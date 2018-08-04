@@ -10,11 +10,17 @@
         <div class="col-md-3 col-lg-2 col-12 col-sm-12">
              @if(!empty($categories))
             <ul class="itemList d-none d-md-block d-lg-block">
-                <li class="list" id="all"><a href="/art-gallery">All</a></li>
-                @foreach($categories as $category)
-                <li class="list" id="{{$category->cat_url}}"><a href="/art-gallery/{{$category->cat_url}}">{{$category->cat_name}}</a></li>
+                <li @if(!isset($cat_name)) class="list active" @else class="list" @endif id="all"><a href="/art-gallery">All</a></li>
+
+                @php $active='' @endphp
+                @foreach($categories as $category)                
+                @if(isset($cat_name) && $cat_name == strtolower($category->cat_name))
+                    @php $active=' active' @endphp
+                @else
+                    @php $active='' @endphp
+                @endif
+                <li class="list{{ $active }}" id="{{$category->cat_url}}"><a href="/art-gallery/{{$category->cat_url}}">{{$category->cat_name}}</a></li>
                 @endforeach
-                <li>Browse by category</li>
             </ul>
             @endif
           
