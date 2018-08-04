@@ -77,13 +77,22 @@
                                                         <input type="radio" name="status" id="inactive" value="0" @if($art->active == 0) checked @endif>Inactive
                                                     </label>                                                
                                                 </div>
+                                                <div class="form-group">
+                                                    <label>Creative Art</label>
+                                                    <label class="radio-inline">
+                                                        <input type="radio" name="creative_art_status" id="active" value="1" @if($art->is_creative_art == 1) checked @endif>Yes
+                                                    </label>
+                                                    <label class="radio-inline">
+                                                        <input type="radio" name="creative_art_status" id="inactive" value="0" @if($art->is_creative_art == 0) checked @endif>No
+                                                    </label>                                                
+                                                </div>
                                             @endcan
                                             
                                             <div class="form-group">
                                                 <label>Total Price: {{ $totalPrice }}</label>
                                                                                                
                                             </div>
-                                            <button type="submit" class="btn btn-default">Submit Button</button>
+                                            <button type="submit" class="btn btn-primary">Submit</button>
                                         </form>
                                     </div>                                    
                                     <!-- /.col-lg-6 (nested) -->

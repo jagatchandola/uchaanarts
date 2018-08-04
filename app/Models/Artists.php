@@ -24,12 +24,12 @@ class Artists extends Model
         if ($records == 'all') {
             $artists = DB::table('users')
                                 ->where('user_role', '=', 'artist')
-                                ->select('id', 'uname', 'email as user_email','shide as status')
+                                ->select('id', 'uname', 'email as user_email','shide as status', 'is_creative_artists', 'is_weekly_artist')
                                 ->get();
         } else {
             $artists = Artists::where('shide', 1)
                         ->orderBy('uname', 'asc')
-                        ->paginate(5);
+                        ->paginate(12);
         }
         
         if (!empty($artists)) {
@@ -65,7 +65,6 @@ class Artists extends Model
         if($is_creative == 1)
             $artist->where('is_creative_artists', 1);
 
-            //->orderBy('uname', 'asc')
         $artist = $artist->get()
                          ->toArray();
 
@@ -101,11 +100,31 @@ class Artists extends Model
         return [];
     }
     
-    public function updateArtistStatus($artist_id, $status) {
+    public function updateArtistStatus($artist_id, $status, $type) {
+        
+        $update = [];
+        switch ($type){
+            case 'status':
+                $update = ['shide' => $status];
+                break;
+            case 'creative_artist':
+                $update = ['is_creative_artists' => $status];
+                break;
+            case 'weekly_artist':
+                if ($status == 1) {
+                    DB::table('users')
+                            ->update(['is_weekly_artist' => 0]);
+                }
+                
+                $update = ['is_weekly_artist' => $status];
+                break;
+        }
+        
         $updateStatus = DB::table('users')
             ->where('id', $artist_id)
-            ->update(['shide' => $status]);
+            ->update($update);
         
+        //var_dump($updateStatus);exit;
         if ($updateStatus >= 1) {
             return true;
         }

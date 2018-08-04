@@ -57,8 +57,6 @@ class HomeController extends Controller
                 }
             }
         }
-        
-        
 
         $banner = new Banner();
 
@@ -233,7 +231,8 @@ class HomeController extends Controller
 
         return view('gallery')->with([
                                     'arts' => $arts,
-                                    'categories' => $categories
+                                    'categories' => $categories,
+                                    'cat_name' => $cat_name
                                 ]);
     }
 
@@ -303,9 +302,18 @@ class HomeController extends Controller
     }
     
     public function contactus(Request $request) {
+        
         $msg = '';
         if($request->post()) {
-            //print_r($request->all());exit;
+            $request->validate([
+                'fname' => 'required|regex:/(^([a-zA-Z\s]+)(\d+)?$)/u|max:25',
+                'lname' => 'required|regex:/(^([a-zA-Z\s]+)(\d+)?$)/u|max:25',
+                'email' => 'required|email|max:100',
+                'mobile' => 'max:10|max:10',
+                'message' => 'required|max:10000'
+            ]);
+            
+//            print_r($request->all());exit;
             if($this->contactus->insert($request)) {
                 $msg = 'Thank you for contacting us. We will get back to you soon!';
             }

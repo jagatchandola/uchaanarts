@@ -28,7 +28,7 @@
                             </div>
                             @endforeach
                             
-                            <button type="submit" class="btn btn-default">Participate</button>
+                            <button type="submit" class="btn btn-primary">Participate</button>
                         </form>
                     @endif
                 </div>

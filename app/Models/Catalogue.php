@@ -30,7 +30,8 @@ class Catalogue extends Model
                         ->get();
         } else {
             $catalogues = Catalogue::where('art_items.active', 1)
-                        ->join('users', 'art_items.artist_id' , '=', 'users.id');
+                        ->join('users', 'art_items.artist_id' , '=', 'users.id')
+                        ->where('art_items.isSold' , '=', 0);
             
             if (!empty($artist_id)) {
                 $catalogues = $catalogues->where('art_items.artist_id', '=', $artist_id);
@@ -39,7 +40,7 @@ class Catalogue extends Model
             
             $catalogues = $catalogues->select('art_items.*', 'users.uname')
                         ->orderBy('id', 'desc')
-                        ->paginate(10);
+                        ->paginate(20);
         }
         
         if (!empty($catalogues)) {
@@ -146,7 +147,8 @@ class Catalogue extends Model
                         'gst' => $data['gst'], 
                         'discount' => $data['discount'], 
                         'discount_value' => $data['discount_value'], 
-                        'active' => $data['status']
+                        'active' => $data['status'],
+                        'is_creative_art' => $data['creative_art_status']
                     ];
         }
         
