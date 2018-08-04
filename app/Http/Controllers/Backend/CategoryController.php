@@ -64,7 +64,7 @@ class CategoryController extends Controller
                 
                 $image = $request->file('image');
                 $title = str_replace(' ', '-', strtolower($request['cat-name']));
-                $name = str_slug($title).'.'.$image->getClientOriginalExtension();
+                $name = str_slug($title).'-'.time().'.'.$image->getClientOriginalExtension();
                 $destinationPath = public_path(config('constants.uploads.category'));
                 $image->move($destinationPath, $name);
                 
@@ -106,7 +106,7 @@ class CategoryController extends Controller
                 
                 $image = $request->file('image');
                 $title = str_replace(' ', '-', strtolower($request['cat-name']));
-                $name = str_slug($title).'.'.$image->getClientOriginalExtension();
+                $name = str_slug($title).'-'.time().'.'.$image->getClientOriginalExtension();
                 //$destinationPath = public_path('/uploads/category');
                 $destinationPath = public_path(config('constants.uploads.category'));
                 $imagePath = $destinationPath. "/".  $name;

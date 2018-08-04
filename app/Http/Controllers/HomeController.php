@@ -328,11 +328,8 @@ class HomeController extends Controller
         if(!empty($input['email'])){
             $news = new NewsLetter();
             $result = $news->add($input);
-            if(!empty($result)){
-                echo 1;
-            } else {
-                echo 0;
-            }
+            echo $result;
+            
         } else {
             echo -1;
         }
