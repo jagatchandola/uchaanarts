@@ -56,7 +56,7 @@
                     @if(!empty($weeklyStatus))
                     <div class="row">
                         <div class="col-lg-5 col-md-5 col-12 col-sm-12">
-                            <img class="card-img-top" src="{{ \App\Helpers\Helper::getImage($weeklyStatus->profimg, 1) }}" alt="Card image cap">
+                            <img class="card-img-top" src="{{ \App\Helpers\Helper::getImage($weeklyStatus->username.'/'.$weeklyStatus->profimg, 1) }}" alt="Card image cap">
 
                             <p class="card-text">{{$weeklyStatus->uname}}</p>
 
@@ -78,7 +78,7 @@
                     @if(!empty($upcomingEvents))
                     <div class="owl-carousel owl-theme second-owl-carousel">
                         @foreach($upcomingEvents as $event)
-                        <div class="item"><img src="{{ \App\Helpers\Helper::getImage($event->banner, 3) }}"><div class="captionBtm">{{date("d-m-Y", strtotime($event->start_date))}}<br>Uchaan Events<br>{{$event->venue}}</div></div>
+                        <div class="item"><img src="{{ \App\Helpers\Helper::getImage($event->eurl.'/'.$event->banner, 3) }}"><div class="captionBtm">{{date("d-m-Y", strtotime($event->start_date))}}<br>Uchaan Events<br>{{$event->venue}}</div></div>
                         @endforeach
                     </div>
                     @endif
@@ -98,7 +98,7 @@
             @foreach($catalogues as $catalogue)
             <div class="col-md-4 col-lg-4 col-12 col-sm-12">
                 <div class="artBox">
-                    <a href="/"><img src="{{ \App\Helpers\Helper::getImage($catalogue->fname.'.'.$catalogue->ext, 0) }}" style="width: 200px; height: 200px;"><a href="/item/{{$catalogue->id}}" class="img-fluid"></a>
+                    <a href="/"><img class="img-fluid" src="{{ \App\Helpers\Helper::getImage($catalogue->directory.'/imgs/'.$catalogue->fname.'.'.$catalogue->ext, 1) }}"><a href="/item/{{$catalogue->id}}" class="img-fluid"></a>
                         <h3>{{$catalogue->title}}</h3>
                         <h2>{{ \App\Helpers\Helper::getFormattedPrice($catalogue->totalPrice) }}</h2>
                         <span>{{$catalogue->user_name}}</span>
@@ -125,12 +125,9 @@
                 <div class="owl-carousel owl-theme third-owl-carousel">
                     @foreach($artists as $artist)
 
-                    <div class="item"><img src="{{ \App\Helpers\Helper::getImage($artist['profimg'], 1) }}"><a href="/artists/{{$artist['id']}}" class="captionBtn1">View Artwork</a><div class="captionBtm">{{$artist['uname']}}</div></div>
+                    <div class="item"><img class="img-fluid" src="{{ \App\Helpers\Helper::getImage($artist['username'].'/'.$artist['profimg'], 1) }}"><a href="/artists/{{$artist['id']}}" class="captionBtn1">View Artwork</a><div class="captionBtm">{{$artist['uname']}}</div></div>
                     @endforeach
-                    <!-- <div class="item"><img src="{{ asset('img/slider/2.jpg')}}"><a href="#" class="captionBtn1">View Artwork</a><div class="captionBtm">Amit Srivastava</div></div>
-                    <div class="item"><img src="{{ asset('img/slider/3.jpg')}}"><a href="#" class="captionBtn1">View Artwork</a><div class="captionBtm">Anil Kaira</div></div>
-                    <div class="item"><img src="{{ asset('img/slider/4.jpg')}}"><a href="#" class="captionBtn1">View Artwork</a><div class="captionBtm">Abhishek Sharma</div></div>
-                    <div class="item"><img src="{{ asset('img/slider/3.jpg')}}"><a href="#" class="captionBtn1">View Artwork</a><div class="captionBtm">Amit Srivastava</div></div> -->
+                    
                 </div>
             </article>
         </div>

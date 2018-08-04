@@ -89,6 +89,13 @@ Route::group(['middleware' => ['auth']],function(){
         Route::get('/admin/event/participants', 'Backend\EventController@participants')->name('event-participants');
         Route::match(['get', 'post'], '/admin/event/participants/{event_id}/{artist_id}', 'Backend\EventController@participantDetails')->name('participant');
         
+
+        // Banners
+        Route::get('/admin/banner','Backend\BannerController@index')->name('banner-list');
+        Route::put('/admin/banner/changeStatus/{id}','Backend\BannerController@updateStatus');
+        Route::get('/admin/banner/{id}','Backend\BannerController@edit')->name('edit-banner');
+        Route::post('/admin/banner/','Backend\BannerController@edit')->name('edit-banner-post');
+
 	// Categories Routes (Admin)
 //	Route::match(['get','post'],'/admin/add-category','CategoryController@addCategory');
 //	Route::match(['get','post'],'/admin/edit-category/{id}','CategoryController@editCategory');

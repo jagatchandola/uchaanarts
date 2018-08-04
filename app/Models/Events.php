@@ -26,7 +26,7 @@ class Events extends Model
         if ($records == 'all') {
 
             $events = DB::table('events')
-                                ->select('id', 'etitle', 'start_date','end_date','venue', 'fees', 'shide as status')
+                                ->select('id', 'etitle', 'eurl', 'start_date','end_date','venue', 'fees', 'shide as status')
 
                                 ->orderBy('start_date', 'desc')
                                 ->orderBy('id', 'desc')
@@ -213,6 +213,7 @@ class Events extends Model
     }
  
     public function getEventFeaturedArts($event_id) {
+        echo $event_id;
         $result = DB::table('events as e')
                 ->join('evt_artists as es', 'e.id', '=', 'es.evtid')
                 ->join('art_items as ai', 'es.artist_item_id', '=', 'ai.id')
@@ -220,7 +221,7 @@ class Events extends Model
                 ->where('e.id', '=', $event_id)
                 ->where('es.shide', '=', 1)
                 ->where('es.is_featured', '=', 1)
-                ->select('ai.fname', 'ai.ext', 'u.profimg', 'u.uname')
+                ->select('ai.fname', 'ai.ext', 'u.username', 'u.profimg', 'u.uname')
                 ->get();
         
         if (!empty($result)) {

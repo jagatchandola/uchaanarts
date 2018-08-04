@@ -58,7 +58,7 @@ class HomeController extends Controller
             }
         }
         
-        // echo '<pre>';print_r($upcomingEvents);exit;
+        
 
         $banner = new Banner();
 
@@ -76,14 +76,13 @@ class HomeController extends Controller
                 $art->totalPrice = Helper::calculatePrice($calculateData);
             }
         }
-
+// echo '<pre>';print_r($arts);exit;
         return view('home')->with([
 
                             'catalogues' => $arts, 
                             'categories' => $category,
                             'banners'    => $banners,
                             'artists'    => $artists,
-                            'arts'    => $artists,
                             'weeklyStatus' => $weeklyStatus,
                             'upcomingEvents' => $upcomingEvents
 
@@ -183,7 +182,7 @@ class HomeController extends Controller
     {
         $eventDetails = $this->events->getEventDetails($event_id);
         $eventArts = $this->events->getEventFeaturedArts($event_id);
-//        dd($eventArts);
+       // dd($eventArts);
         return view('eventdetails')->with([
                                             'eventDetails' => $eventDetails,
                                             'eventArts'    => $eventArts

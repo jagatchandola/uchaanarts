@@ -25,7 +25,6 @@ class Banner extends Model
         $banners = DB::table('banner')
                             ->where('status', '=', 1)
                             ->orderBy('sort_order', 'ASC')
-                            ->select('id', 'title', 'description','image','url')
                             ->get();
         
         if (!empty($banners)) {

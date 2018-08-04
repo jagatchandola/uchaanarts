@@ -13,7 +13,8 @@
 	<link rel="icon" href="favicon.ico">
 
 	<!-- Bootstrap core CSS -->
-	<link href="{{ asset('/css/bootstrap.min.css') }}" rel="stylesheet">
+  <link href="{{ asset('/css/bootstrap.min.css') }}" rel="stylesheet">
+	<link href="{{ asset('/css/bootstrap-lightbox.min.css') }}" rel="stylesheet">
 	<link href="{{ asset('/css/fontawesome.css') }}" rel="stylesheet">
 	<link href="{{ asset('/css/owl.carousel.min.css') }}" rel="stylesheet">
 	<link href="{{ asset('/css/owl.theme.default.css') }}" rel="stylesheet">
@@ -204,6 +205,7 @@
 <script src="{{ asset('js/jquery-3.3.1.slim.min.js')}}" ></script>
 <script src="{{ asset('js/popper.min.js')}}"></script>
 <script src="{{ asset('js/bootstrap.min.js')}}"></script>
+<script src="{{ asset('js/bootstrap-lightbox.min.js')}}"></script>
 <script src="{{ asset('js/owl.carousel.min.js')}}"></script>
 <script src="{{ asset('js/custom.js')}}"></script>
 

@@ -20,8 +20,9 @@ class Moments extends Model
     protected $table = 'moments';
 
     public function getAllMoments() {
-        $moments = Moments::where('is_active', 1)
-                    ->orderBy('id', 'desc')
+        $moments = Moments::where('moments.is_active', 1)
+                    ->join('events', 'events.id' , '=', 'moments.event_id')
+                    ->orderBy('moments.id', 'desc')
                     ->get();
 
         if (!empty($moments)) {

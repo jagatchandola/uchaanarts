@@ -21,55 +21,55 @@ class Helper
 
     public static function getImage($image, $type = 0){
 
-        $img = '/img/swagatika.jpg';
+        $img = '/image/dummy-400x400.jpg';
         switch ($type) {
             case 0:
-                $img = '/img/swagatika.jpg';
+                //$img = '/img/swagatika.jpg';
                 if(is_file(public_path(config('constants.uploads.arts').$image))) {
                     $img = config('constants.uploads.arts').$image;
                 }
                 break;
 
             case 1:
-                $img = '/img/swagatika.jpg';
+                //$img = '/img/swagatika.jpg';
                 if(is_file(public_path(config('constants.uploads.artists').$image))) {
                     $img = config('constants.uploads.artists').$image;
                 }
                 break;
 
             case 2:
-                $img = '/img/swagatika.jpg';
+                //$img = '/img/swagatika.jpg';
                 if(is_file(public_path(config('constants.uploads.testimonials').$image))) {
                     $img = config('constants.uploads.testimonials').$image;
                 }
                 break;
 
             case 3:
-                $img = '/img/swagatika.jpg';
+                //$img = '/img/swagatika.jpg';
                 if(is_file(public_path(config('constants.uploads.events').$image))) {
                     $img = config('constants.uploads.events').$image;
                 }
                 break;
             case 4:
-                $img = '/img/swagatika.jpg';
+                //$img = '/img/swagatika.jpg';
                 if(is_file(public_path(config('constants.uploads.moments').$image))) {
                     $img = config('constants.uploads.moments').$image;
                 }
                 break;
             case 5:
-                $img = '/img/swagatika.jpg';
+                //$img = '/img/swagatika.jpg';
                 if(is_file(public_path(config('constants.uploads.category').$image))) {
                     $img = config('constants.uploads.category').$image;
                 }
                 break;
             case 6:
-                $img = '/img/swagatika.jpg';
+                //$img = '/img/swagatika.jpg';
                 if(is_file(public_path(config('constants.uploads.banner').$image))) {
                     $img = config('constants.uploads.banner').$image;
                 }
                 break;
             case 7:
-                $img = '/img/swagatika.jpg';
+                //$img = '/img/swagatika.jpg';
                 if(is_file(public_path(config('constants.uploads.media').$image))) {
                     $img = config('constants.uploads.media').$image;
                 }

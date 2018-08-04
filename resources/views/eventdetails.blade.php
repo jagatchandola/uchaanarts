@@ -13,8 +13,8 @@
                     <div class="owl-carousel owl-theme fourth-owl-carousel">
                         
                         @foreach($eventArts as $eventArt)
-                        <div class="item"><img src="{{ \App\Helpers\Helper::getImage($eventArt->fname . '.' . $eventArt->ext, 0) }}"></div>
-                        <div class="item"><img src="{{ \App\Helpers\Helper::getImage($eventArt->profimg, 1) }}" class="imgSmall" title="{{ $eventArt->uname }}"></div>                        
+                        <div class="item"><img src="{{ \App\Helpers\Helper::getImage($eventArt->username .'/imgs/'.$eventArt->fname . '.' . $eventArt->ext, 1) }}" class="img-fluid"></div>
+                        <div class="item"><img src="{{ \App\Helpers\Helper::getImage($eventArt->username.'/'.$eventArt->profimg, 1) }}" class="imgSmall" title="{{ $eventArt->uname }}"></div>                        
                         @endforeach
                     </div>
                     @endif
@@ -36,7 +36,7 @@
                                 <th>Space Rental Fee</th>
                             </tr>
                             <tr>
-                                <td>2 Entries</td>
+                                <td>{{ $eventDetails->no_of_entries }} {{ $eventDetails->no_of_entries > 1 ?'Entries':'Entry'}}</td>
                                 <td><i class="fas fa-rupee-sign"></i> {{ number_format($eventDetails->fees) }}/-</td>
                             </tr>
                         </table>
@@ -49,16 +49,18 @@
 <!--Section 1 Ends Here-->
 
 <section class="themeSec1 bgWhite">
-    <h2>Concept Note</h2>
     <div class="container">
         <div class="row">
             <div class="col-lg-12 col-md-12 col-12 col-sm-12"> 
                 <div class="contentBx">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-
+                @if(!empty($eventDetails->concept_note))
+                    <h2>Concept Note</h2>
+                    <p>{{ $eventDetails->concept_note }}</p>
+                @endif
+                @if(!empty($eventDetails->artists))
                     <h2>Participating Artist</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-
+                    <p>{{ $eventDetails->artists }}</p>
+                @endif
                     @can('isArtist')
                     <div class="text-center"><a href="{{ route('participate-event', $eventDetails->id) }}" target="_blank" class="btn btn-primary themeBtn mt-5">Participate Now</a></div>
                     @endcan
