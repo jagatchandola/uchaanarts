@@ -68,7 +68,7 @@ class RegisterController extends Controller
         if (isset($data['artist_image'])) {
             $image = $data['artist_image'];
             $title = str_replace(' ', '-', strtolower($data['name']));
-            $name = str_slug($title) . '.' . $image->getClientOriginalExtension();
+            $name = str_slug($title) .'-'.time() . '.' . $image->getClientOriginalExtension();
             // $destinationPath = public_path(config('constants.uploads.artists'));
             // $image->move($destinationPath, $name);
 

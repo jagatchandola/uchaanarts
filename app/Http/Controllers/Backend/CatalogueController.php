@@ -71,7 +71,7 @@ class CatalogueController extends Controller
                 if ($request->hasFile('image')) {
                     $image = $request->file('image');
                     $title = str_replace(' ', '-', strtolower($request['title']));
-                    $name = str_slug($title).'.'.$image->getClientOriginalExtension();
+                    $name = str_slug($title).'-'.time().'.'.$image->getClientOriginalExtension();
                     $destinationPath = public_path(config('constants.uploads.artists')).Auth::user()->username.'/imgs/';
                     $image->move($destinationPath, $name);
                     
@@ -186,7 +186,7 @@ class CatalogueController extends Controller
             if ($request->hasFile('image')) {
                 $image = $request->file('image');
                 $title = str_replace(' ', '-', strtolower($request['title']));
-                $name = str_slug($title).'.'.$image->getClientOriginalExtension();
+                $name = str_slug($title).'-'.time().'.'.$image->getClientOriginalExtension();
                 $destinationPath = public_path(config('constants.uploads.artists')).Auth::user()->username.'/imgs/';
                 $image->move($destinationPath, $name);
 

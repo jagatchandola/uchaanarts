@@ -95,6 +95,7 @@ Route::group(['middleware' => ['auth']],function(){
         Route::put('/admin/banner/changeStatus/{id}','Backend\BannerController@updateStatus');
         Route::get('/admin/banner/{id}','Backend\BannerController@edit')->name('edit-banner');
         Route::post('/admin/banner/','Backend\BannerController@edit')->name('edit-banner-post');
+        Route::match(['get', 'post'], '/admin/banner/add', 'Backend\BannerController@add')->name('add-banner');
 
 	// Categories Routes (Admin)
 //	Route::match(['get','post'],'/admin/add-category','CategoryController@addCategory');
