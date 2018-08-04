@@ -21,14 +21,19 @@ class NewsLetter extends Model
     protected $table = 'news_letter';
 
     public function add($input) {
-       
-       $newsLtr = DB::table('news_letter')->insert([ 'email' => $input['email'] ]);
 
-        if (!empty($newsLtr)) {
-            return $newsLtr;
+        $find = DB::table('news_letter')->where('email', $input['email'])->first();
+        if(!empty($find)){
+            return 0;
         }
 
-        return [];
+        $newsLtr = DB::table('news_letter')->insert([ 'email' => $input['email'] ]);
+
+        if (!empty($newsLtr)) {
+            return 1;
+        }
+
+        return -1;
     }
     
     

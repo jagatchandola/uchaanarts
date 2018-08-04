@@ -152,7 +152,7 @@ $(document).ready(function(){
                         if(response == 1){
                             _html = '<div class="alert-success" style="font-size:12px;"><strong>Success!</strong> Thanks for subscription.</div>'
                         }else if(response == 0){
-                            _html = '<div class="alert-danger" style="font-size:12px;"><strong>Danger!</strong> Something went wrong.</div>';
+                            _html = '<div class="alert-danger" style="font-size:12px;"><strong>Danger!</strong> Email is already exist.</div>';
                         } else{
                             _html = '<div class="alert-danger" style="font-size:12px;"><strong>Danger!</strong> Email is Required.</div>';
                         }
