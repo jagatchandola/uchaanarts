@@ -74,7 +74,7 @@ class HomeController extends Controller
                 $art->totalPrice = Helper::calculatePrice($calculateData);
             }
         }
-// echo '<pre>';print_r($arts);exit;
+// echo '<pre>';print_r($artists);exit;
         return view('home')->with([
 
                             'catalogues' => $arts, 
@@ -313,7 +313,6 @@ class HomeController extends Controller
                 'message' => 'required|max:10000'
             ]);
             
-//            print_r($request->all());exit;
             if($this->contactus->insert($request)) {
                 $msg = 'Thank you for contacting us. We will get back to you soon!';
             }

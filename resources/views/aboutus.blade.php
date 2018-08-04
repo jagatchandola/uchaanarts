@@ -1,11 +1,10 @@
 @extends('layouts.app')
 
 @section('style')
-<link rel="stylesheet" type="text/css" href="{{ asset('/css/ekko-lightbox.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('/css/lightbox.min.css') }}">
 @endsection
 @section('script')
-<!--<script type="text/javascript" src="{{ asset('/js/ekko-lightbox.js')}}"></script>-->
-<script type="text/javascript" src="{{ asset('/js/ekko-lightbox.min.js')}}"></script>
+<script type="text/javascript" src="{{ asset('/js/lightbox-plus-jquery.min.js')}}"></script>
 @endsection
 
 @section('content')
@@ -51,7 +50,7 @@ Uchaan has a repertoire of not just the masters of art but also an impeccable a 
         <div class="row">
             <div class="col-lg-3 col-md-3 col-12 col-sm-6">
                 <div class="artBox"> 
-                    <a href="{{ \App\Helpers\Helper::getImage($moment->eurl.'/slides/'.$moment->image, 3) }}" data-toggle="lightbox" data-title="{{$moment->title}}">
+                    <a href="{{ \App\Helpers\Helper::getImage($moment->eurl.'/slides/'.$moment->image, 3) }}" data-lightbox="{{$moment->title}}" data-title="{{$moment->title}}">
                         <img src="{{ \App\Helpers\Helper::getImage($moment->eurl.'/slides/'.$moment->image, 3) }}" class="img-fluid">
                     </a>
                     <h3>{{$moment->title}}</h3>
@@ -65,10 +64,4 @@ Uchaan has a repertoire of not just the masters of art but also an impeccable a 
 </div>
 <!--sectionAddcart Ends here-->
 
-<script type="text/javascript">
-    $(document).on('click', '[data-toggle="lightbox"]', function(event) {
-        event.preventDefault();
-        $(this).ekkoLightbox();
-    });
-</script>
 @endsection

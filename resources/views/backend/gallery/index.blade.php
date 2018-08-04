@@ -20,10 +20,10 @@
                                     
                                     <!--<img src="images/{{ $art->fname.'.'.$art->ext }}" />-->
                                     <a href="{{ route('edit-gallery', [$art->artist_id, $art->id]) }}" target="_blank">
-                                        <img src="{{ \App\Helpers\Helper::getImage($art->fname . $art->ext, 0) }}" width="200" height="200" /><br/>
+                                        <img src="{{ \App\Helpers\Helper::getImage($art->fname . $art->ext, 0) }}" width="200" height="200" title="{{ $art->uname }}" /><br/>
                                     </a>
-                                    <span>{{ $art->title }}</span><br/>
-                                    <span>By {{ $art->uname }}</span>
+                                    <span>{{ mb_strimwidth($art->title, 0, 25, '...') }}</span><br/>
+                                    <span><b>By:</b> {{ $art->uname }}</span>
                                     
                                 </div>
                                 @endforeach
