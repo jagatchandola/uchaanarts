@@ -20,14 +20,14 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="form_name">First Name *</label>
-                    <input id="form_name" type="text" name="fname" class="form-control" placeholder="Please enter your firstname *" required="required" data-error="Firstname is required.">
+                    <input id="form_name" type="text" name="fname" class="form-control" placeholder="Please enter your firstname *" required="required" data-error="Firstname is required." pattern="[A-Za-z\s]{3,25}" title="Min 3 and max 25 characters are allowed">
                     <div class="help-block with-errors"></div>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="form_lastname">Last Name *</label>
-                    <input id="form_lastname" type="text" name="lname" class="form-control" placeholder="Please enter your lastname *" required="required" data-error="Lastname is required.">
+                    <input id="form_lastname" type="text" name="lname" class="form-control" placeholder="Please enter your lastname *" required="required" data-error="Lastname is required." pattern="[A-Za-z\s]{3,25}" title="Min 3 and max 25 characters are allowed">
                     <div class="help-block with-errors"></div>
                 </div>
             </div>
@@ -36,7 +36,7 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="form_email">Email *</label>
-                    <input id="form_email" type="email" name="email" class="form-control" placeholder="Please enter your email *" required="required" data-error="Valid email is required." value="{{ old('email') }}"">
+                    <input id="form_email" type="email" name="email" class="form-control" placeholder="Please enter your email *" required="required" data-error="Valid email is required." value="{{ old('email') }}" pattern="[a-z0-9\._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
                     <div class="help-block with-errors">
                         @if ($errors->has('email'))
                             {{ $errors->first('email') }}
@@ -47,7 +47,7 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="form_phone">Phone</label>
-                    <input id="form_phone" type="tel" name="mobile" class="form-control" placeholder="Please enter your phone no">
+                    <input id="form_phone" type="tel" name="mobile" class="form-control" placeholder="Please enter your phone no" maxlength="10">
                     <div class="help-block with-errors"></div>
                 </div>
             </div>

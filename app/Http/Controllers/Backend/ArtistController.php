@@ -80,11 +80,13 @@ class ArtistController extends Controller
             abort(401);
         }
         
-        $artist = $this->artists->updateArtistStatus($artist_id, $request['status']);
+        $artist = $this->artists->updateArtistStatus($artist_id, $request['status'], $request['type']);
 
         if ($artist == true) {
+            Session::flash('success_message', 'Status updated successfully');
             echo 1;
         } else {
+            Session::flash('error_message', 'Something went wrong. Please try again.');
             echo 0;
         }
     }

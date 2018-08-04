@@ -123,14 +123,13 @@
             <article class="themeSubs1">
                 <h2>Creative Modern Artist</h2>
                 <div class="owl-carousel owl-theme third-owl-carousel">
-                    @foreach($artists as $artist)
-
-                    <div class="item"><img src="{{ \App\Helpers\Helper::getImage($artist['profimg'], 1) }}"><a href="/artists/{{$artist['id']}}" class="captionBtn1">View Artwork</a><div class="captionBtm">{{$artist['uname']}}</div></div>
+                    @foreach($artists as $artist)                    
+                        <div class="item">
+                            <img src="{{ \App\Helpers\Helper::getImage($artist['profimg'], 1) }}">
+                            <a href="/artists/{{$artist['id']}}" class="captionBtn1">View Artwork</a>
+                            <div class="captionBtm">{{$artist['uname']}}</div>
+                        </div>
                     @endforeach
-                    <!-- <div class="item"><img src="{{ asset('img/slider/2.jpg')}}"><a href="#" class="captionBtn1">View Artwork</a><div class="captionBtm">Amit Srivastava</div></div>
-                    <div class="item"><img src="{{ asset('img/slider/3.jpg')}}"><a href="#" class="captionBtn1">View Artwork</a><div class="captionBtm">Anil Kaira</div></div>
-                    <div class="item"><img src="{{ asset('img/slider/4.jpg')}}"><a href="#" class="captionBtn1">View Artwork</a><div class="captionBtm">Abhishek Sharma</div></div>
-                    <div class="item"><img src="{{ asset('img/slider/3.jpg')}}"><a href="#" class="captionBtn1">View Artwork</a><div class="captionBtm">Amit Srivastava</div></div> -->
                 </div>
             </article>
         </div>

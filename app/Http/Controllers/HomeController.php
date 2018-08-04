@@ -57,8 +57,6 @@ class HomeController extends Controller
                 }
             }
         }
-        
-        // echo '<pre>';print_r($upcomingEvents);exit;
 
         $banner = new Banner();
 
@@ -304,6 +302,12 @@ class HomeController extends Controller
     }
     
     public function contactus(Request $request) {
+        $request->validate([
+                'cat-name' => 'required|regex:/(^([a-zA-Z\s]+)(\d+)?$)/u|max:50',
+                'gst' => 'required',
+                'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            ]);
+        
         $msg = '';
         if($request->post()) {
             //print_r($request->all());exit;
