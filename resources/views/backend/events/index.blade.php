@@ -59,7 +59,7 @@
                                                         @elseif( $event->status == 0)
                                                             <button type="button" class="btn btn-danger">Inactive</button>
                                                         @else
-                                                            <button type="button" class="btn btn-success">Active</button>
+                                                            <button type="button" class="btn btn-success">Upcoming</button>
                                                         @endif
                                                         
                                                     @endcan

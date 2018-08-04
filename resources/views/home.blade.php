@@ -1,5 +1,13 @@
 @extends('layouts.app')
 
+@section('style')
+<link rel="stylesheet" type="text/css" href="{{ asset('/css/lightbox.min.css') }}">
+@endsection
+@section('script')
+<script type="text/javascript" src="{{ asset('/js/lightbox-plus-jquery.min.js')}}"></script>
+
+@endsection
+
 @section('content')
 
 <!--Carousel Start Here-->
@@ -120,16 +128,22 @@
 <section class="themeSec2">
     <div class="container">
         <div class="col-lg-12 col-md-12 col-12 col-sm-12">
-            <article class="themeSubs1">
+            <!--<article class="themeSubs1">-->
                 <h2>Creative Modern Artist</h2>
                 <div class="owl-carousel owl-theme third-owl-carousel">
                     @foreach($artists as $artist)
 
-                    <div class="item"><img class="img-fluid" src="{{ \App\Helpers\Helper::getImage($artist['username'].'/'.$artist['profimg'], 1) }}"><a href="/artists/{{$artist['id']}}" class="captionBtn1">View Artwork</a><div class="captionBtm">{{$artist['uname']}}</div></div>
+                    <div class="item">
+                        <a href="{{ \App\Helpers\Helper::getImage($artist['username'].'/'.$artist['profimg'], 1) }}" data-lightbox="{{$artist['uname']}}" data-title="{{$artist['uname']}}">
+                            <img class="img-fluid" src="{{ \App\Helpers\Helper::getImage($artist['username'].'/'.$artist['profimg'], 1) }}">
+                        </a>
+                        <a href="{{ route('artistdetails', $artist['id']) }}" class="captionBtn1">View Artwork</a>
+                        <div class="captionBtm">{{$artist['uname']}}</div>                            
+                    </div>
                     @endforeach
                     
                 </div>
-            </article>
+            <!--</article>-->
         </div>
     </div>     
 </section>
