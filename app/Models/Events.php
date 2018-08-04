@@ -154,8 +154,8 @@ class Events extends Model
         $catalogue = Events::where('events.shide', 1)
                     ->join('evt_artists', 'events.id' , '=', 'evt_artists.evtid')
                     ->join('users', 'evt_artists.artist_id' , '=', 'users.id')
-                    //->join('art_items', 'evt_artists.artist_item_id' , '=', 'art_items.id')
-                    ->select('events.etitle', 'events.id as event_id', 'users.id as artist_id', 'uname')
+                    ->leftJoin('event_payment', 'events.id' , '=', 'event_payment.event_id')
+                    ->select('events.etitle', 'events.id as event_id', 'users.id as artist_id', 'uname', 'event_payment.id as event_payment_id', 'event_payment.payment_received')
                     ->orderBy('events.id', 'desc')
                     ->groupBy('evt_artists.evtid', 'evt_artists.artist_id')
                     ->get();
@@ -178,23 +178,25 @@ class Events extends Model
     
     public function approveEventArt($data) {
         $this->data = $data;
-        //dd($this->data);
+
         $result = DB::transaction(function () {
 
-            $approveStatus = DB::table('evt_artists')
+            $eventDetails = $this->getEventDetails($this->data['event_id']);
+            $artsCount = count($this->data['event_art_ids']);
+            $paymentAmount = $eventDetails['no_of_entries'] == 1 ? ($artsCount * $eventDetails['fees']) : ($artsCount * ($eventDetails['fees']/$eventDetails['no_of_entries']));
+            
+            DB::table('evt_artists')
                             ->whereIn('id', $this->data['event_art_ids'])
                             ->update(['admin_approved' => 1]);
             
-            $featuredStatus = DB::table('evt_artists')
+            DB::table('evt_artists')
                                 ->where('id', $this->data['featured_image'])
                                 ->update(['is_featured' => 1]);
-            
-            $eventDetails = $this->getEventDetails($this->data['event_id']);
             
             $lastInsertId = DB::table('event_payment')->insertGetId([
                                             'event_id' => $this->data['event_id'],
                                             'artist_id' => $this->data['artist_id'],
-                                            'payment_amount' => $eventDetails['fees'],
+                                            'payment_amount' => $paymentAmount,
                                             'payment_link'  => hash('sha256', $this->data['event_id'].$this->data['artist_id'])
                                         ]);
             

@@ -227,7 +227,7 @@ class EventController extends Controller
             $response = $this->events->approveEventArt($data);
 
             if (!empty($response) && count($response)) {
-                $html = 'Cleck on the link <a href="'.env('APP_URL') . '/event/payment/' . $response[0]->payment_link.'">Click here</a> to make the payment';
+                $html = 'Total amount to be paid : <b>'. $response[0]->payment_amount . '</b>. <br>Cleck on the link <a href="'.env('APP_URL') . '/event/payment/' . $response[0]->payment_link.'">Click here</a> to make the payment';
                 $status = Mail::send([], [], function($message) use ($html) {
                     $message->from(env('MAIL_USERNAME'), 'Jagat Prakash');
                     $message->to('jagat2205114@gmail.com');

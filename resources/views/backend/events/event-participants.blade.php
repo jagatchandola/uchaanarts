@@ -18,9 +18,10 @@
                                         <thead>
                                             <tr>
                                                 <th>#</th>
-                                                <th>Event Title</th>
-                                                <th>Artist Name</th>
-                                                <th></th>
+                                                <th class="text-center">Event Title</th>
+                                                <th class="text-center">Artist Name</th>
+                                                <th class="text-center">Arts</th>
+                                                <th class="text-center">Payment</th>
                                             </tr>
                                         </thead>
                                         
@@ -33,7 +34,21 @@
                                                 <td>{{ $event->uname }}</td>
                                                 
                                                 <td class="text-center">
+                                                @if(empty($event->event_payment_id))
                                                     <a href="{{ route('participant', [$event->event_id, $event->artist_id]) }}" target="_blank"><button type="button" class="btn btn-primary">View Arts</button></a>
+                                                @else
+                                                    <button type="button" class="btn btn-success">Approved</button>
+                                                @endif
+                                                </td>
+                                                
+                                                <td class="text-center">
+                                                @if(!empty($event->event_payment_id))
+                                                    @if($event->payment_received == 'y') 
+                                                        <i class="fa fa-check" style="color: #5cb85c; font-size: 25px;"></i>
+                                                    @else
+                                                    <i class="fa fa-close" style="color: #c9302c; font-size: 25px;"></i>
+                                                    @endif
+                                                @endif
                                                 </td>
                                             </tr>
                                             @php $i++ @endphp
