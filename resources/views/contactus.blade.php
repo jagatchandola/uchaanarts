@@ -20,14 +20,14 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="form_name">First Name *</label>
-                    <input id="form_name" type="text" name="fname" class="form-control" placeholder="Please enter your firstname *" required="required" data-error="Firstname is required." pattern="[A-Za-z\s]{3,25}" title="Min 3 and max 25 characters are allowed">
+                    <input id="form_name" type="text" name="fname" class="form-control" placeholder="Please enter your firstname *" required="required" data-error="Firstname is required." pattern="[A-Za-z\s]{3,25}" title="Min 3 and max 25 characters are allowed" value="{{ old('fname') }}">
                     <div class="help-block with-errors"></div>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="form_lastname">Last Name *</label>
-                    <input id="form_lastname" type="text" name="lname" class="form-control" placeholder="Please enter your lastname *" required="required" data-error="Lastname is required." pattern="[A-Za-z\s]{3,25}" title="Min 3 and max 25 characters are allowed">
+                    <input id="form_lastname" type="text" name="lname" class="form-control" placeholder="Please enter your lastname *" required="required" data-error="Lastname is required." pattern="[A-Za-z\s]{3,25}" title="Min 3 and max 25 characters are allowed" value="{{ old('lname') }}">
                     <div class="help-block with-errors"></div>
                 </div>
             </div>
@@ -47,7 +47,7 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="form_phone">Phone</label>
-                    <input id="form_phone" type="tel" name="mobile" class="form-control" placeholder="Please enter your phone no" maxlength="10">
+                    <input id="form_phone" type="tel" name="mobile" class="form-control" placeholder="Please enter your phone no" maxlength="10" value="{{ old('mobile') }}" pattern="[6-9][0-9]{9}" title="Please enter a valid phone number">
                     <div class="help-block with-errors"></div>
                 </div>
             </div>
@@ -56,7 +56,7 @@
             <div class="col-md-12">
                 <div class="form-group">
                     <label for="form_message">Message *</label>
-                    <textarea id="form_message" name="message" class="form-control" placeholder="Message for me *" rows="4" required="required" data-error="Please,leave us a message."></textarea>
+                    <textarea id="form_message" name="message" class="form-control" placeholder="Message for me *" rows="4" required="required" value="{{ old('message') }}" data-error="Please,leave us a message."></textarea>
                     <div class="help-block with-errors"></div>
                 </div>
             </div>

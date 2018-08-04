@@ -29,7 +29,7 @@ class Artists extends Model
         } else {
             $artists = Artists::where('shide', 1)
                         ->orderBy('uname', 'asc')
-                        ->paginate(5);
+                        ->paginate(12);
         }
         
         if (!empty($artists)) {

@@ -303,15 +303,18 @@ class HomeController extends Controller
     }
     
     public function contactus(Request $request) {
-        $request->validate([
-                'cat-name' => 'required|regex:/(^([a-zA-Z\s]+)(\d+)?$)/u|max:50',
-                'gst' => 'required',
-                'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            ]);
         
         $msg = '';
         if($request->post()) {
-            //print_r($request->all());exit;
+            $request->validate([
+                'fname' => 'required|regex:/(^([a-zA-Z\s]+)(\d+)?$)/u|max:25',
+                'lname' => 'required|regex:/(^([a-zA-Z\s]+)(\d+)?$)/u|max:25',
+                'email' => 'required|email|max:100',
+                'mobile' => 'max:10|max:10',
+                'message' => 'required|max:10000'
+            ]);
+            
+//            print_r($request->all());exit;
             if($this->contactus->insert($request)) {
                 $msg = 'Thank you for contacting us. We will get back to you soon!';
             }
