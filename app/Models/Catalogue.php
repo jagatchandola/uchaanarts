@@ -39,7 +39,7 @@ class Catalogue extends Model
             
             $catalogues = $catalogues->select('art_items.*', 'users.uname')
                         ->orderBy('id', 'desc')
-                        ->paginate(10);
+                        ->paginate(20);
         }
         
         if (!empty($catalogues)) {
@@ -146,7 +146,8 @@ class Catalogue extends Model
                         'gst' => $data['gst'], 
                         'discount' => $data['discount'], 
                         'discount_value' => $data['discount_value'], 
-                        'active' => $data['status']
+                        'active' => $data['status'],
+                        'is_creative_art' => $data['creative_art_status']
                     ];
         }
         
