@@ -32,18 +32,18 @@ class BannerController extends Controller
             abort(401);
         }
         
-        $banners = $this->banner->getBanners();
+        $banners = $this->banner->getBanners(1);
         return view('backend.banner.index')->with([
                                             'banners' => $banners
                                         ]);
     }
 
-    public function updateStatus(Request $request, $artist_id) {
+    public function updateStatus(Request $request, $banner_id) {
         if (!Gate::allows('isAdmin')) {
             abort(401);
         }
         
-        $artist = $this->artists->updateArtistStatus($artist_id, $request['status']);
+        $artist = $this->banner->updateBannerStatus($banner_id, $request['status']);
 
         if ($artist == true) {
             echo 1;
@@ -52,7 +52,7 @@ class BannerController extends Controller
         }
     }
     
-    public function edit(Request $request, $artist_id = '') {
+    public function edit(Request $request, $banner_id = '') {
         if (!Gate::allows('isAdmin')) {
             abort(401);
         }
@@ -60,20 +60,62 @@ class BannerController extends Controller
         if ($request->isMethod('POST')) {
             $inputData = $request->all();
 
-            $result = $this->artists->updateArtist($inputData);
+             if ($request->hasFile('image')) {
+                $image = $request->file('image');
+                $title = str_replace(' ', '-', strtolower($request['name']));
+                $name = str_slug($title).'-'.time().'.'.$image->getClientOriginalExtension();
+                $destinationPath = public_path(config('constants.uploads.banner'));
+                $image->move($destinationPath, $name);
+                
+                $inputData['image'] = $name;
+            }
+
+            $result = $this->banner->updateBanner($inputData);
             if ($result == true) {
-                Session::flash('success_message', 'Artist updated successfully');
-                return redirect('/admin/artists/'.$inputData['artist-id']);
+                Session::flash('success_message', 'Banner updated successfully');
+                return redirect('/admin/banner/'.$inputData['banner-id']);
             } else {
                 Session::flash('success_message', 'Something went wrong. Please try again');
-                return redirect('/admin/artists/'.$inputData['artist-id']);
+                return redirect('/admin/banner/'.$inputData['banner-id']);
             }
         } else {
-            $artist = $this->artists->getArtistDetails($artist_id);
+            $banner = $this->banner->getBannerDetails($banner_id);
 
-            return view('backend.artist.edit-artist')->with([
-                                                'artist' => array_shift($artist)
+            return view('backend.banner.edit-banner')->with([
+                                                'banner' => array_shift($banner)
                                             ]);
+        }
+    }
+
+    public function add(Request $request) {
+        if (!Gate::allows('isAdmin')) {
+            abort(401);
+        }
+        
+        if ($request->isMethod('POST')) {
+            $inputData = $request->all();
+
+             if ($request->hasFile('image')) {
+                $image = $request->file('image');
+                $title = str_replace(' ', '-', strtolower($request['name']));
+                $name = str_slug($title).'-'.time().'.'.$image->getClientOriginalExtension();
+                $destinationPath = public_path(config('constants.uploads.banner'));
+                $image->move($destinationPath, $name);
+                
+                $inputData['image'] = $name;
+            }
+
+            $result = $this->banner->addBanner($inputData);
+            if ($result == true) {
+                Session::flash('success_message', 'Banner updated successfully');
+                return redirect('/admin/banner');
+            } else {
+                Session::flash('success_message', 'Something went wrong. Please try again');
+                return redirect('/admin/banner/add');
+            }
+        } else {
+
+            return view('backend.banner.add-banner');
         }
     }
    

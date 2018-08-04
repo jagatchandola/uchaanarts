@@ -78,6 +78,18 @@
                     </ul>
                 </li>
                 <li>
+                    <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i>Banner<span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a href="{{ route('banner-list') }}">All Banners</a>
+                        </li>
+                        <li>
+                            <a href="{{ route('add-banner') }}">Add Banner</a>
+                        </li>
+                        
+                    </ul>
+                </li>
+                <li>
                     <a href="#"><i class="fa fa-wrench fa-fw"></i>Customers<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li>
