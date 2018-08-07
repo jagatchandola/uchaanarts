@@ -67,12 +67,12 @@
                                                 
                                                 <td class="text-center">
                                                 @can('isAdmin')
-                                                    <a href="{{ route('edit-event', $event->id) }}" target="_blank"><button type="button" class="btn btn-primary">Edit</button></a>
+                                                    <a href="{{ route('edit-event', $event->id) }}"Check $1><button type="button" class="btn btn-primary">Edit</button></a>
                                                 @endcan
 
                                                 @can('isArtist')
                                                     @if($event->start_date > date('Y-m-d'))
-                                                        <a href="{{ route('participate-event', $event->id) }}" target="_blank"><button type="button" class="btn btn-primary">Participate</button></a>
+                                                        <a href="{{ route('participate-event', $event->id) }}"Check $1><button type="button" class="btn btn-primary">Participate</button></a>
                                                     @endif
                                                 @endcan
                                                 </td>

@@ -11,7 +11,7 @@
         @foreach($artists as $artist)
        <div class="col-lg-3 col-md-3 col-12 col-sm-6">
         
-         <div class="artBox"> <a href="/artists/{{ $artist->id}}"><img src="{{ \App\Helpers\Helper::getImage($artist->profimg, 1) }}" class="img-fluid"></a>
+         <div class="artBox"> <a href="/artists/{{ $artist->id}}"><img src="{{ \App\Helpers\Helper::getImage($artist->username .'/'. $artist->profimg, 1) }}" class="img-fluid"></a>
             <span>{{ $artist->uname }}</span>
              <a href="/artists/{{ $artist->id}}" class="btn btn-primary themebBtn">View Artwork</a>
          </div>

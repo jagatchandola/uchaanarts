@@ -31,7 +31,7 @@
             @if(!empty($arts))
                 @foreach($arts as $art)
                 <div class="col-lg-3 col-md-4 col-12 col-sm-6 a b box all">
-                  <div class="artBox"> <a href="{{ route('artist-art', [$art->artist_id, $art->id]) }}"><img src="{{ \App\Helpers\Helper::getImage($art->fname.'.'.$art->ext, 0) }}" class="img-fluid"></a>
+                  <div class="artBox"> <a href="{{ route('artist-art', [$art->artist_id, $art->id]) }}"><img src="{{ \App\Helpers\Helper::getImage($art->username.'/imgs/'. $art->fname.'.'.$art->ext, 1) }}" class="img-fluid"></a>
                     <h3>{{ $art->title }}</h3>
                     <h2><i class="fas fa-rupee-sign"></i> {{ \App\Helpers\Helper::getFormattedPrice($art->totalPrice) }}</h2>
                     <span>{{$art->uname}}</span> <a href="#" class="btn btn-primary themebBtn">ADD TO CART</a> </div>

@@ -170,9 +170,10 @@ class Events extends Model
     public function getParticipantDetails($event_id, $artist_id) {
         return DB::table('evt_artists')
                 ->join('art_items', 'evt_artists.artist_item_id' , '=', 'art_items.id')
+                ->join('users', 'art_items.artist_id' , '=', 'users.id')
                 ->where('evt_artists.evtid', '=', $event_id)
                 ->where('evt_artists.artist_id', '=', $artist_id)
-                ->select('evt_artists.id', 'title', 'fname', 'ext', 'price', 'gst', 'discount', 'discount_value')
+                ->select('evt_artists.id', 'title', 'fname', 'ext', 'price', 'gst', 'discount', 'discount_value','users.username')
                 ->get();
     }
     
@@ -215,7 +216,7 @@ class Events extends Model
     }
  
     public function getEventFeaturedArts($event_id) {
-        echo $event_id;
+        
         $result = DB::table('events as e')
                 ->join('evt_artists as es', 'e.id', '=', 'es.evtid')
                 ->join('art_items as ai', 'es.artist_item_id', '=', 'ai.id')

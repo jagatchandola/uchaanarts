@@ -35,7 +35,7 @@
                                                 
                                                 <td class="text-center">
                                                 @if(empty($event->event_payment_id))
-                                                    <a href="{{ route('participant', [$event->event_id, $event->artist_id]) }}" target="_blank"><button type="button" class="btn btn-primary">View Arts</button></a>
+                                                    <a href="{{ route('participant', [$event->event_id, $event->artist_id]) }}"Check $1><button type="button" class="btn btn-primary">View Arts</button></a>
                                                 @else
                                                     <button type="button" class="btn btn-success">Approved</button>
                                                 @endif

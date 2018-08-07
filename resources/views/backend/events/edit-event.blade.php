@@ -24,7 +24,7 @@
                                             </div>
                                             <div class="form-group">
                                                 <label>Event Image</label>
-                                                <img src="{{ \App\Helpers\Helper::getImage($event['banner'], 3) }}" width="100" height="100" />
+                                                <img src="{{ \App\Helpers\Helper::getImage($event['eurl'].'/'.$event['banner'], 3) }}" width="100" height="100" />
                                                 <input class="form-control" type="file" name="image" value="">
                                             </div>
                                             <div class="form-group">

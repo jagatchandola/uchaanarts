@@ -42,13 +42,13 @@
                     <!-- /.nav-second-level -->
                 </li>
                 <li>
-                    <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i>Gallery<span class="fa arrow"></span></a>
+                    <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i>Product<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li>
-                            <a href="{{ route('gallery-list') }}">All Photo</a>
+                            <a href="{{ route('gallery-list') }}">All Product</a>
                         </li>
                         <li>
-                            <a href="{{ route('pending-gallery') }}">Pending Photo</a>
+                            <a href="{{ route('pending-gallery') }}">Pending Product</a>
                         </li>
                     </ul>
                 </li>
@@ -154,13 +154,13 @@
                         <a href="#" class="active"><i class="fa fa-dashboard fa-fw"></i>Dashboard</a>
                     </li>
                     <li>
-                        <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i>Gallery<span class="fa arrow"></span></a>
+                        <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i>Product<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="{{ route('gallery-list') }}">All Photo</a>
+                                <a href="{{ route('gallery-list') }}">All Product</a>
                             </li>
                             <li>
-                                <a href="{{ route('add-gallery') }}">Add Image</a>
+                                <a href="{{ route('add-gallery') }}">Add Product</a>
                             </li>
                         </ul>
                     </li>

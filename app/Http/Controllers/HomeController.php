@@ -107,7 +107,8 @@ class HomeController extends Controller
      */
     public function artists()
     {
-        $artists = $this->artists->getAllArtists();        
+        $artists = $this->artists->getAllArtists();
+        //print_r($artists);exit;        
         return view('artists')->with(['artists' => $artists]);
     }
 

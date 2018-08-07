@@ -22,9 +22,8 @@
                     @else
                     @foreach($arts as $art)
                     <div class="dataTable_wrapper">
-
-                        <a href="{{ route('update-pending-gallery', [$art->id]) }}" target="_blank">
-                            <img src="{{ \App\Helpers\Helper::getImage($art->fname . $art->ext, 0) }}" width="100" height="100" /><br/>
+                        <a href="{{ route('update-pending-gallery', [$art->id]) }}">
+                            <img src="{{ \App\Helpers\Helper::getImage($art->username .'/imgs/'.$art->fname .'.'. $art->ext, 1) }}" width="100" height="100" /><br/>
                         </a>
                         <span>{{ $art->title }}</span><br/>
                         <span>By {{ $art->uname }}</span>

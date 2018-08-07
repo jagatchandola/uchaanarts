@@ -22,10 +22,10 @@
                                                 <th>Name</th>
                                                 <th>Email</th>
                                                 <th>Status</th>
-                                                <th></th>
-                                                <th></th>
-                                                <th></th>
-                                                <th></th>
+                                                <th>Edit</th>
+                                                <th>View Arts</th>
+                                                <th>Creative Artist<br>At Home Page</th>
+                                                <th>Weekly Artist</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -37,29 +37,29 @@
                                                 <td>{{ $artist->uname }}</td>
                                                 <td>{{ $artist->user_email }}</td>
                                                 <!--<td class="center">{{ $artist->status == 1 ? 'Active' : 'Inactive' }}</td>-->
-                                                <td class="center">
+                                                <td class="text-center">
                                                     @if( $artist->status == 0)
                                                     <button type="button" class="btn btn-danger" onclick="changeStatus({{ $artist->id }}, 1, 'status')">Inactive</button>
                                                     @else
                                                         <button type="button" class="btn btn-success" onclick="changeStatus({{ $artist->id }}, 0, 'status')">Active</button>
                                                     @endif
                                                 </td>
-                                                <td class="center"><a href="{{ route('edit-artist', $artist->id) }}" target="_blank"><button type="button" class="btn btn-primary">Edit</button></a></td>
-                                                <td class="center"><a href="{{ route('view-artist-arts', $artist->id) }}" target="_blank"><button type="button" class="btn btn-primary">View Arts</button></a></td>
+                                                <td class="text-center"><a href="{{ route('edit-artist', $artist->id) }}"><button type="button" class="btn btn-primary"><i class="fa fa-edit"></i></button></a></td>
+                                                <td class="text-center"><a href="{{ route('view-artist-arts', $artist->id) }}"><button type="button" class="btn btn-primary"><i class="fa fa-eye"></i></button></a></td>
                                                 
-                                                <td class="center">
+                                                <td class="text-center">
                                                     @if( $artist->is_creative_artists == 0)
-                                                        <button type="button" class="btn btn-danger" onclick="changeStatus({{ $artist->id }}, 1, 'creative_artist')">Creative Artist</button>
+                                                        <button type="button" class="btn btn-danger" onclick="changeStatus({{ $artist->id }}, 1, 'creative_artist')"><i class="fa fa-close"></i></button>
                                                     @else
-                                                        <button type="button" class="btn btn-success" onclick="changeStatus({{ $artist->id }}, 0, 'creative_artist')">Creative Artist</button>
+                                                        <button type="button" class="btn btn-success" onclick="changeStatus({{ $artist->id }}, 0, 'creative_artist')"><i class="fa fa-check"></i></button>
                                                     @endif
                                                 </td>
                                                 
-                                                <td class="center">
+                                                <td class="text-center">
                                                     @if( $artist->is_weekly_artist == 0)
-                                                        <button type="button" class="btn btn-danger" onclick="changeStatus({{ $artist->id }}, 1, 'weekly_artist')">Weekly Artist</button>
+                                                        <button type="button" class="btn btn-danger" onclick="changeStatus({{ $artist->id }}, 1, 'weekly_artist')"><i class="fa fa-close"></i></button>
                                                     @else
-                                                        <button type="button" class="btn btn-success" onclick="changeStatus({{ $artist->id }}, 0, 'weekly_artist')">Weekly Artist</button>
+                                                        <button type="button" class="btn btn-success" onclick="changeStatus({{ $artist->id }}, 0, 'weekly_artist')"><i class="fa fa-check"></i></button>
                                                     @endif
                                                     </td>
                                                 
