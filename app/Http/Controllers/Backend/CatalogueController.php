@@ -47,7 +47,7 @@ class CatalogueController extends Controller
             $message = Session::get('error_message');
         }
         
-        $arts = $this->catalogue->getCatalogues('', $id);
+        $arts = $this->catalogue->getCatalogues('', $id, true);
         return view('backend.gallery.index')->with([
                                     'arts' => $arts,
                                     'message' => $message
@@ -196,7 +196,7 @@ class CatalogueController extends Controller
             $result = $this->catalogue->addArt($inputData, $id);
 
             if ($result == true) {
-                Session::flash('success_message', 'Art added successfully');
+                Session::flash('success_message', 'Product has been sent to admin for approval');
                 return redirect('/admin/gallery/add');
             } else {
                 Session::flash('error_message', 'Something went wrong. Please try again');

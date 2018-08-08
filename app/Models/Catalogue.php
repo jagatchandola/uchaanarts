@@ -21,7 +21,7 @@ class Catalogue extends Model
      */
     protected $table = 'art_items';
 
-    public function getCatalogues($records = '', $artist_id = '') {
+    public function getCatalogues($records = '', $artist_id = '', $admin = false) {
         if ($records == 'all') {
             $catalogues = DB::table('art_items')
                         ->join('users', 'art_items.artist_id' , '=', 'users.id')
@@ -30,8 +30,12 @@ class Catalogue extends Model
                         ->get();
         } else {
             $catalogues = Catalogue::where('art_items.active', 1)
-                        ->join('users', 'art_items.artist_id' , '=', 'users.id')
-                        ->where('art_items.isSold' , '=', 0);
+                        ->join('users', 'art_items.artist_id' , '=', 'users.id');
+                        
+            
+            if ($admin === false) {
+                $catalogues = $catalogues->where('art_items.isSold' , '=', 0);
+            }
             
             if (!empty($artist_id)) {
                 $catalogues = $catalogues->where('art_items.artist_id', '=', $artist_id);
