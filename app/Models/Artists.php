@@ -22,8 +22,13 @@ class Artists extends Model
 
     public function getAllArtists($records = '') {
         if ($records == 'all') {
+            $where = [
+                'user_role' => 'artist',
+                'admin_approved' => 1
+            ];
+            
             $artists = DB::table('users')
-                                ->where('user_role', '=', 'artist')
+                                ->where($where)
                                 ->select('id', 'uname', 'username', 'email as user_email','shide as status', 'is_creative_artists', 'is_weekly_artist')
                                 ->get();
         } else {
@@ -118,13 +123,21 @@ class Artists extends Model
                 
                 $update = ['is_weekly_artist' => $status];
                 break;
+            case 'approve':
+                $update = ['admin_approved' => $status, 'image_uploaded' => $status];
+                break;
         }
         
         $updateStatus = DB::table('users')
-            ->where('id', $artist_id)
-            ->update($update);
+                            ->where('id', $artist_id)
+                            ->update($update);
+
+        if ($type == 'approve') {
+            DB::table('art_items')
+                ->where('artist_id', $artist_id)
+                ->update(['active' => 1]);
+        }
         
-        //var_dump($updateStatus);exit;
         if ($updateStatus >= 1) {
             return true;
         }
@@ -153,6 +166,18 @@ class Artists extends Model
 
         if (!empty($artist)) {
             return $artist;
+        }
+
+        return [];
+    }
+    
+    public function getPendingArtists() {
+        $artists = Artists::where('admin_approved', 0)
+                    ->orderBy('uname', 'asc')
+                    ->paginate(12);
+        
+        if (!empty($artists)) {
+            return $artists;
         }
 
         return [];

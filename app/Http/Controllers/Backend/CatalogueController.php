@@ -203,6 +203,7 @@ class CatalogueController extends Controller
                 return redirect('/admin/gallery/add');
             }
         } else {
+            //dd(Auth::user());
             $categories = $this->category->getCategories();
             return view('backend.gallery.add-gallery')->with([
                                                             'categories' => $categories

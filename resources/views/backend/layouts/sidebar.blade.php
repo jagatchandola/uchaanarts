@@ -133,6 +133,15 @@
             <a class="navbar-brand" href="{{ route('backend-dashboard') }}">{{ ('Uchaan Arts') }}</a>
         </div>
 
+        @if (Auth::user()->image_uploaded == 0)
+            <div class="navbar-header">
+                <span style="color: white; margin-left: 300px; padding-top: 20px;">Please upload a image to get approved</span>
+            </div>
+        @elseif (Auth::user()->admin_approved == 0)
+            <div class="navbar-header">
+                <span style="color: white; margin-left: 300px; padding-top: 20px;">Approval pending</span>
+            </div>
+        @endif
         <ul class="nav navbar-right navbar-top-links">        
             <li class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">

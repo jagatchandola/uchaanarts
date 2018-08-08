@@ -23,7 +23,6 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        //$this->middleware('auth');
         $this->catalogue = new Catalogue();
         $this->category = new Category();
         $this->artists = new Artists();

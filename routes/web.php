@@ -46,7 +46,7 @@ Route::group(['middleware' => ['auth']],function(){
         
         // Artists Routes (Admin)
 	Route::get('/admin/artists','Backend\ArtistController@index')->name('artists-list');
-        Route::get('/admin/pending/artists','Backend\ArtistController@index')->name('pending-artists');
+        Route::get('/admin/pending/artists','Backend\ArtistController@getPendingArtists')->name('pending-artists');
 	Route::put('/admin/artists/changeStatus/{id}','Backend\ArtistController@updateStatus');
         Route::get('/admin/artists/{id}','Backend\ArtistController@edit')->name('edit-artist');
         Route::post('/admin/artist','Backend\ArtistController@edit')->name('edit-artist-post');

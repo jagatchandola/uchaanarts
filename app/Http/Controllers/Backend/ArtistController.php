@@ -83,7 +83,8 @@ class ArtistController extends Controller
         $artist = $this->artists->updateArtistStatus($artist_id, $request['status'], $request['type']);
 
         if ($artist == true) {
-            Session::flash('success_message', 'Status updated successfully');
+            $msg = $request['type'] == 'approve' ? 'Artist approved successfully' : 'Status updated successfully';
+            Session::flash('success_message', $msg);
             echo 1;
         } else {
             Session::flash('error_message', 'Something went wrong. Please try again.');
@@ -138,6 +139,18 @@ class ArtistController extends Controller
         
         return view('backend.artist.view-arts')->with([
                                             'arts' => $arts
+                                        ]);
+    }
+    
+    public function getPendingArtists()
+    {
+        if (!Gate::allows('isAdmin')) {
+            abort(401);
+        }
+        
+        $artists = $this->artists->getPendingArtists();
+        return view('backend.artist.pending')->with([
+                                            'artists' => $artists
                                         ]);
     }
 }
