@@ -42,7 +42,7 @@ class Catalogue extends Model
             }
             
             
-            $catalogues = $catalogues->select('art_items.*', 'users.uname')
+            $catalogues = $catalogues->select('art_items.*', 'users.uname', 'users.username')
                         ->orderBy('id', 'desc')
                         ->paginate(20);
         }
@@ -79,7 +79,7 @@ class Catalogue extends Model
             ->join('category', 'art_items.cat', '=', 'category.id')
             ->where('art_items.id', $art_id)
             ->where('users.id', '=', $artist_id)
-            ->select('art_items.*', 'users.uname', 'users.id as artist_id', 'category.cat_name')
+            ->select('art_items.*', 'users.uname', 'users.username', 'users.id as artist_id', 'category.cat_name')
             ->get();
 
         if (!empty($catArts)) {
@@ -101,7 +101,7 @@ class Catalogue extends Model
                     ->where('art_items.active', '=', 1)
                     ->where('art_items.id', '<>', $art_id)
                     ->orderBy('art_items.id', 'desc')
-                    ->select('art_items.id', 'title', 'art_items.about', 'art_items.price', 'users.uname as user_name', 'users.id as artist_id', 'art_items.fname', 'art_items.ext', 'art_items.price', 'art_items.gst', 'art_items.discount', 'art_items.discount_value')
+                    ->select('art_items.id', 'title', 'art_items.about', 'art_items.price', 'users.uname as user_name', 'users.username', 'users.id as artist_id', 'art_items.fname', 'art_items.ext', 'art_items.price', 'art_items.gst', 'art_items.discount', 'art_items.discount_value')
                     ->take(20)
                     ->get();
 
@@ -184,18 +184,20 @@ class Catalogue extends Model
     
     public function getArtistArts($artist_id, $all = false) {
         $where = [
-                    'artist_id' => $artist_id,
-                    'active'    => 1
+                    'art_items.artist_id' => $artist_id,
+                    'art_items.active'    => 1
                 ];
         
         if ($all === true) {
             $catalogues = Catalogue::where($where)
-                    ->select('id', 'title', 'fname', 'ext')
-                    ->orderBy('id', 'desc')
+                    ->select('art_items.id', 'art_items.title', 'art_items.fname', 'art_items.ext', 'users.username')
+                    ->join('users', 'art_items.artist_id' , '=', 'users.id')
+                    ->orderBy('art_items.id', 'desc')
                     ->get();
         } else {
             $catalogues = Catalogue::where($where)
-                    ->orderBy('id', 'desc')
+                    ->join('users', 'art_items.artist_id' , '=', 'users.id')
+                    ->orderBy('users.id', 'desc')
                     ->paginate(2);
         }
         
@@ -210,7 +212,7 @@ class Catalogue extends Model
         
         $catalogue = Catalogue::where('art_items.active', 2)
                     ->join('users', 'art_items.artist_id' , '=', 'users.id')
-                    ->select('art_items.id', 'title', 'price', 'gst', 'discount', 'discount_value', 'users.uname as user_name', 'art_items.fname', 'art_items.ext', 'users.uname')
+                    ->select('art_items.id', 'title', 'price', 'gst', 'discount', 'discount_value', 'users.uname as user_name', 'art_items.fname', 'art_items.ext', 'users.uname', 'users.username')
                     ->orderBy('art_items.updated_at', 'desc')
                     ->get();
 

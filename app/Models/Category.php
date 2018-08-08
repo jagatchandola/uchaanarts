@@ -46,7 +46,7 @@ class Category extends Model
             ->join('users', 'art_items.artist_id', '=', 'users.id')
             ->where('category.cat_url', '=', $cat_name)
             ->where('art_items.active', 1)
-            ->select('art_items.*', 'users.uname')
+            ->select('art_items.*', 'users.uname', 'users.username')
             ->paginate(10);
 
         if (!empty($catArts)) {
@@ -65,7 +65,7 @@ class Category extends Model
             ->where('art_items.active', 1)
             ->orderBy('art_items.id', 'desc')
             ->take(10)
-            ->select('art_items.*', 'users.uname', 'users.id as artist_id')
+            ->select('art_items.*', 'users.uname', 'users.username', 'users.id as artist_id')
             ->get();
 
         if (!empty($catArts)) {

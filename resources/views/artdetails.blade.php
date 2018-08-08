@@ -8,7 +8,7 @@
         <div class="productBx">
             <div class="row">
                 <div class="col-lg-3 col-md-4 col-12 col-sm-12">
-                    <a href="{{ \App\Helpers\Helper::getImage($art->fname.'.'.$art->ext, 0) }}" data-spzoom><img class="card-img-top img-fluid" src="{{ \App\Helpers\Helper::getImage($art->fname.'.'.$art->ext, 0) }}" alt="" ></a>
+                    <a href="{{ \App\Helpers\Helper::getImage($art->username .'/imgs'. $art->fname.'.'.$art->ext, 1) }}" data-spzoom><img class="card-img-top img-fluid" src="{{ \App\Helpers\Helper::getImage($art->username .'/imgs/'. $art->fname.'.'.$art->ext, 1) }}" alt="" ></a>
                     <a class="btn btn-primary themebBtn float-left mt-4" href="#">ADD TO CART</a>
                     <a class="btn btn-primary themebBtn float-right mt-4" href="#">BUY NOW</a>
                 </div>
@@ -63,7 +63,8 @@
                 @foreach($artistOtherArts as $otherArt)
                     <div class="col-md-3 col-lg-3 col-12 col-sm-6 blogBox moreBox" @if($i>4) style="display: none;" @endif>
                         <div class="artBox">
-                            <a href="{{ route('artist-art', [$otherArt->artist_id, $otherArt->id]) }}"><img src="{{ \App\Helpers\Helper::getImage($otherArt->fname.'.'.$otherArt->ext, 0) }}" class="img-fluid"></a>
+
+                            <a href="{{ route('artist-art', [$otherArt->artist_id, $otherArt->id]) }}"><img src="{{ \App\Helpers\Helper::getImage($otherArt->username .'/imgs/'. $otherArt->fname.'.'.$otherArt->ext, 1) }}" class="img-fluid"></a>
                             <div class="paintingInfo">
                                 <h3 class="mt-2">{{ $otherArt->title }}</h3>
                                 <span>By {{$otherArt->user_name }}</span>
@@ -94,7 +95,7 @@
                 <div class="owl-carousel owl-theme fifth-owl-carousel">
                     
                     @foreach($categoryArts as $art)
-                    <div class="item"><a href="{{ route('artist-art', [$art->artist_id, $art->id]) }}"><img src="{{ \App\Helpers\Helper::getImage($art->fname.'.'.$art->ext, 0) }}"></a>
+                    <div class="item"><a href="{{ route('artist-art', [$art->artist_id, $art->id]) }}"><img src="{{ \App\Helpers\Helper::getImage($art->username .'/imgs/'.$art->fname.'.'.$art->ext, 1) }}"></a>
                         <div class="captionBtm">
                             <div class="paintingInfo artBox">
                                 <h3 class="mt-2">{{ $art->title }}</h3>

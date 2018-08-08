@@ -24,7 +24,7 @@ class Artists extends Model
         if ($records == 'all') {
             $artists = DB::table('users')
                                 ->where('user_role', '=', 'artist')
-                                ->select('id', 'uname', 'email as user_email','shide as status', 'is_creative_artists', 'is_weekly_artist')
+                                ->select('id', 'uname', 'username', 'email as user_email','shide as status', 'is_creative_artists', 'is_weekly_artist')
                                 ->get();
         } else {
             $artists = Artists::where('shide', 1)

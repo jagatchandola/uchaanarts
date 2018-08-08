@@ -39,7 +39,7 @@
                                                         <button type="button" class="btn btn-success" onclick="changeStatus({{ $category->id }}, 0)">Active</button>
                                                     @endif
                                                 </td>
-                                                <td class="center"><a href="{{ route('edit-category', $category->id) }}" target="_blank"><button type="button" class="btn btn-primary">Edit</button></a></td>
+                                                <td class="center"><a href="{{ route('edit-category', $category->id) }}"><button type="button" class="btn btn-primary">Edit</button></a></td>
                                             </tr>
                                             @php $i++ @endphp
                                             @endforeach

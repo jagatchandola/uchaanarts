@@ -19,7 +19,7 @@
                     <form role="form" name="participant-details-form" action="{{ route('participant', [$event_id, $artist_id]) }}" method="post">
                             @foreach($eventArts as $art)
                                 <div class="dataTable_wrapper">
-                                    <img src="{{ \App\Helpers\Helper::getImage($art->fname . $art->ext, 0) }}" width="100" height="100" /><br/>
+                                    <img src="{{ \App\Helpers\Helper::getImage($art->username.'/imgs/'.$art->fname .'.'. $art->ext, 1) }}" width="100" height="100" /><br/>
                                     <span>{{ $art->title }}</span><br/>
                                     <span>Rs. {{ $art->totalPrice }}</span>
                                     <input type="checkbox" name="event_id[]" value="{{ $art->id }}" />
