@@ -43,7 +43,11 @@
                                                 <input class="form-control" type="number" name="price" value="">
                                             </div>
                                             
-                                            <button type="submit" class="btn btn-primary">Submit</button>
+                                            @if (Auth::user()->admin_approved == 0)
+                                                <button type="submit" class="btn btn-primary">Send Profile for Admin approval</button>
+                                            @else
+                                                <button type="submit" class="btn btn-primary">Submit</button>
+                                            @endif
                                         </form>
                                     </div>                                    
                                     <!-- /.col-lg-6 (nested) -->
