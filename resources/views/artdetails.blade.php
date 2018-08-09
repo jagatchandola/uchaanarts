@@ -1,5 +1,12 @@
 @extends('layouts.app')
 
+@section('style')
+<link rel="stylesheet" type="text/css" href="{{ asset('/css/lightbox.min.css') }}">
+@endsection
+@section('script')
+<script type="text/javascript" src="{{ asset('/js/lightbox-plus-jquery.min.js')}}"></script>
+@endsection
+
 @section('content')
 
 <section class="themeSec1 bgWhite">
@@ -8,7 +15,7 @@
         <div class="productBx">
             <div class="row">
                 <div class="col-lg-3 col-md-4 col-12 col-sm-12">
-                    <a href="{{ \App\Helpers\Helper::getImage($art->username .'/imgs'. $art->fname.'.'.$art->ext, 1) }}" data-spzoom><img class="card-img-top img-fluid" src="{{ \App\Helpers\Helper::getImage($art->username .'/imgs/'. $art->fname.'.'.$art->ext, 1) }}" alt="" ></a>
+                    <a href="{{ \App\Helpers\Helper::getImage($art->username .'/imgs'. $art->fname.'.'.$art->ext, 1) }}" data-lightbox="art-details"><img class="card-img-top img-fluid" src="{{ \App\Helpers\Helper::getImage($art->username .'/imgs/'. $art->fname.'.'.$art->ext, 1) }}" alt=""></a>
                     <a class="btn btn-primary themebBtn float-left mt-4" href="#">ADD TO CART</a>
                     <a class="btn btn-primary themebBtn float-right mt-4" href="#">BUY NOW</a>
                 </div>

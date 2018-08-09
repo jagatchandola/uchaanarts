@@ -238,9 +238,8 @@ class HomeController extends Controller
     }
 
     public function artistArtDetails($artist_id, $art_id) {
-        // echo "$artist_id, $art_id";
         $art = $this->catalogue->getArtDetails($artist_id, $art_id);
-        // print_r($art);die;
+
         $artistOtherArts = $categoryArts = [];
       
         if (!empty($art)) {

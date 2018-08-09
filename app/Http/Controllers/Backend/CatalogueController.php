@@ -147,7 +147,7 @@ class CatalogueController extends Controller
             $result = $this->catalogue->updateArt($inputData);
 
             if ($result == true) {
-                Session::flash('success_message', 'Art updated successfully');               
+                Session::flash('success_message', 'Product approved successfully');               
                 return redirect('/admin/gallery/pending');                
             } else {
                 Session::flash('error_message', 'Something went wrong. Please try again');

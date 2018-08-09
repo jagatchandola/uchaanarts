@@ -76,7 +76,6 @@ class Catalogue extends Model
 
     // get art details
     public function getArtDetails($artist_id, $art_id) {
-        //echo "++ $artist_id, $art_id ++";
         $catArts = DB::table('art_items')
             ->join('category', 'art_items.cat', '=', 'category.id')
             ->join('users', 'art_items.artist_id', '=', 'users.id')
@@ -155,7 +154,7 @@ class Catalogue extends Model
                         'discount' => $data['discount'], 
                         'discount_value' => $data['discount_value'], 
                         'active' => $data['status'],
-                        'is_creative_art' => $data['creative_art_status']
+                        'is_creative_art' => $data['creative_art_status'] ?? 0
                     ];
         }
         
@@ -230,7 +229,7 @@ class Catalogue extends Model
         
         $catalogue = Catalogue::where('art_items.id', $art_id)
                     ->join('users', 'art_items.artist_id' , '=', 'users.id')
-                    ->select('art_items.id', 'title', 'art_items.about', 'price', 'gst', 'discount', 'discount_value', 'users.uname as user_name', 'art_items.fname', 'art_items.ext', 'users.uname')
+                    ->select('art_items.id', 'title', 'art_items.about', 'price', 'gst', 'discount', 'discount_value', 'users.username', 'art_items.fname', 'art_items.ext', 'users.uname')
                     ->orderBy('art_items.updated_at', 'desc')
                     ->get();
 
