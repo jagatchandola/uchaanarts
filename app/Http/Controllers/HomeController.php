@@ -120,6 +120,7 @@ class HomeController extends Controller
     public function artistdetails(Request $request, $id)
     {
         $artist = $this->artists->getArtistDetails($id);
+
         if (!empty($artist)) {
             $catalogues = $this->catalogue->getArtistWork($id);
             $items = [];
@@ -139,7 +140,7 @@ class HomeController extends Controller
             }
 
         }
-
+ 
         return view('artistdetails')->with([
                                             'artists' => array_shift($artist),
                                             'catalogues' => $items
@@ -238,8 +239,9 @@ class HomeController extends Controller
     }
 
     public function artistArtDetails($artist_id, $art_id) {
+        echo "$artist_id, $art_id";
         $art = $this->catalogue->getArtDetails($artist_id, $art_id);
-
+        print_r($art);die;
         $artistOtherArts = $categoryArts = [];
         
         if (!empty($art)) {
