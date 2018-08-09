@@ -56,11 +56,13 @@ class Catalogue extends Model
     
     public function getArtistWork($artist_id) {
         $where = [
-                    'artist_id' => $artist_id,
-                    'active'    => 1
+                    'art_items.artist_id' => $artist_id,
+                    'art_items.active'    => 1
                 ];
         $catalogues = Catalogue::where($where)
-                    ->orderBy('id', 'desc')
+                    ->select('art_items.*', 'users.uname', 'users.username')
+                    ->join('users', 'art_items.artist_id' , '=', 'users.id')
+                    ->orderBy('art_items.id', 'desc')
                     ->take(4)
                     ->get()
                     ->toArray();
@@ -74,11 +76,12 @@ class Catalogue extends Model
 
     // get art details
     public function getArtDetails($artist_id, $art_id) {
+        echo "++ $artist_id, $art_id ++";
         $catArts = DB::table('art_items')
-            ->join('users', 'art_items.artist_id', '=', 'users.id')
             ->join('category', 'art_items.cat', '=', 'category.id')
+            ->join('users', 'art_items.artist_id', '=', 'users.id')
             ->where('art_items.id', $art_id)
-            ->where('users.id', '=', $artist_id)
+            ->where('art_items.artist_id', '=', $artist_id)
             ->select('art_items.*', 'users.uname', 'users.username', 'users.id as artist_id', 'category.cat_name')
             ->get();
 
