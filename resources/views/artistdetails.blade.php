@@ -34,7 +34,7 @@
                <div class="col-lg-3 col-md-3 col-12 col-sm-6">
                  <div class="artBox"> <a href="/"><img src="{{ \App\Helpers\Helper::getImage($catalogue['fname'].'.'.$catalogue['ext'], 0) }}" class="img-fluid"></a>
                     <h3>{{$catalogue['title']}}</h3>
-                    <h2><i class="fas fa-rupee-sign"></i> {{$catalogue['totalPrice']}}</h2>
+                    <h2><i class="fas fa-rupee-sign"></i> {{\App\Helpers\Helper::getFormattedPrice($catalogue['totalPrice'])}}</h2>
                     <a href="#" class="btn btn-primary themebBtn">ADD TO CART</a>
                  </div>
                </div>
