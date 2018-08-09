@@ -76,7 +76,7 @@ class Catalogue extends Model
 
     // get art details
     public function getArtDetails($artist_id, $art_id) {
-        echo "++ $artist_id, $art_id ++";
+        //echo "++ $artist_id, $art_id ++";
         $catArts = DB::table('art_items')
             ->join('category', 'art_items.cat', '=', 'category.id')
             ->join('users', 'art_items.artist_id', '=', 'users.id')
