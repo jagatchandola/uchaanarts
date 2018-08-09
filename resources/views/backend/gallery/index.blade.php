@@ -17,14 +17,17 @@
                             <div class="panel-body">
                                 @foreach($arts as $art)
                                 <div class="dataTable_wrapper col-md-3">
-                                    
-                                    <!--<img src="images/{{ $art->fname.'.'.$art->ext }}" />-->
-                                    <a href="{{ route('edit-gallery', [$art->artist_id, $art->id]) }}">
-                                        <img src="{{ \App\Helpers\Helper::getImage($art->username .'/imgs/'. $art->fname .'.'. $art->ext, 1) }}" width="200" height="200" title="{{ $art->uname }}" /><br/>
-                                    </a>
-                                    <span>{{ mb_strimwidth($art->title, 0, 25, '...') }}</span><br/>
-                                    <span><b>By:</b> {{ $art->uname }}</span>
-                                    
+                                    @if($art->isSold == 0)
+                                        <a href="{{ route('edit-gallery', [$art->artist_id, $art->id]) }}">
+                                            <img src="{{ \App\Helpers\Helper::getImage($art->username .'/imgs/'. $art->fname .'.'. $art->ext, 1) }}" width="200" height="200" title="{{ $art->uname }}" /><br/>
+                                        </a>
+                                        <span>{{ mb_strimwidth($art->title, 0, 25, '...') }}</span><br/>
+                                        <span><b>By:</b> {{ $art->uname }}</span>
+                                    @else 
+                                            <img src="{{ \App\Helpers\Helper::getImage($art->username .'/imgs/'. $art->fname .'.'. $art->ext, 1) }}" width="200" height="200" title="{{ $art->uname }}" /><br/>
+                                        <span>{{ mb_strimwidth($art->title, 0, 25, '...') }}</span><br/>
+                                        <span><b>By:</b> {{ $art->uname }}</span>
+                                    @endif
                                 </div>
                                 @endforeach
                             </div>

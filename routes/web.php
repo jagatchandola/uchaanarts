@@ -19,7 +19,6 @@ Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home');
 Route::post('/login', 'LoginController@index')->name('login');
-//Route::post('/register', 'RegisterController@create')->name('register');
 Route::post('/logout-custom', 'LoginController@logout')->name('logout-custom');
 Route::get('/aboutus', 'HomeController@aboutus')->name('aboutus');
 Route::get('/artists', 'HomeController@artists')->name('artists');
@@ -47,6 +46,7 @@ Route::group(['middleware' => ['auth']],function(){
         
         // Artists Routes (Admin)
 	Route::get('/admin/artists','Backend\ArtistController@index')->name('artists-list');
+        Route::get('/admin/pending/artists','Backend\ArtistController@getPendingArtists')->name('pending-artists');
 	Route::put('/admin/artists/changeStatus/{id}','Backend\ArtistController@updateStatus');
         Route::get('/admin/artists/{id}','Backend\ArtistController@edit')->name('edit-artist');
         Route::post('/admin/artist','Backend\ArtistController@edit')->name('edit-artist-post');
@@ -96,21 +96,6 @@ Route::group(['middleware' => ['auth']],function(){
         Route::get('/admin/banner/{id}','Backend\BannerController@edit')->name('edit-banner');
         Route::post('/admin/banner/','Backend\BannerController@edit')->name('edit-banner-post');
         Route::match(['get', 'post'], '/admin/banner/add', 'Backend\BannerController@add')->name('add-banner');
-
-	// Categories Routes (Admin)
-//	Route::match(['get','post'],'/admin/add-category','CategoryController@addCategory');
-//	Route::match(['get','post'],'/admin/edit-category/{id}','CategoryController@editCategory');
-//	Route::match(['get','post'],'/admin/delete-category/{id}','CategoryController@deleteCategory');
-//	Route::get('/admin/view-categories','CategoryController@viewCategories');
-//
-//	// Products Routes
-//	Route::match(['get','post'],'/admin/add-product','ProductsController@addProduct');
-//	Route::get('/admin/view-products','ProductsController@viewProducts');
 });
-//Route::namespace('Backend')->prefix('backend')->group(function () {
-//	Route::get('/login', 'LoginController@index')->name('backend-login');
-//        Route::post('/login', 'LoginController@index')->name('backend-post-login');
-//	Route::get('/', 'DashboardController@index')->name('backend-dashboard');
-//});
 
 Route::get('/backend/logout', 'Backend\LoginController@logout')->name('backend-logout');

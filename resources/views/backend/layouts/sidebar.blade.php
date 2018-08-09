@@ -38,17 +38,20 @@
                         <li>
                             <a href="{{ route('artists-list') }}">{{ ('All Artists') }}</a>
                         </li>
+                        <li>
+                            <a href="{{ route('pending-artists') }}">{{ ('Pending Artists') }}</a>
+                        </li>
                     </ul>
                     <!-- /.nav-second-level -->
                 </li>
                 <li>
-                    <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i>Product<span class="fa arrow"></span></a>
+                    <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i>Products<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li>
-                            <a href="{{ route('gallery-list') }}">All Product</a>
+                            <a href="{{ route('gallery-list') }}">All Products</a>
                         </li>
                         <li>
-                            <a href="{{ route('pending-gallery') }}">Pending Product</a>
+                            <a href="{{ route('pending-gallery') }}">Pending Products</a>
                         </li>
                     </ul>
                 </li>
@@ -130,6 +133,15 @@
             <a class="navbar-brand" href="{{ route('backend-dashboard') }}">{{ ('Uchaan Arts') }}</a>
         </div>
 
+        @if (Auth::user()->image_uploaded == 0)
+            <div class="navbar-header">
+                <span style="color: white; margin-left: 300px; padding-top: 20px;">Please upload a image to get approved</span>
+            </div>
+        @elseif (Auth::user()->admin_approved == 0)
+            <div class="navbar-header">
+                <span style="color: white; margin-left: 300px; padding-top: 20px;">Approval pending</span>
+            </div>
+        @endif
         <ul class="nav navbar-right navbar-top-links">        
             <li class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">
@@ -151,13 +163,13 @@
             <div class="sidebar-nav navbar-collapse">
                 <ul class="nav" id="side-menu">
                     <li>
-                        <a href="#" class="active"><i class="fa fa-dashboard fa-fw"></i>Dashboard</a>
+                        <a href="{{ route('backend-dashboard') }}" class="active"><i class="fa fa-dashboard fa-fw"></i>Dashboard</a>
                     </li>
                     <li>
-                        <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i>Product<span class="fa arrow"></span></a>
+                        <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i>Products<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="{{ route('gallery-list') }}">All Product</a>
+                                <a href="{{ route('gallery-list') }}">All Products</a>
                             </li>
                             <li>
                                 <a href="{{ route('add-gallery') }}">Add Product</a>
