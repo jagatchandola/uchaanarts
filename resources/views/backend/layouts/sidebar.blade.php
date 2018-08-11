@@ -100,6 +100,15 @@
                     <!-- /.nav-second-level -->
                 </li>
                 <li>
+                    <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i>About Us<span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a href="{{ route('add-aboutus-photos') }}">Add Photos</a>
+                        </li>
+                        
+                    </ul>
+                </li>
+                <li>
                     <a href="#"><i class="fa fa-sitemap fa-fw"></i>{{ ('Billing') }}<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li>

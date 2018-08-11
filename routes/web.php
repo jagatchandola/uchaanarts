@@ -42,6 +42,7 @@ Route::match(['get', 'post'], '/backend/login','Backend\LoginController@index')-
 
 Route::group(['middleware' => ['auth']],function(){
 	Route::get('/admin/dashboard','Backend\DashboardController@index')->name('backend-dashboard');
+	Route::match(['get', 'post'], '/admin/aboutus', 'Backend\DashboardController@addPhotos')->name('add-aboutus-photos');
 	//Route::get('/admin/settings','AdminController@settings');
         
         // Artists Routes (Admin)
