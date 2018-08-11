@@ -52,8 +52,8 @@ class Helper
                 break;
             case 4:
                 //$img = '/img/swagatika.jpg';
-                if(is_file(public_path(config('constants.uploads.moments').$image))) {
-                    $img = config('constants.uploads.moments').$image;
+                if(is_file(public_path(config('constants.uploads.memorable').$image))) {
+                    $img = config('constants.uploads.memorable').$image;
                 }
                 break;
             case 5:

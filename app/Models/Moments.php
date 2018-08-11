@@ -10,6 +10,7 @@
 namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use DB;
+
 class Moments extends Model
 {
     /**
@@ -35,16 +36,44 @@ class Moments extends Model
         return [];
     }
 
-    public function getUchaanMoments() {
-        $moments = DB::table('uchaan_events')
+    public function getUchaanMoments($isBackend = false) {
+        if($isBackend == false){
+
+            $moments = DB::table('uchaan_events')
                     ->where('is_active', 1)
                     ->get();
+        } else {
+            $moments = DB::table('uchaan_events')
+                    ->get();
+        }
 
         if (!empty($moments)) {
             return $moments;
         }
 
         return [];
+    }
+
+    public function addMemorableMoments($data){
+
+        $insert = DB::table('uchaan_events')->insert([
+                                            'title' => $data['title'],
+                                            'image' => $data['image'],
+                                            'is_active' => 1
+                                        ]);
+
+        if ($insert === true) {
+            return true;
+        }
+        return false;
+    }
+
+    public function deleteMoment($id) {
+        $response = DB::table('uchaan_events')->where('id', $id)->delete();
+        if ($response >= 1) {
+            return true;
+        }
+        return false;
     }
 
 }

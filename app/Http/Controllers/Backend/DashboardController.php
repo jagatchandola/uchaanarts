@@ -3,12 +3,17 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use App\Helpers\Helper;
 use App\Models\Catalogue;
 use App\Models\Category;
 use App\Models\Artists;
 use App\Models\Events;
+use App\Models\Moments;
 use Illuminate\Support\Facades\Auth;
 use Gate;
+use DB;
+use Session;
 
 class DashboardController extends Controller
 {
@@ -23,6 +28,7 @@ class DashboardController extends Controller
         $this->category = new Category();
         $this->artists = new Artists();
         $this->events = new Events();
+        $this->moments = new Moments();
     }
 
     /**
@@ -57,7 +63,7 @@ class DashboardController extends Controller
         abort(401);
     }
     
-    public function addPhotos() {
+    public function addPhotos(Request $request) {
         if (!Gate::allows('isAdmin')) {
             abort(401);
         }
@@ -65,45 +71,44 @@ class DashboardController extends Controller
         if ($request->isMethod('POST')) {
             $inputData = $request->all();
 
-            $event = DB::table('events')->where('id', $eventId)->get();
+            $event = DB::table('uchaan_events')->get();
 
             if ($request->hasFile('image')) {
                 for ($i=0; $i<count($request->file('image')); $i++) {
                     $image = $request->file('image')[$i];
                     
                     $title = str_replace(' ', '-', strtolower($request['title']));
-                    $name = str_slug($title).'-'.time().rand().'.'.$image->getClientOriginalExtension();
+                    $name = str_slug($title).'-'.time().'.'.$image->getClientOriginalExtension();
 
-                    $destinationPath = public_path(config('constants.uploads.events')) . $event[0]->eurl .'/slides/';
+                    $destinationPath = public_path(config('constants.uploads.memorable'));
+
                     $image->move($destinationPath, $name);
                     
                     $inputData['image'] = $name;
-                    $inputData['event_id'] = $eventId;
                     
-                    $result = $this->events->addMemorableMoments($inputData);
+                    $result = $this->moments->addMemorableMoments($inputData);
                     if ($result == false) {
                         Session::flash('error_message', 'Something went wrong. Please try again');
-                        return redirect('/admin/event/moments/' . $eventId);
+                        return redirect('/admin/aboutus');
                     }
                 }
                 
                 Session::flash('success_message', 'Moments uploaded successfully');
-                return redirect('/admin/events');
+                return redirect('/admin/aboutus');
             }
             
         }
         
-        $uploadedMoments = $this->events->getMemorableMoments($eventId);
-        return view('backend.events.memorable-moments')->with([
-                                    'eventId' => $eventId,
+        $uploadedMoments = $this->moments->getUchaanMoments(true);
+        return view('backend.gallery.uchaan-memorable-moments')->with([
                                     'uploadedMoments' => $uploadedMoments
                                 ]);
     }
     
-    public function deletePhoto($id, $path, $image) {
-        $result = $this->events->deleteMoment($id);
+    public function deletePhoto($id, $image) {
+        $result = $this->moments->deleteMoment($id);
         if($result == true) {
-            $path = public_path(config('constants.uploads.events') . $path . '/slides/' . $image);
+            $path = public_path(config('constants.uploads.memorable') . $image);
             if(file_exists($path)) {
                 unlink($path);
             }
