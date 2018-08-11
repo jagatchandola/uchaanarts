@@ -51,6 +51,8 @@ Route::group(['middleware' => ['auth']],function(){
         Route::get('/admin/artists/{id}','Backend\ArtistController@edit')->name('edit-artist');
         Route::post('/admin/artist','Backend\ArtistController@edit')->name('edit-artist-post');
         Route::get('/admin/artist/view/{id}','Backend\ArtistController@viewArts')->name('view-artist-arts');
+        Route::get('/admin/artist/profile','Backend\ArtistController@profile')->name('artist-profile');
+        Route::post('/admin/artist/profile','Backend\ArtistController@profile')->name('artist-profile');
         
         // gallery Routes (Admin)
 	Route::get('/admin/gallery','Backend\CatalogueController@index')->name('gallery-list');

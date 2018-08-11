@@ -13,6 +13,7 @@
                     </div>
                     <!-- /.col-lg-12 -->
                 </div>
+                @include('layouts.alert')
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="panel panel-default">
@@ -28,7 +29,7 @@
                                             </div>
                                             
                                             <div class="form-group">
-                                                <label>Image: <img src="{{ \App\Helpers\Helper::getImage($art->fname .'.'. $art->ext, 0) }}" width="100" height="100"></label>
+                                                <label>Image: <img src="{{ \App\Helpers\Helper::getImage($art->username .'/imgs/'. $art->fname .'.'. $art->ext, 1) }}" width="100" height="100"></label>
                                             </div>
                                             
                                             @can('isArtist')
@@ -44,7 +45,7 @@
                                             </div>
                                             <div class="form-group">
                                                 <label>About Image</label>
-                                                <input class="form-control" type="textarea" name="about" value="{{ $art->about }}">
+                                                <textarea class="form-control" name="about">{{ $art->about }}</textarea>
                                             </div>
                                             <div class="form-group">
                                                 <label>Price</label>

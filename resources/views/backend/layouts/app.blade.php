@@ -29,6 +29,8 @@
 
         <!-- Custom Fonts -->
         <link href="{{ asset('backend/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
+        
+        <link href="{{ asset('backend/css/style.css') }}" rel="stylesheet">
 
         @yield('style')
         

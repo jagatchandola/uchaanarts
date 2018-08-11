@@ -33,7 +33,7 @@
 <!--Header start Here-->
 <header>
   <div class="col-md-6 col-12 col-sm-12 col-lg-3 d-none d-md-block d-lg-block">
-    <div class="logoRight"><a href="/"><img src="{{ asset('img/uchaan-logo.jpg')}}" class="img-fluid"></a></div>
+    <div class="logoRight"><a href="/"><img src="{{ asset('img/uchaan-logo.png')}}" class="img-fluid"></a></div>
   </div>
   <div class="container">
     <div class="row">

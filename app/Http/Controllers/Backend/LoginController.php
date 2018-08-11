@@ -66,7 +66,8 @@ class LoginController extends Controller
     public function logout(){
         Session::flush();
         Auth::logout();
-        return redirect('/backend/login')->with('flash_message_success','Logged out Successfully'); 
+        // return redirect('/backend/login')->with('flash_message_success','Logged out Successfully'); 
+        return redirect('/'); 
     }
 }
 

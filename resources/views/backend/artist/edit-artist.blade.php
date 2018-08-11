@@ -18,6 +18,7 @@
                         <div class="panel panel-default">
                             
                             <div class="panel-body">
+                                @include('layouts.alert')
                                 <div class="row">
                                     <div class="col-lg-6">
                                         <form role="form" name="edit-artist-form" action="{{ route('edit-artist-post') }}" method="post">

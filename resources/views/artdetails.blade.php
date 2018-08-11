@@ -15,7 +15,7 @@
         <div class="productBx">
             <div class="row">
                 <div class="col-lg-3 col-md-4 col-12 col-sm-12">
-                    <a href="{{ \App\Helpers\Helper::getImage($art->username .'/imgs'. $art->fname.'.'.$art->ext, 1) }}" data-lightbox="art-details"><img class="card-img-top img-fluid" src="{{ \App\Helpers\Helper::getImage($art->username .'/imgs/'. $art->fname.'.'.$art->ext, 1) }}" alt=""></a>
+                    <a href="{{ \App\Helpers\Helper::getImage($art->username .'/imgs/'. $art->fname.'.'.$art->ext, 1) }}" data-lightbox="art-details"><img class="card-img-top img-fluid" src="{{ \App\Helpers\Helper::getImage($art->username .'/imgs/'. $art->fname.'.'.$art->ext, 1) }}" alt=""></a>
                     <a class="btn btn-primary themebBtn float-left mt-4" href="#">ADD TO CART</a>
                     <a class="btn btn-primary themebBtn float-right mt-4" href="#">BUY NOW</a>
                 </div>

@@ -110,8 +110,8 @@
         <div class="row">
             @foreach($catalogues as $catalogue)
             <div class="col-md-4 col-lg-4 col-12 col-sm-12">
-                <div class="artBox">
-                    <a href="/"><img class="img-fluid" src="{{ \App\Helpers\Helper::getImage($catalogue->directory.'/imgs/'.$catalogue->fname.'.'.$catalogue->ext, 1) }}"><a href="/item/{{$catalogue->id}}" class="img-fluid"></a>
+                <div class="item artBox">
+                    <a href="{{ \App\Helpers\Helper::getImage($catalogue->directory.'/imgs/'.$catalogue->fname.'.'.$catalogue->ext, 1) }}" data-lightbox="creative-art" data-title="{{$catalogue->title}}"><img class="img-fluid" src="{{ \App\Helpers\Helper::getImage($catalogue->directory.'/imgs/'.$catalogue->fname.'.'.$catalogue->ext, 1) }}"><a href="/item/{{$catalogue->id}}" class="img-fluid"></a>
                         <h3>{{$catalogue->title}}</h3>
                         <h2>{{ \App\Helpers\Helper::getFormattedPrice($catalogue->totalPrice) }}</h2>
                         <span>{{$catalogue->user_name}}</span>
@@ -139,7 +139,7 @@
                     @foreach($artists as $artist)
 
                     <div class="item">
-                        <a href="{{ \App\Helpers\Helper::getImage($artist['username'].'/'.$artist['profimg'], 1) }}" data-lightbox="creatice-artists" data-title="{{$artist['uname']}}">
+                        <a href="{{ \App\Helpers\Helper::getImage($artist['username'].'/'.$artist['profimg'], 1) }}" data-lightbox="creative-artists" data-title="{{$artist['uname']}}">
                             <img class="img-fluid" src="{{ \App\Helpers\Helper::getImage($artist['username'].'/'.$artist['profimg'], 1) }}">
                         </a>
                         <a href="{{ route('artistdetails', $artist['id']) }}" class="captionBtn1">View Artwork</a>

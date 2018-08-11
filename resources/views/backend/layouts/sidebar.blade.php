@@ -13,9 +13,7 @@
                 <i class="fa fa-user fa-fw"></i>{{Auth::user()->uname}} <b class="caret"></b>
             </a>
             <ul class="dropdown-menu dropdown-user">
-                <li>
-                    <a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
-                </li>
+                
                 <li class="divider"></li>
                 <li>
                     <a href="{{ route('backend-logout') }}"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
@@ -129,36 +127,37 @@
 
 @else
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-        <div class="navbar-header">
+        <div class="col-xs-12 col-sm-4 col-md-2 navbar-header">
             <a class="navbar-brand" href="{{ route('backend-dashboard') }}">{{ ('Uchaan Arts') }}</a>
         </div>
-
+    
+        <div class="col-xs-12 col-sm-4 col-md-7 text-center">
         @if (Auth::user()->image_uploaded == 0)
-            <div class="navbar-header">
-                <span style="color: white; margin-left: 300px; padding-top: 20px;">Please upload a image to get approved</span>
-            </div>
+            <span class="notify-box"><i class="fa fa-info-circle"></i> Please upload a image to get approved</span>
         @elseif (Auth::user()->admin_approved == 0)
-            <div class="navbar-header">
-                <span style="color: white; margin-left: 300px; padding-top: 20px;">Approval pending</span>
-            </div>
+            <span class="notify-box"><i class="fa fa-info-circle"></i> Approval pending</span>
         @endif
-        <ul class="nav navbar-right navbar-top-links">        
-            <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                    <i class="fa fa-user fa-fw"></i>{{Auth::user()->uname}} <b class="caret"></b>
-                </a>
-                <ul class="dropdown-menu dropdown-user">
-                    <li>
-                        <a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
-                    </li>
-                    <li class="divider"></li>
-                    <li>
-                        <a href="{{ route('backend-logout') }}"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
-                    </li>
-                </ul>
-            </li>
-        </ul>
-
+        </div>
+        <div class="col-xs-12 col-sm-4 col-md-3">
+            <ul class="nav navbar-right navbar-top-links">        
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-user fa-fw"></i>{{Auth::user()->uname}} <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu dropdown-user">
+                        @if(Auth::user()->user_role == 'artist')
+                        <li>
+                            <a href="{{ route('artist-profile') }}"><i class="fa fa-user fa-fw"></i> User Profile</a>
+                        </li>
+                        @endif
+                        <li class="divider"></li>
+                        <li>
+                            <a href="{{ route('backend-logout') }}"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
         <div class="navbar-default sidebar" role="navigation">
             <div class="sidebar-nav navbar-collapse">
                 <ul class="nav" id="side-menu">
