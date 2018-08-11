@@ -41,7 +41,7 @@ class HomeController extends Controller
     {
         $arts = $this->catalogue->getCreativeArts();
 
-        $category = $this->category->getCategories('all');
+        $category = $this->category->getCategories('');
         $artists = $this->artists->getArtistDetails('','1');
         $weeklyStatus = $this->artists->getArtistOfWeek();
 
