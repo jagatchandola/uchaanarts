@@ -271,7 +271,8 @@ class EventController extends Controller
         }
         
         if ($request->isMethod('POST')) {
-            
+            $inputData = $request->all();
+            dd($inputData);
         }
         
         return view('backend.events.memorable-moments')->with([

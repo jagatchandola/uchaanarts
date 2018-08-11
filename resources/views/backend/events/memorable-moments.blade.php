@@ -31,18 +31,32 @@
                                     <div class="col-lg-6">
                                         <form role="form" id="memorable-moments-form" name="memorable-moments-form" action="{{ route('upload-memorable-moments', $eventId) }}" method="post" enctype="multipart/form-data">
                                             @csrf
-                                            <div class="form-group">
-                                                <label>Event Title</label>
-                                                <input class="form-control" name="event_name" value="" required>
+                                            <div class="input-group control-group after-add-more form-group">
+                                                <div class="form-group">
+                                                    <label>Event Title</label>
+                                                    <input class="form-control" name="event_name" value="" required>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Image</label>
+                                                    <input class="form-control" type="file" name="image[]" value="" required>
+                                                </div>
+                                                <div class="input-group-btn">
+                                                    <button class="btn btn-primary add-more" style="font-size: 12px" type="button"><i class="glyphicon glyphicon-plus"></i></button>
+                                              </div>
                                             </div>
-                                            <div class="form-group">
-                                                <label>Image</label>
-                                                <input class="form-control" type="file" name="image" value="" required>
-                                            </div>
-                                            
-                                            
-                                            <button type="button" class="btn btn-primary">Submit</button>
+                                            <button type="submit" class="btn btn-primary">Submit</button>
                                         </form>
+                                        
+                                        <div class="copy-fields hide">
+                                            <div class="control-group input-group form-group">
+                                                <div class="col-xs-3" style="padding-left: 0">
+                                                    <input class="form-control" type="file" name="image[]" value="" required>
+                                                </div>
+                                                <div class="input-group-btn"> 
+                                                    <button class="btn btn-danger remove" type="button" style="font-size: 12px"><i class="glyphicon glyphicon-remove"></i></button>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>                                    
                                     <!-- /.col-lg-6 (nested) -->
                                 </div>
@@ -59,6 +73,16 @@
         <!-- /#wrapper -->
 <script type="text/javascript">
     $(document).ready(function(){
+        $(".add-more").click(function(){ 
+            var html = $(".copy-fields").html();
+            $(".after-add-more").after(html);
+        });
+        
+        //here it will remove the current value of the remove button which has been pressed
+        $("body").on("click",".remove",function(){ 
+            $(this).parents(".control-group").remove();
+        });
+
         if($('#start_date').val() > $('#end_date').val()) {
             alert('Start date can not b greater than end date!');
             return false;
