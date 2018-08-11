@@ -3,6 +3,12 @@
 @section('content')
 
             <div id="page-wrapper">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">Products</h1>
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
                 @if(!empty($message))
                     <div class="alert alert-success fade in" id="success-div">
                         <a href="#" class="close">&times;</a>
@@ -12,8 +18,8 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="panel panel-default">
-                            <div class="panel-heading"></div>
-                            <!-- /.panel-heading -->
+<!--                             <div class="panel-heading">Products</div>
+ -->                            <!-- /.panel-heading -->
                             <div class="panel-body">
                                 @foreach($arts as $art)
                                 <div class="dataTable_wrapper col-md-3">

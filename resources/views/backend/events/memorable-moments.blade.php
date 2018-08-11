@@ -32,6 +32,7 @@
                                 $title = '';
                             @endphp
                             @if(count($uploadedMoments) > 0)
+                            
                                 @foreach($uploadedMoments as $moment)
                                     @if(empty($title))
                                         @php
@@ -40,17 +41,19 @@
                                     @endif
                                     <div class="col-sm-2 text-center" id="moment-{{$moment->moment_id}}">
                                             <a href="{{ \App\Helpers\Helper::getImage($moment->eurl.'/slides/'.$moment->image, 3) }}" data-lightbox="{{$moment->moment_id}}" data-title="">
-                                                <img src="{{ \App\Helpers\Helper::getImage($moment->eurl.'/slides/'.$moment->image, 3) }}" width="130" height="130" />                                                
+                                                <img src="{{ \App\Helpers\Helper::getImage($moment->eurl.'/slides/'.$moment->image, 3) }}" width="130" height="130"  style="padding:3px; border:1px solid #ccc;"/>                                                
                                             </a>
-                                            <span style="position: absolute; right: 18px; top: 1px;" onclick="deleteImage('{{$moment->moment_id}}', '{{$moment->eurl}}', '{{$moment->image}}')">
+                                            <span style="position: absolute; right: 27px; top: 5px;" onclick="deleteImage('{{$moment->moment_id}}', '{{$moment->eurl}}', '{{$moment->image}}')">
                                                 <i class="fa fa-close" style="padding: 5px; background: #fff;"></i>
                                             </span>
                                     </div>
                                 @endforeach
+                                
                             @endif
                             <div class="panel-body">
+                            <div class="col-lg-12">
                                 <div class="row">
-                                    <div class="col-lg-6">
+                                    <div class="col-lg-4">
                                         <form role="form" id="memorable-moments-form" name="memorable-moments-form" action="{{ route('upload-memorable-moments', $eventId) }}" method="post" enctype="multipart/form-data">
                                             @csrf
                                             <div class="input-group control-group after-add-more form-group">
@@ -83,6 +86,7 @@
                                     <!-- /.col-lg-6 (nested) -->
                                 </div>
                                 <!-- /.row (nested) -->
+                                </div>
                             </div>
                             <!-- /.panel-body -->
                         </div>

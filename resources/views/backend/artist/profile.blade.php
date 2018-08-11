@@ -97,12 +97,6 @@
                                                 <textarea class="form-control" name="about">{{ $artist->about }}</textarea>
                                             </div>
                                         </div>
-                                        <div class="col-lg-6">
-                                            <div class="form-group">
-                                                <label>About2</label>
-                                                <textarea class="form-control" name="about2">{{ $artist->about2 }}</textarea>
-                                            </div>
-                                        </div>
                                             
                                         <div class="col-lg-12">    
                                             <button type="submit" class="btn btn-primary">Submit</button>
