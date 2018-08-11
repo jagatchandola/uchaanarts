@@ -29,7 +29,7 @@
                                             </div>
                                             
                                             <div class="form-group">
-                                                <label>Image: <img src="{{ \App\Helpers\Helper::getImage($art->username .'/imgs/'. $art->fname .'.'. $art->ext, 1) }}" width="100" height="100"></label>
+                                                <img src="{{ \App\Helpers\Helper::getImage($art->username .'/imgs/'. $art->fname .'.'. $art->ext, 1) }}" width="100" height="100">
                                             </div>
                                             
                                             @can('isArtist')
@@ -89,10 +89,6 @@
                                                 </div>
                                             @endcan
                                             
-                                            <div class="form-group">
-                                                <label>Total Price: {{ $totalPrice }}</label>
-                                                                                               
-                                            </div>
                                             <button type="submit" class="btn btn-primary">Submit</button>
                                         </form>
                                     </div>                                    

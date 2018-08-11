@@ -184,15 +184,21 @@ class Catalogue extends Model
         return [];            
     }
     
-    public function getArtistArts($artist_id, $all = false) {
-        $where = [
-                    'art_items.artist_id' => $artist_id,
-                    'art_items.active'    => 1
-                ];
+    public function getArtistArts($artist_id, $all = false, $artistPending = false) {
+        if ($artistPending === true) {
+            $where = [
+                        'art_items.artist_id' => $artist_id
+                    ];
+        } else {
+            $where = [
+                        'art_items.artist_id' => $artist_id,
+                        'art_items.active'    => 1
+                    ];
+        }
         
         if ($all === true) {
             $catalogues = Catalogue::where($where)
-                    ->select('art_items.id', 'art_items.title', 'art_items.fname', 'art_items.ext', 'users.username')
+                    ->select('art_items.id', 'art_items.price', 'art_items.title', 'art_items.fname', 'art_items.ext', 'users.username', 'users.uname')
                     ->join('users', 'art_items.artist_id' , '=', 'users.id')
                     ->orderBy('art_items.id', 'desc')
                     ->get();
@@ -214,6 +220,7 @@ class Catalogue extends Model
         
         $catalogue = Catalogue::where('art_items.active', 2)
                     ->join('users', 'art_items.artist_id' , '=', 'users.id')
+                    ->where('users.admin_approved', '=', 1)
                     ->select('art_items.id', 'title', 'price', 'gst', 'discount', 'discount_value', 'users.uname as user_name', 'art_items.fname', 'art_items.ext', 'users.uname', 'users.username')
                     ->orderBy('art_items.updated_at', 'desc')
                     ->get();
