@@ -273,7 +273,7 @@ class EventController extends Controller
         
         if ($request->isMethod('POST')) {
             $inputData = $request->all();
-            //dd($inputData);
+
             $event = DB::table('events')->where('id', $eventId)->get();
 
             if ($request->hasFile('image')) {

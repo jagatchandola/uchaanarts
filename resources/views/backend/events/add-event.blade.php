@@ -37,15 +37,15 @@
                                             </div>
                                             <div class="form-group">
                                                 <label>Image</label>
-                                                <input class="form-control" type="file" name="image" value="" required>
+                                                <input class="form-control" type="file" name="image" id="image" value="" required accept="image/gif, image/jpeg">
                                             </div>
                                             <div class="form-group">
                                                 <label>Venue</label>
-                                                <input class="form-control" type="textarea" name="venue" value="" required>
+                                                <input class="form-control" type="text" name="venue" value="" required>
                                             </div>
                                             <div class="form-group">
                                                 <label>About</label>
-                                                <input class="form-control" type="textarea" name="about" value="" required>
+                                                <textarea class="form-control" type="textarea" name="about" value="" required></textarea>
                                             </div>
                                             <div class="form-group">
                                                 <label>Start Date</label>
@@ -69,7 +69,7 @@
                                                 </label>                                                
                                             </div>
                                             
-                                            <button type="button" class="btn btn-primary">Submit</button>
+                                            <button type="button" class="btn btn-primary" onclick="validate()">Submit</button>
                                         </form>
                                     </div>                                    
                                     <!-- /.col-lg-6 (nested) -->
@@ -86,13 +86,28 @@
         </div>
         <!-- /#wrapper -->
 <script type="text/javascript">
-    $(document).ready(function(){
+    function validate() {
         if($('#start_date').val() > $('#end_date').val()) {
-            alert('Start date can not b greater than end date!');
+            alert('Start date can not be greater than end date!');
             return false;
         }
-        return false;
+
+        var ftype = $('#image')[0].files[0].type;
+
+        switch(ftype)
+        {
+            case 'image/png':
+            case 'image/gif':
+            case 'image/jpeg':
+            case 'image/pjpeg':
+            case 'image/jpg':
+                break;
+            default:
+                alert('Unsupported File!');
+                return false;
+        }
+        
         $('#add-event-form').submit();
-    });
+    }
 </script>
 @endsection
