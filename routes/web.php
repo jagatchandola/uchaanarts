@@ -83,6 +83,7 @@ Route::group(['middleware' => ['auth']],function(){
         Route::get('/admin/events/{id}', 'Backend\EventController@edit')->name('edit-event');
         Route::post('/admin/events', 'Backend\EventController@edit')->name('edit-event-post');
         Route::match(['get', 'post'], '/admin/event/add', 'Backend\EventController@addEvent')->name('add-event');
+        Route::match(['get', 'post'], '/admin/event/moments/{eventId}', 'Backend\EventController@uploadMemorableMoments')->name('upload-memorable-moments');
         
         // Event Route 
         Route::match(['get', 'post'], '/admin/event/participateEvent/{id}', 'Backend\EventController@participateEvent')->name('participate-event');

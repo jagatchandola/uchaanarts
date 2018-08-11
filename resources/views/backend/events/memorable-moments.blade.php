@@ -9,7 +9,7 @@
             <div id="page-wrapper">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h1 class="page-header">Add Event</h1>
+                        <h1 class="page-header">Upload Memorable Moments</h1>
                     </div>
                     <!-- /.col-lg-12 -->
                 </div>
@@ -29,7 +29,7 @@
                             <div class="panel-body">
                                 <div class="row">
                                     <div class="col-lg-6">
-                                        <form role="form" id="add-event-form" name="add-event-form" action="{{ route('add-event') }}" method="post" enctype="multipart/form-data">
+                                        <form role="form" id="memorable-moments-form" name="memorable-moments-form" action="{{ route('upload-memorable-moments', $eventId) }}" method="post" enctype="multipart/form-data">
                                             @csrf
                                             <div class="form-group">
                                                 <label>Event Title</label>
@@ -39,35 +39,7 @@
                                                 <label>Image</label>
                                                 <input class="form-control" type="file" name="image" value="" required>
                                             </div>
-                                            <div class="form-group">
-                                                <label>Venue</label>
-                                                <input class="form-control" type="textarea" name="venue" value="" required>
-                                            </div>
-                                            <div class="form-group">
-                                                <label>About</label>
-                                                <input class="form-control" type="textarea" name="about" value="" required>
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Start Date</label>
-                                                <input class="form-control" type="date" name="start_date" id="start_date" value="" required>
-                                            </div>
-                                            <div class="form-group">
-                                                <label>End Date</label>
-                                                <input class="form-control" type="date" name="end_date" id="end_date" value="" required>
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Event Fees</label>
-                                                <input class="form-control" type="text" name="event_fees" value="" required>
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Status</label>
-                                                <label class="radio-inline">
-                                                    <input type="radio" name="status" id="active" value="1" >Active
-                                                </label>
-                                                <label class="radio-inline">
-                                                    <input type="radio" name="status" id="inactive" value="0" >Inactive
-                                                </label>                                                
-                                            </div>
+                                            
                                             
                                             <button type="button" class="btn btn-primary">Submit</button>
                                         </form>

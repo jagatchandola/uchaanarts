@@ -264,4 +264,18 @@ class EventController extends Controller
                                     'artist_id' => $artist_id
                                 ]);
     }
+    
+    public function uploadMemorableMoments(Request $request, $eventId) {
+        if (!Gate::allows('isAdmin')) {
+            abort(401);
+        }
+        
+        if ($request->isMethod('POST')) {
+            
+        }
+        
+        return view('backend.events.memorable-moments')->with([
+                                    'eventId' => $eventId
+                                ]);
+    }
 }
