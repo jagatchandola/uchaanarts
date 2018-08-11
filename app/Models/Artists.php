@@ -182,4 +182,28 @@ class Artists extends Model
 
         return [];
     }
+
+    public function getArtistsProfile($id){
+
+        $customers = DB::table('users')
+                            ->where('id', '=', $id)
+                            ->first();
+        
+        if (!empty($customers)) {
+            return $customers;
+        }
+
+        return [];
+    }
+
+    public function updateProfile($id, $data) {
+        $updateStatus = DB::table('users')
+            ->where('id', $id)
+            ->update($data);
+        
+        if ($updateStatus >= 1) {
+            return true;
+        }
+        return false;
+    }
 }

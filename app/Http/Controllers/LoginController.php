@@ -52,7 +52,11 @@ class LoginController extends Controller
     public function index(Request $request)
     {
         if (Auth::attempt(['email' => $request['email'], 'password' => $request['password']])) {
-            return redirect()->route('home');
+            // dd(Auth::user()->user_role);
+            if(Auth::user()->user_role == 'user')
+                return redirect()->route('home');
+            else
+                return redirect('/admin/dashboard');;
         } else {
             Session::flash('error-msg', "Invalid email/password");
             return redirect('login');

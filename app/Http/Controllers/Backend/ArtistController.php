@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Helpers\Helper;
 use Gate;
 use Session;
+use Auth;
 
 class ArtistController extends Controller
 {
@@ -152,5 +153,39 @@ class ArtistController extends Controller
         return view('backend.artist.pending')->with([
                                             'artists' => $artists
                                         ]);
+    }
+
+    public function profile(Request $request)
+    {
+        
+        if ($request->isMethod('POST')) {
+            $inputData = $request->all();
+
+            if ($request->hasFile('image')) {
+                $image = $request->file('image');
+                $title = str_replace(' ', '-', strtolower($request['title']));
+                $name = str_slug($title).'-'.time().'.'.$image->getClientOriginalExtension();
+                $destinationPath = public_path(config('constants.uploads.artists')).Auth::user()->username;
+                $image->move($destinationPath, $name);
+                
+                $inputData['profimg'] = $name;
+                unset($inputData['image']);
+            }
+
+            $result = $this->artists->updateProfile(Auth::user()->id, $inputData);
+            if ($result == true) {
+                Session::flash('success_message', 'Profile updated successfully');
+                return redirect('/admin/artist/profile');
+            } else {
+                Session::flash('error_message', 'Something went wrong. Please try again');
+                return redirect('/admin/artist/profile');
+            }
+        } else {
+            $artist = $this->artists->getArtistsProfile(Auth::user()->id);
+            // print_r($artists);die;
+            return view('backend.artist.profile')->with([
+                                                'artist' => $artist
+                                            ]);
+        }
     }
 }

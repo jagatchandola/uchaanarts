@@ -1,8 +1,4 @@
 @extends('backend.layouts.app')
-@section('style')
-    <link href="{{ asset('/backend/css/dataTables/dataTables.bootstrap.css') }}" rel="stylesheet">
-    <link href="{{ asset('backend/css/dataTables/dataTables.responsive.css') }}" rel="stylesheet">
-@endsection
 
 @section('content')
 
@@ -18,6 +14,7 @@
                         <div class="panel panel-default">
                             
                             <div class="panel-body">
+                                @include('layouts.alert')
                                 <div class="row">
                                     <div class="col-lg-6">
                                         <form role="form" name="edit-category-form" action="{{ route('edit-category-post') }}" method="post" enctype="multipart/form-data">
@@ -31,6 +28,10 @@
                                                 <!--<img src="{{ asset('image/'.$category['image']) }}" />-->
                                                 <img src="{{ \App\Helpers\Helper::getImage($category['image'], 5) }}" width="100" height="100" />
                                                 <input class="form-control" type="file" name="image" value="">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Description</label>
+                                                <textarea class="form-control" name="description">{{ $category['cat_desc'] }}</textarea>
                                             </div>
                                             <div class="form-group">
                                                 <label>GST</label>
@@ -65,15 +66,9 @@
 @endsection
 
 @section('script')
-<script src="{{ asset('backend/js/dataTables/jquery.dataTables.min.js') }}"></script>
-<script src="{{ asset('backend/js/dataTables/dataTables.bootstrap.min.js') }}"></script>
+
     <script type="text/javascript">
         $(document).ready(function() {
-            $('#dataTables').DataTable({
-                responsive: true,
-                //iDisplayLength: 20
-                "lengthMenu": [20,30,40,50]
-            });
         });
         
         function changeStatus(id, status) {

@@ -103,6 +103,7 @@ class Category extends Model
         
         $updateData = [
                         'cat_name' => $data['cat-name'], 
+                        'cat_desc' => $data['description'], 
                         'cat_url' => str_replace(' ', '-', strtolower($data['cat-name'])),
                         'gst' => $data['gst'],
                         'shide' => $data['status']

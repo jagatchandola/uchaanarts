@@ -1,8 +1,4 @@
 @extends('backend.layouts.app')
-@section('style')
-    <link href="{{ asset('/backend/css/dataTables/dataTables.bootstrap.css') }}" rel="stylesheet">
-    <link href="{{ asset('backend/css/dataTables/dataTables.responsive.css') }}" rel="stylesheet">
-@endsection
 
 @section('content')
 
@@ -41,7 +37,7 @@
                                             </div>
                                             <div class="form-group">
                                                 <label>Description</label>
-                                                <input class="form-control" type="textarea" name="description" value="">
+                                                <textarea class="form-control" name="description"></textarea>
                                             </div>
                                             <div class="form-group">
                                                 <label>GST</label>

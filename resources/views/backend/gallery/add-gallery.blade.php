@@ -9,11 +9,12 @@
                     <!-- /.col-lg-12 -->
                 </div>
                 <div class="row">
-                    @include('layouts.alert')
+                    
                     <div class="col-lg-12">
                         <div class="panel panel-default">
-                            
+                            @include('layouts.alert')
                             <div class="panel-body">
+
                                 <div class="row">
                                     <div class="col-lg-6">
                                         <form role="form" name="add-gallery-form" action="{{ route('add-gallery') }}" method="post" enctype="multipart/form-data">
@@ -36,7 +37,7 @@
                                             </div>
                                             <div class="form-group">
                                                 <label>About Image</label>
-                                                <input class="form-control" type="textarea" name="about" value="">
+                                                <textarea class="form-control" name="about"></textarea>
                                             </div>
                                             <div class="form-group">
                                                 <label>Price</label>
