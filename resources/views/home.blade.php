@@ -48,9 +48,9 @@
         <div class="owl-carousel owl-theme first-owl-carousel">
             @foreach($categories as $category)
             <div class="item">
-                <a href="{{ \App\Helpers\Helper::getImage($category->image, 5)}}" data-lightbox="{{$category->cat_name.rand()}}" data-title="{{$category->cat_name}}">
+               
                     <img src="{{ \App\Helpers\Helper::getImage($category->image, 5) }}">
-                </a>
+               
                 <a href="/art-gallery/{{$category->cat_url}}" class="caption">{{$category->cat_name}}</a>
             </div>
             @endforeach
@@ -139,9 +139,9 @@
                     @foreach($artists as $artist)
 
                     <div class="item">
-                        <a href="{{ \App\Helpers\Helper::getImage($artist['username'].'/'.$artist['profimg'], 1) }}" data-lightbox="creative-artists" data-title="{{$artist['uname']}}">
+                        
                             <img class="img-fluid" src="{{ \App\Helpers\Helper::getImage($artist['username'].'/'.$artist['profimg'], 1) }}">
-                        </a>
+                        
                         <a href="{{ route('artistdetails', $artist['id']) }}" class="captionBtn1">View Artwork</a>
                         <div class="captionBtm">{{$artist['uname']}}</div>                            
                     </div>
