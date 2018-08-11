@@ -84,11 +84,12 @@ Route::group(['middleware' => ['auth']],function(){
         Route::post('/admin/events', 'Backend\EventController@edit')->name('edit-event-post');
         Route::match(['get', 'post'], '/admin/event/add', 'Backend\EventController@addEvent')->name('add-event');
         Route::match(['get', 'post'], '/admin/event/moments/{eventId}', 'Backend\EventController@uploadMemorableMoments')->name('upload-memorable-moments');
+        Route::delete('/admin/event/deleteMoment/{moment_id}/{path}/{image}', 'Backend\EventController@deleteMoment');
         
         // Event Route 
         Route::match(['get', 'post'], '/admin/event/participateEvent/{id}', 'Backend\EventController@participateEvent')->name('participate-event');
         Route::get('/admin/event/participants', 'Backend\EventController@participants')->name('event-participants');
-        Route::match(['get', 'post'], '/admin/event/participants/{event_id}/{artist_id}', 'Backend\EventController@participantDetails')->name('participant');
+        Route::match(['get', 'post'], '/admin/event/participants/{event_id}/{artist_id}', 'Backend\EventController@participantDetails')->name('participant');        
         
 
         // Banners

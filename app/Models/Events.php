@@ -233,4 +233,34 @@ class Events extends Model
         
         return [];
     }
+    
+    public function addMemorableMoments($data) {
+        $insert = DB::table('moments')->insert([
+                                            'event_id' => $data['event_id'],
+                                            'title' => $data['title'],
+                                            'image' => $data['image'],
+                                            'is_active' => 1
+                                        ]);
+
+        if ($insert === true) {
+            return true;
+        }
+        return false;
+    }
+    
+    public function getMemorableMoments($event_id) {
+        return DB::table('moments as m')
+                ->join('events as e', 'm.event_id', '=', 'e.id')
+                ->where('event_id', $event_id)
+                ->select('m.id as moment_id', 'm.title', 'm.image', 'e.eurl')
+                ->get();
+    }
+    
+    public function deleteMoment($id) {
+        $response = DB::table('moments')->delete($id);
+        if ($response >= 1) {
+            return true;
+        }
+        return false;
+    }
 }

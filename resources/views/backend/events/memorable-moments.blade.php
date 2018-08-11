@@ -1,7 +1,10 @@
 @extends('backend.layouts.app')
+
 @section('style')
-    <link href="{{ asset('/backend/css/dataTables/dataTables.bootstrap.css') }}" rel="stylesheet">
-    <link href="{{ asset('backend/css/dataTables/dataTables.responsive.css') }}" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="{{ asset('/css/lightbox.min.css') }}">
+@endsection
+@section('script')
+<script type="text/javascript" src="{{ asset('/js/lightbox-plus-jquery.min.js')}}"></script>
 @endsection
 
 @section('content')
@@ -25,7 +28,28 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="panel panel-default">
-                            
+                            @php
+                                $title = '';
+                            @endphp
+                            @if(count($uploadedMoments) > 0)
+                                @foreach($uploadedMoments as $moment)
+                                    @if(empty($title))
+                                        @php
+                                            $title = $moment->title;
+                                        @endphp
+                                    @endif
+                                    <div class="col-sm-2 text-center" id="moment-{{$moment->moment_id}}">
+                                        <div>
+                                            <a href="{{ \App\Helpers\Helper::getImage($moment->eurl.'/slides/'.$moment->image, 3) }}" data-lightbox="{{$moment->moment_id}}" data-title="">
+                                                <img src="{{ \App\Helpers\Helper::getImage($moment->eurl.'/slides/'.$moment->image, 3) }}" width="130" height="130" />                                                
+                                            </a>
+                                            <span style="position: absolute; right: 18px; top: 1px;" onclick="deleteImage('{{$moment->moment_id}}', '{{$moment->eurl}}', '{{$moment->image}}')">
+                                                <i class="fa fa-close" style="padding: 5px; background: #fff;"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            @endif
                             <div class="panel-body">
                                 <div class="row">
                                     <div class="col-lg-6">
@@ -34,7 +58,7 @@
                                             <div class="input-group control-group after-add-more form-group">
                                                 <div class="form-group">
                                                     <label>Event Title</label>
-                                                    <input class="form-control" name="event_name" value="" required>
+                                                    <input class="form-control" name="title" value="{{$title}}" required>
                                                 </div>
                                                 <div class="form-group">
                                                     <label>Image</label>
@@ -49,7 +73,7 @@
                                         
                                         <div class="copy-fields hide">
                                             <div class="control-group input-group form-group">
-                                                <div class="col-xs-3" style="padding-left: 0">
+                                                <div class="form-group">
                                                     <input class="form-control" type="file" name="image[]" required accept="image/*">
                                                 </div>
                                                 <div class="input-group-btn"> 
@@ -83,12 +107,27 @@
             $(this).parents(".control-group").remove();
         });
 
-        if($('#start_date').val() > $('#end_date').val()) {
-            alert('Start date can not b greater than end date!');
-            return false;
-        }
         return false;
-        $('#add-event-form').submit();
+        $('#add-event-form').submit();        
     });
+    
+    function deleteImage(momentId, path, image) {
+        $.ajax({
+            type: "DELETE",
+            url: "/admin/event/deleteMoment/"+momentId+'/'+path+'/'+image,
+            success: function(data) {
+                if(data != 0 && data == true){
+                    $("#moment-"+momentId).remove();
+                    alert('Image deleted successfully');
+                } else {
+                    alert('Something went wrong. Please try again!');
+                    return false;
+                }
+            },
+            error: function(request,status,errorThrown) {
+               alert('request :'+request, 'status : '+status, 'errorThrown : '+errorThrown); 
+            }
+        });
+    }
 </script>
 @endsection

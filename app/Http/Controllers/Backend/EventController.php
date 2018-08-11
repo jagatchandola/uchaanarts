@@ -11,6 +11,7 @@ use Session;
 use Auth;
 use Gate;
 use Illuminate\Support\Facades\Mail;
+use DB;
 
 class EventController extends Controller
 {
@@ -272,32 +273,52 @@ class EventController extends Controller
         
         if ($request->isMethod('POST')) {
             $inputData = $request->all();
-            dd($inputData);
-            
+            //dd($inputData);
+            $event = DB::table('events')->where('id', $eventId)->get();
+
             if ($request->hasFile('image')) {
+                for ($i=0; $i<count($request->file('image')); $i++) {
+                    $image = $request->file('image')[$i];
+                    
+                    $title = str_replace(' ', '-', strtolower($request['title']));
+                    $name = str_slug($title).'-'.time().rand().'.'.$image->getClientOriginalExtension();
+
+                    $destinationPath = public_path(config('constants.uploads.events')) . $event[0]->eurl .'/slides/';
+                    $image->move($destinationPath, $name);
+                    
+                    $inputData['image'] = $name;
+                    $inputData['event_id'] = $eventId;
+                    
+                    $result = $this->events->addMemorableMoments($inputData);
+                    if ($result == false) {
+                        Session::flash('error_message', 'Something went wrong. Please try again');
+                        return redirect('/admin/event/moments/' . $eventId);
+                    }
+                }
                 
-                $image = $request->file('image');
-                $title = str_replace(' ', '-', strtolower($request['event_name']));
-                $name = str_slug($title).'.'.$image->getClientOriginalExtension();
-
-                $destinationPath = public_path(config('constants.uploads.events')) . $title .'-'. date('d-M-Y', strtotime($inputData['start_date']));
-                $image->move($destinationPath, $name);
-            }
-
-            $inputData['image'] = $name;
-            
-            $result = $this->events->addEvent($inputData);
-            if ($result == true) {
                 Session::flash('success_message', 'Moments uploaded successfully');
                 return redirect('/admin/events');
-            } else {
-                Session::flash('error_message', 'Something went wrong. Please try again');
-                return redirect('/admin/event/moments/'.$eventId);
             }
+            
         }
         
+        $uploadedMoments = $this->events->getMemorableMoments($eventId);
         return view('backend.events.memorable-moments')->with([
-                                    'eventId' => $eventId
+                                    'eventId' => $eventId,
+                                    'uploadedMoments' => $uploadedMoments
                                 ]);
+    }
+
+    public function deleteMoment($id, $path, $image) {
+        $result = $this->events->deleteMoment($id);
+        if($result == true) {
+            $path = public_path(config('constants.uploads.events') . $path . '/slides/' . $image);
+            if(file_exists($path)) {
+                unlink($path);
+            }
+            echo 1;
+        } else {
+            echo 0;
+        }
     }
 }
