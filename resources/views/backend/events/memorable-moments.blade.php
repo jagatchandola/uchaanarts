@@ -39,14 +39,12 @@
                                         @endphp
                                     @endif
                                     <div class="col-sm-2 text-center" id="moment-{{$moment->moment_id}}">
-                                        <div>
                                             <a href="{{ \App\Helpers\Helper::getImage($moment->eurl.'/slides/'.$moment->image, 3) }}" data-lightbox="{{$moment->moment_id}}" data-title="">
                                                 <img src="{{ \App\Helpers\Helper::getImage($moment->eurl.'/slides/'.$moment->image, 3) }}" width="130" height="130" />                                                
                                             </a>
                                             <span style="position: absolute; right: 18px; top: 1px;" onclick="deleteImage('{{$moment->moment_id}}', '{{$moment->eurl}}', '{{$moment->image}}')">
                                                 <i class="fa fa-close" style="padding: 5px; background: #fff;"></i>
                                             </span>
-                                        </div>
                                     </div>
                                 @endforeach
                             @endif
@@ -112,22 +110,25 @@
     });
     
     function deleteImage(momentId, path, image) {
-        $.ajax({
-            type: "DELETE",
-            url: "/admin/event/deleteMoment/"+momentId+'/'+path+'/'+image,
-            success: function(data) {
-                if(data != 0 && data == true){
-                    $("#moment-"+momentId).remove();
-                    alert('Image deleted successfully');
-                } else {
-                    alert('Something went wrong. Please try again!');
-                    return false;
+        var r = confirm('Are you sure, you want to Delete this image?');
+        if (r == true) {
+            $.ajax({
+                type: "DELETE",
+                url: "/admin/event/deleteMoment/"+momentId+'/'+path+'/'+image,
+                success: function(data) {
+                    if(data != 0 && data == true){
+                        $("#moment-"+momentId).remove();
+                        alert('Image deleted successfully');
+                    } else {
+                        alert('Something went wrong. Please try again!');
+                        return false;
+                    }
+                },
+                error: function(request,status,errorThrown) {
+                   alert('request :'+request, 'status : '+status, 'errorThrown : '+errorThrown); 
                 }
-            },
-            error: function(request,status,errorThrown) {
-               alert('request :'+request, 'status : '+status, 'errorThrown : '+errorThrown); 
-            }
-        });
+            });
+        }
     }
 </script>
 @endsection
