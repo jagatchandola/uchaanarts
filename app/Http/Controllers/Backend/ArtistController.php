@@ -123,20 +123,7 @@ class ArtistController extends Controller
             abort(401);
         }
         
-        $arts = $this->catalogue->getArtistArts($artist_id);
-
-        if (!empty($arts) && count($arts)) {
-            foreach ($arts as $art) {
-                $calculateData = [
-                                    'price' => $art->price,
-                                    'gst' => $art->gst,
-                                    'discountType' => $art->discount,
-                                    'discountValue' => $art->discount_value
-                                ];
-                
-                $art->totalPrice = Helper::calculatePrice($calculateData);
-            }
-        }
+        $arts = $this->catalogue->getArtistArts($artist_id, true, true);
         
         return view('backend.artist.view-arts')->with([
                                             'arts' => $arts
@@ -182,7 +169,6 @@ class ArtistController extends Controller
             }
         } else {
             $artist = $this->artists->getArtistsProfile(Auth::user()->id);
-            // print_r($artists);die;
             return view('backend.artist.profile')->with([
                                                 'artist' => $artist
                                             ]);

@@ -22,7 +22,7 @@
                                             </div>
                                             
                                             <div class="form-group">
-                                                <label>Image: <img src="{{ \App\Helpers\Helper::getImage($art->username .'/imgs/'.$art->fname .'.'. $art->ext, 1) }}" width="100" height="100"></label>
+                                                <img src="{{ \App\Helpers\Helper::getImage($art->username .'/imgs/'.$art->fname .'.'. $art->ext, 1) }}" width="100" height="100">
                                             </div>
                                             
                                             <div class="form-group">
@@ -31,11 +31,11 @@
                                             </div>
                                             <div class="form-group">
                                                 <label>About Image</label>
-                                                <input class="form-control" type="textarea" name="about" value="{{ $art->about }}">
+                                                <textarea class="form-control" name="about">{{ $art->about }}</textarea>
                                             </div>
                                             <div class="form-group">
                                                 <label>Price</label>
-                                                <input class="form-control" type="textarea" name="price" value="{{ $art->price }}">
+                                                <input class="form-control" type="text" name="price" value="{{ $art->price }}">
                                             </div>
                                             <div class="form-group">
                                                 <label>Commission(%)</label>
