@@ -23,6 +23,7 @@ class Category extends Model
     public function getCategories($records = '') {
         if ($records == 'all') {
             $categories = DB::table('category')
+                        ->where('shide', 1)
                         ->orderBy('cat_name', 'asc')
                         ->select('id', 'cat_url', 'cat_name', 'gst', 'shide as status', 'image')
                         ->get();
