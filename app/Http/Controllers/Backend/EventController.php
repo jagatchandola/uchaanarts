@@ -264,4 +264,40 @@ class EventController extends Controller
                                     'artist_id' => $artist_id
                                 ]);
     }
+    
+    public function uploadMemorableMoments(Request $request, $eventId) {
+        if (!Gate::allows('isAdmin')) {
+            abort(401);
+        }
+        
+        if ($request->isMethod('POST')) {
+            $inputData = $request->all();
+            dd($inputData);
+            
+            if ($request->hasFile('image')) {
+                
+                $image = $request->file('image');
+                $title = str_replace(' ', '-', strtolower($request['event_name']));
+                $name = str_slug($title).'.'.$image->getClientOriginalExtension();
+
+                $destinationPath = public_path(config('constants.uploads.events')) . $title .'-'. date('d-M-Y', strtotime($inputData['start_date']));
+                $image->move($destinationPath, $name);
+            }
+
+            $inputData['image'] = $name;
+            
+            $result = $this->events->addEvent($inputData);
+            if ($result == true) {
+                Session::flash('success_message', 'Moments uploaded successfully');
+                return redirect('/admin/events');
+            } else {
+                Session::flash('error_message', 'Something went wrong. Please try again');
+                return redirect('/admin/event/moments/'.$eventId);
+            }
+        }
+        
+        return view('backend.events.memorable-moments')->with([
+                                    'eventId' => $eventId
+                                ]);
+    }
 }

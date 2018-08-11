@@ -29,7 +29,7 @@
                             <div class="panel-body">
                                 <div class="row">
                                     <div class="col-lg-6">
-                                        <form role="form" name="add-event-form" action="{{ route('add-event') }}" method="post" enctype="multipart/form-data">
+                                        <form role="form" id="add-event-form" name="add-event-form" action="{{ route('add-event') }}" method="post" enctype="multipart/form-data">
                                             @csrf
                                             <div class="form-group">
                                                 <label>Event Title</label>
@@ -49,11 +49,11 @@
                                             </div>
                                             <div class="form-group">
                                                 <label>Start Date</label>
-                                                <input class="form-control" type="date" name="start_date" value="" required>
+                                                <input class="form-control" type="date" name="start_date" id="start_date" value="" required>
                                             </div>
                                             <div class="form-group">
                                                 <label>End Date</label>
-                                                <input class="form-control" type="date" name="end_date" value="" required>
+                                                <input class="form-control" type="date" name="end_date" id="end_date" value="" required>
                                             </div>
                                             <div class="form-group">
                                                 <label>Event Fees</label>
@@ -69,7 +69,7 @@
                                                 </label>                                                
                                             </div>
                                             
-                                            <button type="submit" class="btn btn-primary">Submit</button>
+                                            <button type="button" class="btn btn-primary">Submit</button>
                                         </form>
                                     </div>                                    
                                     <!-- /.col-lg-6 (nested) -->
@@ -85,4 +85,14 @@
 
         </div>
         <!-- /#wrapper -->
+<script type="text/javascript">
+    $(document).ready(function(){
+        if($('#start_date').val() > $('#end_date').val()) {
+            alert('Start date can not b greater than end date!');
+            return false;
+        }
+        return false;
+        $('#add-event-form').submit();
+    });
+</script>
 @endsection

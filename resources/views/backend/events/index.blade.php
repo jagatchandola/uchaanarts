@@ -26,6 +26,7 @@
                                                 <th>Status</th>
                                                 @can('isAdmin')
                                                 <th>Edit</th>
+                                                <th>Memorale Moments</th>
                                                 @endcan
                                                 @can('isArtist')
                                                 <th>Participate</th>
@@ -76,6 +77,13 @@
                                                     @endif
                                                 @endcan
                                                 </td>
+                                                @can('isAdmin')
+                                                <td>
+                                                @if(strtotime($event->start_date) <= strtotime(date('Y-m-d')))
+                                                    <a href="{{ route('upload-memorable-moments', $event->id) }}"><button type="button" class="btn btn-success">Upload Moments</button></a>
+                                                @endif
+                                                </td>
+                                                @endcan
                                             </tr>
                                             @php $i++ @endphp
                                             @endforeach
