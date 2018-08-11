@@ -1,5 +1,12 @@
 @extends('layouts.app')
 
+@section('style')
+<link rel="stylesheet" type="text/css" href="{{ asset('/css/lightbox.min.css') }}">
+@endsection
+@section('script')
+<script type="text/javascript" src="{{ asset('/js/lightbox-plus-jquery.min.js')}}"></script>
+@endsection
+
 @section('content')
 <!--Section 1 Stat Here-->
 <section class="themeSec1 bgWhite">
@@ -70,4 +77,31 @@
     </div>
 </section>
 
+
+
+<!--sectionAddcart Start here-->
+<div class="sectionAddcart">
+ <div class="container">
+   <div class="aboutUsbx themeSubs1 ">
+       
+    @if (!empty($moments))
+    <h2>Uchaan Memorable Moments </h2>
+        
+    <div class="row">
+    @foreach ($moments as $moment)
+            <div class="col-lg-3 col-md-3 col-sm-4">
+                <div class="artBox"> 
+                    <a href="{{ \App\Helpers\Helper::getImage($moment->eurl.'/slides/'.$moment->image, 3) }}" data-lightbox="{{$moment->title}}" data-title="{{$moment->title}}">
+                        <img src="{{ \App\Helpers\Helper::getImage($moment->eurl.'/slides/'.$moment->image, 3) }}" class="img-fluid">
+                    </a>
+                    <h3>{{$moment->title}}</h3>
+                </div>
+            </div>
+    @endforeach
+    </div> 
+    @endif
+  </div>
+</div>
+</div>
+<!--sectionAddcart Ends here-->
 @endsection

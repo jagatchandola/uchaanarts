@@ -46,22 +46,21 @@ Uchaan has a repertoire of not just the masters of art but also an impeccable a 
     @if (!empty($moments))
     <h2>Uchaan Memorable Moments </h2>
         
+    <div class="row">
     @foreach ($moments as $moment)
-        <div class="row">
-            <div class="col-lg-3 col-md-3 col-12 col-sm-6">
+            <div class="col-lg-3 col-md-3 col-sm-4">
                 <div class="artBox"> 
-                    <a href="{{ \App\Helpers\Helper::getImage($moment->eurl.'/slides/'.$moment->image, 3) }}" data-lightbox="{{$moment->title}}" data-title="{{$moment->title}}">
-                        <img src="{{ \App\Helpers\Helper::getImage($moment->eurl.'/slides/'.$moment->image, 3) }}" class="img-fluid">
+                    <a href="{{ \App\Helpers\Helper::getImage($moment->image, 4) }}" data-lightbox="{{$moment->title}}" data-title="{{$moment->title}}">
+                        <img src="{{ \App\Helpers\Helper::getImage($moment->image, 4) }}" class="img-fluid">
                     </a>
                     <h3>{{$moment->title}}</h3>
                 </div>
             </div>
-        </div> 
     @endforeach
+    </div> 
     @endif
   </div>
 </div>
 </div>
-<!--sectionAddcart Ends here-->
 
 @endsection

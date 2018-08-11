@@ -93,7 +93,7 @@ class HomeController extends Controller
      */
     public function aboutus()
     {
-        $moments = $this->moments->getAllMoments();
+        $moments = $this->moments->getUchaanMoments();
         return view('aboutus')->with([
                                     'moments' => $moments
                                 ]);
@@ -181,10 +181,12 @@ class HomeController extends Controller
     {
         $eventDetails = $this->events->getEventDetails($event_id);
         $eventArts = $this->events->getEventFeaturedArts($event_id);
-       // dd($eventArts);
+        $moments = $this->moments->getAllMoments($event_id);
+       // print_r($moments);die;
         return view('eventdetails')->with([
                                             'eventDetails' => $eventDetails,
-                                            'eventArts'    => $eventArts
+                                            'eventArts'    => $eventArts,
+                                            'moments' => $moments
                                         ]);
     }
 
