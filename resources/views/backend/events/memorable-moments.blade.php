@@ -38,7 +38,7 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <label>Image</label>
-                                                    <input class="form-control" type="file" name="image[]" value="" required>
+                                                    <input class="form-control" type="file" name="image[]" required accept="image/*">
                                                 </div>
                                                 <div class="input-group-btn">
                                                     <button class="btn btn-primary add-more" style="font-size: 12px" type="button"><i class="glyphicon glyphicon-plus"></i></button>
@@ -50,7 +50,7 @@
                                         <div class="copy-fields hide">
                                             <div class="control-group input-group form-group">
                                                 <div class="col-xs-3" style="padding-left: 0">
-                                                    <input class="form-control" type="file" name="image[]" value="" required>
+                                                    <input class="form-control" type="file" name="image[]" required accept="image/*">
                                                 </div>
                                                 <div class="input-group-btn"> 
                                                     <button class="btn btn-danger remove" type="button" style="font-size: 12px"><i class="glyphicon glyphicon-remove"></i></button>
