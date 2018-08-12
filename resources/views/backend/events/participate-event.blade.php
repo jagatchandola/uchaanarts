@@ -19,10 +19,10 @@
                         <div class="dataTable_wrapper">No record(s) found</div>
                     @else
                         <form role="form" name="particiapte-event-form" action="{{ route('participate-event', [$event_id]) }}" method="post">
-                            <input type="hidden" name="event_art_id" value="{{ $event_artist_id }}"
+                            <input type="hidden" name="event_art_id" value="{{ $event_artist_id }}" />
                             @foreach($arts as $art)
-                            <div class="dataTable_wrapper">
-                               <img src="{{ \App\Helpers\Helper::getImage($art->fname . $art->ext, 0) }}" width="100" height="100" /><br/>
+                            <div class="col-sm-3">
+                               <img src="{{ \App\Helpers\Helper::getImage($art->username .'/imgs/'. $art->fname .'.'. $art->ext, 1) }}" width="100" height="100" /><br/>
                                 <span>{{ $art->title }}</span><br/>
                                 <input type="checkbox" name="art_id[]" value="{{ $art->id }}" @if(in_array($art->id, $eventArts)) checked="checked" @endif />
                             </div>

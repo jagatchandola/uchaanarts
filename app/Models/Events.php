@@ -263,4 +263,13 @@ class Events extends Model
         }
         return false;
     }
+    
+    public function getArtistEvents($artist_id) {
+        return DB::table('evt_artists')
+                ->where('artist_id', $artist_id)
+                ->groupBy('evtid')
+                ->select('evtid')
+                ->get()
+                ->toArray();
+    }
 }

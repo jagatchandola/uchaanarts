@@ -30,17 +30,9 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="panel panel-default">
-                            @php
-                                $title = '';
-                            @endphp
                             @if(count($uploadedMoments) > 0)
                             
                                 @foreach($uploadedMoments as $moment)
-                                    @if(empty($title))
-                                        @php
-                                            $title = $moment->title;
-                                        @endphp
-                                    @endif
                                     <div class="col-sm-2 text-center" id="moment-{{$moment->id}}">
                                             <a href="{{ \App\Helpers\Helper::getImage($moment->image, 4) }}" data-lightbox="{{$moment->id}}" data-title="">
                                                 <img src="{{ \App\Helpers\Helper::getImage($moment->image, 4) }}" width="130" height="130"  style="padding:3px; border:1px solid #ccc;"/>                                                
@@ -59,10 +51,6 @@
                                         <form role="form" id="memorable-moments-form" name="memorable-moments-form" action="{{ route('add-aboutus-photos') }}" method="post" enctype="multipart/form-data">
                                             @csrf
                                             <div class="input-group control-group after-add-more form-group">
-                                                <div class="form-group">
-                                                    <label>Event Title</label>
-                                                    <input class="form-control" name="title" value="{{$title}}" required>
-                                                </div>
                                                 <div class="form-group">
                                                     <label>Image</label>
                                                     <input class="form-control" type="file" name="image[]" required accept="image/*">

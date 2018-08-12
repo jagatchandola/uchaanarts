@@ -74,7 +74,9 @@
 
                                                 @can('isArtist')
                                                     @if($event->start_date > date('Y-m-d'))
+                                                        @if(!in_array($event->id, $artistEvents))
                                                         <a href="{{ route('participate-event', $event->id) }}"Check $1><button type="button" class="btn btn-primary">Participate</button></a>
+                                                        @endif
                                                     @endif
                                                 @endcan
                                                 </td>
