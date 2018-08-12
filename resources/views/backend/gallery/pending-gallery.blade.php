@@ -6,7 +6,7 @@
     <div class="row">        
         <div class="col-lg-12">
             <div class="panel panel-default">                
-                <div class="panel-heading"></div>
+                
                 @if(!empty($message))
                 <div class="alert alert-success fade in" id="success-div">
                     <a href="#" class="close">&times;</a>
@@ -16,9 +16,7 @@
                 <!-- /.panel-heading -->
                 <div class="panel-body">
                     @if(empty($arts))
-                    <div class="dataTable_wrapper">
-                        No record(s) found
-                    </div>
+                    <div class="panel-heading">No record(s) found</div>
                     @else
                     @foreach($arts as $art)
                     <div class="dataTable_wrapper">
