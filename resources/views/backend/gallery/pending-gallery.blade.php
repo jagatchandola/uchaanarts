@@ -3,10 +3,12 @@
 @section('content')
 
 <div id="page-wrapper">   
+<div class="clearfix">
+                <h1 class="page-header">Pending Products</h1>
+            </div>
     <div class="row">        
         <div class="col-lg-12">
             <div class="panel panel-default">                
-                <div class="panel-heading"></div>
                 @if(!empty($message))
                 <div class="alert alert-success fade in" id="success-div">
                     <a href="#" class="close">&times;</a>
@@ -21,12 +23,12 @@
                     </div>
                     @else
                     @foreach($arts as $art)
-                    <div class="dataTable_wrapper">
+                    <div class="col-md-2 col-xs-6 dataTable_wrapper text-center">
                         <a href="{{ route('update-pending-gallery', [$art->id]) }}">
                             <img src="{{ \App\Helpers\Helper::getImage($art->username .'/imgs/'.$art->fname .'.'. $art->ext, 1) }}" width="100" height="100" /><br/>
                         </a>
-                        <span>{{ $art->title }}</span><br/>
-                        <span>By {{ $art->uname }}</span>
+                        <p>{{ $art->title }}</p>
+                        <p>By {{ $art->uname }}</p>
 
                     </div>
                     @endforeach

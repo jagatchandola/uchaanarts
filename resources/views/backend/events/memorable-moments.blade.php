@@ -3,9 +3,6 @@
 @section('style')
 <link rel="stylesheet" type="text/css" href="{{ asset('/css/lightbox.min.css') }}">
 @endsection
-@section('script')
-<script type="text/javascript" src="{{ asset('/js/lightbox-plus-jquery.min.js')}}"></script>
-@endsection
 
 @section('content')
 
@@ -96,6 +93,8 @@
                 </div>
 
         </div>
+        <script type="text/javascript" src="{{ asset('/js/lightbox-plus-jquery.min.js')}}"></script>
+
         <!-- /#wrapper -->
 <script type="text/javascript">
     $(document).ready(function(){

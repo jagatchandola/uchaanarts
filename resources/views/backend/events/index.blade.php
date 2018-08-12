@@ -7,10 +7,12 @@
 @section('content')
 
             <div id="page-wrapper">
+            <div class="clearfix">
+        <h1 class="page-header">All Events</h1>
+    </div>
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="panel panel-default">
-                            <div class="panel-heading"></div>
                             @include('layouts.alert')
                             <!-- /.panel-heading -->
                             <div class="panel-body">
