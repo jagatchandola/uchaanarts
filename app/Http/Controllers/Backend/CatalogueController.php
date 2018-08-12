@@ -131,7 +131,7 @@ class CatalogueController extends Controller
         
         $arts = $this->catalogue->getPendingPhotos();
         return view('backend.gallery.pending-gallery')->with([
-                                    'arts' => $arts,
+                                    'arts' => count($arts) ? $arts : [],
                                     'message' => $message
                                 ]);
     }

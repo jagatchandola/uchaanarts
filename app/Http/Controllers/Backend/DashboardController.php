@@ -77,8 +77,8 @@ class DashboardController extends Controller
                 for ($i=0; $i<count($request->file('image')); $i++) {
                     $image = $request->file('image')[$i];
                     
-                    $title = str_replace(' ', '-', strtolower($request['title']));
-                    $name = str_slug($title).'-'.time().'.'.$image->getClientOriginalExtension();
+                    $title = 'moment';
+                    $name = str_slug($title).'-'.time().rand().'.'.$image->getClientOriginalExtension();
 
                     $destinationPath = public_path(config('constants.uploads.memorable'));
 

@@ -57,7 +57,7 @@ class Moments extends Model
     public function addMemorableMoments($data){
 
         $insert = DB::table('uchaan_events')->insert([
-                                            'title' => $data['title'],
+                                            'title' => $data['title'] ?? '',
                                             'image' => $data['image'],
                                             'is_active' => 1
                                         ]);
