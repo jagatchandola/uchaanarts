@@ -239,12 +239,12 @@ class EventController extends Controller
 
             if (!empty($response) && count($response)) {
                 $html = 'Total amount to be paid : <b>'. $response[0]->payment_amount . '</b>. <br>Cleck on the link <a href="'.env('APP_URL') . '/event/payment/' . $response[0]->payment_link.'">Click here</a> to make the payment';
-                // $status = Mail::send([], [], function($message) use ($html) {
-                //     $message->from(env('MAIL_USERNAME'), 'Jagat Prakash');
-                //     $message->to('jagat2205114@gmail.com');
-                //     $message->subject('Event Payment');
-                //     $message->setBody($html, 'text/html');
-                // }); 
+//                 $status = Mail::send([], [], function($message) use ($html) {
+//                     $message->from(env('MAIL_USERNAME'), 'Jagat Prakash');
+//                     $message->to('jagat2205114@gmail.com');
+//                     $message->subject('Event Payment');
+//                     $message->setBody($html, 'text/html');
+//                 }); 
                 
                 Session::flash('success_message', 'Participant approved successfully');
                 return redirect('/admin/event/participants');

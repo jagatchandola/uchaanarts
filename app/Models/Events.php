@@ -154,7 +154,10 @@ class Events extends Model
         $catalogue = Events::where('events.shide', 1)
                     ->join('evt_artists', 'events.id' , '=', 'evt_artists.evtid')
                     ->join('users', 'evt_artists.artist_id' , '=', 'users.id')
-                    ->leftJoin('event_payment', 'events.id' , '=', 'event_payment.event_id')
+                    ->leftJoin('event_payment', function($join){
+                            $join->on('events.id', '=', 'event_payment.event_id')
+                                ->on('users.id', '=', 'event_payment.artist_id');
+                    })
                     ->select('events.etitle', 'events.id as event_id', 'users.id as artist_id', 'uname', 'event_payment.id as event_payment_id', 'event_payment.payment_received')
                     ->orderBy('events.id', 'desc')
                     ->groupBy('evt_artists.evtid', 'evt_artists.artist_id')
