@@ -37,7 +37,7 @@
                             </div>
                             @endforeach
                         <div class="col-md-12 text-center" style="margin-top: 10px">    
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                            <a href="{{ route('event-participants') }}"><button type="button" class="btn btn-primary">Back</button></a> <button type="submit" class="btn btn-primary">Submit</button>
                         </div>
                     </form>
                 </div>

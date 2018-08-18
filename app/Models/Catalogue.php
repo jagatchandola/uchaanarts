@@ -116,12 +116,12 @@ class Catalogue extends Model
     }
     
     public function getTotalArtsCount($id = '') {
-        $catalogues = Catalogue::where('active', 1);
-        
+        $catalogues = DB::table('art_items');
+
         if (!empty($id)) {
             $catalogues->where('artist_id', $id);
         }
-        
+
         $catalogues = $catalogues->count('id');
 
         if (!empty($catalogues)) {

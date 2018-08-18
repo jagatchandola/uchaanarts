@@ -81,7 +81,7 @@ class Artists extends Model
     }
     
     public function getTotalArtistsCount() {
-        $catalogues = Artists::where('shide', 1)
+        $catalogues = DB::table('users')
                     ->where('user_role', '=', 'artist')
                     ->count('id');
 
