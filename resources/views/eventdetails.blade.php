@@ -34,7 +34,7 @@
                             Date - {{ date('jS', strtotime($eventDetails->start_date)) }} to {{ date('jS F Y', strtotime($eventDetails->end_date)) }}<br>
                             {{ $eventDetails->venue }}
                         </h3>
-                        <p class="text-md-left text-lg-left text-center">{{ $eventDetails->about }}</p>
+                        <p class="text-md-left text-lg-left text-center"><?php echo $eventDetails->about; ?></p>
                         <br>
                         <h3 class="text-center">Event Fees</h3>
                         <table class="text-center">
@@ -62,11 +62,11 @@
                 <div class="contentBx">
                 @if(!empty($eventDetails->concept_note))
                     <h2>Concept Note</h2>
-                    <p>{{ $eventDetails->concept_note }}</p>
+                    <p><?php echo  $eventDetails->concept_note; ?></p>
                 @endif
                 @if(!empty($eventDetails->artists))
                     <h2>Participating Artist</h2>
-                    <p>{{ $eventDetails->artists }}</p>
+                    <p><?php echo $eventDetails->artists; ?></p>
                 @endif
                     @can('isArtist')
                     <div class="text-center"><a href="{{ route('participate-event', $eventDetails->id) }}" target="_blank" class="btn btn-primary themeBtn mt-5">Participate Now</a></div>
