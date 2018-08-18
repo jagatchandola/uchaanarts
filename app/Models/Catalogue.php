@@ -25,9 +25,10 @@ class Catalogue extends Model
         if ($records == 'all') {
             $catalogues = DB::table('art_items')
                         ->join('users', 'art_items.artist_id' , '=', 'users.id')
-                        ->select('art_items.id', 'title', 'art_items.about', 'price', 'users.uname as user_name', 'art_items.active as status')
+                        ->whereIn('art_items.active', [0, 1])
+                        ->select('art_items.*', 'users.username', 'users.uname', 'art_items.active as status')
                         ->orderBy('id', 'desc')
-                        ->get();
+                        ->paginate(20);
         } else {
             $catalogues = Catalogue::where('art_items.active', 1)
                         ->join('users', 'art_items.artist_id' , '=', 'users.id');

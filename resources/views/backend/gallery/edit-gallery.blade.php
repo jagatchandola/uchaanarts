@@ -89,7 +89,7 @@
                                                 </div>
                                             @endcan
                                             
-                                            <button type="submit" class="btn btn-primary">Submit</button>
+                                            <a href="{{ route('gallery-list') }}"><button type="button" class="btn btn-primary">Back</button></a> <button type="submit" class="btn btn-primary">Submit</button>
                                         </form>
                                     </div>                                    
                                     <!-- /.col-lg-6 (nested) -->

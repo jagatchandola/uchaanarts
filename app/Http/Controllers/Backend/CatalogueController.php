@@ -47,7 +47,7 @@ class CatalogueController extends Controller
             $message = Session::get('error_message');
         }
         
-        $arts = $this->catalogue->getCatalogues('', $id, true);
+        $arts = $this->catalogue->getCatalogues('all', $id, true);
         return view('backend.gallery.index')->with([
                                     'arts' => $arts,
                                     'message' => $message
