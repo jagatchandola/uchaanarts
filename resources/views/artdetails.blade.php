@@ -23,7 +23,7 @@
                     <blockquote class="blockquote aboutBio text-left">
                         <h3>{{ $art->title }}</h3>
                         <h5>INR {{ \App\Helpers\Helper::getFormattedPrice($art->totalPrice) }}</h5>
-                        <p class="mb-0 ">{{ $art->about }}</p>
+                        <p class="mb-0 "><?php echo $art->about; ?></p>
                     </blockquote>
                     <h5>Artwork details</h5>
                     <table class="">

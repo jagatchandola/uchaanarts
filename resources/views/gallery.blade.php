@@ -1,13 +1,5 @@
 @extends('layouts.app')
 
-@section('style')
-<link rel="stylesheet" type="text/css" href="{{ asset('/css/lightbox.min.css') }}">
-@endsection
-@section('script')
-<script type="text/javascript" src="{{ asset('/js/lightbox-plus-jquery.min.js')}}"></script>
-
-@endsection
-
 @section('content')
 <!--Section 1 Stat Here-->
 <section class="themeSec1 bgWhite">
@@ -39,10 +31,16 @@
             @if(!empty($arts))
                 @foreach($arts as $art)
                 <div class="col-lg-3 col-md-4 col-12 col-sm-6 a b box all">
-                  <div class="artBox"> <a href="{{ \App\Helpers\Helper::getImage($art->username.'/imgs/'. $art->fname.'.'.$art->ext, 1) }}" data-lightbox="creative-art" data-title="{{$art->title}}"> <img src="{{ \App\Helpers\Helper::getImage($art->username.'/imgs/'. $art->fname.'.'.$art->ext, 1) }}" class="img-fluid"></a>
-                    <a class="view-a" href="{{ route('artist-art', [$art->artist_id, $art->id]) }}"><h3>{{ $art->title }} <i class="fa fa-eye"></i></h3></a>
-                    <h2><i class="fas fa-rupee-sign"></i> {{ \App\Helpers\Helper::getFormattedPrice($art->totalPrice) }}</h2>
-                    <span>{{$art->uname}}</span> <a href="#" class="btn btn-primary themebBtn">ADD TO CART</a> </div>
+                  <div class="artBox"> 
+                      <a href="{{ route('artist-art', [$art->artist_id, $art->id]) }}"> <img src="{{ \App\Helpers\Helper::getImage($art->username.'/imgs/'. $art->fname.'.'.$art->ext, 1) }}" class="img-fluid"></a>
+                    <a class="view-a" href="{{ route('artist-art', [$art->artist_id, $art->id]) }}">
+                        <h3>{{ $art->title }} </h3>
+                    </a>
+                    <h2>
+                        <i class="fas fa-rupee-sign"></i> {{ \App\Helpers\Helper::getFormattedPrice($art->totalPrice) }}
+                    </h2>
+                    <span>{{ $art->uname }}</span> <a href="#" class="btn btn-primary themebBtn">ADD TO CART</a> 
+                  </div>
                 </div>
                 @endforeach
             @else

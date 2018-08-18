@@ -73,7 +73,7 @@ class HomeController extends Controller
                 $art->totalPrice = Helper::calculatePrice($calculateData);
             }
         }
-// echo '<pre>';print_r($artists);exit;
+
         return view('home')->with([
 
                             'catalogues' => $arts, 
@@ -139,7 +139,7 @@ class HomeController extends Controller
             }
 
         }
- 
+
         return view('artistdetails')->with([
                                             'artists' => array_shift($artist),
                                             'catalogues' => $items
@@ -159,8 +159,6 @@ class HomeController extends Controller
         if (!empty($events)) {
            
             foreach ($events as $event) {
-//                echo $event->start_date;exit;
-//                echo '<pre>';print_r($event);exit;
                 if (strtotime($event->start_date) >= strtotime(date('Y-m-d'))) {
                     $upcomingEvents[] = $event;
                 } else {
@@ -168,7 +166,7 @@ class HomeController extends Controller
                 }
             }
         }
-//        echo '<pre>';print_r($upcomingEvents);exit;
+
         return view('events')->with(['upcomingEvents' => $upcomingEvents, 'pastEvents' => $pastEvents]);
     }
 

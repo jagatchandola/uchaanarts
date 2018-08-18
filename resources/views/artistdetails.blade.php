@@ -15,7 +15,7 @@
             <div class="col-lg-9 col-md-9 col-12 col-sm-12">
               <blockquote class="blockquote aboutBio">
                <h3>Artist Bio</h3>
-                <p class="mb-0 ">"{{$artists['about']}}"</p>
+                <p class="mb-0 "><?php echo $artists['about']; ?></p>
               </blockquote>
             </div>
           </div>
