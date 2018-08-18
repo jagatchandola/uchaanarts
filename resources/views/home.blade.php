@@ -76,7 +76,7 @@
                         <div class="col-lg-7 col-md-7 col-12 col-sm-12">
                             <blockquote class="blockquote aboutBio">
                                 <h3>Artist Bio</h3>
-                                <p class="mb-0 text-center font-italic">"{{$weeklyStatus->about}}"</p>
+                                <p class="mb-0 text-center font-italic"><?php echo $weeklyStatus->about;?></p>
                             </blockquote>
                             <a href="/artists/{{$weeklyStatus->id}}" class="btn btn-primary themeBtn">View Artwork</a>
                         </div>

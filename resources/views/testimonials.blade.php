@@ -12,7 +12,7 @@
      @foreach($testimonails as $testimonail)
      <div class="row">
       <div class="col-lg-9 col-md-9 col-xs-12 col-sm-8">
-       <p>{{ $testimonail->content }}</p>
+       <p><?php echo $testimonail->content; ?></p>
       </div>
       <div class="col-lg-3 col-md-3 col-x-12 col-sm-4">
        <img src="{{ \App\Helpers\Helper::getImage($testimonail->image, 2) }}" class="img-fluid">
