@@ -55,8 +55,7 @@ class Events extends Model
     }
     
     public function getTotalEventsCount() {
-        $totalEvents = Events::where('shide', 1)
-                    ->count('id');
+        $totalEvents = Events::count('id');
 
         if (!empty($totalEvents)) {
             return $totalEvents;

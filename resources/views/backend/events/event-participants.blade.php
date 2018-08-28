@@ -44,9 +44,9 @@
                                                 <td class="text-center">
                                                 @if(!empty($event->event_payment_id))
                                                     @if($event->payment_received == 'y') 
-                                                        <i class="fa fa-check" style="color: #5cb85c; font-size: 25px;"></i>
+                                                        <i  title="Received" class="fa fa-check" style="color: #5cb85c; font-size: 25px;"></i>
                                                     @else
-                                                    <i class="fa fa-close" style="color: #c9302c; font-size: 25px;"></i>
+                                                        <i title="Not received" class="fa fa-close" style="color: #c9302c; font-size: 25px;"></i>
                                                     @endif
                                                 @endif
                                                 </td>

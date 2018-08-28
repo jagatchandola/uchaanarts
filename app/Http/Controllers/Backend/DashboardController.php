@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Helpers\Helper;
 use App\Models\Catalogue;
 use App\Models\Category;
 use App\Models\Artists;
