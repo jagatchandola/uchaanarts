@@ -15,7 +15,7 @@
             <div class="col-lg-9 col-md-9 col-12 col-sm-12">
               <blockquote class="blockquote aboutBio">
                <h3>Artist Bio</h3>
-                <p class="mb-0 ">"{{$artists['about']}}"</p>
+                <p class="mb-0 "><?php echo $artists['about']; ?></p>
               </blockquote>
             </div>
           </div>
@@ -32,7 +32,7 @@
        @if(!empty($catalogues))
             @foreach($catalogues as $catalogue) 
                <div class="col-lg-3 col-md-3 col-12 col-sm-6">
-                 <div class="artBox"> <a href="{{route('artist-art', [$artists['id'], $catalogue['id']])}}"><img src="{{ \App\Helpers\Helper::getImage($catalogue['username'].'/imgs/'.$catalogue['fname'].'.'.$catalogue['ext'], 1) }}" class="img-fluid"></a>
+                 <div class="artBox">  <div class="imgFixbx">  <a href="{{route('artist-art', [$artists['id'], $catalogue['id']])}}"><img src="{{ \App\Helpers\Helper::getImage($catalogue['username'].'/imgs/'.$catalogue['fname'].'.'.$catalogue['ext'], 1) }}" class="img-fluid"></a></div>
                     <h3>{{$catalogue['title']}}</h3>
                     <h2><i class="fas fa-rupee-sign"></i> {{\App\Helpers\Helper::getFormattedPrice($catalogue['totalPrice'])}}</h2>
                     <a href="#" class="btn btn-primary themebBtn">ADD TO CART</a>

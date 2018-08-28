@@ -23,7 +23,7 @@
                     <blockquote class="blockquote aboutBio text-left">
                         <h3>{{ $art->title }}</h3>
                         <h5>INR {{ \App\Helpers\Helper::getFormattedPrice($art->totalPrice) }}</h5>
-                        <p class="mb-0 ">{{ $art->about }}</p>
+                        <p class="mb-0 "><?php echo $art->about; ?></p>
                     </blockquote>
                     <h5>Artwork details</h5>
                     <table class="">
@@ -70,8 +70,9 @@
                 @foreach($artistOtherArts as $otherArt)
                     <div class="col-md-3 col-lg-3 col-12 col-sm-6 blogBox moreBox" @if($i>4) style="display: none;" @endif>
                         <div class="artBox">
-
+ <div class="imgFixbx">  
                             <a href="{{ route('artist-art', [$otherArt->artist_id, $otherArt->id]) }}"><img src="{{ \App\Helpers\Helper::getImage($otherArt->username .'/imgs/'. $otherArt->fname.'.'.$otherArt->ext, 1) }}" class="img-fluid"></a>
+							</div>
                             <div class="paintingInfo">
                                 <h3 class="mt-2">{{ $otherArt->title }}</h3>
                                 <span>By {{$otherArt->user_name }}</span>
@@ -102,7 +103,9 @@
                 <div class="owl-carousel owl-theme fifth-owl-carousel">
                     
                     @foreach($categoryArts as $art)
-                    <div class="item"><a href="{{ route('artist-art', [$art->artist_id, $art->id]) }}"><img src="{{ \App\Helpers\Helper::getImage($art->username .'/imgs/'.$art->fname.'.'.$art->ext, 1) }}"></a>
+                    <div class="item">
+					<div class="imgFixAD">
+					<a href="{{ route('artist-art', [$art->artist_id, $art->id]) }}"><img src="{{ \App\Helpers\Helper::getImage($art->username .'/imgs/'.$art->fname.'.'.$art->ext, 1) }}"></a></div>
                         <div class="captionBtm">
                             <div class="paintingInfo artBox">
                                 <h3 class="mt-2">{{ $art->title }}</h3>
