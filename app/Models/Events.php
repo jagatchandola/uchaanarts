@@ -158,7 +158,7 @@ class Events extends Model
                                 ->on('users.id', '=', 'event_payment.artist_id');
                     })
                     ->select('events.etitle', 'events.id as event_id', 'users.id as artist_id', 'uname', 'event_payment.id as event_payment_id', 'event_payment.payment_received')
-                    ->orderBy('events.id', 'desc')
+                    ->orderBy('events.id', 'asc')
                     ->groupBy('evt_artists.evtid', 'evt_artists.artist_id')
                     ->get();
 
@@ -200,7 +200,7 @@ class Events extends Model
                                             'event_id' => $this->data['event_id'],
                                             'artist_id' => $this->data['artist_id'],
                                             'payment_amount' => $paymentAmount,
-                                            'payment_link'  => hash('sha256', $this->data['event_id'].$this->data['artist_id'])
+                                            'payment_link'  => hash('sha256', $this->data['event_id'].$this->data['artist_id'].time())
                                         ]);
             
             if ($lastInsertId > 0) {
@@ -273,5 +273,35 @@ class Events extends Model
                 ->select('evtid')
                 ->get()
                 ->toArray();
+    }
+    
+    public function checkLink($link) {
+        $result = DB::table('event_payment')
+                        ->where('payment_link', $link)
+                        ->get()
+                        ->toArray();                
+        
+        if ($result != null || !empty($result)) {
+            return $result;
+        }
+
+        return false;
+    }
+    
+    public function updatePayment($data) {
+        $updateData = [
+                        'payment_received' => 'y',
+                        'transaction_id' => $data['transaction_id']
+                    ];
+
+        $updateStatus = DB::table('event_payment')
+            ->where('id', $data['id'])
+            ->update($updateData);
+
+        if ($updateStatus >= 1) {
+            return true;
+        }
+        
+        return false;
     }
 }

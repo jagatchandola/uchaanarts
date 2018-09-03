@@ -283,7 +283,7 @@ class HomeController extends Controller
                 }                
             }
         }
-
+//dd($art);
         return view('artdetails')->with([
                                     'art' => $art,
                                     'artistOtherArts' => (!empty($artistOtherArts) && count($artistOtherArts)) ? $artistOtherArts : '',

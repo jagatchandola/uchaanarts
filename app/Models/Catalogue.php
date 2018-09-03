@@ -33,7 +33,6 @@ class Catalogue extends Model
             $catalogues = Catalogue::where('art_items.active', 1)
                         ->join('users', 'art_items.artist_id' , '=', 'users.id');
                         
-            
             if ($admin === false) {
                 $catalogues = $catalogues->where('art_items.isSold' , '=', 0);
             }
@@ -45,7 +44,7 @@ class Catalogue extends Model
             
             $catalogues = $catalogues->select('art_items.*', 'users.uname', 'users.username')
                         ->orderBy('id', 'desc')
-                        ->paginate(20);
+                        ->paginate(21);
         }
         
         if (!empty($catalogues)) {
@@ -269,5 +268,22 @@ class Catalogue extends Model
         }
         
         return false;
+    }
+    
+    public function getProductDetails($product_id) {
+        $productDetail = DB::table('art_items as ai')
+            ->join('users as u', 'ai.artist_id' , '=', 'u.id')
+            ->where('ai.id', $product_id)
+            ->whereAnd('isSold', 0)
+            ->whereAnd('active', 1)
+            ->select('ai.id', 'ai.title', 'ai.fname', 'ai.ext', 'ai.price', 'ai.discount', 'ai.discount_value', 'ai.gst', 'u.username')
+            ->get()
+            ->toArray();
+
+        if (!empty($productDetail) && count($productDetail)) {
+            return $productDetail;
+        }
+
+        return [];
     }
 }
