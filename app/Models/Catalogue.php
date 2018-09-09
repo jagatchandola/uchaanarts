@@ -270,7 +270,26 @@ class Catalogue extends Model
         return false;
     }
     
+
+    public function getWeeklyArtistArts() {
+        
+        $catalogue = Catalogue::where('users.is_weekly_artist',1)
+                    ->where('users.admin_approved',1)
+                    ->join('users', 'art_items.artist_id' , '=', 'users.id')
+                    ->select('art_items.id', 'art_items.title', 'art_items.fname', 'art_items.ext', 'art_items.price', 'art_items.cat', 'users.username as directory')
+                    ->orderBy('art_items.updated_at', 'desc')
+                    ->get();
+
+        if (!empty($catalogue)) {
+            return $catalogue;
+        }
+
+        return [];
+    }
+
+
     public function getProductDetails($product_id) {
+        
         $productDetail = DB::table('art_items as ai')
             ->join('users as u', 'ai.artist_id' , '=', 'u.id')
             ->where('ai.id', $product_id)
@@ -286,6 +305,7 @@ class Catalogue extends Model
 
         return [];
     }
+
     
     public function enquiry($data, $product_id) {
         $where = [
@@ -315,4 +335,5 @@ class Catalogue extends Model
         
         return false;
     }
+
 }

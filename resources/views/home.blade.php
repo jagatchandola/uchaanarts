@@ -97,6 +97,7 @@
       <div class="item"><div class="imgFixbxhp"><img src="/img/slider/3.jpg"></div></div> -->
     </div>
                 </article>
+
 				<div class="text-center">
 				 <a href="/artists/{{$weeklyStatus->id}}" class="btn btn-primary themeBtn">View Artwork</a>
 				</div> 
@@ -115,6 +116,7 @@
                     <div class="owl-carousel owl-theme first-owl-carousel">
                         @foreach($upcomingEvents as $event)
                         <div class="item">
+
 						 <div class="imgFixbxhp">
 						<img src="{{ \App\Helpers\Helper::getImage($event->eurl.'/'.$event->banner, 3) }}"><div class="captionBtm">{{date("d-m-Y", strtotime($event->start_date))}}<br>Uchaan Events<br>{{$event->venue}}</div></div></div>
                         @endforeach
@@ -122,6 +124,7 @@
                     @endif
     </div>
 </section>
+
 @endif		
 
 <!--Section 1 Start Here-->
@@ -133,10 +136,10 @@
             @foreach($catalogues as $catalogue)
             <div class="col-md-4 col-lg-4 col-12 col-sm-12">
                 <div class="item artBox">
-				 <div class="imgFixbxhp">
+                 <div class="imgFixbxhp">
                     <a href="{{ \App\Helpers\Helper::getImage($catalogue->directory.'/imgs/'.$catalogue->fname.'.'.$catalogue->ext, 1) }}" data-lightbox="creative-art" data-title="{{$catalogue->title}}"><img class="img-fluid" src="{{ \App\Helpers\Helper::getImage($catalogue->directory.'/imgs/'.$catalogue->fname.'.'.$catalogue->ext, 1) }}">
-					</div>
-					<a href="/item/{{$catalogue->id}}" class="img-fluid"></a>
+                    </div>
+                    <a href="/item/{{$catalogue->id}}" class="img-fluid"></a>
                         <h3>{{$catalogue->title}}</h3>
                         <h2>{{ \App\Helpers\Helper::getFormattedPrice($catalogue->totalPrice) }}</h2>
                         <span>{{$catalogue->user_name}}</span>
@@ -168,6 +171,7 @@
                             <img class="img-fluid" src="{{ \App\Helpers\Helper::getImage($artist['username'].'/'.$artist['profimg'], 1) }}">
                        
                         <a href="{{ route('artistdetails', $artist['id']) }}" class="captionBtn1">View Artwork</a>
+
 						
 						 </div>
                             <div class="captionBtm">{{$artist['uname']}}</div>                        
