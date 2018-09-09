@@ -383,13 +383,13 @@ class HomeController extends Controller
                 }
                 
                 Session::flash('success_message', 'Thanks for making an enquiry. We will soon contact you.');
-                return redirect('/product/enquiry/' . $product_id);
+            } else {
+
+                Session::flash('error_message', 'Some error ocured. Please try again');
             }
             
-            Session::flash('error_message', 'Some error ocured. Please try again');
-            return view('enquiry')->with([
-                                'product_id' => $product_id
-                            ]);
+            return redirect('/product/enquiry/' . $product_id);
+            
         }
         
         return view('enquiry')->with([
