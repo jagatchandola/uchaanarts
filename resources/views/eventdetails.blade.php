@@ -80,11 +80,11 @@
 
 
 <!--sectionAddcart Start here-->
+@if (!empty($moments))
 <div class="sectionAddcart">
  <div class="container">
    <div class="aboutUsbx themeSubs1 ">
        
-    @if (!empty($moments))
     <h2>Event Memorable Moments</h2>
         
     <div class="row">
@@ -101,9 +101,9 @@
             </div>
     @endforeach
     </div> 
-    @endif
   </div>
 </div>
 </div>
+@endif
 <!--sectionAddcart Ends here-->
 @endsection

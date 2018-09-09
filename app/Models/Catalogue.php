@@ -33,7 +33,6 @@ class Catalogue extends Model
             $catalogues = Catalogue::where('art_items.active', 1)
                         ->join('users', 'art_items.artist_id' , '=', 'users.id');
                         
-            
             if ($admin === false) {
                 $catalogues = $catalogues->where('art_items.isSold' , '=', 0);
             }
@@ -45,7 +44,7 @@ class Catalogue extends Model
             
             $catalogues = $catalogues->select('art_items.*', 'users.uname', 'users.username')
                         ->orderBy('id', 'desc')
-                        ->paginate(20);
+                        ->paginate(21);
         }
         
         if (!empty($catalogues)) {
@@ -269,5 +268,21 @@ class Catalogue extends Model
         }
         
         return false;
+    }
+    
+    public function getWeeklyArtistArts() {
+        
+        $catalogue = Catalogue::where('users.is_weekly_artist',1)
+                    ->where('users.admin_approved',1)
+                    ->join('users', 'art_items.artist_id' , '=', 'users.id')
+                    ->select('art_items.id', 'art_items.title', 'art_items.fname', 'art_items.ext', 'art_items.price', 'art_items.cat', 'users.username as directory')
+                    ->orderBy('art_items.updated_at', 'desc')
+                    ->get();
+
+        if (!empty($catalogue)) {
+            return $catalogue;
+        }
+
+        return [];
     }
 }

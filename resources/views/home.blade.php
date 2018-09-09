@@ -60,11 +60,12 @@
 <!--Section 1 Ends Here-->
 <!--Section 2 Start Here-->
 <section class="themeSec2">
+ <h2>Artist of the week</h2>
     <div class="container">
         <div class="row">
             <div class="col-lg-6 col-md-6 col-12 col-sm-12">
                 <article class="themeSubs1">
-                    <h2>Artist of the week</h2>
+                   
                     @if(!empty($weeklyStatus))
                     <div class="row">
                         <div class="col-lg-5 col-md-5 col-12 col-sm-12">
@@ -76,44 +77,66 @@
                         <div class="col-lg-7 col-md-7 col-12 col-sm-12">
                             <blockquote class="blockquote aboutBio">
                                 <h3>Artist Bio</h3>
-                                <p class="mb-0 text-center font-italic">"{{$weeklyStatus->about}}"</p>
+                                <p class="mb-0 text-center font-italic">"<?php echo $weeklyStatus->about; ?>"</p>
                             </blockquote>
-                            <a href="/artists/{{$weeklyStatus->id}}" class="btn btn-primary themeBtn">View Artwork</a>
+                           
                         </div>
                     </div>
                     @endif
                 </article>
             </div>
             <div class="col-lg-6 col-md-6 col-12 col-sm-12">
+                @if(!empty($weeklyArts))
                 <article class="themeSubs1">
-                    <h2>Upcoming Events</h2>
-                    @if(!empty($upcomingEvents))
                     <div class="owl-carousel owl-theme second-owl-carousel">
-                        @foreach($upcomingEvents as $event)
-                        <div class="item"><img src="{{ \App\Helpers\Helper::getImage($event->eurl.'/'.$event->banner, 3) }}"><div class="captionBtm">{{date("d-m-Y", strtotime($event->start_date))}}<br>Uchaan Events<br>{{$event->venue}}</div></div>
-                        @endforeach
-                    </div>
-                    @endif
+                    @foreach($weeklyArts as $weekArt)    
+      <div class="item"><div class="imgFixbxhp"><img src="{{ \App\Helpers\Helper::getImage($weekArt->directory.'/imgs/'.$weekArt->fname.'.'.$weekArt->ext, 1) }}"></div></div>
+                    @endforeach
+      
+      <!--<div class="item"><div class="imgFixbxhp"><img src="/img/slider/2.jpg"></div></div>
+      <div class="item"><div class="imgFixbxhp"><img src="/img/slider/3.jpg"></div></div> -->
+    </div>
                 </article>
+                <div class="text-center">
+                 <a href="/artists/{{$weeklyStatus->id}}" class="btn btn-primary themeBtn">View Artwork</a>
+                </div> 
+                @endif
             </div>
         </div>
     </div>
 </section>
 <!--Section 2 Ends Here-->
 
+@if(!empty($categories))
+<section class="themeSec1">
+    <h1>Upcoming Events</h1>
+    <div class="container">
+         @if(!empty($upcomingEvents))
+                    <div class="owl-carousel owl-theme first-owl-carousel">
+                        @foreach($upcomingEvents as $event)
+                        <div class="item">
+                         <div class="imgFixbxhp">
+                        <img src="{{ \App\Helpers\Helper::getImage($event->eurl.'/'.$event->banner, 3) }}"><div class="captionBtm">{{date("d-m-Y", strtotime($event->start_date))}}<br>Uchaan Events<br>{{$event->venue}}</div></div></div>
+                        @endforeach
+                    </div>
+                    @endif
+    </div>
+</section>
+@endif      
+
 <!--Section 1 Start Here-->
 @if(!empty($catalogues))
-<section class="themeSec1">
+<section class="themeSec2">
     <h2>Creative Art</h2>
     <div class="container">
         <div class="row">
             @foreach($catalogues as $catalogue)
             <div class="col-md-4 col-lg-4 col-12 col-sm-12">
                 <div class="item artBox">
-				 <div class="imgFixbxhp">
+                 <div class="imgFixbxhp">
                     <a href="{{ \App\Helpers\Helper::getImage($catalogue->directory.'/imgs/'.$catalogue->fname.'.'.$catalogue->ext, 1) }}" data-lightbox="creative-art" data-title="{{$catalogue->title}}"><img class="img-fluid" src="{{ \App\Helpers\Helper::getImage($catalogue->directory.'/imgs/'.$catalogue->fname.'.'.$catalogue->ext, 1) }}">
-					</div>
-					<a href="/item/{{$catalogue->id}}" class="img-fluid"></a>
+                    </div>
+                    <a href="/item/{{$catalogue->id}}" class="img-fluid"></a>
                         <h3>{{$catalogue->title}}</h3>
                         <h2>{{ \App\Helpers\Helper::getFormattedPrice($catalogue->totalPrice) }}</h2>
                         <span>{{$catalogue->user_name}}</span>
@@ -132,7 +155,7 @@
 
 <!--Section 2 Start Here-->
 @if(!empty($artists))
-<section class="themeSec2">
+<section class="themeSec1">
     <div class="container">
         <div class="col-lg-12 col-md-12 col-12 col-sm-12">
             <article class="themeSubs1">
@@ -143,9 +166,11 @@
                     <div class="item">
                          <div class="imgFixbxhp">
                             <img class="img-fluid" src="{{ \App\Helpers\Helper::getImage($artist['username'].'/'.$artist['profimg'], 1) }}">
-                        </div>
+                       
                         <a href="{{ route('artistdetails', $artist['id']) }}" class="captionBtn1">View Artwork</a>
-                        <div class="captionBtm">{{$artist['uname']}}</div>                            
+                        
+                         </div>
+                            <div class="captionBtm">{{$artist['uname']}}</div>                        
                     </div>
                     @endforeach
                     

@@ -102,6 +102,9 @@ Route::group(['middleware' => ['auth']],function(){
         Route::get('/admin/banner/{id}','Backend\BannerController@edit')->name('edit-banner');
         Route::post('/admin/banner/','Backend\BannerController@edit')->name('edit-banner-post');
         Route::match(['get', 'post'], '/admin/banner/add', 'Backend\BannerController@add')->name('add-banner');
+
+        // Queries
+        Route::get('/admin/queries','Backend\BannerController@queris')->name('query-list');
 });
 
 Route::get('/backend/logout', 'Backend\LoginController@logout')->name('backend-logout');
