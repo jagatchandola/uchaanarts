@@ -353,14 +353,15 @@ class HomeController extends Controller
                 $html .= 'Mobile No: ' . $inputData['mobile'] . '<br>';
                 $html .= 'Cooments: ' . $inputData['comments'] . '<br>';
                 $html .= '<a href="'.env('APP_URL') . '/artists/' . $result[0]->artist_id . '/' . $product_id .'">Click Here</a> to get product details.';
+                $artistEmail = $result[0]->email;
                 
-                $status = Mail::send([], [], function($message) use ($html) {
-                     $message->from(env('MAIL_USERNAME'), 'Uchaanarts');
-                     $message->to('jagat2205114@gmail.com');
-                     $message->subject('Product Enquiry');
-                     $message->setBody($html, 'text/html');
+                $status = Mail::send([], [], function($message) use ($html, $artistEmail) {
+                    $message->from(env('MAIL_USERNAME'), 'Uchaanarts');
+                    $message->to($artistEmail);
+                    $message->subject('Product Enquiry');
+                    $message->setBody($html, 'text/html');
                 });
-                
+        
                 $html = 'Dear <b>Admin</b>,<br> An enquiry is made for one of the product. Below are the details:<br>';
                 $html .= 'Name: ' . $inputData['name'] . '<br>';
                 $html .= 'Email: ' . $inputData['email'] . '<br>';
@@ -370,16 +371,13 @@ class HomeController extends Controller
                 
                 $status = Mail::send([], [], function($message) use ($html) {
                      $message->from(env('MAIL_USERNAME'), 'Uchaanarts');
-                     $message->to('jagat2205114@gmail.com');
+                     $message->to(config('app.admin_email'));
                      $message->subject('Product Enquiry');
                      $message->setBody($html, 'text/html');
-                }); 
-                
+                });
                 
                 Session::flash('success_message', 'Thanks for making an enquiry. We will soon contact you.');
-                return view('enquiry')->with([
-                                    'product_id' => $product_id
-                                ]);
+                return redirect('/product/enquiry/' . $product_id);
             }
             
             Session::flash('error_message', 'Some error ocured. Please try again');

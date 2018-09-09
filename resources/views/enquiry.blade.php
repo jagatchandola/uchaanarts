@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+<script src="{{ asset('js/jquery-1.11.2.min.js') }}"></script>
 <section class="themeSec1 bgWhite">
     <div class="container">
         @include('layouts.alert')
