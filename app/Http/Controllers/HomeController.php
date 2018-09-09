@@ -13,6 +13,8 @@ use App\Models\NewsLetter;
 use App\Models\Moments;
 use Illuminate\Http\Request;
 use App\Helpers\Helper;
+use Session;
+use Illuminate\Support\Facades\Mail;
 
 class HomeController extends Controller
 {
@@ -286,7 +288,7 @@ class HomeController extends Controller
                 }                
             }
         }
-
+//dd($art);
         return view('artdetails')->with([
                                     'art' => $art,
                                     'artistOtherArts' => (!empty($artistOtherArts) && count($artistOtherArts)) ? $artistOtherArts : '',
@@ -337,5 +339,60 @@ class HomeController extends Controller
             echo -1;
         }
 
+    }
+    
+    public function productEnquiry(Request $request, $product_id){
+        
+        if ($request->isMethod('POST')) {
+            $inputData = $request->all();
+            $result = $this->catalogue->enquiry($inputData, $product_id);
+            if ($result !== true) {
+//                echo '<pre>';
+//                print_r($result);exit;
+                
+                $html = 'Dear <b>' . $result[0]->uname . '</b>,<br> An enquiry is made for one of your product. Below are the details:<br>';
+                $html .= 'Name: ' . $inputData['name'] . '<br>';
+                $html .= 'Email: ' . $inputData['email'] . '<br>';
+                $html .= 'Mobile No: ' . $inputData['mobile'] . '<br>';
+                $html .= 'Cooments: ' . $inputData['comments'] . '<br>';
+                $html .= '<a href="'.env('APP_URL') . '/artists/' . $result[0]->artist_id . '/' . $product_id .'">Click Here</a> to get product details.';
+                
+                $status = Mail::send([], [], function($message) use ($html) {
+                     $message->from(env('MAIL_USERNAME'), 'Uchaanarts');
+                     $message->to('jagat2205114@gmail.com');
+                     $message->subject('Product Enquiry');
+                     $message->setBody($html, 'text/html');
+                });
+                
+                $html = 'Dear <b>Admin</b>,<br> An enquiry is made for one of the product. Below are the details:<br>';
+                $html .= 'Name: ' . $inputData['name'] . '<br>';
+                $html .= 'Email: ' . $inputData['email'] . '<br>';
+                $html .= 'Mobile No: ' . $inputData['mobile'] . '<br>';
+                $html .= 'Cooments: ' . $inputData['comments'] . '<br>';
+                $html .= '<a href="'.env('APP_URL') . '/artists/' . $result[0]->artist_id . '/' . $product_id .'">Click Here</a> to get product details.';
+                
+                $status = Mail::send([], [], function($message) use ($html) {
+                     $message->from(env('MAIL_USERNAME'), 'Uchaanarts');
+                     $message->to('jagat2205114@gmail.com');
+                     $message->subject('Product Enquiry');
+                     $message->setBody($html, 'text/html');
+                }); 
+                
+                
+                Session::flash('success_message', 'Thanks for making an enquiry. We will soon contact you.');
+                return view('enquiry')->with([
+                                    'product_id' => $product_id
+                                ]);
+            }
+            
+            Session::flash('error_message', 'Some error ocured. Please try again');
+            return view('enquiry')->with([
+                                'product_id' => $product_id
+                            ]);
+        }
+        
+        return view('enquiry')->with([
+                                'product_id' => $product_id
+                            ]);
     }
 }

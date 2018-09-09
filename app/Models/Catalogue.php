@@ -270,6 +270,7 @@ class Catalogue extends Model
         return false;
     }
     
+
     public function getWeeklyArtistArts() {
         
         $catalogue = Catalogue::where('users.is_weekly_artist',1)
@@ -285,4 +286,54 @@ class Catalogue extends Model
 
         return [];
     }
+
+
+    public function getProductDetails($product_id) {
+        
+        $productDetail = DB::table('art_items as ai')
+            ->join('users as u', 'ai.artist_id' , '=', 'u.id')
+            ->where('ai.id', $product_id)
+            ->whereAnd('isSold', 0)
+            ->whereAnd('active', 1)
+            ->select('ai.id', 'ai.title', 'ai.fname', 'ai.ext', 'ai.price', 'ai.discount', 'ai.discount_value', 'ai.gst', 'u.username')
+            ->get()
+            ->toArray();
+
+        if (!empty($productDetail) && count($productDetail)) {
+            return $productDetail;
+        }
+
+        return [];
+    }
+
+    
+    public function enquiry($data, $product_id) {
+        $where = [
+                    'name'          => $data['name'],
+                    'email'         => $data['email'],
+                    'mobile_no'     => $data['mobile'],
+                    'comments'      => $data['comments'],
+                    'product_id'    => $product_id,
+                ];
+        $lastInsertId = DB::table('product_enquiry')->insertGetId($where);
+
+        if ($lastInsertId > 0) {
+            $productDetail = DB::table('art_items as ai')
+                ->join('users as u', 'ai.artist_id' , '=', 'u.id')
+                ->where('ai.id', $product_id)
+                ->whereAnd('isSold', 0)
+                ->whereAnd('active', 1)
+                ->select('ai.artist_id', 'u.uname', 'u.email')
+                ->get()
+                ->toArray();
+
+            if (!empty($productDetail) && count($productDetail)) {
+                return $productDetail;
+            }
+            return true;
+        }
+        
+        return false;
+    }
+
 }

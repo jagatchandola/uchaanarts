@@ -97,10 +97,11 @@
       <div class="item"><div class="imgFixbxhp"><img src="/img/slider/3.jpg"></div></div> -->
     </div>
                 </article>
-                <div class="text-center">
-                 <a href="/artists/{{$weeklyStatus->id}}" class="btn btn-primary themeBtn">View Artwork</a>
-                </div> 
-                @endif
+
+				<div class="text-center">
+				 <a href="/artists/{{$weeklyStatus->id}}" class="btn btn-primary themeBtn">View Artwork</a>
+				</div> 
+				@endif
             </div>
         </div>
     </div>
@@ -115,14 +116,16 @@
                     <div class="owl-carousel owl-theme first-owl-carousel">
                         @foreach($upcomingEvents as $event)
                         <div class="item">
-                         <div class="imgFixbxhp">
-                        <img src="{{ \App\Helpers\Helper::getImage($event->eurl.'/'.$event->banner, 3) }}"><div class="captionBtm">{{date("d-m-Y", strtotime($event->start_date))}}<br>Uchaan Events<br>{{$event->venue}}</div></div></div>
+
+						 <div class="imgFixbxhp">
+						<img src="{{ \App\Helpers\Helper::getImage($event->eurl.'/'.$event->banner, 3) }}"><div class="captionBtm">{{date("d-m-Y", strtotime($event->start_date))}}<br>Uchaan Events<br>{{$event->venue}}</div></div></div>
                         @endforeach
                     </div>
                     @endif
     </div>
 </section>
-@endif      
+
+@endif		
 
 <!--Section 1 Start Here-->
 @if(!empty($catalogues))
@@ -168,8 +171,9 @@
                             <img class="img-fluid" src="{{ \App\Helpers\Helper::getImage($artist['username'].'/'.$artist['profimg'], 1) }}">
                        
                         <a href="{{ route('artistdetails', $artist['id']) }}" class="captionBtn1">View Artwork</a>
-                        
-                         </div>
+
+						
+						 </div>
                             <div class="captionBtm">{{$artist['uname']}}</div>                        
                     </div>
                     @endforeach

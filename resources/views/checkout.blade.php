@@ -1,0 +1,293 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="author" content="">
+<link rel="icon" href="favicon.ico">
+<title>Uchaan - Checkout</title>
+<!-- Bootstrap core CSS -->
+<link href="/assets/css/bootstrap.min.css" rel="stylesheet">
+<link href="/assets/css/fontawesome.css" rel="stylesheet">
+<link href="/assets/css/owl.carousel.min.css" rel="stylesheet">
+<link href="/assets/css/owl.theme.default.css" rel="stylesheet">
+<!-- Custom styles for this template -->
+<link href="/assets/css/style.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,400i,700,700i" rel="stylesheet">
+</head>
+<body>
+<!--Header start Here-->
+<header>
+  <div class="col-md-6 col-12 col-sm-12 col-lg-3 d-none d-md-block d-lg-block">
+    <div class="logoRight"><a href="/"><img src="/assets/img/uchaan-logo.jpg" class="img-fluid"></a></div>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3 col-12 col-sm-12 col-lg-4 offset-lg-3 offset-md-0 offset-sm-0">
+        <div class="logo d-md-none d-lg-none d-col-block d-sm-block"><a href="/"><img src="/assets/img/logo-mobile.png" class="img-fluid"></a></div>
+      </div>
+      <div class="col-md-6 col-12 col-sm-12 col-lg-5">
+        <nav class="topMenu float-lg-right float-sm-none float-col-none float-md-right">
+		<span class="dropdown">
+		<a id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">Login <i class="fas fa-caret-down"></i></a> 
+		<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+    <a class="dropdown-item" href="/login-artist.html">Login Artist</a>
+    <a class="dropdown-item" href="/login-buyer.html">Login Buyer</a>
+  </div>
+		</span>
+        <a href="/register.html">Register</a> 
+		<a href="/" title="Add to Cart"><i class="fas fa-cart-arrow-down"></i></a></nav>
+		<div class="clearfix"></div>
+        <form class="searchBox float-lg-right float-sm-none float-col-none float-md-right">
+          <input type="text" placeholder="Search">
+          <button type="button"><i class="fa fa-search"></i></button>
+        </form>
+      </div>
+    </div>
+    <nav class="navbar navbar-expand-lg navbar-light myNav">
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarsExample09" aria-controls="navbarsExample09" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button>
+      <div class="collapse navbar-collapse" id="navbarsExample09">
+        <ul class="navbar-nav ml-auto ">
+          <li class="nav-item "> <a class="nav-link" href="/">Home </a> </li>
+          <li class="nav-item"> <a class="nav-link" href="/about-us.html">About</a> </li>
+          <li class="nav-item"> <a class="nav-link " href="/events.html">Events</a> </li>
+          <li class="nav-item"> <a class="nav-link " href="/art-gallery.html">Art Gallery</a> </li>
+          <li class="nav-item"> <a class="nav-link " href="/artist.html">Artist</a> </li>
+          <li class="nav-item"> <a class="nav-link " href="/testimonials.html">Testimonials</a> </li>
+          <li class="nav-item"> <a class="nav-link " href="/media.html">Media Coverage</a> </li>
+          <li class="nav-item"> <a class="nav-link " href="/contact.html">Contact Us</a> </li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+</header>
+<!--Header Ends Here-->
+<!--Section 1 Stat Here-->
+<section class="themeSec1 bgWhite">
+  <div class="container">
+    <h1>Shopping Cart</h1>
+	
+	 <div class="shoppingCart">
+	 <div class="row">
+	  <div class="col-md-4 col-lg-4 col-12 col-sm-6">
+	   <div class="newcusBx">
+	    <h3 class="title">New Customer</h3>
+		<a href="/register.html">Register Account</a><br>
+		<a href="#">Guest Checkout</a><br>
+		<p>By creating an account you will be able to shop faster, be up to date on an order's status, and keep track of the orders you have previously made.</p>
+		<a class="btn btn-primary themeBtn" href="#">Continue</a>
+	   </div>
+	  </div>
+	  <div class="col-md-4 col-lg-4"></div>
+	  <div class="col-md-4 col-lg-4 col-12 col-sm-6">
+	   <div class="newcusBx">
+	    <h3 class="title">Returning Customer</h3>
+		<form>
+        <div class="form-group row">
+          <label for="staticEmail" class="col-sm-12 col-md-12 col-lg-12 col-12 col-form-label">Email</label>
+          <div class="col-sm-12 col-md-12 col-lg-12 col-12">
+            <input type="text" class="form-control" id="" placeholder="">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="inputPassword" class="col-sm-12 col-md-12 col-lg-12 col-12 col-form-label">Password</label>
+          <div class="col-sm-6 col-md-12 col-lg-12 col-12">
+            <input type="text" class="form-control" id="" placeholder="">
+          </div>
+        </div>
+		 <div class="form-group row">
+		 <div class="col-sm-12 col-md-12 col-lg-12 col-12">
+		<button href="#" class="btn btn-primary themeBtn" type="submit">Login</button>
+		</div>
+		</div>
+		</form>
+	   </div>
+	  </div>
+	  </div>
+	 </div>
+	
+    <div class="registerBox">
+	<h2 class="text-left">Enter Your Details</h2>
+      <form>
+	  <div class="row">
+	   <div class="col-4">
+        <div class="form-group row">
+          <label for="staticEmail" class="col-sm-12 col-form-label">*First Name</label>
+          <div class="col-sm-12">
+            <input type="text" class="form-control" id="">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="staticEmail" class="col-sm-12 col-form-label">*Last Name</label>
+          <div class="col-sm-12">
+            <input type="text" class="form-control" id="">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="staticEmail" class="col-sm-12 col-form-label">*E-Mail</label>
+          <div class="col-sm-12">
+            <input type="text" class="form-control" id="">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="staticEmail" class="col-sm-12 col-form-label">*Password</label>
+          <div class="col-sm-12">
+            <input type="text" class="form-control" id="">
+          </div>
+        </div>
+		</div>
+	   <div class="col-4">
+        <div class="form-group row">
+          <label for="staticEmail" class="col-sm-12 col-form-label">Phone Number</label>
+          <div class="col-sm-12">
+            <input type="text" class="form-control" id="">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="staticEmail" class="col-sm-12 col-form-label">*Address 1</label>
+          <div class="col-sm-12">
+            <input type="text" class="form-control" id="">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="staticEmail" class="col-sm-12 col-form-label">*Address </label>
+          <div class="col-sm-12">
+            <input type="text" class="form-control" id="">
+          </div>
+        </div>
+		<div class="form-group row">
+          <label for="staticEmail" class="col-sm-12 col-form-label">*City </label>
+          <div class="col-sm-12">
+            <input type="text" class="form-control" id="">
+          </div>
+        </div>
+		</div>
+
+	   <div class="col-4">
+		<div class="form-group row">
+          <label for="staticEmail" class="col-sm-12 col-form-label">*Post Code </label>
+          <div class="col-sm-12">
+            <input type="text" class="form-control" id="">
+          </div>
+        </div>
+		<div class="form-group row">
+          <label for="staticEmail" class="col-sm-12 col-form-label">*Country </label>
+          <div class="col-sm-12">
+            <input type="text" class="form-control" id="">
+          </div>
+        </div>
+		<div class="form-group row">
+          <label for="staticEmail" class="col-sm-12 col-form-label">*Region / State </label>
+          <div class="col-sm-12">
+            <input type="text" class="form-control" id="">
+          </div>
+        </div>
+        <div class="form-group row">
+        <label for="staticEmail" class="col-sm-12col-form-label"></label>
+        <div class="col-sm-6 col-md-9 col-lg-9 col-12">
+          <button type="submit" class="btn btn-primary themeBtn" href="#">Confirm Order</button>
+        </div>
+		</div>
+		</div>
+		</div>
+      </form>
+    </div>
+  </div>
+</section>
+<!--footer Start Here-->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-5 col-lg-5 col-12 col-sm-12">
+        <div class="row">
+          <div class="col-md-6 col-lg-6 col-12 col-sm-6">
+            <div class="footerLink">
+              <h4>For Buyers</h4>
+              <ul>
+                <li><a href="/art-gallery.html">Product</a></li>
+                <li><a href="/events.html">Events</a></li>
+                <li><a href="/artist.html">Artists</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-6 col-12 col-sm-6">
+            <div class="footerLink">
+              <h4>For Artist</h4>
+              <ul>
+                <li><a href="#">Why Sell</a></li>
+                <li><a href="/events.html">Events</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-7 col-lg-7 col-12 col-sm-12">
+        <div class="row">
+          <div class="col-md-4 col-lg-4 col-12 col-sm-4">
+            <div class="footerLink">
+              <h4>About Us</h4>
+              <ul>
+                <li><a href="/testimonials.html">Testimonials</a></li>
+                <li><a href="/media.html">Media Coverage</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-md-4 col-lg-4 col-12 col-sm-4">
+            <div class="footerLink">
+              <h4> Uchaan Art</h4>
+              <ul>
+                <li><a href="#">Rangmahal Art Classes</a></li>
+                <li><a href="#">Privacy Policy</a></li>
+                <li><a href="#">Copyright Policy</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-md-4 col-lg-4 col-12 col-sm-4">
+            <div class="footerLink">
+              <h4>Top Categories</h4>
+              <ul>
+                <li><a href="#">Paintings</a></li>
+                <li><a href="#">Photography</a></li>
+                <li><a href="#">Nature</a></li>
+                <li><a href="#">Spritual</a></li>
+                <li><a href="#">Portrait</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="clearfix"></div>
+      <div class="col-md-6 col-lg-6 col-12 col-sm-12">
+        <div class="socialMedia">
+          <ul>
+            <li><a href="" class="iconShape"><i class="fab fa-facebook-f"></i></a></li>
+            <li><a href="" class="iconShape"><i class="fab fa-twitter"></i></a></li>
+            <li><a href="" class="iconShape"><i class="fab fa-pinterest-p"></i></a></li>
+            <li><a href="" class="iconShape"><i class="fab fa-tumblr"></i></a></li>
+            <li><a href="" class="iconShape"><i class="fab fa-instagram"></i></a></li>
+            <li><a href="" class="iconShape"><i class="fab fa-youtube"></i></a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-6 col-12 col-sm-12">
+        <div class="newLetter">
+          <h5>Signup for our Newslatter</h5>
+          <h6>Discover new art and collections added weekly</h6>
+          <form class="newsBox">
+            <input type="text" placeholder="Enter Email ID">
+            <button type="button"><i class="fas fa-sign-in-alt"></i></button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+<!--footer 2 Ends Here-->
+<script src="/assets/js/jquery-3.3.1.slim.min.js" ></script>
+<script src="/assets/js/popper.min.js"></script>
+<script src="/assets/js/bootstrap.min.js"></script>
+<script src="/assets/js/owl.carousel.min.js"></script>
+<script src="/assets/js/custom.js"></script>
+</body>
+</html>
