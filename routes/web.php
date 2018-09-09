@@ -38,6 +38,7 @@ Route::post('/news-letter', 'HomeController@newsLetter')->name('news-letter');
 
 Route::get('/event/payment/{paymentLink}', 'PaymentController@eventPayment')->name('event-payment');
 Route::get('/checkout/{productId}', 'PaymentController@productPayment')->name('product-payment');
+Route::match(['get', 'post'], '/product/enquiry/{productId}', 'HomeController@productEnquiry')->name('product-enquiry');
 
 // Backend routes
 Route::match(['get', 'post'], '/backend/login','Backend\LoginController@index')->name('backend-login');
