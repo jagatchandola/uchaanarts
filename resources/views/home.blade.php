@@ -108,7 +108,7 @@
 </section>
 <!--Section 2 Ends Here-->
 
-@if(!empty($categories))
+@if(!empty($upcomingEvents))
 <section class="themeSec1">
     <h1>Upcoming Events</h1>
     <div class="container">

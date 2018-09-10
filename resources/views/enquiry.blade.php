@@ -37,7 +37,7 @@
                 <div class="form-group row">
                    
                     <div class="col-sm-6 col-md-12 col-lg-12 col-12">
-                        <input type="text" class="form-control" id="mobile" name="mobile" placeholder="Mobile" required>
+                        <input type="text" class="form-control" id="mobile" name="mobile" maxlength="10" min="10" placeholder="Mobile" required>
                     </div>
                 </div>
                 
@@ -49,7 +49,7 @@
                 </div>                
                 <div class="form-group row">
                     <label for="staticEmail" class="col-sm-6 col-md-3 col-lg-3 col-12 col-form-label"></label>
-                    <div class="col-sm-6 col-md-9 col-lg-9 col-12">
+                    <div class="col-sm-6 col-md-12 col-lg-12 col-12 text-center">
                         <button type="submit" class="btn btn-primary themeBtn">{{ __('Submit') }}</button>
                     </div>
                 </div>
