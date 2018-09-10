@@ -347,8 +347,6 @@ class HomeController extends Controller
             $inputData = $request->all();
             $result = $this->catalogue->enquiry($inputData, $product_id);
             if ($result !== true) {
-//                echo '<pre>';
-//                print_r($result);exit;
                 
                 try{
                     $html = 'Dear <b>' . $result[0]->uname . '</b>,<br> An enquiry is made for one of your product. Below are the details:<br>';
@@ -380,6 +378,7 @@ class HomeController extends Controller
                          $message->setBody($html, 'text/html');
                     });
                 } catch(\Exception $e){
+                    
                 }
                 
                 Session::flash('success_message', 'Thanks for making an enquiry. We will soon contact you.');
