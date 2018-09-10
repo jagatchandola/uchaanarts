@@ -331,4 +331,112 @@ class EventController extends Controller
             echo 0;
         }
     }
+    
+    public function addOnlineEvent(Request $request) {
+        if (!Gate::allows('isAdmin')) {
+            abort(401);
+        }
+        
+        if ($request->isMethod('POST')) {
+            $inputData = $request->all();
+
+            $valid = $request->validate([
+                'event_name' => 'required|regex:/(^([a-zA-Z\s]+)(\d+)?$)/u|max:50',
+                'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            ]);
+
+            if ($request->hasFile('image')) {
+                
+                $image = $request->file('image');
+                $title = str_replace(' ', '-', strtolower($request['event_name']));
+                $name = str_slug($title).'.'.$image->getClientOriginalExtension();
+
+                $destinationPath = public_path(config('constants.uploads.events')) . $title .'-'. date('d-M-Y', strtotime($inputData['start_date']));
+                $image->move($destinationPath, $name);
+            }
+
+            $inputData['image'] = $name;
+            
+            $result = $this->events->addOnlineEvent($inputData);
+            if ($result == true) {
+                Session::flash('success_message', 'Event added successfully');
+                return redirect('/admin/online/events');
+            } else {
+                Session::flash('error_message', 'Something went wrong. Please try again');
+                return redirect('/admin/online/event/add');
+            }
+        } else {
+            return view('backend.events.add-online-event');
+        }
+    }
+    
+    public function onlineEvents()
+    {
+        $artistParticipatedEvents = [];
+        if (Auth::user()->user_role == 'artist') {
+            $result = $this->events->getArtistEvents(Auth::user()->id);
+            
+            if (!empty($result)) {
+                $artistParticipatedEvents = array_column($result, 'evtid');
+            }
+        }
+        
+        $events = $this->events->getAllOnlineEvents('all');
+        return view('backend.events.online-events')->with([
+                                    'events'        => $events,
+                                    'artistEvents'  => $artistParticipatedEvents
+                                ]);
+    }
+    
+    public function updateOnlineEventStatus(Request $request, $event_id) {
+        if (!Gate::allows('isAdmin')) {
+            abort(401);
+        }
+        
+        $event = $this->events->updateOnlineEventStatus($event_id, $request['status']);
+
+        if ($event == true) {
+            echo 1;
+        } else {
+            echo 0;
+        }
+    }
+    
+    public function editOnlineEvent(Request $request, $event_id = '') {
+        if (!Gate::allows('isAdmin')) {
+            abort(401);
+        }
+        
+        if ($request->isMethod('POST')) {
+            $inputData = $request->all();
+
+            if ($request->hasFile('image')) {
+
+                $image = $request->file('image');
+                $title = str_replace(' ', '-', strtolower($request['event-name']));
+                $name = str_slug($title).'-'.time().'.'.$image->getClientOriginalExtension();
+                $destinationPath = public_path(config('constants.uploads.events')) . $inputData['path'];
+                $image->move($destinationPath, $name);
+                
+                $inputData['image'] = $name;
+            } else {
+                $inputData['image'] = $inputData['banner'];
+            }
+            
+            $result = $this->events->updateOnlineEvent($inputData);
+            if ($result == true) {
+                Session::flash('success_message', 'Event updated successfully');                
+            } else {
+                Session::flash('error_message', 'Something went wrong. Please try again');
+            }
+            
+            return redirect('/admin/online/events/'.$inputData['event-id']);
+        } else {
+            $event = $this->events->getOnlineEventDetails($event_id);
+
+            return view('backend.events.edit-online-event')->with([
+                                                'event' => json_decode(json_encode($event), true)
+                                            ]);
+        }
+    }
 }

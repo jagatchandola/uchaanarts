@@ -93,6 +93,10 @@ Route::group(['middleware' => ['auth']],function(){
         Route::match(['get', 'post'], '/admin/event/add', 'Backend\EventController@addEvent')->name('add-event');
         Route::match(['get', 'post'], '/admin/event/moments/{eventId}', 'Backend\EventController@uploadMemorableMoments')->name('upload-memorable-moments');
         Route::delete('/admin/event/deleteMoment/{moment_id}/{path}/{image}', 'Backend\EventController@deleteMoment');
+        Route::match(['get', 'post'], '/admin/online/event/add', 'Backend\EventController@addOnlineEvent')->name('add-online-event');
+        Route::get('/admin/online/events','Backend\EventController@onlineEvents')->name('online-events-list');
+        Route::put('/admin/online/events/changeStatus/{id}', 'Backend\EventController@updateOnlineEventStatus');
+        Route::match(['get', 'post'], '/admin/online/events/{id}', 'Backend\EventController@editOnlineEvent')->name('edit-online-event');
         
         // Event Route 
         Route::match(['get', 'post'], '/admin/event/participateEvent/{id}', 'Backend\EventController@participateEvent')->name('participate-event');

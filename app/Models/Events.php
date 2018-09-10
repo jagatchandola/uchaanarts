@@ -304,4 +304,99 @@ class Events extends Model
         
         return false;
     }
+    
+    public function addOnlineEvent($data) {
+        $insert = DB::table('contests')->insert([
+                                            'etitle' => $data['event_name'],
+                                            'eurl' => str_replace(' ', '-', strtolower($data['event_name'])).'-'.date('d-M-Y', strtotime($data['start_date'])),
+                                            'about' => $data['about'],
+                                            'start_date' => $data['start_date'],
+                                            'end_date' => $data['end_date'],
+                                            'banner' => $data['image'],
+                                            'shide' => $data['status'],
+                                            'first_prize' => $data['first_prize'],
+                                            'second_prize' => $data['second_prize'],
+                                            'third_prize' => $data['third_prize']
+                                        ]);
+
+        if ($insert === true) {
+            return true;
+        }
+        return false;
+    }
+    
+    public function getAllOnlineEvents($records = '') {
+        if ($records == 'all') {
+
+            $events = DB::table('contests')
+                                ->select('id', 'etitle', 'eurl', 'start_date','end_date', 'shide as status', 'first_prize', 'second_prize', 'third_prize')
+
+                                ->orderBy('start_date', 'desc')
+                                ->orderBy('id', 'desc')
+                                ->get();
+        } else {
+            $events = Events::where('shide', 1)
+                        ->orderBy('start_date', 'desc')
+                        ->get();
+        }
+        
+        if (!empty($events)) {
+            return $events;
+        }
+
+        return [];
+    }
+    
+    public function updateOnlineEventStatus($event_id, $status) {
+        $updateStatus = DB::table('contests')
+            ->where('id', $event_id)
+            ->update(['shide' => $status]);
+
+        if ($updateStatus >= 1) {
+            return true;
+        }
+        
+        return false;
+    }
+    
+    public function updateOnlineEvent($data) {
+        
+        $updateData = [
+                        'etitle' => $data['event-name'],
+                        'about' => $data['about'],
+                        'start_date' => $data['start_date'],
+                        'end_date' => $data['end_date'],
+                        'banner' => $data['image'],
+                        'shide' => $data['status'],
+                        'first_prize' => $data['first_prize'],
+                        'second_prize' => $data['second_prize'],
+                        'third_prize' => $data['third_prize']
+                    ];
+        
+        if (isset($data['image']) && !empty($data['image'])) {
+            $updateData['banner'] = $data['image'];
+        }
+
+        $updateStatus = DB::table('contests')
+            ->where('id', $data['event-id'])
+            ->update($updateData);
+
+        if ($updateStatus >= 1) {
+            return true;
+        }
+        return false;
+    }
+    
+    public function getOnlineEventDetails($event_id) {
+        $events = DB::table('contests')
+                ->where('id', $event_id)
+                ->get()
+                ->toArray();
+
+        if (!empty($events)) {
+            return $events[0];
+        }
+
+        return [];
+    }
 }

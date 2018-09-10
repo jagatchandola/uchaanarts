@@ -371,7 +371,7 @@ class HomeController extends Controller
                 $html .= 'Mobile No: ' . $inputData['mobile'] . '<br>';
                 $html .= 'Cooments: ' . $inputData['comments'] . '<br>';
                 $html .= '<a href="'.env('APP_URL') . '/artists/' . $result[0]->artist_id . '/' . $product_id .'">Click Here</a> to get product details.';
-                
+
                 $status = Mail::send([], [], function($message) use ($html) {
                      $message->from(env('MAIL_USERNAME'), 'Uchaanarts');
                      $message->to(config('app.admin_email'));
