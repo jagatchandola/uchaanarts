@@ -23,8 +23,11 @@ class Catalogue extends Model
 
     public function getCatalogues($records = '', $artist_id = '', $admin = false) {
         if ($records == 'all') {
-            $catalogues = DB::table('art_items')
-                        ->join('users', 'art_items.artist_id' , '=', 'users.id')
+            $catalogues = DB::table('art_items');
+            if (!empty($artist_id)) {
+                $catalogues = $catalogues->where('art_items.artist_id', '=', $artist_id);
+            }
+                        $catalogues = $catalogues->join('users', 'art_items.artist_id' , '=', 'users.id')
                         ->whereIn('art_items.active', [0, 1])
                         ->select('art_items.*', 'users.username', 'users.uname', 'art_items.active as status')
                         ->orderBy('id', 'desc')
@@ -173,7 +176,7 @@ class Catalogue extends Model
 
         $catalogues = DB::table('art_items')->where('art_items.is_creative_art', 1)->where('art_items.active', 1)
                     ->join('users', 'art_items.artist_id' , '=', 'users.id')
-                    ->select('art_items.id', 'title', 'price', 'gst', 'discount', 'discount_value', 'users.username as directory', 'users.uname as user_name', 'art_items.fname', 'art_items.ext')
+                    ->select('art_items.id', 'title', 'price', 'gst', 'discount', 'discount_value', 'users.username as directory', 'users.id as user_id', 'users.uname as user_name', 'art_items.fname', 'art_items.ext')
                     ->orderBy('id', 'desc')
                     ->get();
 
