@@ -40,6 +40,18 @@ Route::get('/event/payment/{paymentLink}', 'PaymentController@eventPayment')->na
 Route::get('/checkout/{productId}', 'PaymentController@productPayment')->name('product-payment');
 Route::match(['get', 'post'], '/product/enquiry/{productId}', 'HomeController@productEnquiry')->name('product-enquiry');
 
+// static pages
+Route::get('/why-sell', 'HomeController@whySell')->name('why-sell');
+Route::get('/privacy-policy', 'HomeController@privacyPolicy')->name('privacy-policy');
+Route::get('/copyright-policy', 'HomeController@copyrightPolicy')->name('copyright-policy');
+Route::get('/paintings', 'HomeController@paintings')->name('paintings');
+Route::get('/photography', 'HomeController@photography')->name('photography');
+Route::get('/nature', 'HomeController@nature')->name('nature');
+Route::get('/spritual', 'HomeController@spritual')->name('spritual');
+Route::get('/portrait', 'HomeController@portrait')->name('portrait');
+
+
+
 // Backend routes
 Route::match(['get', 'post'], '/backend/login','Backend\LoginController@index')->name('backend-login');
 //Route::get('/admin/dashboard','Backend\DashboardController@index')->name('backend-dashboard');	
