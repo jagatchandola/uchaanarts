@@ -205,6 +205,9 @@
                             <li>
                                 <a href="{{ route('events-list') }}">All Events</a>
                             </li>
+                            <li>
+                                <a href="{{ route('online-events-list') }}">Online Events</a>
+                            </li>
                             </li>
                         </ul>
                     </li>

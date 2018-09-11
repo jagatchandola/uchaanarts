@@ -399,4 +399,13 @@ class Events extends Model
 
         return [];
     }
+    
+    public function getArtistOnlineEvents($artist_id) {
+        return DB::table('contest_art')
+                ->where('artist_id', $artist_id)
+                ->groupBy('contid')
+                ->select('id')
+                ->get()
+                ->toArray();
+    }
 }
