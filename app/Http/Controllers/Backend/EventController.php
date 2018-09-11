@@ -374,7 +374,7 @@ class EventController extends Controller
     {
         $artistParticipatedEvents = [];
         if (Auth::user()->user_role == 'artist') {
-            $result = $this->events->getArtistEvents(Auth::user()->id);
+            $result = $this->events->getArtistOnlineEvents(Auth::user()->id);
             
             if (!empty($result)) {
                 $artistParticipatedEvents = array_column($result, 'evtid');
@@ -437,6 +437,65 @@ class EventController extends Controller
             return view('backend.events.edit-online-event')->with([
                                                 'event' => json_decode(json_encode($event), true)
                                             ]);
+        }
+    }
+    
+    public function participateOnlineEvent(Request $request, $event_id){
+
+        if (!Gate::allows('isArtist')) {
+            abort(401);
+        }
+        
+        $artist_id = Auth::user()->id;
+        
+        if ($request->isMethod('POST')) {
+            $inputData = $request->all();
+
+            $request->validate([
+                'art_id' => 'required'
+            ]);
+
+            $eventArtistsArray = [];
+            
+            foreach($inputData['art_id'] as $id) {
+                $eventArtistsArray[] = [
+                                'evtid'             => $event_id,
+                                'artist_id'         => $artist_id,
+                                'artist_item_id'    => $id,
+                                'shide'             => 0
+                            ];
+            }
+            
+            $result = $this->events->participateEventArts($eventArtistsArray, $inputData['event_art_id']);
+            if ($result == true) {
+                Session::flash('success_message', 'Particiapted successfully');
+                return redirect('/admin/events');
+            } else {
+                Session::flash('error_message', 'Something went wrong. Please try again');
+                return redirect('/admin/participateEvent/'.$event_id);
+            }
+        } else {
+            if(!isset($_SERVER['HTTP_REFERER'])) {
+                abort(401);
+            }
+            
+            $arts = $this->catalogue->getArtistArts($artist_id, true);            
+            $eventArts = $this->events->getArtistEventArts($artist_id, $event_id);
+            
+            $eventArtItemIds = [];
+            $eventArtIds = '';
+            
+            if (!empty($eventArts)) {
+                $eventArtItemIds = array_column($eventArts, 'artist_item_id');
+                $eventArtIds = implode(',', array_column($eventArts, 'id'));
+            }
+
+            return view('backend.events.participate-online-event')->with([
+                                            'arts'          => $arts,
+                                            'eventArts'     => $eventArtItemIds,
+                                            'event_id'      => $event_id,
+                                            'event_artist_id' => $eventArtIds
+                                        ]);
         }
     }
 }

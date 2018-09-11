@@ -109,6 +109,7 @@ Route::group(['middleware' => ['auth']],function(){
         Route::get('/admin/online/events','Backend\EventController@onlineEvents')->name('online-events-list');
         Route::put('/admin/online/events/changeStatus/{id}', 'Backend\EventController@updateOnlineEventStatus');
         Route::match(['get', 'post'], '/admin/online/events/{id}', 'Backend\EventController@editOnlineEvent')->name('edit-online-event');
+        Route::match(['get', 'post'], '/admin/online/event/participate/{id}', 'Backend\EventController@participateOnlineEvent')->name('participate-online-event');
         
         // Event Route 
         Route::match(['get', 'post'], '/admin/event/participateEvent/{id}', 'Backend\EventController@participateEvent')->name('participate-event');
