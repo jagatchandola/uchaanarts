@@ -60,13 +60,14 @@ class Catalogue extends Model
     public function getArtistWork($artist_id) {
         $where = [
                     'art_items.artist_id' => $artist_id,
-                    'art_items.active'    => 1
+                    'art_items.active'    => 1,
+                    'art_items.isSold'    => 0
                 ];
         $catalogues = Catalogue::where($where)
                     ->select('art_items.*', 'users.uname', 'users.username')
                     ->join('users', 'art_items.artist_id' , '=', 'users.id')
                     ->orderBy('art_items.id', 'desc')
-                    ->take(4)
+                    // ->take(4)
                     ->get()
                     ->toArray();
 
