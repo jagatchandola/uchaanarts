@@ -137,7 +137,7 @@
             <div class="col-md-4 col-lg-4 col-12 col-sm-12">
                 <div class="item artBox">
                  <div class="imgFixbxhp">
-                    <a href="{{ \App\Helpers\Helper::getImage($catalogue->directory.'/imgs/'.$catalogue->fname.'.'.$catalogue->ext, 1) }}" data-lightbox="creative-art" data-title="{{$catalogue->title}}"><img class="img-fluid" src="{{ \App\Helpers\Helper::getImage($catalogue->directory.'/imgs/'.$catalogue->fname.'.'.$catalogue->ext, 1) }}">
+                    <a href="/artists/{{$catalogue->user_id}}/{{$catalogue->id}}"><img class="img-fluid" src="{{ \App\Helpers\Helper::getImage($catalogue->directory.'/imgs/'.$catalogue->fname.'.'.$catalogue->ext, 1) }}">
                     </div>
                     <a href="/item/{{$catalogue->id}}" class="img-fluid"></a>
                         <h3>{{$catalogue->title}}</h3>

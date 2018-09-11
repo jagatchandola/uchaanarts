@@ -131,7 +131,7 @@
             <div class="footerLink">
               <h4>For Artist</h4>
               <ul>
-                <li><a href="#">Why Sell</a></li>
+                <li><a href="/why-sell">Why Sell</a></li>
                 <li><a href="{{ route('events') }}">Events</a></li>
               </ul>
             </div>
@@ -154,8 +154,8 @@
               <h4> Uchaan Art</h4>
               <ul>
                 <li><a href="#">Rangmahal Art Classes</a></li>
-                <li><a href="#">Privacy Policy</a></li>
-                <li><a href="#">Copyright Policy</a></li>
+                <li><a href="/privacy-policy">Privacy Policy</a></li>
+                <li><a href="/copyright-policy">Copyright Policy</a></li>
               </ul>
             </div>
           </div>
@@ -163,11 +163,11 @@
             <div class="footerLink">
               <h4>Top Categories</h4>
               <ul>
-                <li><a href="#">Paintings</a></li>
-                <li><a href="#">Photography</a></li>
-                <li><a href="#">Nature</a></li>
-                <li><a href="#">Spritual</a></li>
-                <li><a href="#">Portrait</a></li>
+                <li><a href="/paintings">Paintings</a></li>
+                <li><a href="/photography">Photography</a></li>
+                <li><a href="/nature">Nature</a></li>
+                <li><a href="/spritual">Spritual</a></li>
+                <li><a href="/portrait">Portrait</a></li>
               </ul>
             </div>
           </div>

@@ -12,6 +12,7 @@ use Session;
 use Illuminate\Support\Facades\Auth;
 use Gate;
 
+
 class CatalogueController extends Controller
 {
     /**
@@ -35,6 +36,7 @@ class CatalogueController extends Controller
     public function index()
     {
         $id = '';
+
         if (Auth::user()->user_role == 'artist') {
             $id = Auth::user()->id;
         }
@@ -46,7 +48,7 @@ class CatalogueController extends Controller
         } elseif (Session::has('error_message')) {
             $message = Session::get('error_message');
         }
-        
+       
         $arts = $this->catalogue->getCatalogues('all', $id, true);
         return view('backend.gallery.index')->with([
                                     'arts' => $arts,
@@ -178,36 +180,53 @@ class CatalogueController extends Controller
     
     public function addGallery(Request $request)
     {
+        $errors = [];
         if ($request->isMethod('POST')) {
             $inputData = $request->all();
 
-            $id = Auth::user()->id;
-
-            if ($request->hasFile('image')) {
-                $image = $request->file('image');
-                $title = str_replace(' ', '-', strtolower($request['title']));
-                $name = str_slug($title).'-'.time().'.'.$image->getClientOriginalExtension();
-                $destinationPath = public_path(config('constants.uploads.artists')).Auth::user()->username.'/imgs/';
-                $image->move($destinationPath, $name);
-
-                $inputData['image'] = $name;
-            }
-
-            $result = $this->catalogue->addArt($inputData, $id);
-
-            if ($result == true) {
-                Session::flash('success_message', 'Product has been sent to admin for approval');
-                return redirect('/admin/gallery/add');
+            $validator = $this->validate($request, [
+                'image' => 'required',
+                'title' => 'required',
+                'about' => 'required',
+                'price' => 'required',
+                'title' => 'required'
+            ]);
+            if ($validator->fails()) {
+                
+                $errors = $validator->messages()->all();
+                
             } else {
-                Session::flash('error_message', 'Something went wrong. Please try again');
-                return redirect('/admin/gallery/add');
+
+                $id = Auth::user()->id;
+
+                if ($request->hasFile('image')) {
+                    $image = $request->file('image');
+                    $title = str_replace(' ', '-', strtolower($request['title']));
+                    $name = str_slug($title).'-'.time().'.'.$image->getClientOriginalExtension();
+                    $destinationPath = public_path(config('constants.uploads.artists')).Auth::user()->username.'/imgs/';
+                    $image->move($destinationPath, $name);
+
+                    $inputData['image'] = $name;
+
+                    $result = $this->catalogue->addArt($inputData, $id);
+
+                    if ($result == true) {
+                        Session::flash('success_message', 'Product has been sent to admin for approval');
+                        return redirect('/admin/gallery/add');
+                    } else {
+                        Session::flash('error_message', 'Something went wrong. Please try again');
+                        return redirect('/admin/gallery/add');
+                    }
+                } else {
+                    $errors[0] = 'Product Image is required.';
+                }
             }
-        } else {
-            //dd(Auth::user());
-            $categories = $this->category->getCategories();
-            return view('backend.gallery.add-gallery')->with([
-                                                            'categories' => $categories
-                                                        ]);
         }
+        //dd(Auth::user());
+        $categories = $this->category->getCategories();
+        return view('backend.gallery.add-gallery')->with([
+                                                            'categories' => $categories, 'errors' => $errors
+                                                        ]);
+        
     }
 }

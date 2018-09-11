@@ -395,4 +395,46 @@ class HomeController extends Controller
                                 'product_id' => $product_id
                             ]);
     }
+
+    public function whySell()
+    {
+        return view('why-sell');
+    }
+
+    public function privacyPolicy()
+    {
+        return view('privacy-policy');
+    }
+
+    public function copyrightPolicy()
+    {
+        return view('copyright-policy');
+    }
+
+    public function paintings()
+    {
+        return view('paintings');
+    }
+
+    public function photography()
+    {
+        return view('photography');
+    }
+
+    public function nature()
+    {
+        return view('nature');
+    }
+
+    public function spritual()
+    {
+        return view('spritual');
+    }
+
+    public function portrait()
+    {
+        return view('portrait');
+    }
+
+    
 }
