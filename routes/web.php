@@ -116,6 +116,8 @@ Route::group(['middleware' => ['auth']],function(){
         Route::match(['get', 'post'], '/admin/event/participateEvent/{id}', 'Backend\EventController@participateEvent')->name('participate-event');
         Route::get('/admin/event/participants', 'Backend\EventController@participants')->name('event-participants');
         Route::match(['get', 'post'], '/admin/event/participants/{event_id}/{artist_id}', 'Backend\EventController@participantDetails')->name('participant');        
+        Route::get('/admin/online/event/participants', 'Backend\EventController@onlineParticipants')->name('online-event-participants');
+        Route::match(['get', 'post'], '/admin/online/event/participants/{event_id}/{artist_id}', 'Backend\EventController@onlineParticipantDetails')->name('online-participant');        
         
 
         // Banners

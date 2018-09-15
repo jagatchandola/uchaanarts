@@ -82,6 +82,9 @@
                         <li>
                             <a href="{{ route('add-online-event') }}">Add Online Event</a>
                         </li>
+                        <li>
+                            <a href="{{ route('online-event-participants') }}">Online Event Participants</a>
+                        </li>
                     </ul>
                 </li>
                 <li>

@@ -409,4 +409,60 @@ class Events extends Model
                 ->get()
                 ->toArray();
     }
+    
+    public function participatedOnlineEventArts($eventArtistsArts, $event_art_id) {
+        DB::table('contest_art')->whereIn('id', explode(',', $event_art_id))->delete();
+        
+        return DB::table('contest_art')->insert(
+            $eventArtistsArts
+        );        
+    }
+    
+    public function getArtistOnlineEventArts($artist_id, $event_id) {
+        $where = [
+                    'contid'     => $event_id,
+                    'artist_id' => $artist_id
+                ];
+        
+        $events = DB::table('contest_art')
+                    ->where($where)
+                    ->select('id', 'artist_item_id')
+                    ->get()
+                    ->toArray();
+
+        if (!empty($events)) {
+            return $events;
+        }
+
+        return [];
+    }
+    
+    public function getOnlineEventParticipants() {
+        
+        //$catalogue = Events::where('events.shide', 1)
+        $catalogue = DB::table('contests')
+                    ->join('contest_art', 'contests.id' , '=', 'contest_art.contid')
+                    ->join('users', 'contest_art.artist_id' , '=', 'users.id')
+                    ->where('contests.shide', '=', 1)
+                    ->select('contests.etitle', 'contests.id as event_id', 'users.id as artist_id', 'uname')
+                    ->orderBy('contests.id', 'asc')
+                    ->groupBy('contest_art.contid', 'contest_art.artist_id')
+                    ->get();
+
+        if (!empty($catalogue)) {
+            return $catalogue;
+        }
+
+        return [];
+    }
+    
+    public function getOnlineParticipantDetails($event_id, $artist_id) {
+        return DB::table('contest_art')
+                ->join('art_items', 'contest_art.artist_item_id' , '=', 'art_items.id')
+                ->join('users', 'art_items.artist_id' , '=', 'users.id')
+                ->where('contest_art.contid', '=', $event_id)
+                ->where('contest_art.artist_id', '=', $artist_id)
+                ->select('contest_art.id', 'title', 'fname', 'ext', 'price', 'gst', 'discount', 'discount_value','users.username')
+                ->get();
+    }
 }
