@@ -23,11 +23,12 @@
                             <div class="panel-body">
                                 @foreach($arts as $art)
                                 <div class="dataTable_wrapper col-md-3">
+
                                     @if($art->isSold == 0)
                                         <a href="{{ route('edit-gallery', [$art->artist_id, $art->id]) }}">
                                             <img src="{{ \App\Helpers\Helper::getImage($art->username .'/imgs/'. $art->fname .'.'. $art->ext, 1) }}" width="200" height="200" title="{{ $art->uname }}" /><br/>
                                         </a>
-                                        <span class="delete-product" style="position: absolute; color:red; top:0px; right:45px; font-size: 20px; font-weight: 100; cursor: pointer;" title="Remove" onclick="deleteProduct('{{$art->id}}')"><i class="fa fa-close"></i></span>
+                                        
                                         <span>{{ mb_strimwidth($art->title, 0, 25, '...') }}</span><br/>
                                         <span><b>By:</b> {{ $art->uname }}</span>
                                     @else 
@@ -35,6 +36,7 @@
                                         <span>{{ mb_strimwidth($art->title, 0, 25, '...') }}</span><br/>
                                         <span><b>By:</b> {{ $art->uname }}</span>
                                     @endif
+                                    <span class="delete-product" style="position: absolute; color:red; top:0px; right:45px; font-size: 20px; font-weight: 100; cursor: pointer;" title="Remove" onclick="deleteProduct('{{$art->id}}')"><i class="fa fa-close"></i></span>
                                 </div>
                                 @endforeach
                             </div>
