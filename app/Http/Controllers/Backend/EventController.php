@@ -33,19 +33,24 @@ class EventController extends Controller
      */
     public function index()
     {
-        $artistParticipatedEvents = [];
+        $artistParticipatedEvents = $eventStatus = [];
         if (Auth::user()->user_role == 'artist') {
             $result = $this->events->getArtistEvents(Auth::user()->id);
             
             if (!empty($result)) {
+                
                 $artistParticipatedEvents = array_column($result, 'evtid');
+                foreach($result as $e){
+                    $eventStatus[$e->evtid] = $e->admin_approved;
+                }
             }
         }
         
         $events = $this->events->getAllEvents('all');
         return view('backend.events.index')->with([
                                     'events'        => $events,
-                                    'artistEvents'  => $artistParticipatedEvents
+                                    'artistEvents'  => $artistParticipatedEvents,
+                                    'eventStatus'  => $eventStatus
                                 ]);
     }
 

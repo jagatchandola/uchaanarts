@@ -74,10 +74,18 @@
                                                     <a href="{{ route('edit-event', $event->id) }}"Check $1><button type="button" class="btn btn-primary">Edit</button></a>
                                                 @endcan
 
+
                                                 @can('isArtist')
                                                     @if($event->start_date > date('Y-m-d'))
+                                            <?php //print_r($eventStatus);?>
+                                            <?php //print_r($event->id);?>
+                                            <?php //print_r($artistEvents);?>
                                                         @if(!in_array($event->id, $artistEvents))
                                                         <a href="{{ route('participate-event', $event->id) }}"Check $1><button type="button" class="btn btn-primary">Participate</button></a>
+                                                        @else
+                                                        @if(!empty($eventStatus[$event->id]) && $eventStatus[$event->id] == 1)
+                                                        <i class="btn btn-info">Participated</i>
+                                                        @endif
                                                         @endif
                                                     @endif
                                                 @endcan

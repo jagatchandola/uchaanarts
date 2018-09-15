@@ -270,7 +270,8 @@ class Events extends Model
         return DB::table('evt_artists')
                 ->where('artist_id', $artist_id)
                 ->groupBy('evtid')
-                ->select('evtid')
+                ->select('evtid','admin_approved')
+                ->orderBy('admin_approved', 'desc')
                 ->get()
                 ->toArray();
     }
