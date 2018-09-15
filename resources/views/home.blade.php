@@ -113,15 +113,16 @@
     <h1>Upcoming Events</h1>
     <div class="container">
          @if(!empty($upcomingEvents))
-                    <div class="owl-carousel owl-theme first-owl-carousel">
-                        @foreach($upcomingEvents as $event)
-                        <div class="item">
+        <div class="owl-carousel owl-theme first-owl-carousel">
+            @foreach($upcomingEvents as $event)
+            <div class="item">
 
-						 <div class="imgFixbxhp">
-						<img src="{{ \App\Helpers\Helper::getImage($event->eurl.'/'.$event->banner, 3) }}"><div class="captionBtm">{{date("d-m-Y", strtotime($event->start_date))}}<br>Uchaan Events<br>{{$event->venue}}</div></div></div>
-                        @endforeach
-                    </div>
-                    @endif
+			 <div class="imgFixbxhp">
+             <a href="/events/{{$event->id}}">
+			<img src="{{ \App\Helpers\Helper::getImage($event->eurl.'/'.$event->banner, 3) }}"></a><div class="captionBtm">{{date("d-m-Y", strtotime($event->start_date))}}<br>Uchaan Events<br>{{$event->venue}}</div></div></div>
+            @endforeach
+        </div>
+        @endif
     </div>
 </section>
 

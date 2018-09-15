@@ -29,15 +29,15 @@
                                             @csrf
                                             <div class="form-group">
                                                 <label>Category Name</label>
-                                                <input class="form-control" name="cat-name" value="">
+                                                <input class="form-control" name="cat-name" value="" required>
                                             </div>
                                             <div class="form-group">
                                                 <label>Category Image</label>
-                                                <input class="form-control" type="file" name="image" value="">
+                                                <input class="form-control" type="file" name="image" value="" required>
                                             </div>
                                             <div class="form-group">
                                                 <label>Description</label>
-                                                <textarea class="form-control" name="description"></textarea>
+                                                <textarea class="form-control" name="description" required></textarea>
                                             </div>
                                             <div class="form-group">
                                                 <label>GST</label>
