@@ -83,8 +83,12 @@
                                                         @if(!in_array($event->id, $artistEvents))
                                                         <a href="{{ route('participate-event', $event->id) }}"Check $1><button type="button" class="btn btn-primary">Participate</button></a>
                                                         @else
-                                                        @if(!empty($eventStatus[$event->id]) && $eventStatus[$event->id] == 1)
-                                                        <i class="btn btn-info">Participated</i>
+                                                        @if(isset($eventStatus[$event->id]))
+                                                            @if($eventStatus[$event->id] == 1)
+                                                            <i class="btn btn-info">Participated</i>
+                                                            @else
+                                                            <i class="btn btn-warning">Pending</i>
+                                                            @endif
                                                         @endif
                                                         @endif
                                                     @endif
