@@ -28,7 +28,7 @@
                                         <a href="{{ \App\Helpers\Helper::getImage($art['username'].'/imgs/'.$art['fname'] .'.'. $art['ext'], 1) }}" data-lightbox="{{$art['id']}}">
                                         <img src="{{ \App\Helpers\Helper::getImage($art['username'].'/imgs/'.$art['fname'] .'.'. $art['ext'], 1) }}" width="100" height="100" />
                                         </a><br/>
-                                        <span>{{ $art['title'] }}</span><br/>
+                                        <span>{{ $art['title'] }}==</span><br/>
                                         <span><b>By:</b> {{ $art['uname'] }}</span><br/>
                                         <span>Rs. {{ $art['price'] }}</span>
                                     </div>

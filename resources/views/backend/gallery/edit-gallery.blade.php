@@ -35,21 +35,21 @@
                                             @can('isArtist')
                                             <div class="form-group">
                                                 <label>Image</label>
-                                                <input class="form-control" type="file" name="image" value="">
+                                                <input class="form-control" type="file" name="image" value="" required>
                                             </div>
                                             @endcan
                                             
                                             <div class="form-group">
                                                 <label>Title</label>
-                                                <input class="form-control" type="text" name="title" value="{{ $art->title }}">
+                                                <input class="form-control" type="text" name="title" value="{{ $art->title }}" required>
                                             </div>
                                             <div class="form-group">
                                                 <label>About Image</label>
-                                                <textarea class="form-control" name="about">{{ $art->about }}</textarea>
+                                                <textarea class="form-control" name="about" required>{{ $art->about }}</textarea>
                                             </div>
                                             <div class="form-group">
                                                 <label>Price</label>
-                                                <input class="form-control" type="textarea" name="price" value="{{ $art->price }}">
+                                                <input class="form-control" type="textarea" name="price" value="{{ $art->price }}" required>
                                             </div>
                                             
                                             @can('isAdmin')

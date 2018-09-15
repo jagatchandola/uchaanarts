@@ -21,17 +21,17 @@
                                             <input type="hidden" name="cat-id" value="{{ $category['id'] }}" />
                                             <div class="form-group">
                                                 <label>Category Name</label>
-                                                <input class="form-control" name="cat-name" value="{{ $category['cat_name'] }}">
+                                                <input class="form-control" name="cat-name" value="{{ $category['cat_name'] }}" required>
                                             </div>
                                             <div class="form-group">
                                                 <label>Category Image</label>
                                                 <!--<img src="{{ asset('image/'.$category['image']) }}" />-->
                                                 <img src="{{ \App\Helpers\Helper::getImage($category['image'], 5) }}" width="100" height="100" />
-                                                <input class="form-control" type="file" name="image" value="">
+                                                <input class="form-control" type="file" name="image" value="" required>
                                             </div>
                                             <div class="form-group">
                                                 <label>Description</label>
-                                                <textarea class="form-control" name="description">{{ $category['cat_desc'] }}</textarea>
+                                                <textarea class="form-control" name="description" required>{{ $category['cat_desc'] }}</textarea>
                                             </div>
                                             <div class="form-group">
                                                 <label>GST</label>

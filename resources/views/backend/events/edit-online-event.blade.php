@@ -20,16 +20,16 @@
                                             <input type="hidden" name="event-id" value="{{ $event['id'] }}" />
                                             <div class="form-group">
                                                 <label>Event Title</label>
-                                                <input class="form-control" name="event-name" value="{{ $event['etitle'] }}">
+                                                <input class="form-control" name="event-name" value="{{ $event['etitle'] }}" required>
                                             </div>
                                             <div class="form-group">
                                                 <label>Event Image</label>
                                                 <img src="{{ \App\Helpers\Helper::getImage($event['eurl'].'/'.$event['banner'], 3) }}" width="100" height="100" />
-                                                <input class="form-control" type="file" name="image" id="image" value="">
+                                                <input class="form-control" type="file" name="image" id="image" value="" required>
                                             </div>
                                             <div class="form-group">
                                                 <label>About Event</label>
-                                                <textarea class="form-control" type="textarea" name="about">{{ $event['about'] }}</textarea>
+                                                <textarea class="form-control" type="textarea" name="about" required>{{ $event['about'] }}</textarea>
                                             </div>
                                             <div class="form-group">
                                                 <label>Start Date</label>

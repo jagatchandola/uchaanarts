@@ -340,4 +340,9 @@ class Catalogue extends Model
         return false;
     }
 
+    public function deleteProduct($id) {
+
+        return Catalogue::where('id', $id)->delete();
+    }
+
 }

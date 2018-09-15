@@ -25,15 +25,15 @@
                                             <input type="hidden" name="artist-id" value="{{ $artist['id'] }}" />
                                             <div class="form-group">
                                                 <label>Name</label>
-                                                <input class="form-control" name="artist-name" value="{{ $artist['uname'] }}">
+                                                <input class="form-control" name="artist-name" value="{{ $artist['uname'] }}" required>
                                             </div>
                                             <div class="form-group">
                                                 <label>Email</label>
-                                                <input class="form-control" type="text" name="email" value="{{ $artist['email'] }}">
+                                                <input class="form-control" type="text" name="email" value="{{ $artist['email'] }}" required>
                                             </div>
                                             <div class="form-group">
                                                 <label>Role</label>
-                                                <select class="form-control" name="user-role">
+                                                <select class="form-control" name="user-role" required>
                                                     <option>Select Role</option>
                                                     <option value="artist" @if($artist['user_role'] == 'artist') selected="selected" @endif>Artist</option>
                                                     <option value="user" @if($artist['user_role'] == 'user') selected="selected" @endif>Customer</option>

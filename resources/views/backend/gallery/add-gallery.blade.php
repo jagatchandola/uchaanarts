@@ -20,7 +20,7 @@
                                         <form role="form" name="add-gallery-form" action="{{ route('add-gallery') }}" method="post" enctype="multipart/form-data">
                                             <div class="form-group">
                                                 <label>Category</label>
-                                                <select class="form-control" name="category">
+                                                <select class="form-control" name="category" required>
                                                     <option value="">Select Category</option>
                                                     @foreach($categories as $category)
                                                     <option value="{{ $category->id }}">{{ $category->cat_name }}</option>
@@ -29,19 +29,19 @@
                                             </div>
                                             <div class="form-group">
                                                 <label>Image</label>
-                                                <input class="form-control" type="file" name="image" value="">
+                                                <input class="form-control" type="file" name="image" value="" required>
                                             </div>                                            
                                             <div class="form-group">
                                                 <label>Title</label>
-                                                <input class="form-control" type="text" name="title" value="">
+                                                <input class="form-control" type="text" name="title" value="" required>
                                             </div>
                                             <div class="form-group">
                                                 <label>About Image</label>
-                                                <textarea class="form-control" name="about"></textarea>
+                                                <textarea class="form-control" name="about" required></textarea>
                                             </div>
                                             <div class="form-group">
                                                 <label>Price</label>
-                                                <input class="form-control" type="number" name="price" value="">
+                                                <input class="form-control" type="number" name="price" value="" required>
                                             </div>
                                             
                                             @if (Auth::user()->admin_approved == 0)

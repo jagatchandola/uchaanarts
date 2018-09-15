@@ -229,4 +229,26 @@ class CatalogueController extends Controller
                                                         ]);
         
     }
+    public function deleteProduct(Request $request, $id){
+
+        $getProduct = $this->catalogue->getArtById($id);
+        if ($getProduct == true) {
+            $getProduct = $getProduct[0];
+            $image = $getProduct->username.'/imgs/'.$getProduct->fname.'.'.$getProduct->ext;
+            
+                // echo public_path(config('constants.uploads.artists').$image);die;
+            $delete = $this->catalogue->deleteProduct($id);
+            if ($delete == true) {
+                
+                if(is_file(public_path(config('constants.uploads.artists').$image))) {
+                    unlink(public_path(config('constants.uploads.artists').$image));
+                }
+                echo 1;
+            } else {
+                echo 0;
+            }
+        } else {
+            echo 0;
+        }
+    }
 }
