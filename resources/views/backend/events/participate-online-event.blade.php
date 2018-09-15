@@ -20,7 +20,7 @@
                     @if (empty($arts))
                         <div class="dataTable_wrapper">No record(s) found</div>
                     @else
-                        <form role="form" name="particiapte-event-form" action="{{ route('participate-online-event', [$event_id]) }}" method="post">
+                        <form role="form" name="particiapte-event-form" action="{{ route('participate-online-event', $event_id) }}" method="post">
                             <input type="hidden" name="event_art_id" value="{{ $event_artist_id }}" />
                             @foreach($arts as $art)
                             <div class="col-sm-3">

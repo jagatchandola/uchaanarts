@@ -456,23 +456,24 @@ class EventController extends Controller
             ]);
 
             $eventArtistsArray = [];
-            
+//            echo '<pre>';
+//            print_r($inputData);exit;
             foreach($inputData['art_id'] as $id) {
                 $eventArtistsArray[] = [
-                                'evtid'             => $event_id,
+                                'contid'            => $event_id,
                                 'artist_id'         => $artist_id,
                                 'artist_item_id'    => $id,
                                 'shide'             => 0
                             ];
             }
             
-            $result = $this->events->participateEventArts($eventArtistsArray, $inputData['event_art_id']);
+            $result = $this->events->participatedOnlineEventArts($eventArtistsArray, $inputData['event_art_id']);
             if ($result == true) {
                 Session::flash('success_message', 'Particiapted successfully');
-                return redirect('/admin/events');
+                return redirect('/admin/online/events');
             } else {
                 Session::flash('error_message', 'Something went wrong. Please try again');
-                return redirect('/admin/participateEvent/'.$event_id);
+                return redirect('/admin/online/event/participate/'.$event_id);
             }
         } else {
             if(!isset($_SERVER['HTTP_REFERER'])) {
@@ -480,7 +481,7 @@ class EventController extends Controller
             }
             
             $arts = $this->catalogue->getArtistArts($artist_id, true);            
-            $eventArts = $this->events->getArtistEventArts($artist_id, $event_id);
+            $eventArts = $this->events->getArtistOnlineEventArts($artist_id, $event_id);
             
             $eventArtItemIds = [];
             $eventArtIds = '';
@@ -497,5 +498,64 @@ class EventController extends Controller
                                             'event_artist_id' => $eventArtIds
                                         ]);
         }
+    }
+    
+    public function onlineParticipants() {
+        if (!Gate::allows('isAdmin')) {
+            abort(401);
+        }
+        
+        $eventParticipants = $this->events->getOnlineEventParticipants();
+        return view('backend.events.online-event-participants')->with([
+                                    'eventParticipants' => $eventParticipants
+                                ]);
+    }
+    
+    public function onlineParticipantDetails(Request $request, $event_id, $artist_id) {
+        if (!Gate::allows('isAdmin')) {
+            abort(401);
+        }
+        
+        if ($request->isMethod('post')) {
+            $inputData = $request->all();
+            
+            $data = [
+                'event_art_ids'     => $inputData['event_id'], 
+                'featured_image'    => $inputData['featured_image'],
+                'event_id'          => $event_id,
+                'artist_id'         => $artist_id
+            ];
+
+            $response = $this->events->approveEventArt($data);
+
+            if (!empty($response) && count($response)) {                
+                Session::flash('success_message', 'Participant approved successfully');
+                return redirect('/admin/event/participants');
+            } else {
+                Session::flash('error_message', 'Something went wrong. Please try again');
+                return redirect('/admin/event/participants/' . $event_id . ''. $artist_id);
+            }
+        }
+        
+        $eventArts = $this->events->getOnlineParticipantDetails($event_id, $artist_id);
+        
+        if (!empty($eventArts) && count($eventArts)) {
+            foreach ($eventArts as $art) {
+                $calculateData = [
+                                    'price' => $art->price,
+                                    'gst' => $art->gst,
+                                    'discountType' => $art->discount,
+                                    'discountValue' => $art->discount_value
+                                ];
+                
+                $art->totalPrice = Helper::calculatePrice($calculateData);
+            }
+        }
+
+        return view('backend.events.participant-details')->with([
+                                    'eventArts' => $eventArts,
+                                    'event_id' => $event_id,
+                                    'artist_id' => $artist_id
+                                ]);
     }
 }
