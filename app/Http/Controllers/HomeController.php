@@ -104,9 +104,22 @@ class HomeController extends Controller
                                 ]);
     }
 
-    public function artsCompetition()
+    public function getCompetition()
     {
-        return view('arts-competition');
+        $onlineEvents = $this->events->getAllOnlineEvents();
+
+        return view('arts-competition')->with([
+                                    'onlineEvents' => $onlineEvents
+                                ]);
+    }
+
+    public function getCompetitionDetail($id)
+    {
+        $onlineEventDetail = $this->events->getOnlineEventDetails($id);
+
+        return view('arts-competition-detail')->with([
+                                    'onlineEventDetail' => $onlineEventDetail
+                                ]);
     }
 
     /**

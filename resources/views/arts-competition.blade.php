@@ -22,18 +22,22 @@
    <div class="testimonialBx">
     <h1>Online Art Competition</h1>
     <div class="row">
-              
+        @if(!empty($onlineEvents))  
+        @foreach($onlineEvents as $onlineEvent)  
         <div class="col-xs-6 col-sm-4 col-md-4">            
             <div class="event-thumbnail">
 				 <div class="event-caption">
-                    <h4>Online Competition Title</h4>
-                    <p>Event End Date : 25/July/2018</p>
-                    <p><a class="btn btn-primary themeBtn mt-3" href="art-competition-detail.html">Check Detail</a>
+                    <h4>{{ $onlineEvent->etitle }}</h4>
+                    <p>Event End Date : {{ !empty($onlineEvent->end_date) ? date('d/M/Y', strtotime($onlineEvent->end_date)) : '' }}</p>
+                    <p>
+                        <a class="btn btn-primary themeBtn mt-3" href="/arts-competition/{{$onlineEvent->id}}">Check Detail</a>
                     </p>
                 </div>
-                <img src="assets/img/painting-competition.jpg" alt="Online Competition">
+                <img src="{{ \App\Helpers\Helper::getImage($onlineEvent->eurl.'/'.$onlineEvent->banner, 3) }}" alt="Online Competition" width="330" height="198">
             </div>
 		</div>
+        @endforeach
+        @endif
 		
     </div>
 

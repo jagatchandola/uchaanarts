@@ -343,7 +343,7 @@ class Events extends Model
                                 ->orderBy('id', 'desc')
                                 ->get();
         } else {
-            $events = Events::where('shide', 1)
+            $events = DB::table('contests')->where('shide', 1)
                         ->orderBy('start_date', 'desc')
                         ->get();
         }
