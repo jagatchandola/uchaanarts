@@ -72,6 +72,34 @@
                                                 <label>Third Prize Amount</label>
                                                 <input class="form-control" type="number" name="third_prize" value="" required>
                                             </div>
+                                            <div class="form-group">
+                                                <label>Fourth Prize Amount</label>
+                                                <input class="form-control" type="number" name="fourth_prize" value="" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Fifth Prize Amount</label>
+                                                <input class="form-control" type="number" name="fifth_prize" value="" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Sixth Prize Amount</label>
+                                                <input class="form-control" type="number" name="sixth_prize" value="" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Seventh Prize Amount</label>
+                                                <input class="form-control" type="number" name="seventh_prize" value="" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Eighth Prize Amount</label>
+                                                <input class="form-control" type="number" name="eighth_prize" value="" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Ninth Prize Amount</label>
+                                                <input class="form-control" type="number" name="ninth_prize" value="" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Tenth Prize Amount</label>
+                                                <input class="form-control" type="number" name="tenth_prize" value="" required>
+                                            </div>
                                             <button type="button" class="btn btn-primary" onclick="validate()">Submit</button>
                                         </form>
                                     </div>                                    

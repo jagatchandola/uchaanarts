@@ -51,6 +51,36 @@
                                                 <label>Third Prize Amount</label>
                                                 <input class="form-control" type="number" name="third_prize" value="{{ $event['third_prize'] }}" required>
                                             </div>
+                                            
+                                            <div class="form-group">
+                                                <label>Fourth Prize Amount</label>
+                                                <input class="form-control" type="number" name="fourth_prize" value="{{ $event['fourth_prize'] }}" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Fifth Prize Amount</label>
+                                                <input class="form-control" type="number" name="fifth_prize" value="{{ $event['fifth_prize'] }}" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Sixth Prize Amount</label>
+                                                <input class="form-control" type="number" name="sixth_prize" value="{{ $event['sixth_prize'] }}" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Seventh Prize Amount</label>
+                                                <input class="form-control" type="number" name="seventh_prize" value="{{ $event['seventh_prize'] }}" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Eighth Prize Amount</label>
+                                                <input class="form-control" type="number" name="eighth_prize" value="{{ $event['eighth_prize'] }}" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Ninth Prize Amount</label>
+                                                <input class="form-control" type="number" name="ninth_prize" value="{{ $event['ninth_prize'] }}" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Tenth Prize Amount</label>
+                                                <input class="form-control" type="number" name="tenth_prize" value="{{ $event['tenth_prize'] }}" required>
+                                            </div>
+
                                             <div class="form-group">
                                                 <label>Status</label>
                                                 <label class="radio-inline">

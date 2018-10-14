@@ -27,7 +27,7 @@
                 <div class="carousel-caption">
                     <h1>{{$banner->title}}</h1>
                     <p>{{$banner->description}}</p>
-                    <p><a class="btn btn-lg btn-primary themeBtn" href="#" role="button">See More</a></p>
+                    <p><a class="btn btn-lg btn-primary themeBtn" href="{{$banner->url}}" role="button">See More</a></p>
                 </div>
             </div>
         </div>
