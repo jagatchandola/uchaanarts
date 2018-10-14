@@ -5,11 +5,11 @@ namespace App\Http\Controllers;
 // use App\Models\Orders;
 use App\Models\OrderItems;
 use App\Models\Catalogue;
+use App\Models\Cart;
 use Illuminate\Http\Request;
 use App\Helpers\Helper;
 use Session;
 use Auth;
-use Illuminate\Support\Facades\Mail;
 
 class OrderController extends Controller
 {
@@ -22,6 +22,7 @@ class OrderController extends Controller
     {
         $this->catalogue = new Catalogue();
         $this->orderItem = new OrderItems();
+        $this->cart      = new Cart();
         // $this->order = new Orders();
     }
 
@@ -32,16 +33,32 @@ class OrderController extends Controller
      */
     public function addItem(Request $request)
     {
-        // if(!Auth::check()){
-        //     echo -1;
-        //     exit;
-        // }
         if($request->post()) {
         
             $input  = $request->all();
-            print_r($input);die;
-            $itemData = $catalogue->getArtItem($input['id']);
-            if(!empty($itemData)){
+            
+            if (Auth::check()) {
+                $cartItemCount = $this->cart->addToCart([$input['id']]);
+                $_SESSION['cart'] = $cartItemCount;
+                echo 1;
+            } else {
+                if(!isset($_SESSION['cart'])){
+                    $_SESSION['cart'] = [];
+                }
+
+                // check if the item is in the array, if it is, do not add
+                if(array_key_exists($input['id'], $_SESSION['cart'])){
+                    echo '2';
+                } else { // else, add the item to the array
+                    $_SESSION['cart'][$input['id']] = 1;
+                    echo '1';
+                }
+            }
+            //dd(Session::get('cart'));
+            //dd($_SESSION['cart']);
+            //die;
+            //$itemData = $catalogue->getArtItem($input['id']);
+            /*if(!empty($itemData)){
 
                 $itemId = 0;
                 $dataArray = [
@@ -66,7 +83,7 @@ class OrderController extends Controller
                 if($itemId > 0){
                     
                 }
-            }
+            }*/
         }
         // if(!empty($input['email'])){
         //     $news = new NewsLetter();
@@ -78,4 +95,31 @@ class OrderController extends Controller
         // }
     }
     
+    public function checkout() {
+//        dd($_SESSION['cart']);
+        $cartItems = $this->cart->getCartItems();
+//echo '<pre>';
+//print_r($cartItems);exit;
+        if (!empty($cartItems)) {
+            foreach ($cartItems as $productDetail) {
+                $calculateData = [
+                                            'price' => $productDetail->price,
+                                            'gst' => $productDetail->gst,
+                                            'discountType' => $productDetail->discount,
+                                            'discountValue' => $productDetail->discount_value
+                                        ];
+
+                $productDetail->totalPrice = Helper::calculatePrice($calculateData);
+                $productDetail->quantity = $productDetail->quantity ?? 1;
+            }
+            
+//            if(Auth::user()) {
+//                $this->order->addOrder(Auth::user()->id, $product_id, $totalPrice);
+//            }
+        }
+//dd($cartItems);
+        return view('checkout-pay')->with([
+                                        'cartItems' => $cartItems
+                                    ]);
+    }
 }

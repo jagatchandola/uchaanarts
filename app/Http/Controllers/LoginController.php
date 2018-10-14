@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use App\User;
 use App\Models\Artists;
+use App\Models\Cart;
 use Illuminate\Http\Request;
 use Session;
 use Auth;
@@ -42,6 +43,7 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
         $this->user = new User();
         $this->artists = new Artists();
+        $this->cart = new Cart();
     }
 
     /**
@@ -52,7 +54,15 @@ class LoginController extends Controller
     public function index(Request $request)
     {
         if (Auth::attempt(['email' => $request['email'], 'password' => $request['password']])) {
-            // dd(Auth::user()->user_role);
+
+            if (isset($_SESSION['cart']) && count($_SESSION['cart']) > 0) {                
+                $cartItemCount = $this->cart->addToCart(array_keys($_SESSION['cart']));
+                $_SESSION['cart'] = $cartItemCount;
+            } else {
+                $cartItemCount = $this->cart->getCartItemCount();
+                $_SESSION['cart'] = $cartItemCount;
+            }
+            
             if(Auth::user()->user_role == 'user')
                 return redirect()->route('home');
             else
@@ -67,6 +77,7 @@ class LoginController extends Controller
     public function logout(Request $request)
     {
         Session::flush();
+//        unset($_SESSION['cart']);
         Auth::logout();
         return redirect('/');
     }

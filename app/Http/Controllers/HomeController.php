@@ -47,7 +47,6 @@ class HomeController extends Controller
         $artists = $this->artists->getArtistDetails('','1');
         $weeklyStatus = $this->artists->getArtistOfWeek();
         $weeklyArts = $this->catalogue->getWeeklyArtistArts();
-        //print_r($weeklyArts);die;
 
         $events = $this->events->getAllEvents();
         $upcomingEvents = [];

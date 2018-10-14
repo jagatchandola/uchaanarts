@@ -41,6 +41,8 @@ Route::get('/event/payment/{paymentLink}', 'PaymentController@eventPayment')->na
 Route::get('/checkout/{productId}', 'PaymentController@productPayment')->name('product-payment');
 Route::match(['get', 'post'], '/product/enquiry/{productId}', 'HomeController@productEnquiry')->name('product-enquiry');
 
+Route::get('/checkout', 'OrderController@checkout')->name('checkout');
+
 // static pages
 Route::get('/why-sell', 'HomeController@whySell')->name('why-sell');
 Route::get('/privacy-policy', 'HomeController@privacyPolicy')->name('privacy-policy');
