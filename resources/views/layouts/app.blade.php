@@ -30,59 +30,181 @@
 
 </head>
 <body>
-<!--Header start Here-->
+<!-- Header start ====================== -->
 <header>
-  <div class="col-md-6 col-12 col-sm-12 col-lg-3 d-none d-md-block d-lg-block">
-    <div class="logoRight"><a href="/"><img src="{{ asset('img/uchaan-logo.png')}}" class="img-fluid"></a></div>
-  </div>
-  <div class="container">
-    <div class="row">
-      <div class="col-md-3 col-12 col-sm-12 col-lg-4 offset-lg-3 offset-md-0 offset-sm-0">
-        <div class="logo d-md-none d-lg-none d-col-block d-sm-block"><a href="/"><img src="{{ asset('img/logo-mobile.png')}}" class="img-fluid"></a></div>
-      </div>
-      <div class="col-md-6 col-12 col-sm-12 col-lg-5">
-        <nav class="topMenu float-lg-right float-sm-none float-col-none float-md-right">
-      @guest  
-		
-        <a href="{{ route('login') }}">Login</a>
-    
-        <a href="{{ route('register') }}">Register</a> 
-      @else
-      <span style="color: white;">Welcome {{Auth::user()->uname}}</span> 
-        <a href="{{ route('logout-custom') }}"
-           onclick="event.preventDefault();
-                         document.getElementById('logout-form').submit();">
-            {{ __('Logout') }}
-        </a>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-12 col-md-1 col-lg-1 col-xl-1">
+          <div class="logoRight text-md-left">
+            <a href="/">
+              <img src="/img/logo.png" class="img-fluid">
+            </a>
+          </div>
+        </div>
+        <div class="col-sm-12 col-md-11 col-lg-11 col-xl-11">
+          <div class="header-top-row">
+            <ul class="header-top-row-list text-md-right">
+              <li class="d-none d-md-inline-block">
+                <a href="mailto:uchaanartz@gmail.com">
+                  <span class="header-small-icons"><img src="/img/mail.png" /></span>
+                  uchaanartz@gmail.com
+                </a>
+              </li>
+              <li class="d-none d-md-inline-block">
+                <a href="tel:+918860277388">
+                  <span class="header-small-icons"><img src="/img/phn.png" /></span>
+                  +91 88602 77388
+                </a>
+              </li>
+              @guest
+              <li>
+                <a href="#">LOGIN</a>
+                <div class="custom-dropdown hover-dropdown position-absolute">
+                  <div class="content-box">
+                    <ul class="dropdown-list text-left">
+                      <li>
+                        <a href="{{ route('login') }}" class="p-3"> Login </a>
+                      </li>
+                      <!-- <li>
+                        <a href="{{ route('login') }}" class="p-3"> Artist Login </a>
+                      </li>
+                      <li>
+                        <a href="{{ route('login') }}" class="p-3">
+                          Buyer Login
+                        </a>
+                      </li> -->
+                    </ul>
+                  </div>
+                </div>
+              </li>
+              <li><a href="{{ route('register') }}">REGISTER</a></li>
+              @else
+              <li>
+                <span style="color: white;">Welcome {{Auth::user()->uname}}</span> 
+                <a href="{{ route('logout-custom') }}"
+                   onclick="event.preventDefault();
+                                 document.getElementById('logout-form').submit();">
+                    {{ __('Logout') }}
+                </a>
 
-        @can('isAdmin')
-            <a href="{{ route('backend-dashboard') }}" target="_blank">{{ ('Admin') }}</a>
-        @endcan
-        
-        @can('isArtist')
-            <a href="{{ route('backend-dashboard') }}" target="_blank">{{ ('Artist') }}</a>
-        @endcan
-        <form id="logout-form" action="{{ route('logout-custom') }}" method="POST" style="display: none;">
-            @csrf
-        </form>
-      @endguest
-		<a href="/" title="Add to Cart"><i class="fas fa-cart-arrow-down"></i></a></nav>
-		<div class="clearfix"></div>
-        <form class="searchBox float-lg-right float-sm-none float-col-none float-md-right">
-          <input type="text" placeholder="Search">
-          <button type="button"><i class="fa fa-search"></i></button>
-        </form>
-      </div>
-    </div>
-    <nav class="navbar navbar-expand-lg navbar-light myNav">
-      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarsExample09" aria-controls="navbarsExample09" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button>
-      <div class="collapse navbar-collapse" id="navbarsExample09">
-        <ul class="navbar-nav ml-auto ">
-          <li class="nav-item  {{ request()->is('home') ? 'active' : '' }}">
+                @can('isAdmin')
+                    <a href="{{ route('backend-dashboard') }}" target="_blank">{{ ('Admin') }}</a>
+                @endcan
+                
+                @can('isArtist')
+                    <a href="{{ route('backend-dashboard') }}" target="_blank">{{ ('Artist') }}</a>
+                @endcan
+                <form id="logout-form" action="{{ route('logout-custom') }}" method="POST" style="display: none;">
+                    @csrf
+                </form>
+              </li>
+              @endguest
+              <li>
+                <a href="#">
+                  <img src="/img/cart.png" />
+                </a>
+                <div class="custom-dropdown hover-dropdown position-absolute">
+                  <div class="content-box p-3">
+                    <div class="row pb-3 align-items-center">
+                      <div class="col-sm-5 col-5"> <img src="/img/prd-8.jpg" /></div>
+                      <div class="col-sm-7 col-7 text-center">
+                        <div class="cart-item-name">Title</div>
+                        <div class="cart-item-price"><i class="fas fa-rupee-sign"></i>1500</div>
+                      </div>
+                    </div>
+
+                    <div class="row pb-3 align-items-center">
+                      <div class="col-sm-5 col-5"> <img src="/img/prd-8.jpg" /></div>
+                      <div class="col-sm-7 col-7 text-center">
+                        <div class="cart-item-name">Title</div>
+                        <div class="cart-item-price"><i class="fas fa-rupee-sign"></i>1500</div>
+                      </div>
+                    </div>
+
+                  </div>
+                  <div>
+                    <div class="text-center p-3">
+                      <span class="sub-total-title text-uppercase">Sub-Total : </span>
+                      <span class="sub-total-price"><i class="fas fa-rupee-sign"></i>14000</span>
+                    </div>
+                    <div class="checkout-btn-container text-center p-3">
+                     <a href="/checkout.html"><input type="button" name="btn" value="Check-out" class="btn btn-lg btn-primary themeBtn text-uppercase" /></a>
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <a href="#">
+                  <img src="/img/love.png" />
+                </a>
+                <div class="custom-dropdown hover-dropdown position-absolute">
+                  <div class="content-box p-3">
+                    <div class="row pb-3 align-items-center">
+                      <div class="col-sm-5 col-5"> <img src="/img/prd-8.jpg" /></div>
+                      <div class="col-sm-7 col-7 text-center">
+                        <div class="cart-item-name">Title</div>
+                        <div class="cart-item-price"><i class="fas fa-rupee-sign"></i>1500</div>
+                      </div>
+                    </div>
+
+                    <div class="row pb-3 align-items-center">
+                      <div class="col-sm-5 col-5"> <img src="/img/prd-8.jpg" /></div>
+                      <div class="col-sm-7 col-7 text-center">
+                        <div class="cart-item-name">Title</div>
+                        <div class="cart-item-price"><i class="fas fa-rupee-sign"></i>1500</div>
+                      </div>
+                    </div>
+
+                  </div>
+                  <div>
+                    <div class="text-center p-3">
+                      <span class="sub-total-title text-uppercase">Sub-Total : </span>
+                      <span class="sub-total-price"><i class="fas fa-rupee-sign"></i>14000</span>
+                    </div>
+                    <div class="checkout-btn-container text-center p-3">
+                      <a href="/wishlist.html"><input type="button" name="btn" value="View Wishlist" class="btn btn-lg btn-primary themeBtn text-uppercase"/></a>
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <a href="#">
+                  <img src="/img/search.png" />
+                </a>
+                <div class="custom-dropdown jquery-dropdown position-absolute">
+                  <div class="content-box p-3">
+                    <input type="text" name="search" value="" placeholder="Search" class="search-txt" />
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+
+
+          <nav class="navbar navbar-expand-lg navbar-light header-main-nav-container">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+              aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <ul class="mobile-inline-list d-none">
+              <li>
+                <a href="mailto:uchaanartz@gmail.com"><img src="/img/mail.png" /></a>
+              </li>
+              <li>
+                <a href="tel:+918860277388"><img src="/img/phn.png" /></a>
+              </li>
+            </ul>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav mr-auto header-main-nav text-uppercase">
+                <li class="nav-item  {{ request()->is('home') ? 'active' : '' }}">
             <a class="nav-link" href="{{ route('home') }}">{{ __('Home') }}</a>
           </li>
       <li class="nav-item {{ request()->is('aboutus') ? 'active' : '' }}">
             <a class="nav-link" href="{{ route('aboutus') }}">{{ __('About') }}</a>
+                      </li>
+      <li class="nav-item {{ request()->is('arts-competition') ? 'active' : '' }}">
+            <a class="nav-link" href="{{ route('arts-competition') }}">{{ __('Arts Competition') }}</a>
                       </li>
       <li class="nav-item {{ request()->is('events*') ? 'active' : '' }}">
             <a class="nav-link" href="{{ route('events') }}">{{ __('Events') }}</a>
@@ -102,12 +224,17 @@
                         <li class="nav-item {{ request()->is('contactus*') ? 'active' : '' }}">
             <a class="nav-link" href="{{ route('contactus') }}">{{ __('Contact Us') }}</a>
                       </li>
-        </ul>
+              </ul>
+
+            </div>
+          </nav>
+
+
+        </div>
       </div>
-    </nav>
-  </div>
-</header>
-<!--Header Ends Here-->
+    </div>
+  </header>
+<!-- Header end ========================= -->
 
 @yield('content')
 
