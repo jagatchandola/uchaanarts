@@ -317,7 +317,14 @@ class Events extends Model
                                             'shide' => $data['status'],
                                             'first_prize' => $data['first_prize'],
                                             'second_prize' => $data['second_prize'],
-                                            'third_prize' => $data['third_prize']
+                                            'third_prize' => $data['third_prize'],
+                                            'fourth_prize' => $data['fourth_prize'],
+                                            'fifth_prize' => $data['fifth_prize'],
+                                            'sixth_prize' => $data['sixth_prize'],
+                                            'seventh_prize' => $data['seventh_prize'],
+                                            'eighth_prize' => $data['eighth_prize'],
+                                            'ninth_prize' => $data['ninth_prize'],
+                                            'tenth_prize' => $data['tenth_prize']
                                         ]);
 
         if ($insert === true) {
@@ -336,7 +343,7 @@ class Events extends Model
                                 ->orderBy('id', 'desc')
                                 ->get();
         } else {
-            $events = Events::where('shide', 1)
+            $events = DB::table('contests')->where('shide', 1)
                         ->orderBy('start_date', 'desc')
                         ->get();
         }
@@ -371,7 +378,14 @@ class Events extends Model
                         'shide' => $data['status'],
                         'first_prize' => $data['first_prize'],
                         'second_prize' => $data['second_prize'],
-                        'third_prize' => $data['third_prize']
+                        'third_prize' => $data['third_prize'],
+                        'fourth_prize' => $data['fourth_prize'],
+                        'fifth_prize' => $data['fifth_prize'],
+                        'sixth_prize' => $data['sixth_prize'],
+                        'seventh_prize' => $data['seventh_prize'],
+                        'eighth_prize' => $data['eighth_prize'],
+                        'ninth_prize' => $data['ninth_prize'],
+                        'tenth_prize' => $data['tenth_prize']
                     ];
         
         if (isset($data['image']) && !empty($data['image'])) {
