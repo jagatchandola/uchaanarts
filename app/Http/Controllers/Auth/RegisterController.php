@@ -74,6 +74,7 @@ class RegisterController extends Controller
 
             $data['image'] = $name;
         }
+        // print_r($data);die;
 
         $user = User::create([
             'uname' => $data['name'],
@@ -86,9 +87,11 @@ class RegisterController extends Controller
             'dob' => $data['dob'],
             'address' => $data['address'],
             'city' => $data['city'],
+            'state' => $data['state'],
             'pcode' => $data['pincode'],
-            'about' => $data['about'],
             'profimg' => $data['image'],
+            'about' => $data['about'],
+            'awards' => $data['awards'],
             'education' => $data['qualification']
         ]);
 

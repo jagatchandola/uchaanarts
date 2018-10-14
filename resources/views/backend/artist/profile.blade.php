@@ -20,9 +20,9 @@
                                     
                                     <form role="form" name="edit-artist-form" action="{{ route('artist-profile') }}" method="post" enctype="multipart/form-data">
                                         <div class="col-lg-6">
-                                            
                                            
                                             <div class="form-group">
+
                                                 <img src="{{ \App\Helpers\Helper::getImage($artist->username .'/'. $artist->profimg, 1) }}" width="100" height="100">
                                                 <input class="form-control" type="file" name="image" value="">
 
