@@ -43,6 +43,32 @@
                                                 <label>Price</label>
                                                 <input class="form-control" type="number" name="price" value="" required>
                                             </div>
+
+                                            <div class="form-group">
+                                                <label>Subject</label>
+                                                <input class="form-control" type="text" name="subject" value="" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Painting</label>
+                                                <input class="form-control" type="text" name="painting" value="" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Surface</label>
+                                                <input class="form-control" type="text" name="surface" value="" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Size</label>
+                                                <input class="form-control" type="text" name="size" value="" required>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label>Quantity</label>
+                                                <select class="form-control" name="quantity" required>
+                                                    @foreach(range(0,10) as $i)
+                                                    <option value="{{$i}}">{{$i}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
                                             
                                             @if (Auth::user()->admin_approved == 0)
                                                 <button type="submit" class="btn btn-primary">Send Profile for Admin approval</button>

@@ -184,18 +184,23 @@ class CatalogueController extends Controller
         if ($request->isMethod('POST')) {
             $inputData = $request->all();
 
-            $validator = $this->validate($request, [
-                'image' => 'required',
-                'title' => 'required',
-                'about' => 'required',
-                'price' => 'required',
-                'title' => 'required'
-            ]);
-            if ($validator->fails()) {
+            // $validator = $this->validate($request, [
+            //     'image' => 'required',
+            //     'title' => 'required',
+            //     'about' => 'required',
+            //     'price' => 'required',
+            //     'title' => 'required',
+            //     'subject' => 'required',
+            //     'painting' => 'required',
+            //     'surface' => 'required',
+            //     'size' => 'required',
+            //     'quantity' => 'required'
+            // ]);
+            // if ($validator->fails()) {
                 
-                $errors = $validator->messages()->all();
+            //     $errors = $validator->messages()->all();
                 
-            } else {
+            // } else {
 
                 $id = Auth::user()->id;
 
@@ -220,7 +225,7 @@ class CatalogueController extends Controller
                 } else {
                     $errors[0] = 'Product Image is required.';
                 }
-            }
+            // }
         }
         //dd(Auth::user());
         $categories = $this->category->getCategories();

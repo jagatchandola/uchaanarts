@@ -164,6 +164,42 @@ $(document).ready(function(){
             $('#news-letter-msg-box').html('<div class="alert-danger" style="font-size:12px;"><strong>Danger!</strong> Email id is Required.</div>');
         }
     });
+
+    $(".add-to-cart").on('click', function(){
+        let id = $(this).attr('data-id');
+        addToCart(id, 'cart')
+        
+    })
+
+    $(".add-to-wishlist").on('click', function(){
+        let id = $(this).attr('data-id');
+        addToCart(id, 'wishlist')
+        
+    })
+
+    
 });
 
-	
+function addToCart(id, type){
+    $.ajax({
+      url: '/add-to-cart',
+      type: 'POST',
+      data: {id: id, type: type, _token: $('meta[name="csrf-token"]').attr('content')},
+      success: function(data) {
+        //called when successful
+        if(data != 0){
+            if(type == 'cart'){
+
+            } else {
+
+            }
+        } else {
+
+        }
+      },
+      error: function(e) {
+        //called when there is an error
+        //console.log(e.message);
+      }
+    });
+}

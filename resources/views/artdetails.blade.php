@@ -8,7 +8,19 @@
 @endsection
 
 @section('content')
-
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12 col-sm-12">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/art-gallery">Art Work</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Product Details</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+</div>  
 <section class="themeSec1 bgWhite">
     <!--  <h1>UCHAAN - A Group of Contemporary Artist </h1>-->  
     <div class="container">
@@ -22,7 +34,7 @@
                 <div class="col-lg-6 col-md-6 col-12 col-sm-12">
                     <blockquote class="blockquote aboutBio text-left">
                         <h3>{{ $art->title }}</h3>
-                        <h5>INR {{ \App\Helpers\Helper::getFormattedPrice($art->totalPrice) }}</h5>
+                        <h5><i class="fas fa-rupee-sign"></i> {{ \App\Helpers\Helper::getFormattedPrice($art->totalPrice) }}</h5>
                         <p class="mb-0 "><?php echo $art->about; ?></p>
                     </blockquote>
                     <h5>Artwork details</h5>
@@ -36,26 +48,33 @@
                             <td>{{ $art->cat_name }}</td>
                         </tr>
                         <tr>
+                            <td>Painting Type</td>
+                            <td>{{ $art->painting }}</td>
+                        </tr>
+                        <tr>
+                            <td>Subject</td>
+                            <td>{{ $art->subject }}</td>
+                        </tr>
+                        <tr>
+                            <td>Surface</td>
+                            <td>{{ $art->surface }}</td>
+                        </tr>
+                        <tr>
+                            <td>Size</td>
+                            <td>{{ $art->size }}</td>
+                        </tr>
+
+                        <tr>
                             <td>
-                                <a href="{{ route('product-enquiry', $art->id) }}" class="btn btn-primary themebBtn" style="margin-top: 25px;">ADD TO CART</a>
+                                @if($art->quantity > 0)
+                                <a class="btn btn-primary mt-3 add-to-cart" data-id="{{ $art->id }}" href="javascript:;">Add To Cart</a>
+                                <a class="btn btn-primary themeBtn mt-3 buy-now" href="checkout.html">Buy Now</a>
+                                @else
+                                <a href="javascript:;" class="btn btn-primary themebBtn">OUT OF STOCK</a>
+                                @endif
                             </td>
                         </tr>
-<!--				<tr>
-                        <td>Painting Type</td>
-                        <td>Acrylic</td>
-                        </tr>
-                        <tr>
-                        <td>Subject</td>
-                        <td>Impressionist</td>
-                        </tr>
-                        <tr>
-                        <td>Surface</td>
-                        <td>Canvas</td>
-                        </tr>
-                        <tr>
-                        <td>Size</td>
-                        <td>30*36inch</td>
-                        </tr>-->
+
                     </table>
                 </div>
             </div>
@@ -81,8 +100,13 @@
                             <div class="paintingInfo">
                                 <h3 class="mt-2">{{ $otherArt->title }}</h3>
                                 <span>By {{$otherArt->user_name }}</span>
-                                <!--<p>Oil on Canvas | 40*60 Inches</p>-->
-                                <h2>{{ \App\Helpers\Helper::getFormattedPrice($otherArt->totalPrice) }}</h2>
+                                <p>{{$otherArt->surface }} | {{$otherArt->size }}</p>
+                                <h2><i class="fas fa-rupee-sign"></i>  {{ \App\Helpers\Helper::getFormattedPrice($otherArt->totalPrice) }}</h2>
+                                @if($otherArt->quantity > 0)
+                                <a href="javascript:;" class="btn btn-primary themebBtn">ADD TO CART</a>
+                                    @else
+                                    <a href="javascript:;" class="btn btn-primary themebBtn">OUT OF STOCK</a>
+                                    @endif
                             </div>
                         </div>
                     </div>
@@ -108,15 +132,16 @@
                 <div class="owl-carousel owl-theme fifth-owl-carousel">
                     
                     @foreach($categoryArts as $art)
-                    <div class="item">
-					<div class="imgFixAD">
-					<a href="{{ route('artist-art', [$art->artist_id, $art->id]) }}"><img src="{{ \App\Helpers\Helper::getImage($art->username .'/imgs/'.$art->fname.'.'.$art->ext, 1) }}"></a></div>
+                    <div class="item artBox">
+					
+					<a href="{{ route('artist-art', [$art->artist_id, $art->id]) }}"><img src="{{ \App\Helpers\Helper::getImage($art->username .'/imgs/'.$art->fname.'.'.$art->ext, 1) }}"></a>
                         <div class="captionBtm">
-                            <div class="paintingInfo artBox">
+                            <div class="paintingInfo">
                                 <h3 class="mt-2">{{ $art->title }}</h3>
                                 <span>By {{$art->uname}}</span>
-                                <p>Oil on Canvas | 40*60 Inches</p>
-                                <h2>{{ \App\Helpers\Helper::getFormattedPrice($art->totalPrice) }}</h2>
+                                <p>{{$art->surface }} | {{$art->size }}</p>
+                                <h2><i class="fas fa-rupee-sign"></i> {{ \App\Helpers\Helper::getFormattedPrice($art->totalPrice) }}</h2>
+                                <a href="javascript:;" class="btn btn-primary themebBtn">ADD TO CART</a>
                             </div>
                         </div>
                     </div>

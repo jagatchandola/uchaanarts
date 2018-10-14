@@ -78,12 +78,7 @@
                                                 <input class="form-control" type="number" name="phone" value="{{ $artist->phone }}" maxlength="10">
                                             </div>
                                         </div>
-                                        <div class="col-lg-6">    
-                                            <div class="form-group">
-                                                <label>Education</label>
-                                                <input class="form-control" type="text" name="education" value="{{ $artist->education }}">
-                                            </div>
-                                        </div>
+                                        
 
                                         <div class="col-lg-6">    
                                             <div class="form-group">
@@ -91,12 +86,25 @@
                                                 <input class="form-control" type="text" name="website" value="{{ $artist->website }}">
                                             </div>
                                         </div>
-                                        <div class="col-lg-6">
+                                        <div class="col-lg-12">    
+                                            <div class="form-group">
+                                                <label>Education</label>
+                                                <textarea class="form-control" name="education">{{ $artist->education }}</textarea>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12">
                                             <div class="form-group">
                                                 <label>About</label>
                                                 <textarea class="form-control" name="about">{{ $artist->about }}</textarea>
                                             </div>
                                         </div>
+                                        <div class="col-lg-12">
+                                            <div class="form-group">
+                                                <label>Award & Recognition</label>
+                                                <textarea class="form-control" name="awards">{{ $artist->awards }}</textarea>
+                                            </div>
+                                        </div>
+
                                             
                                         <div class="col-lg-12">    
                                             <button type="submit" class="btn btn-primary">Submit</button>

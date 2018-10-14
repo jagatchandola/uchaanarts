@@ -102,4 +102,12 @@ class Helper
     public static function nameFormat($name){
         return preg_replace('/\s+/','-',strtolower($name));
     }
+
+    public static function readMore($str , $link ='' ,$len=100){
+        if(strlen($str) == 0) return;
+        if(strlen($str) > $len){
+            $str = substr($str, 0, $len) . '...<a href="'.($link != '' ? $link : 'javascript:;').'" class="read-more-btn sep-text">Read More</a>';
+        }
+        return $str;
+    }
 }//END CLASS

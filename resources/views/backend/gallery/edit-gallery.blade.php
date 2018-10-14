@@ -35,7 +35,7 @@
                                             @can('isArtist')
                                             <div class="form-group">
                                                 <label>Image</label>
-                                                <input class="form-control" type="file" name="image" value="" required>
+                                                <input class="form-control" type="file" name="image" value="" @if(empty($art->fname)) required @endif>
                                             </div>
                                             @endcan
                                             
@@ -50,6 +50,32 @@
                                             <div class="form-group">
                                                 <label>Price</label>
                                                 <input class="form-control" type="textarea" name="price" value="{{ $art->price }}" required>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label>Subject</label>
+                                                <input class="form-control" type="text" name="subject" value="{{ $art->subject }}" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Painting</label>
+                                                <input class="form-control" type="text" name="painting" value="{{ $art->painting }}" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Surface</label>
+                                                <input class="form-control" type="text" name="surface" value="{{ $art->surface }}" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Size</label>
+                                                <input class="form-control" type="text" name="size" value="{{ $art->size }}" required>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label>Quantity</label>
+                                                <select class="form-control" name="quantity" required>
+                                                    @foreach(range(0,10) as $i)
+                                                    <option value="{{$i}}" @if($art->quantity == $i) selected @endif>{{$i}}</option>
+                                                    @endforeach
+                                                </select>
                                             </div>
                                             
                                             @can('isAdmin')

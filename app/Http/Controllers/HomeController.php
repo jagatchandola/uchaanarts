@@ -104,6 +104,11 @@ class HomeController extends Controller
                                 ]);
     }
 
+    public function artsCompetition()
+    {
+        return view('arts-competition');
+    }
+
     /**
      * Show the application artists.
      *

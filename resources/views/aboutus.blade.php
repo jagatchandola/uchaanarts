@@ -8,34 +8,50 @@
 @endsection
 
 @section('content')
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12 col-sm-12">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">About</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+</div>
 <!--Section 1 Stat Here-->
 <section class="themeSec1 bgWhite">
+
+<!--Section 1 Stat Here-->
   <h1>UCHAAN - A Group of Contemporary Artist </h1>
   <div class="container">
    <div class="aboutUsbx">
-     <div class="row">
-            <div class="col-lg-3 col-md-3 col-12 col-sm-12">
-              <img class="card-img-top img-fluid" src="{{ asset('img/a-1.jpg')}}" alt="Card image cap">
-                <p class="card-text">Jyoti Kalra</p>
-            </div>
-            <div class="col-lg-9 col-md-9 col-12 col-sm-12">
+   <div class="row">
+                   <div class="col-lg-12 col-md-12 col-12 col-sm-12">
               <blockquote class="blockquote aboutBio text-left">
-               <h3>Foundation & Director of UCHAAN</h3>
-                <p><strong>Jyoti Kalra</strong> is a founder of Uchaan arts, a podium that benifits upcoming artists and provides excellent platform for established artist to get worldwide exposure. </p>
-                <p>
-Over the years Uchaan has acquired and developed an exotic art collection from artists of varied genre. She has been displaying works of folk artists  to  encourage and promote our traditional art form. This inspires, informs and educates the masses and helps our culture reach a certain height. Over the years Uchaan art has earned its repute of being a serious art promoter.</p>
-<p>
-Besides working with art and artists, she has tremendous administrative skills for organising exhibitions and art events. She keeps up with latest art trends and keeps on researching about artists and their work. She is an adept multitasker who is also good at public relations and marketing artefacts. She has excellent communication skills and using them she has successfully mediated between artists, buyers and the art connoisseurs with great success rates.</p>
-<p>
-<strong>UCHAAN Foundation</strong>, is incorporated as a not-for-profit comapny with a main objective that has established itself as nurtuing ground for a variety of art and varied artists.
-Uchaan has a repertoire of not just the masters of art but also an impeccable a range of contemporary artists from all parts of the country, whose works are showcased on a regular basis. Uchaan has been doing shows in all forms of visual arts in its own distinguish way within the gallery as well as hastaken art outside the confines to off site locations. Uchaan has taken the art to masses so as to maximise the reach and lure are enthusiasts far and wide
+         <h3>About Us</h3>
+                <p class="mb-0 ">UCHAAN is an organisation with a main objective that has established itself as a nurturing ground for art and artist. Uchaan has a repertoire of not just the masters of art but also an impeccable range of contemporary artists from all parts of the country, whose works are showcased on a regular basis. The gallery has been doing shows in all forms of visual arts in its own distinguish way within the gallery as well as has taken art outside the confines to off site locations. Uchaan has taken the art to masses so as to maximise the reach and lure art enthusiasts far and wide. 
+Uchaan has been organizing art shows, art workshops, art camps & painting competition pan India & abroad and through this endeavor it has able to take the art out of clutches of gallery system to the larger audiences of malls, hotels & other places wherein more people are encouraged to be the part of the journey called art.
+
 </p>
+</blockquote>
+<blockquote class="blockquote aboutBio text-left">
+<h3>Our Objective </h3>
+
+<p class="mb-0 ">
+<abbr>
+To provide a dedicated platform for deserving artists and nurture more creative spirit and aesthetic temperament among all….
+</abbr>
+</p>
+
               </blockquote>
             </div>
           </div>
-   </div>         
+   </div>     
   </div>
 </section>
+<!--Section 1 Ends Here-->
 <!--Section 1 Ends Here-->
 
 <!--sectionAddcart Start here-->

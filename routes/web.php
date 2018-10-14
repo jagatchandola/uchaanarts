@@ -21,6 +21,7 @@ Route::get('/', 'HomeController@index')->name('home');
 Route::post('/login', 'LoginController@index')->name('login');
 Route::post('/logout-custom', 'LoginController@logout')->name('logout-custom');
 Route::get('/aboutus', 'HomeController@aboutus')->name('aboutus');
+Route::get('/arts-competition', 'HomeController@artsCompetition')->name('arts-competition');
 Route::get('/artists', 'HomeController@artists')->name('artists');
 Route::get('/artists/{id}', 'HomeController@artistdetails')->name('artistdetails');
 Route::get('/events', 'HomeController@events')->name('events');
@@ -50,7 +51,7 @@ Route::get('/nature', 'HomeController@nature')->name('nature');
 Route::get('/spritual', 'HomeController@spritual')->name('spritual');
 Route::get('/portrait', 'HomeController@portrait')->name('portrait');
 
-
+Route::post('/add-to-cart', 'OrderController@addItem')->name('add-to-cart');
 
 // Backend routes
 Route::match(['get', 'post'], '/backend/login','Backend\LoginController@index')->name('backend-login');

@@ -22,7 +22,7 @@
     <div class="carousel-inner">
         @php $i=0; @endphp
         @foreach($banners as $banner)
-        <div class="carousel-item @if($i == 0)active @endif"> <img src="{{ \App\Helpers\Helper::getImage($banner->image, 6) }}" alt="First slide" class="img-fluid first-slide">
+        <div class="carousel-item @if($i == 0) active @endif"> <img src="{{ \App\Helpers\Helper::getImage($banner->image, 6) }}" alt="First slide" class="img-fluid first-slide">
             <div class="container d-none d-md-block d-lg-block ">
                 <div class="carousel-caption">
                     <h1>{{$banner->title}}</h1>
@@ -41,16 +41,14 @@
 <!--Carousel Ends Here-->
 <!--Section 1 Start Here-->
 @if(!empty($categories))
-<section class="themeSec1">
-    <h1>Browse by category</h1>
+<section class="themeSec2">
+    <h2>Browse by category</h2>
     <div class="container">
         <div class="owl-carousel owl-theme first-owl-carousel">
             @foreach($categories as $category)
             <div class="item">
-               <div class="imgFixbxhp">
-                    <img src="{{ \App\Helpers\Helper::getImage($category->image, 5) }}">
-               </div>
-                <a href="/art-gallery/{{$category->cat_url}}" class="caption">{{$category->cat_name}}</a>
+                <img src="{{ \App\Helpers\Helper::getImage($category->image, 5) }}">
+                <a href="/art-gallery/{{$category->cat_url}}" class="caption crousal-overlay">{{$category->cat_name}}</a>
             </div>
             @endforeach
         </div>
@@ -59,7 +57,7 @@
 @endif
 <!--Section 1 Ends Here-->
 <!--Section 2 Start Here-->
-<section class="themeSec2">
+<section class="themeSec1">
  <h2>Artist of the week</h2>
     <div class="container">
         <div class="row">
@@ -69,15 +67,12 @@
                     @if(!empty($weeklyStatus))
                     <div class="row">
                         <div class="col-lg-5 col-md-5 col-12 col-sm-12">
-                            <img class="card-img-top" src="{{ \App\Helpers\Helper::getImage($weeklyStatus->username.'/'.$weeklyStatus->profimg, 1) }}" alt="Card image cap">
-
-                            <p class="card-text">{{$weeklyStatus->uname}}</p>
-
+                            <img class="artist-week-image" src="{{ \App\Helpers\Helper::getImage($weeklyStatus->username.'/'.$weeklyStatus->profimg, 1) }}" alt="Card image cap">
                         </div>
                         <div class="col-lg-7 col-md-7 col-12 col-sm-12">
                             <blockquote class="blockquote aboutBio">
-                                <h3>Artist Bio</h3>
-                                <p class="mb-0 text-center font-italic">"<?php echo $weeklyStatus->about; ?>"</p>
+                                <h3>{{$weeklyStatus->uname}}</h3>
+                                <p class="mb-0 text-justify"><?php echo \App\Helpers\Helper::readMore($weeklyStatus->about, route('artistdetails', $weeklyStatus->id),520); ?></p>
                             </blockquote>
                            
                         </div>
@@ -88,20 +83,23 @@
             <div class="col-lg-6 col-md-6 col-12 col-sm-12">
                 @if(!empty($weeklyArts))
                 <article class="themeSubs1">
-                    <div class="owl-carousel owl-theme second-owl-carousel">
-                    @foreach($weeklyArts as $weekArt)    
-      <div class="item"><div class="imgFixbxhp"><img src="{{ \App\Helpers\Helper::getImage($weekArt->directory.'/imgs/'.$weekArt->fname.'.'.$weekArt->ext, 1) }}"></div></div>
+                    <div class="owl-carousel owl-theme second-owl-carousel owl-loaded owl-drag">
+                    <div class="owl-stage-outer">
+                    <div class="owl-stage" style="transform: translate3d(-1375px, 0px, 0px); transition: all 0s ease 0s; width: 5225px;">
+                    @foreach($weeklyArts as $weekArt)  
+
+                    <div class="owl-item cloned" style="width: 265px; margin-right: 10px;"><div class="item"><div class="imgFixbxhp"><a href="/artists/110/272"><img src="{{ \App\Helpers\Helper::getImage($weekArt->directory.'/imgs/'.$weekArt->fname.'.'.$weekArt->ext, 1) }}"></a></div></div></div>
                     @endforeach
-      
-      <!--<div class="item"><div class="imgFixbxhp"><img src="/img/slider/2.jpg"></div></div>
-      <div class="item"><div class="imgFixbxhp"><img src="/img/slider/3.jpg"></div></div> -->
-    </div>
+                    </div>
+                    </div>
+
+                    </div>
                 </article>
 
-				<div class="text-center">
-				 <a href="/artists/{{$weeklyStatus->id}}" class="btn btn-primary themeBtn">View Artwork</a>
-				</div> 
-				@endif
+                <div class="text-center">
+                 <a href="/artists/{{$weeklyStatus->id}}" class="btn btn-primary themeBtn">View Artwork</a>
+                </div> 
+                @endif
             </div>
         </div>
     </div>
@@ -109,24 +107,25 @@
 <!--Section 2 Ends Here-->
 
 @if(!empty($upcomingEvents))
-<section class="themeSec1">
-    <h1>Upcoming Events</h1>
+
+<section class="themeSec2">
+    <h2>Upcoming Events</h2>
     <div class="container">
          @if(!empty($upcomingEvents))
         <div class="owl-carousel owl-theme first-owl-carousel">
             @foreach($upcomingEvents as $event)
             <div class="item">
 
-			 <div class="imgFixbxhp">
+             <div class="imgFixbxhp">
              <a href="/events/{{$event->id}}">
-			<img src="{{ \App\Helpers\Helper::getImage($event->eurl.'/'.$event->banner, 3) }}"></a><div class="captionBtm">{{date("d-m-Y", strtotime($event->start_date))}}<br>Uchaan Events<br>{{$event->venue}}</div></div></div>
+            <img src="{{ \App\Helpers\Helper::getImage($event->eurl.'/'.$event->banner, 3) }}"></a><div class="captionBtm">{{date("d-m-Y", strtotime($event->start_date))}}<br>Uchaan Events<br>{{$event->venue}}</div></div></div>
             @endforeach
         </div>
         @endif
     </div>
 </section>
 
-@endif		
+@endif      
 
 <!--Section 1 Start Here-->
 @if(!empty($catalogues))
@@ -142,8 +141,14 @@
                     </div>
                     <a href="/item/{{$catalogue->id}}" class="img-fluid"></a>
                         <h3>{{$catalogue->title}}</h3>
-                        <h2>{{ \App\Helpers\Helper::getFormattedPrice($catalogue->totalPrice) }}</h2>
+                        <h2><i class="fas fa-rupee-sign"></i> {{ \App\Helpers\Helper::getFormattedPrice($catalogue->totalPrice) }}</h2>
                         <span>{{$catalogue->user_name}}</span>
+                        <p>{{$catalogue->surface }} | {{$catalogue->size }}</p>
+                        @if($catalogue->quantity > 0)
+                        <a href="{{ route('product-enquiry', $catalogue->id) }}" class="btn btn-primary themebBtn">ADD TO CART</a> 
+                        @else
+                        <a href="javascript:;" class="btn btn-primary themebBtn">OUT OF STOCK</a>
+                        @endif
                 </div>
             </div>
             @endforeach
@@ -173,8 +178,8 @@
                        
                         <a href="{{ route('artistdetails', $artist['id']) }}" class="captionBtn1">View Artwork</a>
 
-						
-						 </div>
+                        
+                         </div>
                             <div class="captionBtm">{{$artist['uname']}}</div>                        
                     </div>
                     @endforeach

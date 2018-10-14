@@ -1,6 +1,18 @@
 @extends('layouts.app')
 
 @section('content')
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12 col-sm-12">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Artists</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+</div>
 <!--Section 1 Stat Here-->
 <section class="themeSec1 bgWhite">
   <h1>Modern Artist</h1>
@@ -9,10 +21,10 @@
      <div class="row">
      @if (!empty($artists))
         @foreach($artists as $artist)
-       <div class="col-lg-3 col-md-3 col-12 col-sm-6">
+       <div class="col-lg-2 col-md-2 col-12 col-sm-6">
         
          <div class="artBox"> 
-		  <div class="imgFixbx">  <a href="/artists/{{ $artist->id}}"><img src="{{ \App\Helpers\Helper::getImage($artist->username .'/'. $artist->profimg, 1) }}" class="img-fluid"></a></div>
+		  <a href="/artists/{{ $artist->id}}"><img src="{{ \App\Helpers\Helper::getImage($artist->username .'/'. $artist->profimg, 1) }}" class="img-fluid"></a>
             <span>{{ $artist->uname }}</span>
              <a href="/artists/{{ $artist->id}}" class="btn btn-primary themebBtn">View Artwork</a>
          </div>

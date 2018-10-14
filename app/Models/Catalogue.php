@@ -107,7 +107,7 @@ class Catalogue extends Model
                     ->where('art_items.active', '=', 1)
                     ->where('art_items.id', '<>', $art_id)
                     ->orderBy('art_items.id', 'desc')
-                    ->select('art_items.id', 'title', 'art_items.about', 'art_items.price', 'users.uname as user_name', 'users.username', 'users.id as artist_id', 'art_items.fname', 'art_items.ext', 'art_items.price', 'art_items.gst', 'art_items.discount', 'art_items.discount_value')
+                    ->select('art_items.id', 'title', 'art_items.about', 'art_items.price', 'users.uname as user_name', 'users.username', 'users.id as artist_id', 'art_items.fname', 'art_items.ext', 'art_items.price', 'art_items.gst', 'art_items.discount', 'art_items.discount_value', 'art_items.painting', 'art_items.subject', 'art_items.surface', 'art_items.size', 'art_items.quantity')
                     ->take(20)
                     ->get();
 
@@ -141,6 +141,11 @@ class Catalogue extends Model
                         'title' => $data['title'],
                         'about' => $data['about'],
                         'price' => $data['price'],
+                        'subject' => $data['subject'],
+                        'painting' => $data['painting'],
+                        'surface' => $data['surface'],
+                        'quantity' => $data['quantity'],
+                        'size' => $data['size'],
                         'active' => 2
                     ];
             
@@ -177,7 +182,7 @@ class Catalogue extends Model
 
         $catalogues = DB::table('art_items')->where('art_items.is_creative_art', 1)->where('art_items.active', 1)
                     ->join('users', 'art_items.artist_id' , '=', 'users.id')
-                    ->select('art_items.id', 'title', 'price', 'gst', 'discount', 'discount_value', 'users.username as directory', 'users.id as user_id', 'users.uname as user_name', 'art_items.fname', 'art_items.ext')
+                    ->select('art_items.*', 'title', 'price', 'gst', 'discount', 'discount_value', 'users.username as directory', 'users.id as user_id', 'users.uname as user_name')
                     ->orderBy('id', 'desc')
                     ->get();
 
@@ -257,6 +262,11 @@ class Catalogue extends Model
                     'artist_id' => $artist_id,
                     'about' => $data['about'],
                     'price' => $data['price'],
+                    'subject' => $data['subject'],
+                    'painting' => $data['painting'],
+                    'surface' => $data['surface'],
+                    'quantity' => $data['quantity'],
+                    'size' => $data['size'],
                     'active' => 2,
                     'cat' => $data['category']
                 ];
@@ -343,6 +353,21 @@ class Catalogue extends Model
     public function deleteProduct($id) {
 
         return Catalogue::where('id', $id)->delete();
+    }
+
+    public function getArtItem($id) {
+        
+        $catalogue = Catalogue::where('art_items.id', '=', $id)
+                    ->where('art_items.active', '=', 1)
+                    ->join('users', 'art_items.artist_id' , '=', 'users.id')
+                    ->select('art_items.id', 'title', 'art_items.about', 'price', 'gst', 'discount', 'discount_value', 'users.username', 'art_items.fname', 'art_items.ext', 'users.uname')
+                    ->first();
+
+        if (!empty($catalogue)) {
+            return $catalogue;
+        }
+
+        return [];
     }
 
 }
