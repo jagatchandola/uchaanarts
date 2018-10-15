@@ -26,7 +26,7 @@
   @yield('style')
 
 	<!-- Scripts -->
-    <script src="{{ asset('js/jquery-1.11.2.min.js') }}" defer></script>
+    <script src="{{ asset('js/jquery-1.11.2.min.js') }}"></script>
 
 </head>
 <body>

@@ -96,7 +96,7 @@ class Helper
     }
     
     public static function getFormattedPrice($price) {
-        return number_format($price);
+        return number_format($price, 2);
     }
 
     public static function nameFormat($name){
@@ -109,5 +109,9 @@ class Helper
             $str = substr($str, 0, $len) . '...<a href="'.($link != '' ? $link : 'javascript:;').'" class="read-more-btn sep-text">Read More</a>';
         }
         return $str;
+    }
+    
+    public static function getUniqueId() {
+        return uniqid();
     }
 }//END CLASS
