@@ -61,8 +61,7 @@ class ProductOrder extends Model
         $updateStatus = DB::table('product_order')
             ->where('order_id', $order_id)
             ->update($update_data);
-        
-        //var_dump($updateStatus);exit;
+
         if ($updateStatus >= 1) {
             return true;
         }

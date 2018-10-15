@@ -151,8 +151,9 @@ class PaymentController extends Controller
     public function returnurl(Request $request, $orderId)
     {
 
-        echo '<pre>';
-        print_r($request);exit;
+//        echo $orderId.'========';exit;
+//        echo '<pre>';
+//        print_r($request->all());exit;
         
         $ch = curl_init();
 
@@ -167,7 +168,9 @@ class PaymentController extends Controller
         $response = curl_exec($ch);
         $err = curl_error($ch);
         curl_close($ch); 
-
+//echo '<pre>';
+//        print_r($response);exit;
+        
         if ($err) {
             $updateData = [
                                     'payment_status' => 0,
@@ -180,19 +183,23 @@ class PaymentController extends Controller
             $data = json_decode($response);
         }
         
-        echo '<pre>';
-        print_r($request);exit;
+//        echo '<pre>';
+//        print_r($request);exit;
         
         if($data->success == true) {
             if($data->payment->status == 'Credit') {
                 
                 $updateData = [
                                     'payment_status' => 1,
-                                    'failure_reason' => json_encode($data->payment->message),
-                                    'transaction_id' => ''
+                                    'transaction_id' => $data->payment->payment_id,
+                                    'fees' => $data->payment->fees,
+                                    //'variants' => json_encode($data->payment->variants),
+                                    //'custom_fields' => isset($data->payment->custom_fields) && !empty($data->payment->custom_fields) ? $data->payment->custom_fields : '',
+                                    'affiliate_commission' => $data->payment->affiliate_commission
                                 ];
+//                dd($updateData);
                 $this->order->updateOrderStatus($orderId, $updateData);
-                Session::flash('error_message', 'Your payment has been pay successfully, Enjoy!!');
+                Session::flash('success_message', 'Your payment has been pay successfully, Enjoy!!');
                 return redirect('/checkout');
             } else {
                 $updateData = [
