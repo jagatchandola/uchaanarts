@@ -26,7 +26,7 @@
   @yield('style')
 
 	<!-- Scripts -->
-    <script src="{{ asset('js/jquery-1.11.2.min.js') }}" defer></script>
+    <script src="{{ asset('js/jquery-1.11.2.min.js') }}"></script>
 
 </head>
 <body>
@@ -203,9 +203,7 @@
       <li class="nav-item {{ request()->is('aboutus') ? 'active' : '' }}">
             <a class="nav-link" href="{{ route('aboutus') }}">{{ __('About') }}</a>
                       </li>
-      <li class="nav-item {{ request()->is('arts-competition') ? 'active' : '' }}">
-            <a class="nav-link" href="{{ route('arts-competition') }}">{{ __('Arts Competition') }}</a>
-                      </li>
+      
       <li class="nav-item {{ request()->is('events*') ? 'active' : '' }}">
             <a class="nav-link" href="{{ route('events') }}">{{ __('Events') }}</a>
                       </li>
@@ -214,6 +212,9 @@
                       </li>
       <li class="nav-item {{ request()->is('artists*') ? 'active' : '' }}">
             <a class="nav-link" href="{{ route('artists') }}">{{ __('Artist') }}</a>
+                      </li>
+      <li class="nav-item {{ request()->is('arts-competition') ? 'active' : '' }}">
+            <a class="nav-link" href="{{ route('arts-competition') }}">{{ __('Arts Competition') }}</a>
                       </li>
       <li class="nav-item {{ request()->is('testimonials*') ? 'active' : '' }}">
             <a class="nav-link" href="{{ route('testimonials') }}">{{ __('Testimonials') }}</a>

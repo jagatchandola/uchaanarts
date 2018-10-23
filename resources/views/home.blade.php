@@ -142,7 +142,7 @@
                     <a href="/item/{{$catalogue->id}}" class="img-fluid"></a>
                         <h3>{{$catalogue->title}}</h3>
                         <h2><i class="fas fa-rupee-sign"></i> {{ \App\Helpers\Helper::getFormattedPrice($catalogue->totalPrice) }}</h2>
-                        <span>{{$catalogue->user_name}}</span>
+                        <span>By {{$catalogue->user_name}}</span>
                         <p>{{$catalogue->surface }} | {{$catalogue->size }}</p>
                         @if($catalogue->quantity > 0)
                         <a href="{{ route('product-enquiry', $catalogue->id) }}" class="btn btn-primary themebBtn">ADD TO CART</a> 

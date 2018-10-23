@@ -44,17 +44,15 @@
         <script src="{{ asset('backend/js/jquery.min.js') }}"></script>
     </head>
     <body>
-    @include('backend.layouts.header')  
-        <div id="wrapper">
+      <div id="wrapper">
             @auth
                 @include('backend.layouts.sidebar')  
             @endauth
             
             @yield('content')
         </div>
-    @include('backend.layouts.footer') 
         <!-- /#page-wrapper -->
-    
+
 
         <!-- Bootstrap Core JavaScript -->
         <script src="{{ asset('backend/js/bootstrap.min.js') }}"></script>

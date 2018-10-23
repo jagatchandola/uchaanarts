@@ -27,7 +27,7 @@
                                                 <label>Category Image</label>
                                                 <!--<img src="{{ asset('image/'.$category['image']) }}" />-->
                                                 <img src="{{ \App\Helpers\Helper::getImage($category['image'], 5) }}" width="100" height="100" />
-                                                <input class="form-control" type="file" name="image" value="" required>
+                                                <input class="form-control" type="file" name="image" value=""  @if(empty($category['image'])) required @endif>
                                             </div>
                                             <div class="form-group">
                                                 <label>Description</label>

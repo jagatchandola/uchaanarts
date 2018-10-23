@@ -23,6 +23,7 @@ Route::post('/logout-custom', 'LoginController@logout')->name('logout-custom');
 Route::get('/aboutus', 'HomeController@aboutus')->name('aboutus');
 Route::get('/arts-competition', 'HomeController@getCompetition')->name('arts-competition');
 Route::get('/arts-competition/{id}', 'HomeController@getCompetitionDetail')->name('arts-competition-detail');
+Route::get('/arts-competition/{id}/{artist_id}/{artist_item_id}', 'HomeController@getArtistCompetitionDetail')->name('artist-art-competition-detail');
 Route::get('/artists', 'HomeController@artists')->name('artists');
 Route::get('/artists/{id}', 'HomeController@artistdetails')->name('artistdetails');
 Route::get('/events', 'HomeController@events')->name('events');

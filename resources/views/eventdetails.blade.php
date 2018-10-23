@@ -80,9 +80,17 @@
                     <h2>Participating Artist</h2>
                     <p><?php echo $eventDetails->artists; ?></p>
                 @endif
+                    
+                    <div class="text-center">
+                    @auth
                     @can('isArtist')
-                    <div class="text-center"><a href="{{ route('participate-event', $eventDetails->id) }}" target="_blank" class="btn btn-primary themeBtn mt-5">Participate Now</a></div>
+                    <a href="{{ route('participate-event', $eventDetails->id) }}" target="_blank" class="btn btn-primary themeBtn mt-5">Participate Now</a>
                     @endcan
+                    @else
+                      <a class="btn btn-primary themeBtn mt-3" href="/login">Participate in Competition</a>
+                    @endauth
+                    </div>
+                    
                 </div>
             </div>
         </div>

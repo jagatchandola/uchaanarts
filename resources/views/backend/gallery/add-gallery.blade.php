@@ -36,7 +36,7 @@
                                                 <input class="form-control" type="text" name="title" value="" required>
                                             </div>
                                             <div class="form-group">
-                                                <label>About Image</label>
+                                                <label>About Artwork</label>
                                                 <textarea class="form-control" name="about" required></textarea>
                                             </div>
                                             <div class="form-group">
@@ -68,6 +68,23 @@
                                                     <option value="{{$i}}">{{$i}}</option>
                                                     @endforeach
                                                 </select>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label>GST(%)</label>
+                                                <input class="form-control" type="text" name="gst" value="">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Discount</label>
+                                                <select class="form-control" name="discount">
+                                                    <option value="">Select Discount</option>
+                                                    <option value="fixed" selected="selected">Fixed</option>
+                                                    <option value="percentage">Percentage</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Discount Value</label>
+                                                <input class="form-control" type="text" name="discount_value" value="">
                                             </div>
                                             
                                             @if (Auth::user()->admin_approved == 0)

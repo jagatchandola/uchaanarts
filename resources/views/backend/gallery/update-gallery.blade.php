@@ -38,6 +38,31 @@
                                                 <input class="form-control" type="text" name="price" value="{{ $art->price }}">
                                             </div>
                                             <div class="form-group">
+                                                <label>Subject</label>
+                                                <input class="form-control" type="text" name="subject" value="{{ $art->subject }}">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Painting</label>
+                                                <input class="form-control" type="text" name="painting" value="{{ $art->painting }}">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Surface</label>
+                                                <input class="form-control" type="text" name="surface" value="{{ $art->surface }}">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Size</label>
+                                                <input class="form-control" type="text" name="size" value="{{ $art->size }}">
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label>Quantity</label>
+                                                <select class="form-control" name="quantity">
+                                                    @foreach(range(0,10) as $i)
+                                                    <option value="{{$i}}" @if($art->quantity == $i) selected @endif>{{$i}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
                                                 <label>Commission(%)</label>
                                                 <input class="form-control" type="text" name="commission" value="{{ config('app.commission') }}" readonly="readonly">
                                             </div>

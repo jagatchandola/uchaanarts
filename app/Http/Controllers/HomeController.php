@@ -116,9 +116,22 @@ class HomeController extends Controller
     public function getCompetitionDetail($id)
     {
         $onlineEventDetail = $this->events->getOnlineEventDetails($id);
-
+        $participatedArts = $this->events->getOnlineEventArts($id);
+        $participatedPrize = $this->events->getOnlineEventPrize($id);
+        // $onlineEventDetail = !empty($onlineEventDetail) ? $onlineEventDetail[0] : [];
         return view('arts-competition-detail')->with([
-                                    'onlineEventDetail' => $onlineEventDetail
+                                    'onlineEventDetail' => $onlineEventDetail,
+                                    'participatedArts' => $participatedArts,
+                                    'participatedPrize' => $participatedPrize
+                                ]);
+    }
+
+    public function getArtistCompetitionDetail($id, $artist_id, $artist_item_id)
+    {
+        $participatedArts = $this->events->getOnlineEventArts($id, $artist_id, $artist_item_id);
+
+        return view('artist-art-competition-detail')->with([
+                                    'participatedArts' => !empty($participatedArts) ? $participatedArts[0] : []
                                 ]);
     }
 
@@ -177,20 +190,24 @@ class HomeController extends Controller
     public function events()
     {
         $events = $this->events->getAllEvents();
-        $upcomingEvents = $pastEvents = [];
+        $upcomingEvents = $pastEvents = $currentEvents = [];
 
         if (!empty($events)) {
            
             foreach ($events as $event) {
-                if (strtotime($event->start_date) >= strtotime(date('Y-m-d'))) {
+                if(strtotime($event->start_date) <= strtotime(date('Y-m-d')) && strtotime($event->end_date) >= strtotime(date('Y-m-d'))){
+                    $currentEvents[] = $event;
+                }
+                else if (strtotime($event->start_date) > strtotime(date('Y-m-d'))) {
                     $upcomingEvents[] = $event;
                 } else {
                     $pastEvents[] = $event;
+                    
                 }
             }
         }
 
-        return view('events')->with(['upcomingEvents' => $upcomingEvents, 'pastEvents' => $pastEvents]);
+        return view('events')->with(['currentEvents' => $currentEvents, 'upcomingEvents' => $upcomingEvents, 'pastEvents' => $pastEvents]);
     }
 
     /**

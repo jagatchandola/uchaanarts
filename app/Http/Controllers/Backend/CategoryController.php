@@ -59,8 +59,12 @@ class CategoryController extends Controller
         
         if ($request->isMethod('POST')) {
             $inputData = $request->all();
+            if(!empty($this->category->checkCategoryName($inputData['cat-name'], $inputData['cat-id']))){
+                Session::flash('error_message', 'Category already exists.');
+                return redirect('/admin/category/'.$inputData['cat-id']);
+            }
 
-            if ($request->hasFile('image')) {
+            if (!empty($_FILES['image']) && $request->hasFile('image')) {
                 
                 $image = $request->file('image');
                 $title = str_replace(' ', '-', strtolower($request['cat-name']));
@@ -70,6 +74,7 @@ class CategoryController extends Controller
                 
                 $inputData['image'] = $name;
             }
+            // print_r($inputData);die;
             
             $result = $this->category->updateCategory($inputData);
             if ($result == true) {
@@ -102,6 +107,10 @@ class CategoryController extends Controller
                 'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             ]);
 
+            if(!empty($this->category->checkCategoryName($request['cat-name']))){
+                Session::flash('error_message', 'Category already exists.');
+                return redirect('/admin/category/add');
+            }
             if ($request->hasFile('image')) {
                 
                 $image = $request->file('image');

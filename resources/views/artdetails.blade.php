@@ -128,7 +128,7 @@
     <div class="container">
         <div class="col-lg-12 col-md-12 col-12 col-sm-12">
             <article class="themeSubs1">
-                <h2>Related Product</h2>
+                <h2>Related Artwork</h2>
                 <div class="owl-carousel owl-theme fifth-owl-carousel">
                     
                     @foreach($categoryArts as $art)

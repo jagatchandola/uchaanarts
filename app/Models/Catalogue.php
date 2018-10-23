@@ -146,9 +146,16 @@ class Catalogue extends Model
                         'surface' => $data['surface'],
                         'quantity' => $data['quantity'],
                         'size' => $data['size'],
-                        'active' => 2
+                        'gst' => $data['gst'], 
+                        'discount' => $data['discount'], 
+                        'discount_value' => $data['discount_value']
                     ];
-            
+            if (Auth::user()->user_role == 'artist'){
+                $where['active'] = 2;
+            } else {
+                $where['active'] = 1;
+                $where['is_creative_art'] = $data['creative_art_status'] ?? 0;
+            }
             if (!empty($data['image'])) {
                 list($name, $extension) = explode('.', $data['image']);
                 $where['fname'] = $name;
@@ -159,19 +166,26 @@ class Catalogue extends Model
                         'title' => $data['title'], 
                         'about' => $data['about'], 
                         'price' => $data['price'], 
+                        'subject' => $data['subject'],
+                        'painting' => $data['painting'],
+                        'surface' => $data['surface'],
+                        'quantity' => $data['quantity'],
+                        'size' => $data['size'],
                         'gst' => $data['gst'], 
                         'discount' => $data['discount'], 
                         'discount_value' => $data['discount_value'], 
-                        'active' => $data['status'],
+                        // 'active' => $data['status'],
                         'is_creative_art' => $data['creative_art_status'] ?? 0
                     ];
+            if(isset($data['status'])){
+                $where['active'] = $data['status'];
+            }
         }
-        
         $updateStatus = DB::table('art_items')
             ->where('id', $data['art-id'])
             ->update($where);
 
-        if ($updateStatus >= 1) {
+        if ($updateStatus >= 0) {
             return true;
         }
         

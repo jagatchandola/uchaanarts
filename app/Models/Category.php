@@ -112,14 +112,14 @@ class Category extends Model
         if (isset($data['image']) && !empty($data['image'])) {
             $updateData['image'] = $data['image'];
         }
+        // print_r($updateData); die;
         
         $updateStatus = DB::table('category')
             ->where('id', $data['cat-id'])
             ->update($updateData);
-        
-        if ($updateStatus >= 1) {
+        if ($updateStatus >= 0) {
             return true;
-        }
+        }   
         return false;
     }
 
@@ -137,5 +137,20 @@ class Category extends Model
             return true;
         }
         return false;
+    }
+
+    public function checkCategoryName($category, $id = '') {
+        $categories = Category::where('cat_name', $category);
+            if($id != ''){
+                $categories = $categories->where('id','<>',$id);
+            }
+            $categories = $categories->first();
+        
+        
+        if (!empty($categories)) {
+            return $categories;
+        }
+
+        return [];
     }
 }

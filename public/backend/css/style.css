@@ -1,4 +1,220 @@
+
+/* Started vineet */
+header {
+    /* background-image:url('../img/header-pattern.jpg'); */
+    border-top:3px solid #e7e5e6
+}
+header .header-top-row-list {
+    text-align: center;
+    padding:0px;
+}
+header .header-top-row-list li {
+    display: inline-block;
+    list-style: none;
+    margin-left:15px;
+    position: relative;
+    font-weight: 300;
+}
+
+header .header-top-row-list li a {
+    color:#474545;
+    text-decoration: none;
+    padding-bottom:20px;
+}
+header .header-top-row-list li:hover .hover-dropdown {
+    display: block;
+    opacity: 1;
+}
+header .header-top-row-list li:hover .jquery-dropdown {
+    display: none;
+    opacity:0;
+}
+.header-small-icons {
+    margin-right:10px;
+}
+.header-main-nav li a {
+    padding:10px;
+    font-size: 18px;
+    font-weight: 500;
+    display: inline-block;
+    color: #000;
+}
+.header-main-nav li a:hover,
+.header-main-nav li.active a {
+    color:#e2000b;
+    text-decoration: none;
+}
+.header-main-nav-container {
+    padding-left:0px;
+    padding-right:0px;
+}
+.header-main-nav {
+    width: 100%;
+    justify-content: space-between;
+}
+.logo{margin-top:40px;}
+.logoRight {
+    /* position:absolute; 
+    left:0; 
+    top:-1.5px; vineet */
+    text-align:center;
+    padding-top:15px;
+    padding-bottom:15px;
+}
+.custom-dropdown {
+    right:0px;
+    min-width: 280px;
+    z-index: 5;
+    background-color:#fff;
+    border:1px solid #ccc;
+    opacity:0;
+    top:35px;
+}
+.hover-dropdown,
+.jquery-dropdown {
+    display: none;
+    
+}
+img {
+    max-width: 100%;
+}
+.sub-total-title {
+    font-weight:800;
+    font-family: 'Arail',sans-serif;
+}
+.cart-item-name,
+.cart-item-price {
+    font-size:18px;
+    font-weight:500;
+    color:#000;
+    text-transform: uppercase;
+}
+.checkout-btn-container .checkout-btn {
+    background-color: #e2000f;
+    border-radius: 0;
+    color: #fff !important;
+    font-size: 24px;
+    font-weight: 800 !important;
+    padding: 8px 38px;
+}
+.checkout-btn-container .checkout-btn:hover {
+    background-color: #c82333;
+    border-color: #bd2130;
+}
+.dropdown-list{
+    margin:0px;
+    padding:0px;
+}
+.dropdown-list li {
+    display: block !important;
+    list-style: none;
+    margin:0px !important;
+}
+.dropdown-list li a{
+    display: block;
+}
+.dropdown-list li a:hover {
+    color:#e2000f;
+}
+.search-txt {
+    padding:5px;
+    width:100%;
+    display: block;
+    border:0;
+    outline:0;
+}
+.mobile-inline-list li {
+    display: inline-block;
+    padding:10px;
+}
+.add-to-cart-hover{
+    position: absolute;
+    background:rgba(0, 0, 0, 0.5);
+    left:0px;
+    right:0px;
+    bottom:20px;
+    opacity:0;
+    transition: .5s all;
+}
+.create-art-on-hover {
+    margin:0px;
+    position: relative;
+    z-index: 5;
+    padding:0px;
+    text-align: right;
+    top:0;
+    right:0;
+}
+.create-art-on-hover li {
+    display: inline-block;
+    list-style: none;
+}
+.create-art-on-hover li a {
+    display: block;
+    padding-top:5px;
+    padding-bottom:5px;
+    text-decoration: none;
+}
+.create-art-on-hover li a.add-to-cart-text 
+{
+    font-weight:800;
+    color:#fff;
+    font-size:18px;
+
+}
+.create-art-on-hover li a.add-to-cart-img {
+    
+}
+.carousel-caption {
+    bottom:inherit;
+    top: 50%;
+    transform: translate3d(0px, -50%, 0px);
+    left:20%;
+    right:20%;
+}
+.crousal-overlay {
+    background:rgba(0, 0, 0, 0.5);
+    padding:15px;
+    margin-bottom:15px;
+}
+.lightoverlay {
+    position: absolute;
+    background:rgba(0, 0, 0, 0.5);
+    left:0px;
+    right:0px;
+    top:0px;
+    bottom:0px;
+    transition: .5s all;
+}
+.lightoverlay:hover {
+    background:rgba(0, 0, 0, 0.6);
+}
+/* End vineet */
+
+.navbar-light .navbar-nav .nav-link {
+    color: rgba(0,0,0,.5);
+}
+.navbar-nav {
+    
+    list-style: none;
+}
+
 .notify-box {
 	color: #8a6d3b; background-color: #fcf8e3; border-color: #faebcc;padding: 10px; display: inline-block; margin-top: 5px; border-radius: 3px;
 }
 
+footer {
+    background-color: #000;
+    padding: 40px 0;
+}
+
+.navbar {
+    position: relative;
+     min-height: 0px!important; 
+     margin-bottom: 0px!important; 
+    border: 1px solid transparent;
+}
+
+.sidebar {
+    margin-top: 1px!important;
+}

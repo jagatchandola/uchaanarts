@@ -44,7 +44,7 @@
                                                 <input class="form-control" type="text" name="title" value="{{ $art->title }}" required>
                                             </div>
                                             <div class="form-group">
-                                                <label>About Image</label>
+                                                <label>About Artwork</label>
                                                 <textarea class="form-control" name="about" required>{{ $art->about }}</textarea>
                                             </div>
                                             <div class="form-group">
@@ -78,23 +78,24 @@
                                                 </select>
                                             </div>
                                             
+                                            <div class="form-group">
+                                                <label>GST(%)</label>
+                                                <input class="form-control" type="text" name="gst" value="{{ $art->gst }}">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Discount</label>
+                                                <select class="form-control" name="discount">
+                                                    <option value="">Select Discount</option>
+                                                    <option value="fixed" @if($art->discount == 'fixed') selected="selected" @endif>Fixed</option>
+                                                    <option value="percentage" @if($art->discount == 'percentage') selected="selected" @endif>Percentage</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Discount Value</label>
+                                                <input class="form-control" type="text" name="discount_value" value="{{ $art->discount_value }}">
+                                            </div>
+
                                             @can('isAdmin')
-                                                <div class="form-group">
-                                                    <label>GST(%)</label>
-                                                    <input class="form-control" type="text" name="gst" value="{{ $art->gst }}">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label>Discount</label>
-                                                    <select class="form-control" name="discount">
-                                                        <option value="">Select Discount</option>
-                                                        <option value="fixed" @if($art->discount == 'fixed') selected="selected" @endif>Fixed</option>
-                                                        <option value="percentage" @if($art->discount == 'percentage') selected="selected" @endif>Percentage</option>
-                                                    </select>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label>Discount Value</label>
-                                                    <input class="form-control" type="text" name="discount_value" value="{{ $art->discount_value }}">
-                                                </div>
                                                 <div class="form-group">
                                                     <label>Status</label>
                                                     <label class="radio-inline">

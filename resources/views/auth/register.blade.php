@@ -127,7 +127,7 @@
       </div>
       <div class="stepwizard-step">
         <a href="#step-2" type="button" class="btn btn-default btn-circle" disabled="disabled">2</a>
-        <p>Eeducation & Bio</p>
+        <p>Education & Bio</p>
       </div>
       <div class="stepwizard-step">
         <a href="#step-3" type="button" class="btn btn-default btn-circle" disabled="disabled">3</a>
@@ -148,6 +148,10 @@
             <input type="text" id="name" name="name" class="form-control" placeholder="Artist name" required pattern="[A-Za-z\s]{3,25}" title="Min 3 and max 25 characters are allowed" maxlength="50" minlength="3">
           </div>
           <div class="form-group">
+            <label class="control-label">Email <small>(used as user name)</small></label>
+           <input type="email" class="form-control" id="email" name="email" placeholder="email@example.com" required>
+          </div>
+          <div class="form-group">
             <label class="control-label">Password</label>
            <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
           </div>
@@ -155,10 +159,7 @@
             <label class="control-label">Confirm Password</label>
            <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" placeholder="Confirm Password" required>
           </div>
-          <div class="form-group">
-            <label class="control-label">Email</label>
-           <input type="email" class="form-control" id="email" name="email" placeholder="email@example.com" required>
-          </div>
+          
           <div class="form-group">
             <label class="control-label">Mobile</label>
             <input type="number" class="form-control" id="mobile" name="mobile" placeholder="Mobile" maxlength="10" required>
@@ -210,18 +211,18 @@
     <div class="row setup-content" id="step-2">
       <div class="col-xs-6 col-md-offset-3">
         <div class="col-md-12">
-          <h3> Eeducation & Bio</h3>
+          <h3> Education & Bio</h3>
           <div class="form-group">
             <label class="control-label">About Me</label>
-            <textarea class="form-control" id="about" name="about" rows="4" placeholder="(300 words maximum)" required></textarea>
+            <textarea class="form-control" id="about" name="about" rows="4" placeholder="(300 words maximum)"></textarea>
           </div>
           <div class="form-group">
             <label class="control-label">Award & Recognition</label>
-            <textarea class="form-control" id="awards" name="awards" rows="4" placeholder="(300 words maximum)" required></textarea>
+            <textarea class="form-control" id="awards" name="awards" rows="4" placeholder="(300 words maximum)"></textarea>
           </div>
           <div class="form-group">
             <label class="control-label">Qualification</label>
-            <input type="text" class="form-control" id="qualification" name="qualification" placeholder="Qualification" required>
+            <input type="text" class="form-control" id="qualification" name="qualification" placeholder="Qualification">
           </div>
           <button class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Next</button>
         </div>

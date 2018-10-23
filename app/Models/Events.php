@@ -84,7 +84,10 @@ class Events extends Model
                         'about' => $data['about'],
                         'start_date' => $data['start_date'],
                         'end_date' => $data['end_date'],
+                        'last_date' => $data['last_date'],
                         'fees' => $data['event_fees'],
+                        'fees1' => $data['event_fees1'],
+                        'category' => $data['category'],
                         'shide' => $data['status']
                     ];
         
@@ -110,8 +113,11 @@ class Events extends Model
                                             'about' => $data['about'],
                                             'start_date' => $data['start_date'],
                                             'end_date' => $data['end_date'],
+                                            'last_date' => $data['last_date'],
                                             'fees' => $data['event_fees'],
+                                            'fees1' => $data['event_fees1'],
                                             'banner' => $data['image'],
+                                            'category' => $data['category'],
                                             'shide' => $data['status']
                                         ]);
 
@@ -479,4 +485,52 @@ class Events extends Model
                 ->select('contest_art.id', 'title', 'fname', 'ext', 'price', 'gst', 'discount', 'discount_value','users.username')
                 ->get();
     }
+
+    public function getOnlineEventArts($event_id, $artist_id='', $artist_item_id='') {
+        
+        $where = [ 'contest_art.contid' => $event_id ];
+
+        if(!empty($artist_id)){
+            $where['contest_art.artist_id'] = $artist_id;
+        }
+        if(!empty($artist_item_id)){
+            $where['contest_art.artist_item_id'] = $artist_item_id;
+        }
+        
+        $events = DB::table('contest_art')
+                    ->join('art_items', 'contest_art.artist_item_id' , '=', 'art_items.id')
+                    ->join('users', 'art_items.artist_id' , '=', 'users.id')
+                    ->where($where)
+                    ->select('art_items.*', 'contest_art.contid', 'users.username', 'users.uname', 'users.profimg', 'users.about as about_artist')
+                    ->get()
+                    ->toArray();
+
+        if (!empty($events)) {
+            return $events;
+        }
+
+        return [];
+    }
+
+    
+    public function getOnlineEventPrize($event_id) {
+                
+        $events = DB::table('contest_result')
+                    ->join('users', 'contest_result.artist_id' , '=', 'users.id')
+                    ->where('contest_result.contest_id', '=', $event_id)
+                    ->select('contest_result.*', 'users.username', 'users.uname')
+                    ->orderBy('position', 'asc')
+                    ->get()
+                    ->toArray();
+
+        if (!empty($events)) {
+            return $events;
+        }
+
+        return [];
+    }
+
+
+
+
 }

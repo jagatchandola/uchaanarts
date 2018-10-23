@@ -50,7 +50,7 @@
 				  </div>
               <a class="view-a" href="{{ route('artist-art', [$art->artist_id, $art->id]) }}"><h3>{{ $art->title }} </h3></a>
                 <h2><i class="fas fa-rupee-sign"></i> {{ \App\Helpers\Helper::getFormattedPrice($art->totalPrice) }}</h2>
-                <span>{{$art->uname}}</span> <p>{{$art->surface }} | {{$art->size }}</p> 
+                <span>By {{$art->uname}}</span> <p>{{$art->surface }} | {{$art->size }}</p> 
                 @if($art->quantity > 0)
                 <a href="{{ route('product-enquiry', $art->id) }}" class="btn btn-primary themebBtn">ADD TO CART</a> 
                 @else

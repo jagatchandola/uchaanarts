@@ -80,8 +80,8 @@ class CatalogueController extends Controller
                     $inputData['image'] = $name;
                 }
             }
-
-            $result = $this->catalogue->updateArt($inputData, $id);
+            // print_r($inputData);die();
+            $result = $this->catalogue->updateArt($inputData, $inputData['art-id']);
 
             if ($result == true) {
                 Session::flash('success_message', 'Art updated successfully');

@@ -9,7 +9,7 @@
                     </div>
                     <!-- /.col-lg-12 -->
                 </div>
-                @if ($errors->any())
+                <!-- @if ($errors->any())
                 <div class="alert alert-danger">
                     <ul>
                         @foreach ($errors->all() as $error)
@@ -17,12 +17,13 @@
                         @endforeach
                     </ul>
                 </div>
-            @endif
+            @endif -->
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="panel panel-default">
                             
                             <div class="panel-body">
+                            @include('layouts.alert')
                                 <div class="row">
                                     <div class="col-lg-6">
                                         <form role="form" name="add-category-form" action="{{ route('add-category') }}" method="post" enctype="multipart/form-data">
