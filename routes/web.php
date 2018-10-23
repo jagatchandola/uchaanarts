@@ -40,8 +40,11 @@ Route::post('/contactus', 'HomeController@contactus')->name('contactus');
 Route::post('/news-letter', 'HomeController@newsLetter')->name('news-letter');
 
 Route::get('/event/payment/{paymentLink}', 'PaymentController@eventPayment')->name('event-payment');
-Route::get('/checkout/{productId}', 'PaymentController@productPayment')->name('product-payment');
+Route::get('/payment', 'PaymentController@productPayment')->name('order-payment');
+Route::get('/returnurl/{orderId}', 'PaymentController@returnurl')->name('returnurl');
 Route::match(['get', 'post'], '/product/enquiry/{productId}', 'HomeController@productEnquiry')->name('product-enquiry');
+
+Route::get('/checkout', 'OrderController@checkout')->name('checkout');
 
 // static pages
 Route::get('/why-sell', 'HomeController@whySell')->name('why-sell');

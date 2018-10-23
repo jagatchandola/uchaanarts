@@ -173,11 +173,8 @@ $(document).ready(function(){
 
     $(".add-to-wishlist").on('click', function(){
         let id = $(this).attr('data-id');
-        addToCart(id, 'wishlist')
-        
+        addToCart(id, 'wishlist')        
     })
-
-    
 });
 
 function addToCart(id, type){
@@ -186,15 +183,23 @@ function addToCart(id, type){
       type: 'POST',
       data: {id: id, type: type, _token: $('meta[name="csrf-token"]').attr('content')},
       success: function(data) {
-        //called when successful
-        if(data != 0){
+        if(data != 0) {
             if(type == 'cart'){
-
+                if (data == 1) {
+                    var itemCount = parseInt($("#cart-item-count").text()) + 1;
+                    $("#cart-item-count").text(itemCount);
+                    alert('Product added successfully to your cart!');
+                    return false;
+                } else if (data == 2) {
+                    alert('Product already exists in your cart!');
+                    return false;
+                }
             } else {
 
             }
         } else {
-
+            alert('Some error occured. Please try again later');
+            return false;
         }
       },
       error: function(e) {

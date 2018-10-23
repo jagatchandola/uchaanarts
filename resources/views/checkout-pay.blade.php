@@ -5,7 +5,7 @@
 <section class="themeSec1 bgWhite">
   <div class="container">
     <h1>Check Out</h1>
-	
+	@include('layouts.alert')
 	 <div class="shoppingCart">
 	 <div class="row">
        <div class="table-responsive">
@@ -20,13 +20,30 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <th scope="row">{{ $productDetail->title }}</th>
-                <td width="15%"><a href="{{ \App\Helpers\Helper::getImage($productDetail->username . '/imgs/' . $productDetail->fname . '.' . $productDetail->ext, 1) }}" data-spzoom><img class="card-img-top img-fluid" src="{{ \App\Helpers\Helper::getImage($productDetail->username . '/imgs/' . $productDetail->fname . '.' . $productDetail->ext, 1) }}" alt=""></a></td>
-                <td>1</td>
-                <td>INR {{ \App\Helpers\Helper::getFormattedPrice($totalPrice) }}</td>
-                <td><strong>INR {{ \App\Helpers\Helper::getFormattedPrice($totalPrice) }}</strong></td>
-              </tr>
+                @php
+                    $totalPrice = 0;
+                @endphp
+                @if(!empty($cartItems))
+                @foreach($cartItems as $productDetail)
+                    <tr>
+                      <th scope="row">{{ $productDetail->title }}</th>
+                      <td width="15%">
+                          <a href="{{ \App\Helpers\Helper::getImage($productDetail->username . '/imgs/' . $productDetail->fname . '.' . $productDetail->ext, 1) }}" data-spzoom>
+                              <img class="card-img-top img-fluid" src="{{ \App\Helpers\Helper::getImage($productDetail->username . '/imgs/' . $productDetail->fname . '.' . $productDetail->ext, 1) }}" alt="">
+                          </a>
+                      </td>
+                      <td style="text-align:center">{{$productDetail->quantity}}</td>
+                      <td>INR {{ \App\Helpers\Helper::getFormattedPrice($productDetail->totalPrice) }}</td>
+                      <td><strong>INR {{ \App\Helpers\Helper::getFormattedPrice($productDetail->quantity * $productDetail->totalPrice) }}</strong></td>
+                    </tr>
+                    
+                    @php
+                        $totalPrice += $productDetail->totalPrice;
+                    @endphp
+                @endforeach
+              @else
+                No record(s) found
+              @endif
             </tbody>
           </table>
 		  <hr>
@@ -48,7 +65,11 @@
     </tr>
   </tbody>
 			</table>
-			<a href="#" class="btn btn-primary themeBtn float-right " id="loadMore">Checkout</a>
+                        @if(Auth::check())
+                            <a href="{{route('order-payment')}}" class="btn btn-primary themeBtn float-right ">Checkout</a>
+                        @else
+                            <a href="{{route('login')}}" class="btn btn-primary themeBtn float-right ">Checkout</a>
+                        @endif
 		</div>
 	 </div>
 	 </div>
@@ -57,11 +78,10 @@
   </div>
 </section>
 
-<script type="text/javascript" src="{{ asset('js/popper.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js/jquery.spzoom.js') }}"></script>
-<script type="text/javascript" src="{{ asset('js/custom.js') }}"></script>
 <script type="text/javascript">
     $(function() {
+        jQuery.noConflict();
         $('[data-spzoom]').spzoom();
     });
 </script>

@@ -10,6 +10,7 @@
 namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use DB;
+use Auth;
 
 class ProductOrder extends Model
 {
@@ -21,17 +22,17 @@ class ProductOrder extends Model
     protected $table = 'product_order';
     protected $fillable = ['user_id', 'product_id', 'total_amount', 'order_date'];
     
-    public function addOrder($user_id, $product_id, $order_amount) {
+    public function addOrder($order_amount, $order_id) {
         $insertData = [
+                        'order_id' => $order_id,
+                        'user_id' => Auth::user()->id,
                         'total_amount' => $order_amount,
                         'order_date' => date('Y-m-d h:i:s')
                     ];
         
-        $matchThese = ['user_id' => $user_id, 'product_id' => $product_id];
-        //$insert = DB::table($this->table)->insert($insertData);
-        $insert = ProductOrder::firstOrNew($matchThese, $insertData);
-//        $insert = ProductOrder::forceCreate($insertData);
-        var_dump($insert);exit;
+        $insert = DB::table($this->table)->insert($insertData);
+
+        //var_dump($insert);exit;
         if ($insert === true) {
             return true;
         }
@@ -55,13 +56,12 @@ class ProductOrder extends Model
         return [];
     }
 
-    public function updateBannerStatus($banner_id, $status) {
+    public function updateOrderStatus($order_id, $update_data) {
         
-        $updateStatus = DB::table('banner')
-            ->where('id', $banner_id)
-            ->update(['status' => $status]);
-        
-        //var_dump($updateStatus);exit;
+        $updateStatus = DB::table('product_order')
+            ->where('order_id', $order_id)
+            ->update($update_data);
+
         if ($updateStatus >= 1) {
             return true;
         }

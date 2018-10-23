@@ -52,7 +52,7 @@
                 <h2><i class="fas fa-rupee-sign"></i> {{ \App\Helpers\Helper::getFormattedPrice($art->totalPrice) }}</h2>
                 <span>By {{$art->uname}}</span> <p>{{$art->surface }} | {{$art->size }}</p> 
                 @if($art->quantity > 0)
-                <a href="{{ route('product-enquiry', $art->id) }}" class="btn btn-primary themebBtn">ADD TO CART</a> 
+                <a href="javascript:;" class="btn btn-primary themebBtn add-to-cart" id="add-to-cart" data-id="{{$art->id}}">ADD TO CART</a> 
                 @else
                 <a href="javascript:;" class="btn btn-primary themebBtn">OUT OF STOCK</a>
                 @endif

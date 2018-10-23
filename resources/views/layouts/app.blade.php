@@ -100,10 +100,15 @@
               </li>
               @endguest
               <li>
-                <a href="#">
-                  <img src="/img/cart.png" />
+                <a @if(isset($_SESSION['cart']) && count($_SESSION['cart']) > 0) href="{{route('checkout')}}" @else href="javascript:;" @endif>
+                    <img src="/img/cart.png" />
+                    <span style="color: red;" id="cart-item-count">
+                        <?php
+                            echo isset($_SESSION['cart']) ? count($_SESSION['cart']) : 0;
+                        ?>
+                    </span>
                 </a>
-                <div class="custom-dropdown hover-dropdown position-absolute">
+<!--                <div class="custom-dropdown hover-dropdown position-absolute">
                   <div class="content-box p-3">
                     <div class="row pb-3 align-items-center">
                       <div class="col-sm-5 col-5"> <img src="/img/prd-8.jpg" /></div>
@@ -131,7 +136,7 @@
                      <a href="/checkout.html"><input type="button" name="btn" value="Check-out" class="btn btn-lg btn-primary themeBtn text-uppercase" /></a>
                     </div>
                   </div>
-                </div>
+                </div>-->
               </li>
               <li>
                 <a href="#">
