@@ -133,6 +133,20 @@ Route::group(['middleware' => ['auth']],function(){
         Route::post('/admin/banner/','Backend\BannerController@edit')->name('edit-banner-post');
         Route::match(['get', 'post'], '/admin/banner/add', 'Backend\BannerController@add')->name('add-banner');
 
+        // testimonials
+        Route::get('/admin/testimonial','Backend\TestimonialController@index')->name('testimonial-list');
+        Route::put('/admin/testimonial/changeStatus/{id}','Backend\TestimonialController@updateStatus');
+        Route::get('/admin/testimonial/{id}','Backend\TestimonialController@edit')->name('edit-testimonial');
+        Route::post('/admin/testimonial/','Backend\TestimonialController@edit')->name('edit-testimonial-post');
+        Route::match(['get', 'post'], '/admin/testimonial/add', 'Backend\TestimonialController@add')->name('add-testimonial');
+
+        // Media
+        Route::get('/admin/media','Backend\MediaController@index')->name('media-list');
+        Route::put('/admin/media/changeStatus/{id}','Backend\MediaController@updateStatus');
+        Route::get('/admin/media/{id}','Backend\MediaController@edit')->name('edit-media');
+        Route::post('/admin/media/','Backend\MediaController@edit')->name('edit-media-post');
+        Route::match(['get', 'post'], '/admin/media/add', 'Backend\MediaController@add')->name('add-media');
+
         // Queries
         Route::get('/admin/queries','Backend\OrderController@queris')->name('query-list');
 });
