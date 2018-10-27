@@ -11,6 +11,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use DB;
 use Auth;
+use App\Helpers\Helper;
 
 class ProductOrder extends Model
 {
@@ -61,8 +62,71 @@ class ProductOrder extends Model
         $updateStatus = DB::table('product_order')
             ->where('order_id', $order_id)
             ->update($update_data);
-
+        
+        $updateStatus = 1;
+        
         if ($updateStatus >= 1) {
+            $cartIdArray = [];
+            
+            $cartItems = DB::table('cart')
+                    ->where('user_id', Auth::user()->id)
+                    ->get()
+                    ->toArray();
+            
+//            echo '<pre>';
+//            print_r($cartItems);exit;
+            
+            foreach ($cartItems as $cart) {
+                $cartIdArray[] = $cart->id;
+                
+                $artItem = DB::table('art_items')
+                    ->where('id', $cart->product_id)
+                    ->get()
+                    ->toArray();
+                
+//                echo '<pre>';
+//                print_r($artItem);exit;
+                
+                $orderData = [
+                    'order_id' => $order_id,
+                    'art_item_id' => $cart->product_id,
+                    'artist_id' => $cart->user_id,
+                    'qty' => $cart->quantity,
+                    'price' => $artItem[0]->price,
+                    'gst' => $artItem[0]->gst,
+                    'discount' => $artItem[0]->discount,
+                    'discount_value' => $artItem[0]->discount_value,
+                    'commission' => config('app.commission'),
+                    'status' => 1,
+                    'date_created' => date('Y-m-d h:i:s')
+                ];
+                
+                $calculateData = [
+                                    'price' => $artItem[0]->price,
+                                    'gst' => $artItem[0]->gst,
+                                    'discountType' => $artItem[0]->discount,
+                                    'discountValue' => $artItem[0]->discount_value
+                                ];
+
+                $orderData['total_price'] = Helper::calculatePrice($calculateData);
+                
+                $order = new OrderItems();
+                $orderItemId = $order->addOrderItem($orderData);
+                
+                if ($orderItemId !== false) {
+
+                    DB::table('art_items')
+                        ->where('id', $cart->product_id)
+                        ->update(['isSold' => 1]);
+
+                    DB::table('cart')->delete($cart->id);
+                }
+                
+//                echo '<pre>';
+//                print_r($orderData);exit;
+            }
+        
+
             return true;
         }
         return false;

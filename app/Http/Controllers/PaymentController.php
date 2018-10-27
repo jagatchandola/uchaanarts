@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use App\Models\Events;
 use App\Models\Catalogue;
 use App\Models\ProductOrder;
@@ -87,6 +88,9 @@ class PaymentController extends Controller
             $result = $this->order->addOrder($totalPrice, $orderId);
             
             if ($result === true) {
+                
+                Log::info('Payment started for Order Id: ' . $orderId);
+                
                 $ch = curl_init();
 
                 //curl_setopt($ch, CURLOPT_URL, 'https://www.instamojo.com/api/1.1/payment-requests/');
@@ -105,7 +109,7 @@ class PaymentController extends Controller
                             array("X-Api-Key: test_20379e4739c5ee98dbf1258454c",
                                   "X-Auth-Token: test_61bbe938ebc21412d41b830a5ae"));
                 
-                $payload = Array(
+                $payload = [
                     'purpose' => 'Order payment - ' . $orderId,
                     'amount' => $totalPrice,
                     'phone' => Auth::user()->phone,
@@ -116,31 +120,31 @@ class PaymentController extends Controller
                     'send_sms' => false,
                     'email' => Auth::user()->email,
                     'allow_repeated_payments' => false
-                );
+                ];
+                
+                Log::info('Payload data for Order Id: ' . $orderId . ' is ' . json_encode($payload));
+                
                 curl_setopt($ch, CURLOPT_POST, true);
                 curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($payload));
                 $response = curl_exec($ch);
                 curl_close($ch); 
-
-                //echo $response;exit;
+                
+                Log::info('Response received for Order Id: ' . $orderId . ' is ' . $response);
+                
                 $response = json_decode($response);
-//                echo '<pre>';
-//                print_r($response);exit;
+
                 if ($response->success === false) {
                     $updateData = [
                                     'payment_status' => 0,
                                     'failure_reason' => json_encode($response->message)
                                 ];
-//                    echo '<pre>';
-//                print_r($updateData);exit;
+
                     $result = $this->order->updateOrderStatus($orderId, $updateData);
                     Session::flash('error_message', 'Something went wrong. Please try again later');
                     return redirect('/checkout');
                 }
                 
-                //$pay_ulr = $response->payment_request->longurl;
                 return redirect($response->payment_request->longurl);
-                //exit();
             }
             
         }
@@ -150,10 +154,7 @@ class PaymentController extends Controller
     
     public function returnurl(Request $request, $orderId)
     {
-
-//        echo $orderId.'========';exit;
-//        echo '<pre>';
-//        print_r($request->all());exit;
+        Log::info('Payment Id received for Order Id: ' . $orderId . ' is ' . $request->get('payment_id'));
         
         $ch = curl_init();
 
@@ -167,24 +168,22 @@ class PaymentController extends Controller
 
         $response = curl_exec($ch);
         $err = curl_error($ch);
-        curl_close($ch); 
-//echo '<pre>';
-//        print_r($response);exit;
+        curl_close($ch);
         
         if ($err) {
+            Log::info('Error received for Order Id: ' . $orderId . ' ---====' . json_encode($err));
+            
             $updateData = [
-                                    'payment_status' => 0,
-                                    'failure_reason' => json_encode($err)
-                                ];
+                            'payment_status' => 0,
+                            'failure_reason' => json_encode($err)
+                        ];
             $this->order->updateOrderStatus($orderId, $updateData);
             Session::flash('error_message', 'Payment Failed, Try Again!!');
             return redirect('/checkout');
         } else {
+            Log::info('Payment status received for Order Id: ' . $orderId . ' ----=========' . $response);
             $data = json_decode($response);
         }
-        
-//        echo '<pre>';
-//        print_r($request);exit;
         
         if($data->success == true) {
             if($data->payment->status == 'Credit') {
@@ -198,7 +197,8 @@ class PaymentController extends Controller
                                     'affiliate_commission' => $data->payment->affiliate_commission
                                 ];
 //                dd($updateData);
-                $this->order->updateOrderStatus($orderId, $updateData);
+                $response = $this->order->updateOrderStatus($orderId, $updateData);
+                $_SESSION['cart'] = [];
                 Session::flash('success_message', 'Your payment has been pay successfully, Enjoy!!');
                 return redirect('/checkout');
             } else {

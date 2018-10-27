@@ -38,9 +38,14 @@ class OrderController extends Controller
             $input  = $request->all();
             
             if (Auth::check()) {
-                $cartItemCount = $this->cart->addToCart([$input['id']]);
-                $_SESSION['cart'] = $cartItemCount;
-                echo 1;
+                // check if the item is in the array, if it is, do not add
+                if(array_key_exists($input['id'], $_SESSION['cart'])){
+                    echo '2';
+                } else { // else, add the item to the array
+                    $cartItemCount = $this->cart->addToCart([$input['id']]);
+                    $_SESSION['cart'] = $cartItemCount;
+                    echo 1;
+                }
             } else {
                 if(!isset($_SESSION['cart'])){
                     $_SESSION['cart'] = [];

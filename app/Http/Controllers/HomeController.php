@@ -40,7 +40,7 @@ class HomeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
+    {    
         $arts = $this->catalogue->getCreativeArts();
 
         $category = $this->category->getCategories('');
@@ -322,7 +322,7 @@ class HomeController extends Controller
                 }                
             }
         }
-//dd($art);
+
         return view('artdetails')->with([
                                     'art' => $art,
                                     'artistOtherArts' => (!empty($artistOtherArts) && count($artistOtherArts)) ? $artistOtherArts : '',

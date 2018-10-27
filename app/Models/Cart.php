@@ -24,8 +24,6 @@ class Cart extends Model
     protected $fillable = ['user_id', 'product_id'];
     
     public function addToCart($cart_items) {
-//        echo '<pre>';
-//        print_r($cart_items);exit;
         foreach($cart_items as $item) {
             $cart = Cart::firstOrNew([
                                         'user_id' => Auth::user()->id,
@@ -57,9 +55,6 @@ class Cart extends Model
     
     public function getCartItems() {
         if (!Auth::check()) {
-            //$productIds = "'" . implode("','", array_keys($_SESSION['cart'])) . "'";
-            //dd($productIds);
-            //$productDetail = DB::table('cart as c')
             $productDetail = DB::table('art_items as ai')
                 ->join('users as u', 'ai.artist_id' , '=', 'u.id')
                 ->whereIn('ai.id', array_keys($_SESSION['cart']))
