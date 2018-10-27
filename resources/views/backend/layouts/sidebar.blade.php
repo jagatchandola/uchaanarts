@@ -13,6 +13,7 @@
             <ul class="nav" id="side-menu">
                 
                 <li>
+
                     <a href="{{ route('backend-dashboard') }}" class="active"><i class="fa fa-dashboard fa-fw"></i>Dashboard</a>
                 </li>
                 <li>
@@ -85,6 +86,34 @@
                     </ul>
                 </li>
                 <li>
+                    <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i>Testimonials<span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a href="{{ route('testimonial-list') }}">All Testimonials</a>
+                        </li>
+                        <li>
+                            <a href="{{ route('add-testimonial') }}">Add Testimonial</a>
+                        </li>
+                        
+                    </ul>
+                </li>
+
+                <li>
+                    <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i>Media Coverage
+<span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a href="{{ route('media-list') }}">All Media Cover</a>
+                        </li>
+                        <li>
+                            <a href="{{ route('add-media') }}">Add Media Cover</a>
+                        </li>
+                        
+                    </ul>
+                </li>
+
+
+                <li>
                     <a href="#"><i class="fa fa-wrench fa-fw"></i>Customers<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li>
@@ -151,6 +180,13 @@
         <div class="navbar-default sidebar" role="navigation">
             <div class="sidebar-nav navbar-collapse">
                 <ul class="nav" id="side-menu">
+                    <li>
+                        <div style="width: 140px; height: 160px; margin: 20px auto 10px ; display: block; ">
+                            
+                            <img width="100%" height="100%" class="img-fluid" src="{{ \App\Helpers\Helper::getImage(Auth::user()->username.'/'.Auth::user()->profimg, 1) }}">
+                        </div>
+                        <span onclick="javascript:location.href='{{ route('artist-profile') }}';" style="display: block; cursor: pointer; text-align: center; margin-bottom:20px; ">Edit Profile</span>
+                    </li>
                     <li>
                         <a href="{{ route('backend-dashboard') }}" class="active"><i class="fa fa-dashboard fa-fw"></i>Dashboard</a>
                     </li>

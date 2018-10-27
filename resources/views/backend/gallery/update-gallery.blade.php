@@ -27,39 +27,39 @@
                                             
                                             <div class="form-group">
                                                 <label>Title</label>
-                                                <input class="form-control" type="text" name="title" value="{{ $art->title }}">
+                                                <input class="form-control" type="text" name="title" value="{{ $art->title }}" readonly>
                                             </div>
                                             <div class="form-group">
                                                 <label>About Image</label>
-                                                <textarea class="form-control" name="about">{{ $art->about }}</textarea>
+                                                <textarea class="form-control" name="about" readonly>{{ $art->about }}</textarea>
                                             </div>
                                             <div class="form-group">
                                                 <label>Price</label>
-                                                <input class="form-control" type="text" name="price" value="{{ $art->price }}">
+                                                <input class="form-control" type="text" name="price" value="{{ $art->price }}" readonly>
                                             </div>
                                             <div class="form-group">
                                                 <label>Subject</label>
-                                                <input class="form-control" type="text" name="subject" value="{{ $art->subject }}">
+                                                <input class="form-control" type="text" name="subject" value="{{ $art->subject }}" readonly>
                                             </div>
                                             <div class="form-group">
                                                 <label>Painting</label>
-                                                <input class="form-control" type="text" name="painting" value="{{ $art->painting }}">
+                                                <input class="form-control" type="text" name="painting" value="{{ $art->painting }}" readonly>
                                             </div>
                                             <div class="form-group">
                                                 <label>Surface</label>
-                                                <input class="form-control" type="text" name="surface" value="{{ $art->surface }}">
+                                                <input class="form-control" type="text" name="surface" value="{{ $art->surface }}" readonly>
                                             </div>
                                             <div class="form-group">
                                                 <label>Size</label>
-                                                <input class="form-control" type="text" name="size" value="{{ $art->size }}">
+                                                <input class="form-control" type="text" name="size" value="{{ $art->size }}" readonly>
                                             </div>
 
                                             <div class="form-group">
                                                 <label>Quantity</label>
-                                                <select class="form-control" name="quantity">
-                                                    @foreach(range(0,10) as $i)
-                                                    <option value="{{$i}}" @if($art->quantity == $i) selected @endif>{{$i}}</option>
-                                                    @endforeach
+                                                <select class="form-control" name="quantity" readonly>
+                                                   
+                                                    <option value="{{$art->quantity}}" selected>{{$art->quantity}}</option>
+                                                    
                                                 </select>
                                             </div>
                                             <div class="form-group">
@@ -69,11 +69,11 @@
                                             
                                             <div class="form-group">
                                                 <label>GST(%)</label>
-                                                <input class="form-control" type="text" name="gst" value="{{ $art->gst }}">
+                                                <input class="form-control" type="text" name="gst" value="{{ $art->gst }}" readonly>
                                             </div>
                                             <div class="form-group">
                                                 <label>Discount</label>
-                                                <select class="form-control" name="discount">
+                                                <select class="form-control" name="discount" readonly>
                                                     <option value="">Select Discount</option>
                                                     <option value="fixed" @if($art->discount == 'fixed') selected="selected" @endif>Fixed</option>
                                                     <option value="percentage" @if($art->discount == 'percentage') selected="selected" @endif>Percentage</option>
@@ -81,7 +81,7 @@
                                             </div>
                                             <div class="form-group">
                                                 <label>Discount Value</label>
-                                                <input class="form-control" type="text" name="discount_value" value="{{ $art->discount_value }}">
+                                                <input class="form-control" type="text" name="discount_value" value="{{ $art->discount_value }}" readonly>
                                             </div>
                                             <div class="form-group">
                                                 <label>Approve</label>

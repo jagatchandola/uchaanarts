@@ -104,7 +104,39 @@
                                                 <textarea class="form-control" name="awards">{{ $artist->awards }}</textarea>
                                             </div>
                                         </div>
+                                        
+                                        <div class="col-md-12">
+                                            <h2>Bank Account Detail</h2>
+                                        </div>
 
+                                        <div class="col-lg-4">    
+                                            <div class="form-group">
+                                                <label>Account Holder Name</label>
+                                                <input class="form-control" type="text" name="bank_acc_name" value="{{ $artist->bank_acc_name }}">
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-4">    
+                                            <div class="form-group">
+                                                <label>Account Number</label>
+                                                <input class="form-control" type="text" name="bank_acc_no" value="{{ $artist->bank_acc_no }}">
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-4">    
+                                            <div class="form-group">
+                                                <label>IFSC Code</label>
+                                                <input class="form-control" type="text" name="bank_ifsc" value="{{ $artist->bank_ifsc }}">
+                                            </div>
+                                        </div>
+
+
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>Bank Address</label>
+                                                <textarea class="form-control" name="bank_address">{{ $artist->bank_address }}</textarea>
+                                            </div>
+                                        </div>
                                             
                                         <div class="col-lg-12">    
                                             <button type="submit" class="btn btn-primary">Submit</button>

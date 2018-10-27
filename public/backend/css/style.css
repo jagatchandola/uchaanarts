@@ -216,5 +216,18 @@ footer {
 }
 
 .sidebar {
-    margin-top: 1px!important;
+    margin-top: 2px!important;
 }
+
+.page-header {
+    margin: 0px 0 20px;
+}
+
+/*@media (min-width: 768px)
+*/
+#page-wrapper {
+    padding: 20px 20px 0 20px;
+    border-left: 1px solid #e7e7e7;
+}
+
+.d-none{ display: none; }

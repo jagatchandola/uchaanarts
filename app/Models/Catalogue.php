@@ -153,7 +153,11 @@ class Catalogue extends Model
             if (Auth::user()->user_role == 'artist'){
                 $where['active'] = 2;
             } else {
-                $where['active'] = 1;
+                if(isset($data['status'])){
+                    $where['active'] = $data['status'];
+                } else {
+                    $where['active'] = 1;
+                }
                 $where['is_creative_art'] = $data['creative_art_status'] ?? 0;
             }
             if (!empty($data['image'])) {
@@ -181,6 +185,7 @@ class Catalogue extends Model
                 $where['active'] = $data['status'];
             }
         }
+        // print_r($where);die;
         $updateStatus = DB::table('art_items')
             ->where('id', $data['art-id'])
             ->update($where);
@@ -244,7 +249,7 @@ class Catalogue extends Model
         $catalogue = Catalogue::where('art_items.active', 2)
                     ->join('users', 'art_items.artist_id' , '=', 'users.id')
                     ->where('users.admin_approved', '=', 1)
-                    ->select('art_items.id', 'title', 'price', 'gst', 'discount', 'discount_value', 'users.uname as user_name', 'art_items.fname', 'art_items.ext', 'users.uname', 'users.username')
+                    ->select('art_items.id', 'title', 'price', 'gst', 'discount', 'subject', 'painting', 'size', 'surface', 'quantity', 'discount_value', 'users.uname as user_name', 'art_items.fname', 'art_items.ext', 'users.uname', 'users.username')
                     ->orderBy('art_items.updated_at', 'desc')
                     ->get();
 
@@ -259,7 +264,7 @@ class Catalogue extends Model
         
         $catalogue = Catalogue::where('art_items.id', $art_id)
                     ->join('users', 'art_items.artist_id' , '=', 'users.id')
-                    ->select('art_items.id', 'title', 'art_items.about', 'price', 'gst', 'discount', 'discount_value', 'users.username', 'art_items.fname', 'art_items.ext', 'users.uname')
+                    ->select('art_items.id', 'title', 'art_items.about', 'price', 'gst', 'discount', 'subject', 'painting', 'size', 'surface', 'quantity', 'discount_value', 'users.username', 'art_items.fname', 'art_items.ext', 'users.uname')
                     ->orderBy('art_items.updated_at', 'desc')
                     ->get();
 
