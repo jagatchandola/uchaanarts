@@ -105,6 +105,7 @@ class Catalogue extends Model
                     ->join('users', 'art_items.artist_id', '=', 'users.id')
                     ->where('art_items.artist_id', '=', $artist_id)
                     ->where('art_items.active', '=', 1)
+                    ->where('art_items.isSold', '=', 0)
                     ->where('art_items.id', '<>', $art_id)
                     ->orderBy('art_items.id', 'desc')
                     ->select('art_items.id', 'title', 'art_items.about', 'art_items.price', 'users.uname as user_name', 'users.username', 'users.id as artist_id', 'art_items.fname', 'art_items.ext', 'art_items.price', 'art_items.gst', 'art_items.discount', 'art_items.discount_value', 'art_items.painting', 'art_items.subject', 'art_items.surface', 'art_items.size', 'art_items.quantity')

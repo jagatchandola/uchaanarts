@@ -49,7 +49,7 @@ class OrderItems extends Model
             ->insertGetId($dataArray);
         
         if ($lastInsertId > 0) {
-            return $lastInsertId->id;
+            return $lastInsertId;
         }
         return false;
     }

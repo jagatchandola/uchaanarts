@@ -100,7 +100,7 @@
               </li>
               @endguest
               <li>
-                <a @if(isset($_SESSION['cart']) && count($_SESSION['cart']) > 0) href="{{route('checkout')}}" @else href="javascript:;" @endif>
+                <a @if(isset($_SESSION['cart']) && count($_SESSION['cart']) > 0) href="{{route('checkout')}}" @else href="{{route('checkout')}}" @endif>
                     <img src="/img/cart.png" />
                     <span style="color: red;" id="cart-item-count">
                         <?php
