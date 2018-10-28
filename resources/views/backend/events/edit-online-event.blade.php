@@ -40,6 +40,10 @@
                                                 <input class="form-control" type="date" name="end_date" id="end_date" value="{{ $event['end_date'] }}">
                                             </div>
                                             <div class="form-group">
+                                                <label>Last Date</label>
+                                                <input class="form-control" type="date" name="last_date" id="last_date" value="{{ $event['last_date'] }}">
+                                            </div>
+                                            <div class="form-group">
                                                 <label>First Prize Amount</label>
                                                 <input class="form-control" type="number" name="first_prize" value="{{ $event['first_prize'] }}" required>
                                             </div>

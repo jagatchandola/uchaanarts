@@ -22,20 +22,17 @@
                                 <div class="row">
                                     <div class="col-lg-6">
                                         <form role="form" name="edit-gallery-form" action="{{ route('edit-gallery-post') }}" method="post" enctype="multipart/form-data">
+                                        <input class="form-control" type="hidden" name="subject" value="" required>
                                             <input type="hidden" name="artist-id" value="{{ $art->artist_id }}" />
                                             <input type="hidden" name="art-id" value="{{ $art->id }}" />
                                             <div class="form-group">
                                                 <label>Artist Name: <strong>{{ $art->uname }}</strong></label>
                                             </div>
                                             
-                                            <div class="form-group">
-                                                <img src="{{ \App\Helpers\Helper::getImage($art->username .'/imgs/'. $art->fname .'.'. $art->ext, 1) }}" width="100" height="100">
-                                            </div>
-                                            
                                             @can('isArtist')
                                             <div class="form-group">
                                                 <label>Image</label>
-                                                <input class="form-control" type="file" name="image" value="" @if(empty($art->fname)) required @endif>
+                                                <input class="form-control" type="file" name="image" id="imgInp" value="" @if(empty($art->fname)) required @endif>
                                             </div>
                                             @endcan
                                             
@@ -53,11 +50,11 @@
                                             </div>
 
                                             <div class="form-group">
-                                                <label>Subject</label>
-                                                <input class="form-control" type="text" name="subject" value="{{ $art->subject }}" required>
+                                                <label>Artwork Code</label>
+                                                <input class="form-control" type="text" value="UF-{{ $art->artwork_code }}" readonly>
                                             </div>
                                             <div class="form-group">
-                                                <label>Painting</label>
+                                                <label>Year</label>
                                                 <input class="form-control" type="text" name="painting" value="{{ $art->painting }}" required>
                                             </div>
                                             <div class="form-group">
@@ -118,6 +115,11 @@
                                             
                                             <a href="{{ route('gallery-list') }}"><button type="button" class="btn btn-primary">Back</button></a> <button type="submit" class="btn btn-primary">Submit</button>
                                         </form>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="preview-img">
+                                        <img id="blah" src="{{ \App\Helpers\Helper::getImage($art->username .'/imgs/'. $art->fname .'.'. $art->ext, 1) }}" alt="your image" width="200px" />
+                                        </div>
                                     </div>                                    
                                     <!-- /.col-lg-6 (nested) -->
                                 </div>
@@ -137,42 +139,59 @@
 @section('script')
 <script src="{{ asset('backend/js/dataTables/jquery.dataTables.min.js') }}"></script>
 <script src="{{ asset('backend/js/dataTables/dataTables.bootstrap.min.js') }}"></script>
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $('#dataTables').DataTable({
-                responsive: true,
-                "lengthMenu": [20,30,40,50]
-            });
-        });
-        
-        function changeStatus(id, status) {
-            var updateStatus = status == 1 ? 'Active' : 'Inactive';
-            var r = confirm("Are you sure, you want to change status to " + updateStatus + "?");
-            if (r == true) {
-                $.ajax({
-                    method: "PUT",
-                    url: "/admin/artists/changeStatus/"+id,
-                    data: {
-                            status:status
-                         },
-                    dataType: "json",
-                    success: function(response) {
-                        if (response == 1) {
-                            alert('Status updated successfully!');
-                            setTimeout(function() {
-                                location.reload(true);    
-                            }, 500);
-                        } else {
-                            alert('Something went wrong. Please try again!');
-                            return false;
-                        }
-                        
-                    },
-                    error: function(request,status,errorThrown) {
-                       alert('request :'+request,'status : '+status,'errorThrown : '+errorThrown); 
+<script type="text/javascript">
+    
+    function changeStatus(id, status) {
+        var updateStatus = status == 1 ? 'Active' : 'Inactive';
+        var r = confirm("Are you sure, you want to change status to " + updateStatus + "?");
+        if (r == true) {
+            $.ajax({
+                method: "PUT",
+                url: "/admin/artists/changeStatus/"+id,
+                data: {
+                        status:status
+                     },
+                dataType: "json",
+                success: function(response) {
+                    if (response == 1) {
+                        alert('Status updated successfully!');
+                        setTimeout(function() {
+                            location.reload(true);    
+                        }, 500);
+                    } else {
+                        alert('Something went wrong. Please try again!');
+                        return false;
                     }
-                });
-            }
+                    
+                },
+                error: function(request,status,errorThrown) {
+                   alert('request :'+request,'status : '+status,'errorThrown : '+errorThrown); 
+                }
+            });
         }
-    </script>
+    }
+function readURL(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            $('#blah').attr('src', e.target.result);
+        }
+
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+$(document).ready(function() {
+
+     $('#dataTables').DataTable({
+            responsive: true,
+            "lengthMenu": [20,30,40,50]
+        });
+
+    $("#imgInp").change(function() {
+        readURL(this);
+    });
+})
+
+</script>
 @endsection

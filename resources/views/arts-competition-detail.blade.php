@@ -42,7 +42,8 @@
                 </abbr>
                 </p>
           </blockquote>
-                        
+          
+          @if(!empty($onlineEventDetail->last_date) && strtotime($onlineEventDetail->last_date) > strtotime(date("Y-m-d")))            
           <div class="col-md-12 col-12 col-sm-12 col-xs-12 text-center">
             @auth
               @can('isArtist')
@@ -53,6 +54,7 @@
             @endauth
 
           </div>
+          @endif
         </div>
 
    </div>   
@@ -109,10 +111,18 @@
 
         We'll also need your student's First Name only, Age Range, Country and State or Province for each submitted piece of art.
         </p>
+        @if(!empty($onlineEventDetail->last_date) && strtotime($onlineEventDetail->last_date) > strtotime(date("Y-m-d")))
         <div class="col-md-12 col-12 col-sm-12 col-xs-12 text-center">
-         <a class="btn btn-primary themeBtn mt-3" href="login-artist.html">Participate in Competition</a>
-        
+          @auth
+            @can('isArtist')
+              <a class="btn btn-primary themeBtn mt-3" href="/admin/online/events">Participate in Competition</a>
+            @endcan
+          @else
+            <a class="btn btn-primary themeBtn mt-3" href="/login">Participate in Competition</a>
+          @endauth
+
         </div>
+        @endif
         
         </div>
         

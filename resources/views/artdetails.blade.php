@@ -33,7 +33,8 @@
                 <div class="col-lg-6 col-md-6 col-12 col-sm-12">
                     <blockquote class="blockquote aboutBio text-left">
                         <h3>{{ $art->title }}</h3>
-                        <h5><i class="fas fa-rupee-sign"></i> {{ \App\Helpers\Helper::getFormattedPrice($art->totalPrice) }}</h5>
+                        <h6>By {{ $art->uname }}</h6>
+                        
                         <p class="mb-0 "><?php echo $art->about; ?></p>
                     </blockquote>
                     <h5>Artwork details</h5>
@@ -47,34 +48,44 @@
                             <td>{{ $art->cat_name }}</td>
                         </tr>
                         <tr>
-                            <td>Painting Type</td>
-                            <td>{{ $art->painting }}</td>
-                        </tr>
-                        <tr>
-                            <td>Subject</td>
-                            <td>{{ $art->subject }}</td>
-                        </tr>
-                        <tr>
-                            <td>Surface</td>
+                            <td>Medium</td>
                             <td>{{ $art->surface }}</td>
                         </tr>
                         <tr>
                             <td>Size</td>
                             <td>{{ $art->size }}</td>
                         </tr>
+                        <tr>
+                            <td>Year</td>
+                            <td>{{ $art->painting }}</td>
+                        </tr>
+                        <tr>
+                            <td>Artwork Code</td>
+                            <td>UF-{{ $art->artwork_code }}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2"><h5><i class="fas fa-rupee-sign"></i> {{ \App\Helpers\Helper::getFormattedPrice($art->totalPrice) }}</h5></td>
+                        </tr>
 
                         <tr>
                             <td>
                                 @if($art->quantity > 0)
                                 <a class="btn btn-primary mt-3 add-to-cart" data-id="{{ $art->id }}" href="javascript:;">Add To Cart</a>
-                                <a class="btn btn-primary themeBtn mt-3 buy-now" href="checkout.html">Buy Now</a>
+                                <a class="btn btn-primary themeBtn mt-3 buy-now" href="/contactus">Enquiry</a>
                                 @else
                                 <a href="javascript:;" class="btn btn-primary themebBtn">OUT OF STOCK</a>
                                 @endif
                             </td>
                         </tr>
+                        <tr>
+                            <td colspan="2">
+                                <img src="/img/STAMP.png" width="100">
+                                <p>International Shipping Available</p>
+                            </td>
+                        </tr>
 
                     </table>
+                    
                 </div>
             </div>
         </div>		  

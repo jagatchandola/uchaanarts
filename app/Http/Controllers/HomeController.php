@@ -42,6 +42,8 @@ class HomeController extends Controller
     public function index()
     {    
         $arts = $this->catalogue->getCreativeArts();
+        // $arts1 = $this->catalogue->updateOnce();
+        // echo $this->catalogue->newItemCode();
 
         $category = $this->category->getCategories('');
         $artists = $this->artists->getArtistDetails('','1');

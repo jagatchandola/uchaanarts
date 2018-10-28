@@ -228,9 +228,11 @@ class CatalogueController extends Controller
             // }
         }
         //dd(Auth::user());
+        $artCode = $this->catalogue->newItemCode();
         $categories = $this->category->getCategories();
         return view('backend.gallery.add-gallery')->with([
-                                                            'categories' => $categories, 'errors' => $errors
+                                                            'categories' => $categories, 'errors' => $errors,
+                                                            'artCode' => $artCode
                                                         ]);
         
     }

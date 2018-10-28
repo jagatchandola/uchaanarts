@@ -26,7 +26,7 @@
                                                 <th>Start Date</th>
                                                 <th>End Date</th>
                                                 <th>Entry Fees</th>
-                                                <th>Status</th>
+                                                <th>Event Status</th>
                                                 @can('isAdmin')
                                                 <th>Edit</th>
                                                 <th>Memorale Moments</th>

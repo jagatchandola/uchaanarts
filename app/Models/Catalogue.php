@@ -288,7 +288,8 @@ class Catalogue extends Model
                     'quantity' => $data['quantity'],
                     'size' => $data['size'],
                     'active' => 2,
-                    'cat' => $data['category']
+                    'cat' => $data['category'],
+                    'artwork_code' => $this->newItemCode()
                 ];
         
         list($name, $extension) = explode('.', $data['image']);
@@ -389,5 +390,38 @@ class Catalogue extends Model
 
         return [];
     }
+
+    public function updateOnce(){
+
+        $catalogue = Catalogue::orderBy('id', 'asc')
+                    ->get();
+
+        if (!empty($catalogue)) {
+            $code = 2101;
+            foreach ($catalogue as $value) {
+                    
+                if($value->artwork_code == 0){
+                    $updateStatus = DB::table('art_items')
+                        ->where('id', $value->id)
+                        ->update(['artwork_code' => $code]);
+                }
+                $code++;
+            }
+        }
+    }
+
+    public function newItemCode(){
+
+        $catalogue = Catalogue::orderBy('artwork_code', 'desc')
+                    ->first();
+        $code = 2101;
+        if (!empty($catalogue)) {
+            $code = $catalogue->artwork_code;
+        }
+        $code ++;
+        return $code;
+    }
+
+
 
 }

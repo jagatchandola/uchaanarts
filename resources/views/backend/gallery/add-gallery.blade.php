@@ -18,6 +18,14 @@
                                 <div class="row">
                                     <div class="col-lg-6">
                                         <form role="form" name="add-gallery-form" action="{{ route('add-gallery') }}" method="post" enctype="multipart/form-data">
+
+                                        <input class="form-control" type="hidden" name="subject" value="" required>
+
+                                            <div class="form-group">
+                                                <label>Image</label>
+                                                <input class="form-control" type="file" name="image" id="imgInp" value="" required>
+                                            </div>
+
                                             <div class="form-group">
                                                 <label>Category</label>
                                                 <select class="form-control" name="category" required>
@@ -27,10 +35,7 @@
                                                     @endforeach
                                                 </select>
                                             </div>
-                                            <div class="form-group">
-                                                <label>Image</label>
-                                                <input class="form-control" type="file" name="image" value="" required>
-                                            </div>                                            
+                                                                                        
                                             <div class="form-group">
                                                 <label>Title</label>
                                                 <input class="form-control" type="text" name="title" value="" required>
@@ -45,11 +50,7 @@
                                             </div>
 
                                             <div class="form-group">
-                                                <label>Subject</label>
-                                                <input class="form-control" type="text" name="subject" value="" required>
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Painting</label>
+                                                <label>Year</label>
                                                 <input class="form-control" type="text" name="painting" value="" required>
                                             </div>
                                             <div class="form-group">
@@ -93,7 +94,12 @@
                                                 <button type="submit" class="btn btn-primary">Submit</button>
                                             @endif
                                         </form>
-                                    </div>                                    
+                                    </div>  
+                                    <div class="col-lg-6">
+                                        <div class="preview-img">
+                                        <img id="blah" src="/image/dummy-400x400.jpg" alt="your image" width="200px" />
+                                        </div>
+                                    </div>                                  
                                     <!-- /.col-lg-6 (nested) -->
                                 </div>
                                 <!-- /.row (nested) -->
@@ -107,4 +113,26 @@
 
         </div>
         <!-- /#wrapper -->
+@endsection
+
+@section('script')
+<script type="text/javascript">
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#blah').attr('src', e.target.result);
+            }
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+    $(document).ready(function() {
+        $("#imgInp").change(function() {
+            readURL(this);
+        });
+    })
+
+</script>
 @endsection

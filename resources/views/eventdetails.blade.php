@@ -42,7 +42,7 @@
                 
                 <div class="col-lg-5 col-md-5 col-12 col-sm-12">
                     <div class="aboutBio">
-                        <h3 class="text-md-left text-lg-left text-center">Inauguaration by-Qazi M Raghib<br/>
+                        <h3 class="text-md-left text-lg-left text-center">
                             Date - {{ date('jS', strtotime($eventDetails->start_date)) }} to {{ date('jS F Y', strtotime($eventDetails->end_date)) }}<br>
                             {{ $eventDetails->venue }}
                         </h3>
@@ -80,7 +80,7 @@
                     <h2>Participating Artist</h2>
                     <p><?php echo $eventDetails->artists; ?></p>
                 @endif
-                    
+                    @if(!empty($eventDetails->last_date) && strtotime($eventDetails->last_date) > strtotime(date("Y-m-d")))
                     <div class="text-center">
                     @auth
                     @can('isArtist')
@@ -90,7 +90,7 @@
                       <a class="btn btn-primary themeBtn mt-3" href="/login">Participate in Competition</a>
                     @endauth
                     </div>
-                    
+                    @endif
                 </div>
             </div>
         </div>

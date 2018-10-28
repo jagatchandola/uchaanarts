@@ -50,6 +50,10 @@
                                             <div class="form-group">
                                                 <label>End Date</label>
                                                 <input class="form-control" type="date" name="end_date" id="end_date" value="" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Last Date</label>
+                                                <input class="form-control" type="date" name="last_date" id="last_date" value="" required>
                                             </div>                                            
                                             <div class="form-group">
                                                 <label>Status</label>
