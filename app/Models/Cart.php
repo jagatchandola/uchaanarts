@@ -23,10 +23,11 @@ class Cart extends Model
 
     protected $fillable = ['user_id', 'product_id'];
     
-    public function addToCart($cart_items) {
+    public function addToCart($cart_items, $user_id = '') {
+        $userId = !empty($user_id) ? $user_id : Auth::user()->id;
         foreach($cart_items as $item) {
             $cart = Cart::firstOrNew([
-                                        'user_id' => Auth::user()->id,
+                                        'user_id' => $userId,
                                         'product_id' => $item
                             ]);
 
@@ -34,12 +35,14 @@ class Cart extends Model
             $cart->save();
         }
 
-        return $this->getCartItemCount();
+        return $this->getCartItemCount($userId);
     }
     
-    public function getCartItemCount() {
+    public function getCartItemCount($user_id) {
+        $userId = $user_id ?? Auth::user()->id;
+        
         $cartItemCount = DB::table('cart')
-                        ->where('user_id', Auth::user()->id)
+                        ->where('user_id', $userId)
                         ->get()
                         ->toArray();
         

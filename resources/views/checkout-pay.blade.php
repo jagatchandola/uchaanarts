@@ -65,10 +65,14 @@
     </tr>
   </tbody>
 			</table>
-                        @if(Auth::check())
-                            <a href="{{route('order-payment')}}" class="btn btn-primary themeBtn float-right ">Checkout</a>
-                        @else
-                            <a href="{{route('login')}}" class="btn btn-primary themeBtn float-right ">Checkout</a>
+                    
+                        @if(!empty($cartItems))
+                            @if(Auth::check())
+                                <a href="{{route('order-payment')}}" class="btn btn-primary themeBtn float-right ">Checkout</a>
+                            @else
+                                <!--<a href="{{route('login')}}" class="btn btn-primary themeBtn float-right ">Checkout</a>-->
+                                <a href="{{route('checkout-register')}}" class="btn btn-primary themeBtn float-right ">Checkout</a>
+                            @endif
                         @endif
 		</div>
 	 </div>

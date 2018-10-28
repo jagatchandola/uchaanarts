@@ -45,6 +45,7 @@ Route::get('/returnurl/{orderId}', 'PaymentController@returnurl')->name('returnu
 Route::match(['get', 'post'], '/product/enquiry/{productId}', 'HomeController@productEnquiry')->name('product-enquiry');
 
 Route::get('/checkout', 'OrderController@checkout')->name('checkout');
+Route::get('/checkout-register', 'OrderController@checkoutRegister')->name('checkout-register');
 
 // static pages
 Route::get('/why-sell', 'HomeController@whySell')->name('why-sell');

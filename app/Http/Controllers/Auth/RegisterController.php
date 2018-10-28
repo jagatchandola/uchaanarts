@@ -7,8 +7,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
-use Illuminate\Http\Request;
 use App\Helpers\Helper;
+use App\Models\Cart;
 
 class RegisterController extends Controller
 {
@@ -40,6 +40,7 @@ class RegisterController extends Controller
     public function __construct()
     {
         $this->middleware('guest');
+        $this->cart = new Cart();
     }
 
     /**
@@ -53,7 +54,7 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:6|confirmed',
+            'password' => 'required|string|min:6',
         ]);
     }
 
@@ -65,6 +66,34 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        if (isset($data['checkout'])) {
+            $this->redirectTo = '/checkout';
+            
+            $user = User::create([
+                'uname' => $data['name'] . ' ' . $data['last_name'],
+                'email' => $data['email'],
+                'password' => Hash::make($data['password']),
+                'user_role' => 'user',
+                'phone' => $data['phone_no'],
+                'shipping_address' => $data['shipping_address'],
+                'billing_address' => $data['billing_address'],
+                'city' => $data['city'],
+                'state' => $data['state'],
+                'pcode' => $data['pincode'],
+                'country' => $data['country'],
+            ]);
+
+            $user->username = Helper::nameFormat($data['name']) . '-' . $user->id;
+            $user->save();
+            
+            if (isset($_SESSION['cart']) && count($_SESSION['cart']) > 0) {                
+                $cartItemCount = $this->cart->addToCart(array_keys($_SESSION['cart']), $user->id);
+                $_SESSION['cart'] = $cartItemCount;
+            }
+            
+            return $user;
+        } 
+        
         if (isset($data['artist_image'])) {
             $image = $data['artist_image'];
             $title = str_replace(' ', '-', strtolower($data['name']));
@@ -74,7 +103,6 @@ class RegisterController extends Controller
 
             $data['image'] = $name;
         }
-        // print_r($data);die;
 
         $user = User::create([
             'uname' => $data['name'],
