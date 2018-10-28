@@ -141,9 +141,11 @@ class HomeController extends Controller
      */
     public function artists()
     {
-        $artists = $this->artists->getAllArtists();
-        //print_r($artists);exit;        
-        return view('artists')->with(['artists' => $artists]);
+        $filter = isset($_GET['filter']) ? $_GET['filter'] : '';
+        
+        $artists = $this->artists->getAllArtists('', $filter);
+        // print_r($artists[0]);exit;        
+        return view('artists')->with(['artists' => !empty($artists[0]) ? $artists : '' ]);
     }
 
     /**
