@@ -38,7 +38,7 @@ class Cart extends Model
         return $this->getCartItemCount($userId);
     }
     
-    public function getCartItemCount($user_id) {
+    public function getCartItemCount($user_id=null) {
         $userId = $user_id ?? Auth::user()->id;
         
         $cartItemCount = DB::table('cart')
