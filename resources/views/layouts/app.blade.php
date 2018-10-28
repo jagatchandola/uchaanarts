@@ -139,9 +139,9 @@
                 </div>-->
               </li>
               <li>
-                <a href="#">
+<!--                <a href="#">
                   <img src="/img/love.png" />
-                </a>
+                </a>-->
                 <div class="custom-dropdown hover-dropdown position-absolute">
                   <div class="content-box p-3">
                     <div class="row pb-3 align-items-center">

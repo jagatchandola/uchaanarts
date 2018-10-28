@@ -84,9 +84,6 @@ class ProductOrder extends Model
                     ->get()
                     ->toArray();
                 
-//                echo '<pre>';
-//                print_r($artItem);exit;
-                
                 $orderData = [
                     'order_id' => $order_id,
                     'art_item_id' => $cart->product_id,
@@ -98,9 +95,11 @@ class ProductOrder extends Model
                     'discount_value' => $artItem[0]->discount_value,
                     'commission' => config('app.commission'),
                     'status' => 1,
+                    'shipping_address' => Auth::user()->shipping_address,
+                    'billing_address' => Auth::user()->billing_address,
                     'date_created' => date('Y-m-d h:i:s')
                 ];
-                
+
                 $calculateData = [
                                     'price' => $artItem[0]->price,
                                     'gst' => $artItem[0]->gst,
@@ -120,12 +119,8 @@ class ProductOrder extends Model
                         ->update(['isSold' => 1]);
 
                     DB::table('cart')->delete($cart->id);
-                }
-                
-//                echo '<pre>';
-//                print_r($orderData);exit;
+                }                
             }
-        
 
             return true;
         }

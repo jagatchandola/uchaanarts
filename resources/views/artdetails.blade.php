@@ -67,7 +67,7 @@
                             <td>
                                 @if($art->quantity > 0)
                                 <a class="btn btn-primary mt-3 add-to-cart" data-id="{{ $art->id }}" href="javascript:;">Add To Cart</a>
-                                <a class="btn btn-primary themeBtn mt-3 buy-now" href="checkout.html">Buy Now</a>
+                                <!--<a class="btn btn-primary themeBtn mt-3 buy-now" href="checkout.html">Buy Now</a>-->
                                 @else
                                 <a href="javascript:;" class="btn btn-primary themebBtn">OUT OF STOCK</a>
                                 @endif
@@ -102,7 +102,7 @@
                                 <p>{{$otherArt->surface }} | {{$otherArt->size }}</p>
                                 <h2><i class="fas fa-rupee-sign"></i>  {{ \App\Helpers\Helper::getFormattedPrice($otherArt->totalPrice) }}</h2>
                                 @if($otherArt->quantity > 0)
-                                <a href="javascript:;" class="btn btn-primary themebBtn">ADD TO CART</a>
+                                <a href="javascript:;" class="btn btn-primary themebBtn add-to-cart" data-id="{{ $otherArt->id }}">ADD TO CART</a>
                                     @else
                                     <a href="javascript:;" class="btn btn-primary themebBtn">OUT OF STOCK</a>
                                     @endif
@@ -140,7 +140,7 @@
                                 <span>By {{$art->uname}}</span>
                                 <p>{{$art->surface }} | {{$art->size }}</p>
                                 <h2><i class="fas fa-rupee-sign"></i> {{ \App\Helpers\Helper::getFormattedPrice($art->totalPrice) }}</h2>
-                                <a href="javascript:;" class="btn btn-primary themebBtn">ADD TO CART</a>
+                                <a href="javascript:;" class="btn btn-primary themebBtn add-to-cart" data-id="{{ $art->id }}">ADD TO CART</a>
                             </div>
                         </div>
                     </div>
