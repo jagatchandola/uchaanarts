@@ -114,4 +114,19 @@ class Helper
     public static function getUniqueId() {
         return uniqid();
     }
+
+    public static function getArtistFilter($qryStr = '') {
+      
+        $filter = "";
+        if(isset($qryStr['filter'])){
+            $filter = $qryStr['filter'];
+        }
+      ?><div class="col-md-12 text-center"><ul class="alpha-filter"><li class="alpha-filter-list"><a class="<?php echo $filter == "" ? 'active-filter' : '' ?>" href="/artists">All</a></li><?php
+      foreach (range('A', 'Z') as $column){
+        ?><li class="alpha-filter-list"><a class="<?php echo $filter == $column ? 'active-filter' : '' ?>" href="/artists?filter=<?php echo $column; ?>"><?php
+         echo $column;
+         ?></a></li><?php
+      }   
+      ?></ul></div><?php
+    }
 }//END CLASS

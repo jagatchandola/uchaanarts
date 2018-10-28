@@ -20,7 +20,7 @@ class Artists extends Model
      */
     protected $table = 'users';
 
-    public function getAllArtists($records = '') {
+    public function getAllArtists($records = '', $filter = '') {
         if ($records == 'all') {
             $where = [
                 'user_role' => 'artist',
@@ -28,12 +28,19 @@ class Artists extends Model
             ];
             
             $artists = DB::table('users')
-                                ->where($where)
-                                ->select('id', 'uname', 'username', 'email as user_email','shide as status', 'is_creative_artists', 'is_weekly_artist')
+                                ->where($where);
+            if(!empty($filter)){
+                $artists->where('uname', 'LIKE', ''. $filter .'%');
+            }
+            $artists = $artists->select('id', 'uname', 'username', 'email as user_email','shide as status', 'is_creative_artists', 'is_weekly_artist')
                                 ->get();
         } else {
-            $artists = Artists::where('shide', 1)
-                        ->orderBy('uname', 'asc')
+            $artists = Artists::where('shide', 1);
+            
+            if(!empty($filter)) {
+                $artists->where('uname', 'LIKE', ''. $filter .'%');
+            }
+            $artists = $artists->orderBy('uname', 'asc')
                         ->paginate(12);
         }
         

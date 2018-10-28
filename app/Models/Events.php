@@ -243,6 +243,7 @@ class Events extends Model
     }
     
     public function addMemorableMoments($data) {
+        $data['event_id'] = !empty($data['event_id']) ? $data['event_id'] : '';
         $insert = DB::table('moments')->insert([
                                             'event_id' => $data['event_id'],
                                             'title' => $data['title'],

@@ -56,7 +56,7 @@
                                             <div class="input-group control-group after-add-more form-group">
                                                 <div class="form-group">
                                                     <label>Event Title</label>
-                                                    <input class="form-control" name="title" value="{{$title}}" required>
+                                                    <input class="form-control" name="title" value="{{$title}}">
                                                 </div>
                                                 <div class="form-group">
                                                     <label>Image</label>
