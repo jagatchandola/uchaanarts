@@ -71,7 +71,7 @@
                             <td>
                                 @if($art->quantity > 0)
                                 <a class="btn btn-primary mt-3 add-to-cart" data-id="{{ $art->id }}" href="javascript:;">Add To Cart</a>
-                                <a class="btn btn-primary themeBtn mt-3 buy-now" href="/contactus">Enquiry</a>
+                                <a class="btn btn-primary themeBtn mt-3 buy-now" href="/product/enquiry/{{$art->id}}">Enquiry</a>
                                 @else
                                 <a href="javascript:;" class="btn btn-primary themebBtn">OUT OF STOCK</a>
                                 @endif
