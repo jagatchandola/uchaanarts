@@ -21,7 +21,7 @@
     
     @if(!empty($testimonails))
      @foreach($testimonails as $testimonail)
-     <div class="row">
+     <div class="row testimonail-row">
       <div class="col-lg-9 col-md-9 col-xs-12 col-sm-8">
        <p><?php echo $testimonail->content; ?></p>
       </div>
@@ -36,6 +36,10 @@
       
       </div>
     @endforeach
+    @else
+      <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12">
+        No testimonials found.
+      </div>
     @endif
 
     </div>

@@ -18,10 +18,19 @@
   <div class="container">
    <div class="testimonialBx">
     <h1>UCHAAN ARTS - Media Coverage</h1>
-     <div class="row">
-      <div class="col-lg-12 col-md-12 col-12 col-sm-12">
-       <img src="{{ \App\Helpers\Helper::getImage('media-1.jpg', 7) }}" class="img-fluid">
+     <div class="row" style="margin-bottom:25px !important;">
+
+      @if(!empty($media))
+     @foreach($media as $cover)
+      <div class="col-lg-4 col-md-4 col-4 col-sm-4">
+      <a href="{{ \App\Helpers\Helper::getImage($cover->image, 7) }}" target="_blank">
+      <center><img src="{{ \App\Helpers\Helper::getImage($cover->image, 7) }}" height="200" width="300" class="">
+       <h4 style="margin-top:8px !important; text-transform: uppercase !important;">{{$cover->title}}</h4></center>
+        </a>
       </div>
+      @endforeach
+      @endif
+      
       </div>
     </div>
   </div>

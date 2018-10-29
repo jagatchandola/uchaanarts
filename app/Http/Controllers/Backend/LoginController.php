@@ -66,6 +66,8 @@ class LoginController extends Controller
     public function logout(){
         Session::flush();
         Auth::logout();
+        $_SESSION['cart'] = [];
+        unset($_SESSION['cart']);
         // return redirect('/backend/login')->with('flash_message_success','Logged out Successfully'); 
         return redirect('/'); 
     }

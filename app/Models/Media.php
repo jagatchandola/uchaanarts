@@ -24,7 +24,7 @@ class Media extends Model
        
         $media = DB::table('media_cover');
         if($all == 0){
-            $banners->where('status', '=', 1);
+            $media->where('status', '=', 1);
         }
                             
         $media = $media->orderBy('date_created', 'ASC')

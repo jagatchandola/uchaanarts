@@ -77,8 +77,8 @@ class LoginController extends Controller
     public function logout(Request $request)
     {
         Session::flush();
-        $_SESSION['cart'] = '';
-        // unset($_SESSION['cart']);
+        $_SESSION['cart'] = [];
+        unset($_SESSION['cart']);
         Auth::logout();
         return redirect('/');
     }

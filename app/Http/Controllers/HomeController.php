@@ -11,6 +11,7 @@ use App\Models\Testimonials;
 use App\Models\Contactus;
 use App\Models\NewsLetter;
 use App\Models\Moments;
+use App\Models\Media;
 use Illuminate\Http\Request;
 use App\Helpers\Helper;
 use Session;
@@ -32,6 +33,7 @@ class HomeController extends Controller
         $this->testimonials = new Testimonials();
         $this->contactus = new Contactus();
         $this->moments = new Moments();
+        $this->media = new Media();
     }
 
     /**
@@ -42,8 +44,6 @@ class HomeController extends Controller
     public function index()
     {    
         $arts = $this->catalogue->getCreativeArts();
-        // $arts1 = $this->catalogue->updateOnce();
-        // echo $this->catalogue->newItemCode();
 
         $category = $this->category->getCategories('');
         $artists = $this->artists->getArtistDetails('','1');
@@ -342,7 +342,10 @@ class HomeController extends Controller
     }
     
     public function media() {
-        return view('media');
+        $media = $this->media->getMedia();
+        return view('media')->with([
+                                    'media' => $media
+                                ]);
     }
     
     public function contactus(Request $request) {
