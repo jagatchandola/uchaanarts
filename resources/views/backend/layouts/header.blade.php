@@ -9,8 +9,23 @@
           </div>
         </div>
         <div class="col-sm-12 col-md-11 col-lg-11 col-xl-11">
+          <!-- Social Header -->
+<div class="header-top-row">
+            <ul class="header-top-row-list text-md-right">
+              <li class="d-none d-md-inline-block">
+              <li><a href="https://www.facebook.com/uchaanarts/" class=""><i class="fa fa-facebook-f"></i></a></li>
+            <li><a href="https://twitter.com/teamuchaan" class=""><i class="fa fa-twitter"></i></a></li>
+            <li><a href="https://plus.google.com/113335056267512558654" class=""><i class="fa fa-google-plus"></i></a></li>
+            <li><a href="https://www.instagram.com/uchaanarts/" class=""><i class="fa fa-instagram"></i></a></li>
+            <li><a href="https://www.youtube.com/channel/UCm8xRS3d7j24DNmxlJ_H44A" class=""><i class="fa fa-youtube"></i></a></li>               
+              </li>
+              
+            
+            </ul>
+          </div>
+          <!-- Social Header Ends -->
           <div class="header-top-row">
-            <ul class="header-top-row-list text-right">
+            <ul class="header-top-row-list">
               <li class="hide d-md-inline-block">
                 <a href="mailto:uchaanartz@gmail.com">
                   <span class="header-small-icons"><img src="/img/mail.png" /></span>

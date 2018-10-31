@@ -185,15 +185,16 @@
                             
                             <img width="100%" height="100%" class="img-fluid" src="{{ \App\Helpers\Helper::getImage(Auth::user()->username.'/'.Auth::user()->profimg, 1) }}">
                         </div>
-                        <span onclick="javascript:location.href='{{ route('artist-profile') }}';" style="display: block; cursor: pointer; text-align: center; margin-bottom:20px; ">Edit Profile</span>
+                        <center><p><b>{{Auth::user()->uname}}</b></p></center>
+                        <b><span onclick="javascript:location.href='{{ route('artist-profile') }}';" class="btn btn-primary" style="display: block; cursor: pointer; text-align: center; margin:5%; ">Edit Profile</span></b>
                     </li>
                     <li>
                         <a href="{{ route('backend-dashboard') }}" class="active"><i class="fa fa-dashboard fa-fw"></i>Dashboard</a>
                     </li>
                     @if(Auth::user()->user_role == 'artist')
-                    <li>
+                    <!-- <li>
                         <a href="{{ route('artist-profile') }}"><i class="fa fa-user fa-fw"></i> Profile</a>
-                    </li>
+                    </li> -->
                     @endif
                     <li>
                         <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i>Products<span class="fa arrow"></span></a>

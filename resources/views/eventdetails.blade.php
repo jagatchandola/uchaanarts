@@ -27,24 +27,15 @@
         <div class="artistBiobx">
             <div class="row">
                 
-                <div class="col-lg-7 col-md-7 col-12 col-sm-12">
-                    @if(!empty($eventArts))
-                    <div class="owl-carousel owl-theme fourth-owl-carousel">
-                        
-                        @foreach($eventArts as $eventArt)
-                        <div class="item"><img src="{{ \App\Helpers\Helper::getImage($eventArt->username .'/imgs/'.$eventArt->fname . '.' . $eventArt->ext, 1) }}" class="img-fluid"></div>
-                        <div class="item"><img src="{{ \App\Helpers\Helper::getImage($eventArt->username.'/'.$eventArt->profimg, 1) }}" class="imgSmall" title="{{ $eventArt->uname }}"></div>                        
-                        @endforeach
-                    </div>
-                    @endif
-                </div>
+                
                 
                 
                 <div class="col-lg-5 col-md-5 col-12 col-sm-12">
                     <div class="aboutBio">
                         <h3 class="text-md-left text-lg-left text-center">
                             Date - {{ date('jS', strtotime($eventDetails->start_date)) }} to {{ date('jS F Y', strtotime($eventDetails->end_date)) }}<br>
-                            {{ $eventDetails->venue }}
+                            Time -  <br/>
+                            Venue - {{ $eventDetails->venue }}<br/>
                         </h3>
                         <p class="text-md-left text-lg-left text-center"><?php echo $eventDetails->about; ?></p>
                         <br>
@@ -60,6 +51,20 @@
                             </tr>
                         </table>
                     </div>
+                </div>
+
+                <div class="col-lg-7 col-md-7 col-12 col-sm-12">
+                    @if(!empty($eventArts))
+                    <div class="owl-carousel owl-theme fourth-owl-carousel">
+                        
+                        @foreach($eventArts as $eventArt)
+                        <div class="item"><img src="{{ \App\Helpers\Helper::getImage($eventArt->username .'/imgs/'.$eventArt->fname . '.' . $eventArt->ext, 1) }}" class="img-fluid"></div>
+                        <div class="item"><img src="{{ \App\Helpers\Helper::getImage($eventArt->username.'/'.$eventArt->profimg, 1) }}" class="imgSmall" title="{{ $eventArt->uname }}"></div>                        
+                        <!-- <div class="item"><img src="/uploads/banners/-1539692073.jpg" alt="First slide" class="img-fluid first-slide"></div>
+                        <div class="item"><img src="/uploads/banners/-1539692073.jpg" alt="First slide" class="img-fluid first-slide"></div>                         -->
+                        @endforeach
+                    </div>
+                    @endif
                 </div>
             </div>
         </div>		  
@@ -98,7 +103,7 @@
 </section>
 
 
-
+<!-- Photo Gallery -->
 <!--sectionAddcart Start here-->
 @if (!empty($moments))
 <div class="sectionAddcart">
@@ -117,10 +122,13 @@
                     </a>
 					</div>
                     <h3>{{$moment->title}}</h3>
+
                 </div>
             </div>
     @endforeach
     </div> 
+    
+    
   </div>
 </div>
 </div>
