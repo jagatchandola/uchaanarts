@@ -58,7 +58,7 @@
 <!--Section 1 Ends Here-->
 <!--Section 2 Start Here-->
 <section class="themeSec1">
- <h2>Artist of the week</h2>
+ <h1>Artist of the week</h1>
     <div class="container">
         <div class="row">
             <div class="col-lg-6 col-md-6 col-12 col-sm-12">
@@ -71,7 +71,7 @@
                         </div>
                         <div class="col-lg-7 col-md-7 col-12 col-sm-12">
                             <blockquote class="blockquote aboutBio">
-                                <h3>{{$weeklyStatus->uname}}</h3>
+                                <h2 style="margin-bottom:10px !important;">{{$weeklyStatus->uname}}</h2>
                                 <p class="mb-0 text-justify"><?php echo \App\Helpers\Helper::readMore($weeklyStatus->about, route('artistdetails', $weeklyStatus->id),520); ?></p>
                             </blockquote>
                            
@@ -81,15 +81,14 @@
                 </article>
             </div>
             <div class="col-lg-6 col-md-6 col-12 col-sm-12">
-                
-                <article class="themeSubs1">
                 @if(!empty($weeklyArts))
+                <article class="themeSubs1">
                     <div class="owl-carousel owl-theme second-owl-carousel owl-loaded owl-drag">
                     <div class="owl-stage-outer">
-                    <div class="owl-stage" style="">
+                    <div class="owl-stage" style="transform: translate3d(-1375px, 0px, 0px); transition: all 0s ease 0s; width: 5225px;">
                     @foreach($weeklyArts as $weekArt)  
-                    
-                    <div class="owl-item cloned" style="width: 1; margin-right: 10px;"><div class="item"><div class="imgFixbxhp"><a href="/artists/110/272"><img src="{{ \App\Helpers\Helper::getImage($weekArt->directory.'/imgs/'.$weekArt->fname.'.'.$weekArt->ext, 1) }}"></a></div></div></div>
+
+                    <div class="owl-item cloned" style="width: 265px; margin-right: 10px;"><div class="item"><div class="imgFixbxhp"><a href="/artists/110/272"><img src="{{ \App\Helpers\Helper::getImage($weekArt->directory.'/imgs/'.$weekArt->fname.'.'.$weekArt->ext, 1) }}"></a></div></div></div>
                     @endforeach
                     </div>
                     </div>
