@@ -48,12 +48,11 @@
 <div class="header-top-row">
             <ul class="header-top-row-list text-md-right">
               <li class="d-none d-md-inline-block">
-              <li><a href="" class=""><i class="fab fa-facebook-f"></i></a></li>
-            <li><a href="" class=""><i class="fab fa-twitter"></i></a></li>
-            <li><a href="" class=""><i class="fab fa-pinterest-p"></i></a></li>
-            <li><a href="" class=""><i class="fab fa-tumblr"></i></a></li>
-            <li><a href="" class=""><i class="fab fa-instagram"></i></a></li>
-            <li><a href="" class=""><i class="fab fa-youtube"></i></a></li>               
+              <li><a href="https://www.facebook.com/uchaanarts/" class=""><i class="fab fa-facebook-f"></i></a></li>
+            <li><a href="https://twitter.com/teamuchaan" class=""><i class="fab fa-twitter"></i></a></li>
+            <li><a href="https://plus.google.com/113335056267512558654" class=""><i class="fab fa-google-plus-g"></i></a></li>
+            <li><a href="https://www.instagram.com/uchaanarts/" class=""><i class="fab fa-instagram"></i></a></li>
+            <li><a href="https://www.youtube.com/channel/UCm8xRS3d7j24DNmxlJ_H44A" class=""><i class="fab fa-youtube"></i></a></li>               
               </li>
               
             
@@ -142,7 +141,8 @@
               <li>
 
                 <a href="{{route('checkout')}}">
-                    <img src="/img/cart.png" />
+                <i class="fas fa-shopping-cart"></i>
+                    <!-- <img src="/img/cart.png" /> -->
                     <span style="color: red;" id="cart-item-count">
                         <?php
                             echo isset($_SESSION['cart']) ? count($_SESSION['cart']) : 0;
@@ -215,7 +215,8 @@
               </li>
               <li>
                 <a href="#">
-                  <img src="/img/search.png" />
+                  <!-- <img src="/img/search.png" /> -->
+                  <i class="fas fa-search"></i>
                 </a>
                 <div class="custom-dropdown jquery-dropdown position-absolute">
                   <div class="content-box p-3">
@@ -351,12 +352,11 @@
       <div class="col-md-6 col-lg-6 col-12 col-sm-12">
         <div class="socialMedia">
           <ul>
-            <li><a href="" class="iconShape"><i class="fab fa-facebook-f"></i></a></li>
-            <li><a href="" class="iconShape"><i class="fab fa-twitter"></i></a></li>
-            <li><a href="" class="iconShape"><i class="fab fa-pinterest-p"></i></a></li>
-            <li><a href="" class="iconShape"><i class="fab fa-tumblr"></i></a></li>
-            <li><a href="" class="iconShape"><i class="fab fa-instagram"></i></a></li>
-            <li><a href="" class="iconShape"><i class="fab fa-youtube"></i></a></li>
+          <li><a href="https://www.facebook.com/uchaanarts/" class="iconShape"><i class="fab fa-facebook-f"></i></a></li>
+            <li><a href="https://twitter.com/teamuchaan" class="iconShape"><i class="fab fa-twitter"></i></a></li>
+            <li><a href="https://plus.google.com/113335056267512558654" class="iconShape"><i class="fab fa-google-plus-g"></i></a></li>
+            <li><a href="https://www.instagram.com/uchaanarts/" class="iconShape"><i class="fab fa-instagram"></i></a></li>
+            <li><a href="https://www.youtube.com/channel/UCm8xRS3d7j24DNmxlJ_H44A" class="iconShape"><i class="fab fa-youtube"></i></a></li>
           </ul>
         </div>
       </div>

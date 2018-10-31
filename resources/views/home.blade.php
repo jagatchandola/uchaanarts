@@ -43,11 +43,11 @@
 @if(!empty($categories))
 <section class="themeSec2">
     <h2>Browse by category</h2>
-    <div class="container">
-        <div class="owl-carousel owl-theme first-owl-carousel">
+    <div class="container" style="height:55% !important; width:55% !important;">
+        <div class="owl-carousel owl-theme first-owl-carousel" >
             @foreach($categories as $category)
-            <div class="item">
-                <img src="{{ \App\Helpers\Helper::getImage($category->image, 5) }}">
+            <div class="item" style="height:55% !important; width:55% !important;">
+                <img height="175" width="150" src="{{ \App\Helpers\Helper::getImage($category->image, 5) }}">
                 <a href="/art-gallery/{{$category->cat_url}}" class="caption crousal-overlay">{{$category->cat_name}}</a>
             </div>
             @endforeach
@@ -81,14 +81,15 @@
                 </article>
             </div>
             <div class="col-lg-6 col-md-6 col-12 col-sm-12">
-                @if(!empty($weeklyArts))
+                
                 <article class="themeSubs1">
+                @if(!empty($weeklyArts))
                     <div class="owl-carousel owl-theme second-owl-carousel owl-loaded owl-drag">
                     <div class="owl-stage-outer">
-                    <div class="owl-stage" style="transform: translate3d(-1375px, 0px, 0px); transition: all 0s ease 0s; width: 5225px;">
+                    <div class="owl-stage" style="">
                     @foreach($weeklyArts as $weekArt)  
-
-                    <div class="owl-item cloned" style="width: 265px; margin-right: 10px;"><div class="item"><div class="imgFixbxhp"><a href="/artists/110/272"><img src="{{ \App\Helpers\Helper::getImage($weekArt->directory.'/imgs/'.$weekArt->fname.'.'.$weekArt->ext, 1) }}"></a></div></div></div>
+                    
+                    <div class="owl-item cloned" style="width: 1; margin-right: 10px;"><div class="item"><div class="imgFixbxhp"><a href="/artists/110/272"><img src="{{ \App\Helpers\Helper::getImage($weekArt->directory.'/imgs/'.$weekArt->fname.'.'.$weekArt->ext, 1) }}"></a></div></div></div>
                     @endforeach
                     </div>
                     </div>

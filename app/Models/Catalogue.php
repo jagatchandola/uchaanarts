@@ -317,6 +317,7 @@ class Catalogue extends Model
 
         if (!empty($catalogue)) {
             return $catalogue;
+            echo $catalogue;
         }
 
         return [];
