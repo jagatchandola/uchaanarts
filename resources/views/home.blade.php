@@ -43,12 +43,12 @@
 @if(!empty($categories))
 <section class="themeSec2">
     <h2>Browse by category</h2>
-    <div class="container" style="height:55% !important; width:55% !important;">
-        <div class="owl-carousel owl-theme first-owl-carousel" >
+    <div class="container" style="height:100% !important; width:45% !important;">
+        <div class="owl-carousel owl-theme first-owl-carousel" style="height:100% !important; width:100% !important;" >
             @foreach($categories as $category)
-            <div class="item" style="height:55% !important; width:55% !important;">
-                <img height="175" width="150" src="{{ \App\Helpers\Helper::getImage($category->image, 5) }}">
-                <a href="/art-gallery/{{$category->cat_url}}" class="caption crousal-overlay">{{$category->cat_name}}</a>
+            <div class="item" style="height:100% !important; width:100% !important;">
+                <img height="200" width="150" src="{{ \App\Helpers\Helper::getImage($category->image, 5) }}">
+                <a href="/art-gallery/{{$category->cat_url}}" class="caption crousal-overlay" style="padding-top:40% !important;">{{$category->cat_name}}</a>
             </div>
             @endforeach
         </div>
