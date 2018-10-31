@@ -69,7 +69,7 @@
       </div>
       <!--Pagination-->
       <div class="row">
-        <div class="col-md-6 col-lg-6 col-sm-12 col-12 offset-md-3 offset-lg-3">
+        <div class="col-md-12 col-lg-12 col-sm -12 col-12 offset-md-3 offset-lg-3">
           <nav aria-label="Page navigation example">
             {{$arts->links()}}
           </nav>

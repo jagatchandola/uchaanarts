@@ -42,34 +42,75 @@
           </div>
         </div>
         <div class="col-sm-12 col-md-11 col-lg-11 col-xl-11">
-          <div class="header-top-row">
+
+
+<!-- Social Header -->
+<div class="header-top-row">
             <ul class="header-top-row-list text-md-right">
               <li class="d-none d-md-inline-block">
-                <a href="mailto:uchaanartz@gmail.com">
-                  <span class="header-small-icons"><img src="/img/mail.png" /></span>
-                  uchaanartz@gmail.com
+              <li><a href="" class=""><i class="fab fa-facebook-f"></i></a></li>
+            <li><a href="" class=""><i class="fab fa-twitter"></i></a></li>
+            <li><a href="" class=""><i class="fab fa-pinterest-p"></i></a></li>
+            <li><a href="" class=""><i class="fab fa-tumblr"></i></a></li>
+            <li><a href="" class=""><i class="fab fa-instagram"></i></a></li>
+            <li><a href="" class=""><i class="fab fa-youtube"></i></a></li>               
+              </li>
+              
+            
+            </ul>
+          </div>
+          <!-- Social Header Ends -->
+
+          <div class="header-top-row">
+            <ul class="header-top-row-list text-md-right">
+            <li class="d-none d-md-inline-block">
+                <a href="mailto:info@uchaanarts.com">
+                <i class="fas fa-envelope"></i> 
+                  <!-- <span class="header-small-icons"><img src="/img/phn.png" /></span> -->
+                  info@uchaanarts.com
                 </a>
               </li>
               <li class="d-none d-md-inline-block">
-                <a href="tel:+918860277388">
-                  <span class="header-small-icons"><img src="/img/phn.png" /></span>
-                  +91 88602 77388
+                <a href="tel:+919899509043">
+                <i class="fas fa-phone"></i> 
+                  <!-- <span class="header-small-icons"><img src="/img/phn.png" /></span> -->
+                  9899509043 (9AM - 6PM IST)
                 </a>
               </li>
               @guest
               <li>
-                <a href="#">LOGIN</a>
-                <div class="custom-dropdown hover-dropdown position-absolute">
+                <a href="/login">LOGIN</a>
+                <!-- <div class="custom-dropdown hover-dropdown position-absolute">
                   <div class="content-box">
                     <ul class="dropdown-list text-left">
                       <li>
                         <a href="{{ route('login') }}" class="p-3"> Login </a>
                       </li>
-                      <!-- <li>
+                      <li>
                         <a href="{{ route('login') }}" class="p-3"> Artist Login </a>
                       </li>
                       <li>
                         <a href="{{ route('login') }}" class="p-3">
+                          Buyer Login
+                        </a>
+                      </li> 
+                    </ul>
+                  </div>
+                </div>-->
+              </li>
+              <li>
+                <a href="#">REGISTER</a>
+                <div class="custom-dropdown hover-dropdown position-absolute">
+                  <div class="content-box">
+                    <ul class="dropdown-list text-left">
+                      <li>
+                        <a href="http://uchaan.trickymindsolution.com/register" class="p-3"> ARTS REGISTRATION </a>
+                      </li>
+                      <li>
+                        <a href="http://uchaan.trickymindsolution.com/login" class="p-3"> BUYER REGISTRATION </a>
+                      </li>
+                      <!-- <li>
+                        <a href="http://uchaan.trickymindsolution.com/login" class="p-3">
                           Buyer Login
                         </a>
                       </li> -->
@@ -77,7 +118,6 @@
                   </div>
                 </div>
               </li>
-              <li><a href="{{ route('register') }}">REGISTER</a></li>
               @else
               <li>
                 <span style="color: white;">Welcome {{Auth::user()->uname}}</span> 

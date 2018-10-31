@@ -39,7 +39,7 @@
    </div>
 </section>
 
-<section class="themeSec1 bgWhite">
+<section class="themeSec1 ">
   <h1>Upcoming Events</h1>
   <div class="container">
    <div class="eventsBox">
@@ -66,7 +66,7 @@
 
 <!--Section 1 Ends Here-->
 <!--Section 1 Stat Here-->
-<section class="themeSec1">
+<section class="themeSec1 bgWhite">
   <h2>Past Events</h2>
   <div class="container">
    <div class="eventsBox">
