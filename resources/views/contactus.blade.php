@@ -19,7 +19,23 @@
   <div class="container">
    <div class="productPbox">
      <div class="row">
-      <div class="col-lg-12 col-md-12 col-12 col-sm-12">
+     <div class="col-lg-4 col-md-4 col-4 col-sm-4">
+
+<h3>Address</h3>
+<div>
+<p>
+<b>Uchaan Art Gallery</b><br/>
+<i class="fas fa-map-marker"></i> Gold Souk (The Jewelley Mall)<br/>
+  Sushant Lok Phase I, Sector-43<br/>
+  Gurgoan, Haryana - 122002<br/>
+<i class="fas fa-phone"></i> Phones : +91 8860277388<br/>
+<i class="fas fa-envelope"></i> E-Mail : info@uchaanarts.com<br/>
+
+</p>
+
+     </div>
+     </div>
+      <div class="col-lg-8 col-md-8 col-8 col-sm-8">
       <form id="contact-form" method="POST" action="{{ route('contactus') }}" aria-label="{{ __('Contact Us') }}" role="form">
         @csrf
 
