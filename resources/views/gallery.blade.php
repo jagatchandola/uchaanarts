@@ -42,11 +42,11 @@
 
             @if(!empty($arts))
                 @foreach($arts as $art)
-                <div class="col-lg-4 col-md-4 col-12 col-sm-6 a b box all">
-                  <div class="artBox">
+                <div class="col-lg-4 col-md-4 col-12 col-sm-6 a b box all" style="padding:5px !important;">
+                  <div class="artBox"  style="margin:5px !important;">
 				   <div class="imgFixbx">  
 
-				  <a href="{{ route('artist-art', [$art->artist_id, $art->id]) }}"> <img src="{{ \App\Helpers\Helper::getImage($art->username.'/imgs/'. $art->fname.'.'.$art->ext, 1) }}" class="img-fluid"></a>
+				  <a href="{{ route('artist-art', [$art->artist_id, $art->id]) }}"> <img height="300" width="150" src="{{ \App\Helpers\Helper::getImage($art->username.'/imgs/'. $art->fname.'.'.$art->ext, 1) }}" class="img-fluid"></a>
 				  </div>
               <a class="view-a" href="{{ route('artist-art', [$art->artist_id, $art->id]) }}"><h3>{{ $art->title }} </h3></a>
                 <h2><i class="fas fa-rupee-sign"></i> {{ \App\Helpers\Helper::getFormattedPrice($art->totalPrice) }}</h2>
