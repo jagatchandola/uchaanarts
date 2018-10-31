@@ -20,21 +20,18 @@
     <h1>Testimonials</h1>
     
     @if(!empty($testimonails))
-     @foreach($testimonails as $testimonail)
-     <div class="row testimonail-row">
-      <div class="col-lg-9 col-md-9 col-xs-12 col-sm-8">
+    @foreach($testimonails as $testimonail)
+     <div class="row" style="margin:1% !important;">
+     <div class="col-lg-2 col-md-2 col-x-12 col-sm-3">
+       <img src="{{ \App\Helpers\Helper::getImage($testimonail->image, 2) }}" height="150" width="150" class="rounded-circle">
+      </div>
+      <div class="col-lg-10 col-md-10 col-xs-12 col-sm-9">
        <p><?php echo $testimonail->content; ?></p>
+       <p><?php echo $testimonail->name; ?>,<?php echo $testimonail->designation; ?></p>
       </div>
-      <div class="col-lg-3 col-md-3 col-x-12 col-sm-4">
-       <img src="{{ \App\Helpers\Helper::getImage($testimonail->image, 2) }}" class="img-fluid">
-      </div>
-       
-       <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12 text-right">
-       
-      <p class="font-weight-bold">{{ $testimonail->name }}</p>
       </div>
       
-      </div>
+      
     @endforeach
     @else
       <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12">
