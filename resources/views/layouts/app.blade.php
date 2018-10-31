@@ -328,7 +328,7 @@
             <div class="footerLink">
               <h4> Uchaan Art</h4>
               <ul>
-                <li><a href="#">Rangmahal Art Classes</a></li>
+                <!-- <li><a href="#">Rangmahal Art Classes</a></li> -->
                 <li><a href="/privacy-policy">Privacy Policy</a></li>
                 <li><a href="/copyright-policy">Copyright Policy</a></li>
               </ul>
@@ -351,6 +351,7 @@
       <div class="clearfix"></div>
       <div class="col-md-6 col-lg-6 col-12 col-sm-12">
         <div class="socialMedia">
+        <h5 style="color:#888787 !important;">Connect with us</h5>
           <ul>
           <li><a href="https://www.facebook.com/uchaanarts/" class="iconShape"><i class="fab fa-facebook-f"></i></a></li>
             <li><a href="https://twitter.com/teamuchaan" class="iconShape"><i class="fab fa-twitter"></i></a></li>
@@ -362,7 +363,7 @@
       </div>
       <div class="col-md-6 col-lg-6 col-12 col-sm-12">
         <div class="newLetter">
-          <h5>Signup for our Newslatter</h5>
+          <h5 style="color:#888787 !important;">Signup for our Newslatter</h5>
           <h6>Discover new art and collections added weekly</h6>
           <form class="newsBox">
             <div id="news-letter-msg-box"></div>
