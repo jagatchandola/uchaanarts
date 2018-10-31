@@ -168,19 +168,20 @@
     <div class="container">
         <div class="col-lg-12 col-md-12 col-12 col-sm-12">
             <article class="themeSubs1">
-                <h2>Creative Modern Artist</h2>
+                <h2 style="padding: 5px !important; margin: 5px !important;">Creative Modern Artist</h2>
                 <div class="owl-carousel owl-theme third-owl-carousel">
                     @foreach($artists as $artist)
 
-                    <div class="item">
-                         <div class="imgFixbxhp">
-                            <img class="img-fluid" src="{{ \App\Helpers\Helper::getImage($artist['username'].'/'.$artist['profimg'], 1) }}">
-                       
-                        <a href="{{ route('artistdetails', $artist['id']) }}" class="captionBtn1">View Artwork</a>
+                    <div class="item itembck">
+
+                         <div class="imgFixbxhp" >
+                            <img height="20" width="20" class="img-fluid" src="{{ \App\Helpers\Helper::getImage($artist['username'].'/'.$artist['profimg'], 1) }}">
+                            <div class="captionBtm caption-artist-name">{{$artist['uname']}}</div>                        
+
+                        <a href="{{ route('artistdetails', $artist['id']) }}" style="bottom: 1% !important;" class="captionBtn1">View Artwork</a>
 
                         
                          </div>
-                            <div class="captionBtm">{{$artist['uname']}}</div>                        
                     </div>
                     @endforeach
                     

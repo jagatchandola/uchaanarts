@@ -264,6 +264,29 @@ img {
 	background-color:rgba(0, 0, 0, 0.3);
 	
 }
+
+.caption-artist-name {
+	position: absolute;
+	font-weight: 700;
+	font-size: 1.5rem;
+	top:0%;
+	left: 0;
+	padding: 30%;
+	text-align: center;
+	width:100%;
+	height:100%;
+	z-index: 9999;
+    color: #fff !important;
+    padding-top:60% !important;
+    font-size: 24px !important;
+	margin:auto;
+	background-color:rgba(0, 0, 0, 0.3);
+	
+}
+
+.itembck:hover{ border: rgba(255, 1, 1, 0.8)
+}
+
 .caption:hover {color:#eee; text-decoration:none; background-color:rgba(227, 30, 36, 0.8)}
 .captionBtn1:hover {color:#eee; text-decoration:none}
 .captionBtn1 {
