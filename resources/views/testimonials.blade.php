@@ -24,10 +24,11 @@
      <div class="row" style="margin:1% !important;">
      <div class="col-lg-2 col-md-2 col-x-12 col-sm-3">
        <img src="{{ \App\Helpers\Helper::getImage($testimonail->image, 2) }}" height="150" width="150" class="rounded-circle">
+       <center><p><?php echo $testimonail->name; ?>,<?php echo $testimonail->designation; ?></p></center>
       </div>
       <div class="col-lg-10 col-md-10 col-xs-12 col-sm-9">
        <p><?php echo $testimonail->content; ?></p>
-       <p><?php echo $testimonail->name; ?>,<?php echo $testimonail->designation; ?></p>
+       
       </div>
       </div>
       

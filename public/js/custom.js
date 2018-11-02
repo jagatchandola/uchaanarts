@@ -62,10 +62,11 @@ $('.fourth-owl-carousel').owlCarousel({
     margin:10,
     nav:true,
 	lazyLoad: true,
-	singleItem: true,
+    singleItem: true,
+    slideBy: 4,
     responsive:{
         0:{
-            items:1
+            items:2
         },
         600:{
             items:2
