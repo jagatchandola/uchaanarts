@@ -55,11 +55,11 @@
 
                 <div class="col-lg-7 col-md-7 col-12 col-sm-12">
                     @if(!empty($eventArts))
-                    <div class="owl-carousel owl-theme fourth-owl-carousel" style=" margin:0% !important;">
+                    <div class="owl-carousel owl-theme fourth-owl-carousel" style="  margin:0% !important;  	background:#e9ecef  !important;">
                         
                         @foreach($eventArts as $eventArt)
-                        <center><div class="item" style=" margin:0% !important;"><img style=" margin:0% !important; width:50% !important; height:50% !important;" src="{{ \App\Helpers\Helper::getImage($eventArt->username.'/'.$eventArt->profimg, 1) }}" class="imgSmall" title="{{ $eventArt->uname }}"></div></center>                        
-                        <div class="item" style="margin-right:2px"><img style="width:90% !important; height:50% !important; margin" src="{{ \App\Helpers\Helper::getImage($eventArt->username .'/imgs/'.$eventArt->fname . '.' . $eventArt->ext, 1) }}" class="img-fluid"></div>
+                        <center><div class="item" style="margin:0% !important;" ><img style=" border-style: dotted !important; margin:0% !important; width:50% !important; height:50% !important;" src="{{ \App\Helpers\Helper::getImage($eventArt->username.'/'.$eventArt->profimg, 1) }}" class="imgSmall" title="{{ $eventArt->uname }}"></div></center>                        
+                        <div class="item" style="margin-right:2px"><img style=" margin:0% !important; width:100% !important; height:70% !important; padding-right:10% !important;"  src="{{ \App\Helpers\Helper::getImage($eventArt->username .'/imgs/'.$eventArt->fname . '.' . $eventArt->ext, 1) }}" class="img-fluid"></div>
                         <!-- <div class="item"><img src="/uploads/banners/-1539692073.jpg" alt="First slide" class="img-fluid first-slide"></div>
                         <div class="item"><img src="/uploads/banners/-1539692073.jpg" alt="First slide" class="img-fluid first-slide"></div>                         -->
                         @endforeach
